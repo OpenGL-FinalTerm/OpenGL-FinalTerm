@@ -1,0 +1,6 @@
+- Lighting Class
+- Shaders(?)
+- How to read FBX files
+- 2D Rendering (WINAPI)
+
+- Convert whole thing for WINAPI and OpenGL support

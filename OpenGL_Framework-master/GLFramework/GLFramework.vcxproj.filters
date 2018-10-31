@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Base">
+      <UniqueIdentifier>{f5c0568b-55d9-4c90-8935-077e467f874a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utilities">
+      <UniqueIdentifier>{fcbbdcfa-86e8-4afd-a803-e69faf2ad9b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utilities">
+      <UniqueIdentifier>{b4e1fa0f-9364-4fb9-a2f9-95ef2b393a3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Scenes">
+      <UniqueIdentifier>{e4b1f79a-d53c-40a3-b86e-6f70edb7e796}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Scenes">
+      <UniqueIdentifier>{75ec796d-264a-48c7-aad8-bcc9e572941b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utilities\Space and Time">
+      <UniqueIdentifier>{fc9f2ed8-e49d-4b83-a979-028bcf819ccc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utilities\Space and Time">
+      <UniqueIdentifier>{00bed58b-54db-4415-8dc0-14afee9202ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utilities\3D Objects">
+      <UniqueIdentifier>{215e1037-2ad7-4434-9b37-8c62dbc2c819}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utilities\3D Objects">
+      <UniqueIdentifier>{f4a51621-0deb-42a3-9bcf-07e9409e7cff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utilities\Media">
+      <UniqueIdentifier>{2bb4df69-bb1b-40b8-8c91-bc4b66823f4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utilities\Media">
+      <UniqueIdentifier>{5b2bf11e-a8eb-4bd4-b770-644c09598d98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Base">
+      <UniqueIdentifier>{f27eef74-582d-4df1-ae80-31fc09b42197}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="GLFramework.cpp">
+      <Filter>Source Files\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="GLScene.cpp">
+      <Filter>Source Files\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Source.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene01_Main.cpp">
+      <Filter>Source Files\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="LinearMath.cpp">
+      <Filter>Source Files\Utilities\Space and Time</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>Source Files\Utilities\Space and Time</Filter>
+    </ClCompile>
+    <ClCompile Include="Transformations.cpp">
+      <Filter>Source Files\Utilities\Space and Time</Filter>
+    </ClCompile>
+    <ClCompile Include="Picking.cpp">
+      <Filter>Source Files\Utilities\Space and Time</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Source Files\Utilities\Space and Time</Filter>
+    </ClCompile>
+    <ClCompile Include="Model.cpp">
+      <Filter>Source Files\Utilities\3D Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Source Files\Utilities\3D Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>Source Files\Utilities\3D Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="FolderReader.cpp">
+      <Filter>Source Files\Utilities\Media</Filter>
+    </ClCompile>
+    <ClCompile Include="Sound.cpp">
+      <Filter>Source Files\Utilities\Media</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundPlayer.cpp">
+      <Filter>Source Files\Utilities\Media</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene00_Logo.cpp">
+      <Filter>Source Files\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="GLScenesInfo.cpp">
+      <Filter>Source Files\Scenes</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="GLFramework.h">
+      <Filter>Header Files\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="GLScene.h">
+      <Filter>Header Files\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene01_Main.h">
+      <Filter>Header Files\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>Header Files\Utilities\Space and Time</Filter>
+    </ClInclude>
+    <ClInclude Include="LinearMath.h">
+      <Filter>Header Files\Utilities\Space and Time</Filter>
+    </ClInclude>
+    <ClInclude Include="Transformations.h">
+      <Filter>Header Files\Utilities\Space and Time</Filter>
+    </ClInclude>
+    <ClInclude Include="Picking.h">
+      <Filter>Header Files\Utilities\Space and Time</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Header Files\Utilities\Space and Time</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.h">
+      <Filter>Header Files\Utilities\3D Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Header Files\Utilities\3D Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>Header Files\Utilities\3D Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="FolderReader.h">
+      <Filter>Header Files\Utilities\Media</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound.h">
+      <Filter>Header Files\Utilities\Media</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundPlayer.h">
+      <Filter>Header Files\Utilities\Media</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene00_Logo.h">
+      <Filter>Header Files\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="GLScenesInfo.h">
+      <Filter>Header Files\Scenes</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
