@@ -241,7 +241,13 @@ void banana_head(int head_x, int pivot_y, int pivot_z, int size) {
 
 		Swap(index.pos[i].y, -index.pos[i].z);
 	}
-	
+	// x z -y
+	for (int i = 0; i <= (1 + 8 * 5 + 1); i++) {
+		int tmp;
+		tmp = index.pos[i].y;
+		index.pos[i].y = index.pos[i].z;
+		index.pos[i].z = -tmp;
+	}
 
 	glPushMatrix(); {
 
