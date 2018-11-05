@@ -243,152 +243,143 @@ void banana_head(int head_x, int pivot_y, int pivot_z, int size) {
 	}
 	// x z -y
 	for (int i = 0; i <= (1 + 8 * 5 + 1); i++) {
+		index.pos[i].x = index.pos[i].x;
 		int tmp;
 		tmp = index.pos[i].y;
 		index.pos[i].y = index.pos[i].z;
 		index.pos[i].z = -tmp;
 	}
 
-	glPushMatrix(); {
+	for (int i = 0; i < 2; i++) {
+		if (i == 1) {
 
-		glTranslated(head_x, pivot_y, pivot_z);
-		glScaled(5, 5, 5);
-
-		glColor3f(1.0f, 1.0f, 1.0f);
-
-		glBegin(GL_POLYGON); {//아래
-
-			glVertex3f(index.pos[0].x, index.pos[0].y, index.pos[0].z);//중심
-
-			glVertex3f(index.pos[1].x, index.pos[1].y, index.pos[1].z);//그외
-
-			glVertex3f(index.pos[2].x, index.pos[2].y, index.pos[2].z);//그외
-
-		}
-		glEnd();
-
-		glBegin(GL_POLYGON); {//아래
-
-			glVertex3f(index.pos[0].x, index.pos[0].y, index.pos[0].z);//중심
-
-			glVertex3f(index.pos[2].x, index.pos[2].y, index.pos[2].z);//그외
-
-			glVertex3f(index.pos[3].x, index.pos[3].y, index.pos[3].z);//그외
-		}
-		glEnd();
-
-		glBegin(GL_POLYGON); {//아래
-
-			glVertex3f(index.pos[0].x, index.pos[0].y, index.pos[0].z);//중심
-
-			glVertex3f(index.pos[3].x, index.pos[3].y, index.pos[3].z);//그외
-
-			glVertex3f(index.pos[4].x, index.pos[4].y, index.pos[4].z);//그외
-		}
-		glEnd();
-
-		glBegin(GL_POLYGON); {//아래
-
-			glVertex3f(index.pos[0].x, index.pos[0].y, index.pos[0].z);//중심
-
-			glVertex3f(index.pos[4].x, index.pos[4].y, index.pos[4].z);//그외
-
-			glVertex3f(index.pos[5].x, index.pos[5].y, index.pos[5].z);//그외
-		}
-		glEnd();
-		
-		glColor3f(0.0f, 1.0f, 1.0f);
-
-		for (int j = 0; j < 8; j++) {
-			for (int i = 1; i < 5; i++) {
-				
-				
-				glBegin(GL_POLYGON); {//아래
-
-					glVertex3f(index.pos[i + j * 5].x, index.pos[i + j * 5].y, index.pos[i + j * 5].z);//중심
-
-					glVertex3f(index.pos[(i + 1) + j * 5].x, index.pos[(i + 1) + j * 5].y, index.pos[(i+ 1) + j * 5].z);//그외
-
-					glVertex3f(index.pos[(i + 1) + (j + 1) * 5].x, index.pos[(i + 1) + (j + 1) * 5].y, index.pos[(i + 1) + (j + 1 )* 5].z);//그외
-
-					glVertex3f(index.pos[(i) + (j + 1) * 5].x, index.pos[(i) + (j + 1) * 5].y, index.pos[(i) + (j + 1) * 5].z);//그외
-
-				}
-				glEnd();
-			}
-		}
-	
-		for (int i = 0; i <= (1 + 8 * 5 + 1); i++) {
-
-			if (index.pos[i].x != 0.0f)
-			{
+			for (int i = 0; i <= (1 + 8 * 5 + 1); i++) {
 				index.pos[i].x = -index.pos[i].x;
-				index.pos[i].y = index.pos[i].y;
-				index.pos[i].z = index.pos[i].z;
 			}
 		}
-		glColor3f(1.0f, 1.0f, 0.0f);
-
-		glBegin(GL_POLYGON); {//아래
-
-			glVertex3f(index.pos[0].x, index.pos[0].y, index.pos[0].z);//중심
-
-			glVertex3f(index.pos[1].x, index.pos[1].y, index.pos[1].z);//그외
-
-			glVertex3f(index.pos[2].x, index.pos[2].y, index.pos[2].z);//그외
-
-		}
-		glEnd();
-
-		glBegin(GL_POLYGON); {//아래
-
-			glVertex3f(index.pos[0].x, index.pos[0].y, index.pos[0].z);//중심
-
-			glVertex3f(index.pos[2].x, index.pos[2].y, index.pos[2].z);//그외
-
-			glVertex3f(index.pos[3].x, index.pos[3].y, index.pos[3].z);//그외
-		}
-		glEnd();
-
-		glBegin(GL_POLYGON); {//아래
-
-			glVertex3f(index.pos[0].x, index.pos[0].y, index.pos[0].z);//중심
-
-			glVertex3f(index.pos[3].x, index.pos[3].y, index.pos[3].z);//그외
-
-			glVertex3f(index.pos[4].x, index.pos[4].y, index.pos[4].z);//그외
-		}
-		glEnd();
-
-		glBegin(GL_POLYGON); {//아래
-
-			glVertex3f(index.pos[0].x, index.pos[0].y, index.pos[0].z);//중심
-
-			glVertex3f(index.pos[4].x, index.pos[4].y, index.pos[4].z);//그외
-
-			glVertex3f(index.pos[5].x, index.pos[5].y, index.pos[5].z);//그외
-		}
-		glEnd();
-
-		for (int j = 0; j < 8; j++) {
-			for (int i = 1; i < 4 + 1; i++) {
-
-				glBegin(GL_POLYGON); {//아래
-
-					glVertex3f(index.pos[(i + 1) + j * 5].x, index.pos[(i + 1) + j * 5].y, index.pos[(i + 1) + j * 5].z);//그외
-					
-					glVertex3f(index.pos[i + j * 5].x, index.pos[i + j * 5].y, index.pos[i + j * 5].z);//중심
-
-					glVertex3f(index.pos[(i)+(j + 1) * 5].x, index.pos[(i)+(j + 1) * 5].y, index.pos[(i)+(j + 1) * 5].z);//그외
-
-					glVertex3f(index.pos[(i + 1) + (j + 1) * 5].x, index.pos[(i + 1) + (j + 1) * 5].y, index.pos[(i + 1) + (j + 1) * 5].z);//그외
 
 
 
+		glPushMatrix(); {
+
+			glTranslated(head_x, pivot_y, pivot_z);
+			glScaled(5, 5, 5);
+
+			glColor3f(1.0f, 1.0f, 1.0f);
+
+			glBegin(GL_POLYGON); {//아래
+
+				glVertex3f(index.pos[0].x, index.pos[0].y, index.pos[0].z);//중심
+
+				glVertex3f(index.pos[1].x, index.pos[1].y, index.pos[1].z);//그외
+
+				glVertex3f(index.pos[2].x, index.pos[2].y, index.pos[2].z);//그외
+
+			}
+			glEnd();
+
+			glBegin(GL_POLYGON); {//아래
+
+				glVertex3f(index.pos[0].x, index.pos[0].y, index.pos[0].z);//중심
+
+				glVertex3f(index.pos[2].x, index.pos[2].y, index.pos[2].z);//그외
+
+				glVertex3f(index.pos[3].x, index.pos[3].y, index.pos[3].z);//그외
+			}
+			glEnd();
+
+			glBegin(GL_POLYGON); {//아래
+
+				glVertex3f(index.pos[0].x, index.pos[0].y, index.pos[0].z);//중심
+
+				glVertex3f(index.pos[3].x, index.pos[3].y, index.pos[3].z);//그외
+
+				glVertex3f(index.pos[4].x, index.pos[4].y, index.pos[4].z);//그외
+			}
+			glEnd();
+
+			glBegin(GL_POLYGON); {//아래
+
+				glVertex3f(index.pos[0].x, index.pos[0].y, index.pos[0].z);//중심
+
+				glVertex3f(index.pos[4].x, index.pos[4].y, index.pos[4].z);//그외
+
+				glVertex3f(index.pos[5].x, index.pos[5].y, index.pos[5].z);//그외
+			}
+			glEnd();
+
+			glColor3f(0.0f, 1.0f, 1.0f);
+
+			for (int j = 0; j < 7; j++) {
+
+				glColor3f(j+ 0.5 * 0.5, j * 0.2, 0);
+
+				for (int i = 4; i > 0; i--) {
+
+
+					glBegin(GL_POLYGON); {//아래
+
+						glVertex3f(index.pos[i + (j * 5)].x, index.pos[i + (j * 5)].y, index.pos[i + (j * 5)].z);//중심
+
+						glVertex3f(index.pos[(i + 1) + (j * 5)].x, index.pos[(i + 1) + (j * 5)].y, index.pos[(i + 1) + (j * 5)].z);//그외
+
+						glVertex3f(index.pos[(i + 1) + ((j + 1) * 5)].x, index.pos[(i + 1) + ((j + 1) * 5)].y, index.pos[(i + 1) + ((j + 1) * 5)].z);//그외
+
+						glVertex3f(index.pos[(i)+((j + 1) * 5)].x, index.pos[(i)+((j + 1) * 5)].y, index.pos[(i)+((j + 1) * 5)].z);//그외
+
+					}
+					glEnd();
 				}
-				glEnd();
 			}
+
+
+
+			glBegin(GL_POLYGON); {//아래
+
+				glVertex3f(index.pos[0].x, index.pos[0].y, index.pos[0].z);//중심
+
+				glVertex3f(index.pos[1].x, index.pos[1].y, index.pos[1].z);//그외
+
+				glVertex3f(index.pos[2].x, index.pos[2].y, index.pos[2].z);//그외
+
+			}
+			glEnd();
+
+			glBegin(GL_POLYGON); {//아래
+
+				glVertex3f(index.pos[0].x, index.pos[0].y, index.pos[0].z);//중심
+
+				glVertex3f(index.pos[2].x, index.pos[2].y, index.pos[2].z);//그외
+
+				glVertex3f(index.pos[3].x, index.pos[3].y, index.pos[3].z);//그외
+			}
+			glEnd();
+
+			glBegin(GL_POLYGON); {//아래
+
+				glVertex3f(index.pos[0].x, index.pos[0].y, index.pos[0].z);//중심
+
+				glVertex3f(index.pos[3].x, index.pos[3].y, index.pos[3].z);//그외
+
+				glVertex3f(index.pos[4].x, index.pos[4].y, index.pos[4].z);//그외
+			}
+			glEnd();
+
+			glBegin(GL_POLYGON); {//아래
+
+				glVertex3f(index.pos[0].x, index.pos[0].y, index.pos[0].z);//중심
+
+				glVertex3f(index.pos[4].x, index.pos[4].y, index.pos[4].z);//그외
+
+				glVertex3f(index.pos[5].x, index.pos[5].y, index.pos[5].z);//그외
+			}
+			glEnd();
+
+
+	
 		}
+		glPopMatrix();
+
 	}
 	glPopMatrix();
 
