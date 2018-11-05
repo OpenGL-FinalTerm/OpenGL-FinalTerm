@@ -2,6 +2,7 @@
 #pragma once
 #include <GL/freeglut.h> 
 #include <math.h>
+#include <stdio.h>
 
 #define PT 20//도형 갯수 설정
 #define PI 3.141592 //파이
@@ -46,7 +47,6 @@ public:
 		//glLoadIdentity(); // 현재의 변환 행렬을 단위행렬로 초기화 - 시각 좌표계를 원점으로 초기화
 		// 관측 변환: 카메라의 위치 설정 (필요한 경우, 다른 곳에 설정 가능)
 		gluLookAt(m_Eye.x, m_Eye.y, m_Eye.z, m_Center.x, m_Center.y, m_Center.z, m_Up.x, m_Up.y, m_Up.z);
-
 		glRotated(-m_Angle.x, 0.0, 1.0, 0.0);
 		glRotated(m_Angle.y, 1.0, 0.0, 0.0);
 		glRotated(m_Angle.z, 0.0, 0.0, 1.0);
@@ -60,6 +60,7 @@ public:
 		m_Angle.x += x;
 		m_Angle.y += y;
 		m_Angle.z += z;
+		printf("%lf \n", m_Angle.x);
 	}
 	void moveEye(double x, double y, double z) // 카메라 이동 함수
 	{
