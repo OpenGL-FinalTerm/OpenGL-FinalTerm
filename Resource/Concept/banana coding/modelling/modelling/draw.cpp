@@ -94,7 +94,7 @@ int index_box_size;
 void SetupRC()
 {
 	index_box_size = 100;
-	
+	depth = true;
 	//-------------
 }
 void main(int argc, char *argv[]) {
