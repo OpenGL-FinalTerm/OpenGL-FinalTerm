@@ -254,17 +254,23 @@ void banana_save_index() {
 }
 
 float vegier_line(float complete ,float base, float arrive, float ctrl_pt,float t) {
+	t = t / 100;
+
 	complete =
 		(
 			(((1-t)*(1-t) * base) + (2*(1-t)*ctrl_pt) + ((t * t)*(arrive)))
 		);
 	return complete;
 }
-
+float __tmp;
 void banana_head(int head_x, int pivot_y, int pivot_z, int size, float degree) {
 	
 	banana_save_index();
+	for (int i = 0; i <= 5; i++) {
 
+		index.pos[i].y = index.pos[i].y + sin(degree * 3.14);
+		index.pos[i].z = index.pos[i].z + cos(degree *3.14);
+	}
 	for (int i = 0; i < 2; i++) {
 		if (i == 1) {
 
@@ -284,34 +290,35 @@ void banana_head(int head_x, int pivot_y, int pivot_z, int size, float degree) {
 
 			glColor3f(1.0f, 1.0f, 1.0f);
 
+				
 			glBegin(GL_POLYGON); {//아래
 
-				glVertex3f(index.pos[0].x, index.pos[0].y + sin(degree * 3.14 ), index.pos[0].z + cos(degree * 3.14));//중심
+				glVertex3f(index.pos[0].x, index.pos[0].y, index.pos[0].z);//그외
 
-				glVertex3f(index.pos[1].x, index.pos[1].y + sin(degree * 3.14), index.pos[1].z + cos(degree * 3.14));//그외
+				glVertex3f(index.pos[1].x, index.pos[1].y, index.pos[1].z);//그외
 
-				glVertex3f(index.pos[2].x, index.pos[2].y + sin(degree * 3.14), index.pos[2].z + cos(degree * 3.14));//그외
+				glVertex3f(index.pos[2].x, index.pos[2].y, index.pos[2].z);//그외
 
 			}
 			glEnd();
 
 			glBegin(GL_POLYGON); {//아래
 
-				glVertex3f(index.pos[0].x, index.pos[0].y + sin(degree * 3.14), index.pos[0].z + cos(degree * 3.14));//중심
+				glVertex3f(index.pos[0].x, index.pos[0].y, index.pos[0].z);//중심
 
-				glVertex3f(index.pos[2].x, index.pos[2].y + sin(degree * 3.14), index.pos[2].z + cos(degree * 3.14));//그외
+				glVertex3f(index.pos[2].x, index.pos[2].y, index.pos[2].z);//그외
 
-				glVertex3f(index.pos[3].x, index.pos[3].y + sin(degree * 3.14), index.pos[3].z + cos(degree * 3.14));//그외
+				glVertex3f(index.pos[3].x, index.pos[3].y, index.pos[3].z);//그외
 			}
 			glEnd();
 
 			glBegin(GL_POLYGON); {//아래
 
-				glVertex3f(index.pos[0].x, index.pos[0].y + sin(degree * 3.14), index.pos[0].z + cos(degree * 3.14));//중심
+				glVertex3f(index.pos[0].x, index.pos[0].y, index.pos[0].z);//중심
 
-				glVertex3f(index.pos[3].x, index.pos[3].y + sin(degree * 3.14), index.pos[3].z + cos(degree * 3.14));//그외
+				glVertex3f(index.pos[3].x, index.pos[3].y, index.pos[3].z);//그외
 
-				glVertex3f(index.pos[4].x, index.pos[4].y + sin(degree * 3.14), index.pos[4].z + cos(degree * 3.14));//그외
+				glVertex3f(index.pos[4].x, index.pos[4].y, index.pos[4].z);//그외
 			}
 			glEnd();
 
