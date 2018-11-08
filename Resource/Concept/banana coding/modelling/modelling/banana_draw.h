@@ -366,10 +366,10 @@ void banana_head(int head_x, int pivot_y, int pivot_z, int size, float degree) {
 void banana_body(int head_x, int pivot_y, int pivot_z, int size , float rot_degree) {
 
 	banana_save_index();
-	for (int i = 15; i <= 41-8; i++) {
+	for (int i = 20; i <= 41-4*2; i++) {
 		if ((i % 5 == 1) || (i % 5 == 2)) {
-			index.pos[i].y = index.pos[i].y - sin(rot_degree * 3.14);
-			index.pos[i].z = index.pos[i].z - cos(rot_degree * 3.14);
+			index.pos[i].y = index.pos[i].y - sin(rot_degree/5 * 3.14);
+			index.pos[i].z = index.pos[i].z - cos(rot_degree/5 * 3.14);
 		}
 	}
 
