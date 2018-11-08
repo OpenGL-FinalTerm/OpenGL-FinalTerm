@@ -366,7 +366,12 @@ void banana_head(int head_x, int pivot_y, int pivot_z, int size, float degree) {
 void banana_body(int head_x, int pivot_y, int pivot_z, int size , float rot_degree) {
 
 	banana_save_index();
-
+	for (int i = 15; i <= 41-8; i++) {
+		if ((i % 5 == 1) || (i % 5 == 2)) {
+			index.pos[i].y = index.pos[i].y - sin(rot_degree * 3.14);
+			index.pos[i].z = index.pos[i].z - cos(rot_degree * 3.14);
+		}
+	}
 
 	for (int i = 0; i < 2; i++) {
 		if (i == 1) {
@@ -474,7 +479,7 @@ void banana_draw(int pivot_x, int pivot_y, int pivot_z, int size,int state , flo
 	if (state == IDLE) {
 		
 		banana_head(pivot_x, pivot_y, pivot_z, size , sub_degree);//赣府
-		banana_body(pivot_x, pivot_y, pivot_z, size , 0);//个
+		banana_body(pivot_x, pivot_y, pivot_z, size , sub_degree);//个
 	}
 	//else if (state == RUN) {
 	//	banana_head(pivot_x, pivot_y, pivot_z, size);//赣府

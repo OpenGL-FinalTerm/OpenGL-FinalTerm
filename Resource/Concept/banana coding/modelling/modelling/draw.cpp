@@ -195,7 +195,7 @@ void Motion(int x, int y, BOOL state) {
 int switch_sign = -1;
 void Timerfunction(int value) {
 
-	if ((banana.rot.degree == -3) || (banana.rot.degree == 3))
+	if ((banana.rot.degree == -1) || (banana.rot.degree == 1))
 	{
 		switch_sign *= -1;
 	}
