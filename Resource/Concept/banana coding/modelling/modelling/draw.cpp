@@ -91,12 +91,19 @@ Shape ball[10];
 int index_box_size;
 #define BALL_NUM 5
 
+#define IDLE 0
+#define RUN 1
+#define JUMP 2
+#define DOWN_JUMP 3
+
 void SetupRC()
 {
 	index_box_size = 100;
 	depth = true;
 	//-------------
 }
+Shape banana;
+
 void main(int argc, char *argv[]) {
 
 	glutInit(&argc, argv);
@@ -161,11 +168,7 @@ GLvoid drawScene(GLvoid)
 				}
 				//상자 그리기
 				//glScaled(100, 100, 100);
-
-					glColor3f(1, 1, 0);
-
-				banana_head(0, 0, 0, 100);
-
+					banana_draw(0, 0, 0, 5, IDLE , banana.rot.degree);
 
 			}
 			glPopMatrix();
@@ -189,9 +192,14 @@ void Mouse(int button, int state, int x, int y) {
 void Motion(int x, int y, BOOL state) {
 
 }
-
+int switch_sign = 1;
 void Timerfunction(int value) {
 
+	if ((banana.rot.degree == -10) || (banana.rot.degree == 10))
+	{
+		switch_sign *= -1;
+	}
+	banana.rot.degree += 1 * switch_sign;
 
 	glutPostRedisplay(); //타이머에 넣는다.
 	glutTimerFunc(100, Timerfunction, 1); //타이머 다시 출력

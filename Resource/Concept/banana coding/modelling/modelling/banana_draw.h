@@ -53,7 +53,7 @@ void Swap(float a, float b) {
 	b = temp;
 }
 int array_count = 0;
-void banana_head(int head_x, int pivot_y, int pivot_z, int size) {
+void banana_save_index() {
 	//인덱스 버퍼 저장
 	//바나나 헤드
 	//머리 1
@@ -80,158 +80,159 @@ void banana_head(int head_x, int pivot_y, int pivot_z, int size) {
 	index.pos[5].x = 0.0f;
 	index.pos[5].y = 1.842;
 	index.pos[5].z = 18.588f;
-	array_count++;
+
 	//머리 2
-	index.pos[1 + array_count * 5].x = 0.0f;
-	index.pos[1 + array_count * 5].y = 1.258;
-	index.pos[1 + array_count * 5].z = 9.247;
+	index.pos[1 + 1 * 5].x = 0.0f;
+	index.pos[1 + 1 * 5].y = 1.258;
+	index.pos[1 + 1 * 5].z = 9.247;
 
-	index.pos[2 + array_count * 5].x = -1.233;
-	index.pos[2 + array_count * 5].y = 1.589;
-	index.pos[2 + array_count * 5].z = 9.635;
+	index.pos[2 + 1 * 5].x = -1.233;
+	index.pos[2 + 1 * 5].y = 1.589;
+	index.pos[2 + 1 * 5].z = 9.635;
 
-	index.pos[3 + array_count * 5].x = -2.411;
-	index.pos[3 + array_count * 5].y = 2.686;
-	index.pos[3 + array_count * 5].z = 10.71;
+	index.pos[3 + 1 * 5].x = -2.411;
+	index.pos[3 + 1 * 5].y = 2.686;
+	index.pos[3 + 1 * 5].z = 10.71;
 
-	index.pos[4 + array_count * 5].x = -2.004;
-	index.pos[4 + array_count * 5].y = 3.312;
-	index.pos[4 + array_count * 5].z = 11.909;
+	index.pos[4 + 1 * 5].x = -2.004;
+	index.pos[4 + 1 * 5].y = 3.312;
+	index.pos[4 + 1 * 5].z = 11.909;
 
-	index.pos[5 + array_count * 5].x = 0.0f;
-	index.pos[5 + array_count * 5].y = 3.927;
-	index.pos[5 + array_count * 5].z = 12.576;
-	array_count++;
+	index.pos[5 + 1 * 5].x = 0.0f;
+	index.pos[5 + 1 * 5].y = 3.927;
+	index.pos[5 + 1 * 5].z = 12.576;
+
 	//머리 3
-	index.pos[1 + array_count * 5].x = 0.0f;
-	index.pos[1 + array_count * 5].y = 1.568;
-	index.pos[1 + array_count * 5].z = 8.439;
+	index.pos[1 + 2 * 5].x = 0.0f;
+	index.pos[1 + 2 * 5].y = 1.568;
+	index.pos[1 + 2 * 5].z = 8.439;
 
-	index.pos[2 + array_count * 5].x = -1.597;
-	index.pos[2 + array_count * 5].y = 2.119;
-	index.pos[2 + array_count * 5].z = 9.078;
+	index.pos[2 + 2 * 5].x = -1.597;
+	index.pos[2 + 2 * 5].y = 2.119;
+	index.pos[2 + 2 * 5].z = 9.078;
 
-	index.pos[3 + array_count * 5].x = -3.043;
-	index.pos[3 + array_count * 5].y = 3.312;
-	index.pos[3 + array_count * 5].z = 10.247;
+	index.pos[3 + 2 * 5].x = -3.043;
+	index.pos[3 + 2 * 5].y = 3.312;
+	index.pos[3 + 2 * 5].z = 10.247;
 
-	index.pos[4 + array_count * 5].x = -2.419;
-	index.pos[4 + array_count * 5].y = 3.843;
-	index.pos[4 + array_count * 5].z = 12.241;
+	index.pos[4 + 2 * 5].x = -2.419;
+	index.pos[4 + 2 * 5].y = 3.843;
+	index.pos[4 + 2 * 5].z = 12.241;
 
-	index.pos[5 + array_count * 5].x = 0.0f;
-	index.pos[5 + array_count * 5].y = 4.318;
-	index.pos[5 + array_count * 5].z = 12.241;
-	array_count++;
+	index.pos[5 + 2 * 5].x = 0.0f;
+	index.pos[5 + 2 * 5].y = 4.318;
+	index.pos[5 + 2 * 5].z = 12.241;
+
 	//머리 4
-	index.pos[1 + array_count * 5].x = 0.0f;
-	index.pos[1 + array_count * 5].y = 0.745;
-	index.pos[1 + array_count * 5].z = 3.886;
+	index.pos[1 + 3 * 5].x = 0.0f;
+	index.pos[1 + 3 * 5].y = 0.745;
+	index.pos[1 + 3 * 5].z = 3.886;
 
-	index.pos[2 + array_count * 5].x = -3.824;
-	index.pos[2 + array_count * 5].y = 2.21f;
-	index.pos[2 + array_count * 5].z = 4.066;
+	index.pos[2 + 3 * 5].x = -3.824;
+	index.pos[2 + 3 * 5].y = 2.21f;
+	index.pos[2 + 3 * 5].z = 4.066;
 
-	index.pos[3 + array_count * 5].x = -5.822;
-	index.pos[3 + array_count * 5].y = 6.151;
-	index.pos[3 + array_count * 5].z = 5.761;
+	index.pos[3 + 3 * 5].x = -5.822;
+	index.pos[3 + 3 * 5].y = 6.151;
+	index.pos[3 + 3 * 5].z = 5.761;
 
-	index.pos[4 + array_count * 5].x = -4.158;
-	index.pos[4 + array_count * 5].y = 8.571;
-	index.pos[4 + array_count * 5].z = 7.546;
+	index.pos[4 + 3 * 5].x = -4.158;
+	index.pos[4 + 3 * 5].y = 8.571;
+	index.pos[4 + 3 * 5].z = 7.546;
 
-	index.pos[5 + array_count * 5].x = 0.0f;
-	index.pos[5 + array_count * 5].y = 9.382;
-	index.pos[5 + array_count * 5].z = 9.133;
-	array_count++;
+	index.pos[5 + 3 * 5].x = 0.0f;
+	index.pos[5 + 3 * 5].y = 9.382;
+	index.pos[5 + 3 * 5].z = 9.133;
+
 	//머리 5
-	index.pos[1 + array_count * 5].x = 0.0f;
-	index.pos[1 + array_count * 5].y = -1.533;
-	index.pos[1 + array_count * 5].z = -3.874;
+	index.pos[1 + 4 * 5].x = 0.0f;
+	index.pos[1 + 4 * 5].y = -1.533;
+	index.pos[1 + 4 * 5].z = -3.874;
 
-	index.pos[2 + array_count * 5].x = -4.595;
-	index.pos[2 + array_count * 5].y = -0.013;
-	index.pos[2 + array_count * 5].z = -4.006;
+	index.pos[2 + 4 * 5].x = -4.595;
+	index.pos[2 + 4 * 5].y = -0.013;
+	index.pos[2 + 4 * 5].z = -4.006;
 
-	index.pos[3 + array_count * 5].x = -7.523;
-	index.pos[3 + array_count * 5].y = 4.756;
-	index.pos[3 + array_count * 5].z = -3.643;
+	index.pos[3 + 4 * 5].x = -7.523;
+	index.pos[3 + 4 * 5].y = 4.756;
+	index.pos[3 + 4 * 5].z = -3.643;
 
-	index.pos[4 + array_count * 5].x = -4.945;
-	index.pos[4 + array_count * 5].y = 9.724;
-	index.pos[4 + array_count * 5].z = -2.282;
+	index.pos[4 + 4 * 5].x = -4.945;
+	index.pos[4 + 4 * 5].y = 9.724;
+	index.pos[4 + 4 * 5].z = -2.282;
 
-	index.pos[5 + array_count * 5].x = 0.0f;
-	index.pos[5 + array_count * 5].y = 12.002;
-	index.pos[5 + array_count * 5].z = -0.415;
-	array_count++;
+	index.pos[5 + 4 * 5].x = 0.0f;
+	index.pos[5 + 4 * 5].y = 12.002;
+	index.pos[5 + 4 * 5].z = -0.415;
+
 	//머리 6
-	index.pos[1 + array_count * 5].x = 0.0f;
-	index.pos[1 + array_count * 5].y = -4.107;
-	index.pos[1 + array_count * 5].z = -7.083;
+	index.pos[1 + 5 * 5].x = 0.0f;
+	index.pos[1 + 5 * 5].y = -4.107;
+	index.pos[1 + 5 * 5].z = -7.083;
 
-	index.pos[2 + array_count * 5].x = -3.583;
-	index.pos[2 + array_count * 5].y = -3.629;
-	index.pos[2 + array_count * 5].z = -7.564;
+	index.pos[2 + 5 * 5].x = -3.583;
+	index.pos[2 + 5 * 5].y = -3.629;
+	index.pos[2 + 5 * 5].z = -7.564;
 
-	index.pos[3 + array_count * 5].x = -6.663;
-	index.pos[3 + array_count * 5].y = 1.631;
-	index.pos[3 + array_count * 5].z = -11.123;
+	index.pos[3 + 5 * 5].x = -6.663;
+	index.pos[3 + 5 * 5].y = 1.631;
+	index.pos[3 + 5 * 5].z = -11.123;
 
-	index.pos[4 + array_count * 5].x = -4.551;
-	index.pos[4 + array_count * 5].y = 5.834;
-	index.pos[4 + array_count * 5].z = -13.475;
+	index.pos[4 + 5 * 5].x = -4.551;
+	index.pos[4 + 5 * 5].y = 5.834;
+	index.pos[4 + 5 * 5].z = -13.475;
 
-	index.pos[5 + array_count * 5].x = 0.0f;
-	index.pos[5 + array_count * 5].y = 8.641;
-	index.pos[5 + array_count * 5].z = -13.97f;
-	array_count++;
+	index.pos[5 + 5 * 5].x = 0.0f;
+	index.pos[5 + 5 * 5].y = 8.641;
+	index.pos[5 + 5 * 5].z = -13.97f;
+
 	//머리 7
-	index.pos[1 + array_count * 5].x = 0.0f;
-	index.pos[1 + array_count * 5].y = -6.58f;
-	index.pos[1 + array_count * 5].z = -9.429;
+	index.pos[1 + 6 * 5].x = 0.0f;
+	index.pos[1 + 6 * 5].y = -6.58f;
+	index.pos[1 + 6 * 5].z = -9.429;
 
-	index.pos[2 + array_count * 5].x = -3.009;
-	index.pos[2 + array_count * 5].y = -6.078;
-	index.pos[2 + array_count * 5].z = -9.795;
+	index.pos[2 + 6 * 5].x = -3.009;
+	index.pos[2 + 6 * 5].y = -6.078;
+	index.pos[2 + 6 * 5].z = -9.795;
 
-	index.pos[3 + array_count * 5].x = -5.603;
-	index.pos[3 + array_count * 5].y = -2.576;
-	index.pos[3 + array_count * 5].z = -13.82f;
+	index.pos[3 + 6 * 5].x = -5.603;
+	index.pos[3 + 6 * 5].y = -2.576;
+	index.pos[3 + 6 * 5].z = -13.82f;
 
-	index.pos[4 + array_count * 5].x = -3.29f;
-	index.pos[4 + array_count * 5].y = 0.417;
-	index.pos[4 + array_count * 5].z = -18.421;
+	index.pos[4 + 6 * 5].x = -3.29f;
+	index.pos[4 + 6 * 5].y = 0.417;
+	index.pos[4 + 6 * 5].z = -18.421;
 
-	index.pos[5 + array_count * 5].x = 0.0f;
-	index.pos[5 + array_count * 5].y = -1.075;
-	index.pos[5 + array_count * 5].z = -20.255;
-	array_count++;
+	index.pos[5 + 6 * 5].x = 0.0f;
+	index.pos[5 + 6 * 5].y = -1.075;
+	index.pos[5 + 6 * 5].z = -20.255;
+
 	//머리 8
-	index.pos[1 + array_count * 5].x = 0.0f;
-	index.pos[1 + array_count * 5].y = -10.789;
-	index.pos[1 + array_count * 5].z = -12.458;
+	index.pos[1 + 7 * 5].x = 0.0f;
+	index.pos[1 + 7 * 5].y = -10.789;
+	index.pos[1 + 7 * 5].z = -12.458;
 
-	index.pos[2 + array_count * 5].x = -1.923;
-	index.pos[2 + array_count * 5].y = -10.509;
-	index.pos[2 + array_count * 5].z = -12.608;
+	index.pos[2 + 7 * 5].x = -1.923;
+	index.pos[2 + 7 * 5].y = -10.509;
+	index.pos[2 + 7 * 5].z = -12.608;
 
-	index.pos[3 + array_count * 5].x = -3.847;
-	index.pos[3 + array_count * 5].y = -9.577;
-	index.pos[3 + array_count * 5].z = -16.107;
+	index.pos[3 + 7 * 5].x = -3.847;
+	index.pos[3 + 7 * 5].y = -9.577;
+	index.pos[3 + 7 * 5].z = -16.107;
 
-	index.pos[4 + array_count * 5].x = -2.627;
-	index.pos[4 + array_count * 5].y = -9.781;
-	index.pos[4 + array_count * 5].z = -18.481;
+	index.pos[4 + 7 * 5].x = -2.627;
+	index.pos[4 + 7 * 5].y = -9.781;
+	index.pos[4 + 7 * 5].z = -18.481;
 
-	index.pos[5 + array_count * 5].x = 0.0f;
-	index.pos[5 + array_count * 5].y = -10.456;
-	index.pos[5 + array_count * 5].z = -19.459;
-	array_count++;
+	index.pos[5 + 7 * 5].x = 0.0f;
+	index.pos[5 + 7 * 5].y = -10.456;
+	index.pos[5 + 7 * 5].z = -19.459;
+
 	//머리 9
-	index.pos[1 + array_count * 5].x = 0.0f;
-	index.pos[1 + array_count * 5].y = -12.017;
-	index.pos[1 + array_count * 5].z = -14.961;
+	index.pos[1 + 8 * 5].x = 0.0f;
+	index.pos[1 + 8 * 5].y = -12.017;
+	index.pos[1 + 8 * 5].z = -14.961;
+
 
 	for (int i = 0; i < (1 + 8 * 5) + 1; i++) {
 
@@ -250,21 +251,42 @@ void banana_head(int head_x, int pivot_y, int pivot_z, int size) {
 		index.pos[i].z = -tmp;
 	}
 
+}
+float calculate_x(int degree, int rot_size) {
+	int x;
+	x =  rot_size * cos(degree * 3.14) ;
+	return x;
+}
+
+float calculate_y(int degree, int rot_size) {
+	int y;
+	y = rot_size * cos(degree * 3.14);
+	return y;
+}
+
+void banana_head(int head_x, int pivot_y, int pivot_z, int size, int degree) {
+	
+	banana_save_index();
+
 	for (int i = 0; i < 2; i++) {
 		if (i == 1) {
 
 			for (int i = 0; i <= (1 + 8 * 5 + 1); i++) {
 				index.pos[i].x = -index.pos[i].x;
 			}
+			glFrontFace(GL_CW);
 		}
-
+		else {
+			glFrontFace(GL_CCW);
+		}
 
 
 		glPushMatrix(); {
 
 			glTranslated(head_x, pivot_y, pivot_z);
-			glScaled(5, 5, 5);
-
+		
+			glScaled(size, size, size);
+			glPopMatrix();
 			glColor3f(1.0f, 1.0f, 1.0f);
 
 			glBegin(GL_POLYGON); {//아래
@@ -308,11 +330,10 @@ void banana_head(int head_x, int pivot_y, int pivot_z, int size) {
 			}
 			glEnd();
 
-			glColor3f(0.0f, 1.0f, 1.0f);
 
-			for (int j = 0; j < 7; j++) {
+			for (int j = 0; j < 1; j++) {
 
-				glColor3f(j+ 0.5 * 0.5, j * 0.2, 0);
+				glColor3f(j + 0.5 * 0.5, j * 0.2, 0);
 
 				for (int i = 4; i > 0; i--) {
 
@@ -331,52 +352,7 @@ void banana_head(int head_x, int pivot_y, int pivot_z, int size) {
 					glEnd();
 				}
 			}
-
-
-
-			glBegin(GL_POLYGON); {//아래
-
-				glVertex3f(index.pos[0].x, index.pos[0].y, index.pos[0].z);//중심
-
-				glVertex3f(index.pos[1].x, index.pos[1].y, index.pos[1].z);//그외
-
-				glVertex3f(index.pos[2].x, index.pos[2].y, index.pos[2].z);//그외
-
-			}
-			glEnd();
-
-			glBegin(GL_POLYGON); {//아래
-
-				glVertex3f(index.pos[0].x, index.pos[0].y, index.pos[0].z);//중심
-
-				glVertex3f(index.pos[2].x, index.pos[2].y, index.pos[2].z);//그외
-
-				glVertex3f(index.pos[3].x, index.pos[3].y, index.pos[3].z);//그외
-			}
-			glEnd();
-
-			glBegin(GL_POLYGON); {//아래
-
-				glVertex3f(index.pos[0].x, index.pos[0].y, index.pos[0].z);//중심
-
-				glVertex3f(index.pos[3].x, index.pos[3].y, index.pos[3].z);//그외
-
-				glVertex3f(index.pos[4].x, index.pos[4].y, index.pos[4].z);//그외
-			}
-			glEnd();
-
-			glBegin(GL_POLYGON); {//아래
-
-				glVertex3f(index.pos[0].x, index.pos[0].y, index.pos[0].z);//중심
-
-				glVertex3f(index.pos[4].x, index.pos[4].y, index.pos[4].z);//그외
-
-				glVertex3f(index.pos[5].x, index.pos[5].y, index.pos[5].z);//그외
-			}
-			glEnd();
-
-
-	
+		
 		}
 		glPopMatrix();
 
@@ -385,10 +361,130 @@ void banana_head(int head_x, int pivot_y, int pivot_z, int size) {
 
 
 }
+void banana_body(int head_x, int pivot_y, int pivot_z, int size, int degree) {
+
+	banana_save_index();
 
 
-void banana_draw(int pivot_x, int pivot_y, int pivot_z, int size) {
+	for (int i = 0; i < 2; i++) {
+		if (i == 1) {
 
-	
-	banana_head(pivot_x, pivot_y, pivot_z, size);
+			for (int i = 0; i <= (1 + 8 * 5 + 1); i++) {
+				index.pos[i].x = -index.pos[i].x;
+			}
+			glFrontFace(GL_CW);
+		}
+		else {
+			glFrontFace(GL_CCW);
+		}
+
+
+
+		glPushMatrix(); {
+
+			glTranslated(head_x, pivot_y, pivot_z);
+			glScaled(size, size, size);
+
+			for (int j = 1; j < 7; j++) {
+
+				glColor3f(j + 0.5 * 0.5, j * 0.2, 0);
+
+				for (int i = 4; i > 0; i--) {
+
+
+					glBegin(GL_POLYGON); {//아래
+
+						glVertex3f(index.pos[i + (j * 5)].x, index.pos[i + (j * 5)].y, index.pos[i + (j * 5)].z);//중심
+
+						glVertex3f(index.pos[(i + 1) + (j * 5)].x, index.pos[(i + 1) + (j * 5)].y, index.pos[(i + 1) + (j * 5)].z);//그외
+
+						glVertex3f(index.pos[(i + 1) + ((j + 1) * 5)].x, index.pos[(i + 1) + ((j + 1) * 5)].y, index.pos[(i + 1) + ((j + 1) * 5)].z);//그외
+
+						glVertex3f(index.pos[(i)+((j + 1) * 5)].x, index.pos[(i)+((j + 1) * 5)].y, index.pos[(i)+((j + 1) * 5)].z);//그외
+
+					}
+					glEnd();
+				}
+			}
+			glColor3f(0.5f, 0.1f, 0.1f);
+
+			glBegin(GL_POLYGON); {//아래
+
+				glVertex3f(index.pos[36 + 0].x, index.pos[36 + 0].y, index.pos[36 + 0].z);//중심
+
+				glVertex3f(index.pos[36 + 1].x, index.pos[36 + 1].y, index.pos[36 + 1].z);//중심
+
+				glVertex3f(index.pos[36 + 5].x, index.pos[36 + 5].y, index.pos[36 + 5].z);//중심
+
+			}
+			glEnd();
+			glColor3f(0.5f, 0.1f, 0.1f);
+
+			glBegin(GL_POLYGON); {//아래
+
+				glVertex3f(index.pos[36 + 1].x, index.pos[36 + 1].y, index.pos[36 + 1].z);//중심
+
+				glVertex3f(index.pos[36 + 2].x, index.pos[36 + 2].y, index.pos[36 + 2].z);//중심
+
+				glVertex3f(index.pos[36 + 5].x, index.pos[36 + 5].y, index.pos[36 + 5].z);//중심
+
+			}
+			glEnd();
+			glColor3f(0.5f, 0.1f, 0.1f);
+
+			glBegin(GL_POLYGON); {//아래
+
+				glVertex3f(index.pos[36 + 2].x, index.pos[36 + 2].y, index.pos[36 + 2].z);//중심
+
+				glVertex3f(index.pos[36 + 3].x, index.pos[36 + 3].y, index.pos[36 + 3].z);//중심
+
+				glVertex3f(index.pos[36 + 5].x, index.pos[36 + 5].y, index.pos[36 + 5].z);//중심
+
+			}
+			glEnd();
+			glColor3f(0.5f, 0.1f, 0.1f);
+
+			glBegin(GL_POLYGON); {//아래
+
+				glVertex3f(index.pos[36 + 3].x, index.pos[36 + 3].y, index.pos[36 + 3].z);//중심
+
+				glVertex3f(index.pos[36 + 4].x, index.pos[36 + 4].y, index.pos[36 + 4].z);//중심
+
+				glVertex3f(index.pos[36 + 5].x, index.pos[36 + 5].y, index.pos[36 + 5].z);//중심
+
+			}
+			glEnd();
+
+		}
+		glPopMatrix();
+
+	}
+	glPopMatrix();
+
+}
+
+#define IDLE 0
+#define RUN 1
+#define JUMP 2
+#define DOWN_JUMP 3
+
+void banana_draw(int pivot_x, int pivot_y, int pivot_z, int size,int state , int sub_degree) {
+	if (state == IDLE) {
+		
+		banana_head(pivot_x, pivot_y, pivot_z, size ,sub_degree);//머리
+		banana_body(pivot_x, pivot_y, pivot_z, size, 0);//몸
+	}
+	//else if (state == RUN) {
+	//	banana_head(pivot_x, pivot_y, pivot_z, size);//머리
+	//	banana_body(pivot_x, pivot_y, pivot_z, size);//몸
+	//}
+	//else if (state == JUMP) {
+	//	banana_head(pivot_x, pivot_y, pivot_z, size);//머리
+	//	banana_body(pivot_x, pivot_y, pivot_z, size);//몸
+	//}
+	//else if (state == DOWN_JUMP) {
+	//	banana_head(pivot_x, pivot_y, pivot_z, size);//머리
+	//	banana_body(pivot_x, pivot_y, pivot_z, size);//몸
+	//}
+
 }
