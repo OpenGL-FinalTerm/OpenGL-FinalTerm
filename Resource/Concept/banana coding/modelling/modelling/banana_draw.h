@@ -252,19 +252,16 @@ void banana_save_index() {
 	}
 
 }
-float calculate_x(int degree, int rot_size) {
-	int x;
-	x =  rot_size * cos(degree * 3.14) ;
-	return x;
+
+float vegier_line(float complete ,float base, float arrive, float ctrl_pt,float t) {
+	complete =
+		(
+			(((1-t)*(1-t) * base) + (2*(1-t)*ctrl_pt) + ((t * t)*(arrive)))
+		);
+	return complete;
 }
 
-float calculate_y(int degree, int rot_size) {
-	int y;
-	y = rot_size * cos(degree * 3.14);
-	return y;
-}
-
-void banana_head(int head_x, int pivot_y, int pivot_z, int size, int degree) {
+void banana_head(int head_x, int pivot_y, int pivot_z, int size, float degree) {
 	
 	banana_save_index();
 
@@ -280,43 +277,41 @@ void banana_head(int head_x, int pivot_y, int pivot_z, int size, int degree) {
 			glFrontFace(GL_CCW);
 		}
 
-
 		glPushMatrix(); {
 
 			glTranslated(head_x, pivot_y, pivot_z);
-		
 			glScaled(size, size, size);
-			glPopMatrix();
+
 			glColor3f(1.0f, 1.0f, 1.0f);
 
 			glBegin(GL_POLYGON); {//아래
 
-				glVertex3f(index.pos[0].x, index.pos[0].y, index.pos[0].z);//중심
+				glVertex3f(index.pos[0].x, index.pos[0].y + sin(degree * 3.14 ), index.pos[0].z + cos(degree * 3.14));//중심
 
-				glVertex3f(index.pos[1].x, index.pos[1].y, index.pos[1].z);//그외
+				glVertex3f(index.pos[1].x, index.pos[1].y + sin(degree * 3.14), index.pos[1].z + cos(degree * 3.14));//그외
 
-				glVertex3f(index.pos[2].x, index.pos[2].y, index.pos[2].z);//그외
+				glVertex3f(index.pos[2].x, index.pos[2].y + sin(degree * 3.14), index.pos[2].z + cos(degree * 3.14));//그외
 
 			}
 			glEnd();
 
 			glBegin(GL_POLYGON); {//아래
 
-				glVertex3f(index.pos[0].x, index.pos[0].y, index.pos[0].z);//중심
+				glVertex3f(index.pos[0].x, index.pos[0].y + sin(degree * 3.14), index.pos[0].z + cos(degree * 3.14));//중심
 
-				glVertex3f(index.pos[2].x, index.pos[2].y, index.pos[2].z);//그외
+				glVertex3f(index.pos[2].x, index.pos[2].y + sin(degree * 3.14), index.pos[2].z + cos(degree * 3.14));//그외
 
-				glVertex3f(index.pos[3].x, index.pos[3].y, index.pos[3].z);//그외
+				glVertex3f(index.pos[3].x, index.pos[3].y + sin(degree * 3.14), index.pos[3].z + cos(degree * 3.14));//그외
 			}
 			glEnd();
 
 			glBegin(GL_POLYGON); {//아래
 
-				glVertex3f(index.pos[0].x, index.pos[0].y, index.pos[0].z);//중심
+				glVertex3f(index.pos[0].x, index.pos[0].y + sin(degree * 3.14), index.pos[0].z + cos(degree * 3.14));//중심
 
-				glVertex3f(index.pos[3].x, index.pos[3].y, index.pos[3].z);//그외
+				glVertex3f(index.pos[3].x, index.pos[3].y + sin(degree * 3.14), index.pos[3].z + cos(degree * 3.14));//그외
 
-				glVertex3f(index.pos[4].x, index.pos[4].y, index.pos[4].z);//그외
+				glVertex3f(index.pos[4].x, index.pos[4].y + sin(degree * 3.14), index.pos[4].z + cos(degree * 3.14));//그외
 			}
 			glEnd();
 
@@ -361,7 +356,7 @@ void banana_head(int head_x, int pivot_y, int pivot_z, int size, int degree) {
 
 
 }
-void banana_body(int head_x, int pivot_y, int pivot_z, int size, int degree) {
+void banana_body(int head_x, int pivot_y, int pivot_z, int size , float rot_degree) {
 
 	banana_save_index();
 
@@ -468,11 +463,11 @@ void banana_body(int head_x, int pivot_y, int pivot_z, int size, int degree) {
 #define JUMP 2
 #define DOWN_JUMP 3
 
-void banana_draw(int pivot_x, int pivot_y, int pivot_z, int size,int state , int sub_degree) {
+void banana_draw(int pivot_x, int pivot_y, int pivot_z, int size,int state , float sub_degree) {
 	if (state == IDLE) {
 		
-		banana_head(pivot_x, pivot_y, pivot_z, size ,sub_degree);//머리
-		banana_body(pivot_x, pivot_y, pivot_z, size, 0);//몸
+		banana_head(pivot_x, pivot_y, pivot_z, size , sub_degree);//머리
+		banana_body(pivot_x, pivot_y, pivot_z, size , 0);//몸
 	}
 	//else if (state == RUN) {
 	//	banana_head(pivot_x, pivot_y, pivot_z, size);//머리
