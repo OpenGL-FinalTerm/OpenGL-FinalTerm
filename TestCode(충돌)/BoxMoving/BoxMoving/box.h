@@ -7,7 +7,12 @@ private:
 	float y;
 	float z;
 
+	float addX;
+	float addY;
+	float addZ;
+
 	float size;
+	bool check = false;
 
 
 public:
@@ -16,7 +21,6 @@ public:
 	{
 		x += inX;
 	}
-
 
 	void movingY(int inY)
 	{
@@ -28,6 +32,37 @@ public:
 		z += inZ;
 	}
 
+	void checkUpdate(int c)
+	{
+		if (c == 1)
+			check = true;
+		else
+			check = false;
+	}
+
+	void addXrate(int adX)
+	{
+		addX += adX;
+	}
+
+	void addYrate(int adY)
+	{
+		addY += adY;
+	}
+
+	void addZrate(int adZ)
+	{
+		addZ += adZ;
+	}
+
+	void clearAdd()
+	{
+		addX = 0;
+		addY = 0;
+		addZ = 0;
+	}
+
+
 	void drawBox(float size, float R, float G, float B)
 	{
 		glPushMatrix();
@@ -38,14 +73,18 @@ public:
 	}
 
 	float returnBoxCenterX() {
-		return x;
+		return x + addX;
 	}
 	
 	float returnBoxCenterY() {
-		return y;
+		return y + addY;
 	}
 
 	float returnBoxCenterZ() {
-		return z;
+		return z + addZ;
+	}
+
+	bool returnCheck() {
+		return check;
 	}
 };

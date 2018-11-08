@@ -7,6 +7,7 @@
 #include "box.h"
 GLvoid Reshape(int w, int h);
 
+#define whatBox 4
 //해상도 설정
 #define WideSize 800
 #define HighSize 600
@@ -77,7 +78,8 @@ static int __z;
 //카메라
 Cam camera;
 Box box;
-Box smallBox;
+Box otherBox;
+Box smallBox[4];
 
 //은면제거
 BOOL depth;
@@ -99,7 +101,16 @@ void SetupRC()
 {
 	index_box_size = 100;
 	depth = true;
-	smallBox.movingX(-50);
+	smallBox[1].movingX(-50);
+	smallBox[0].movingX(-50);
+	smallBox[1].movingZ(-50);
+
+	smallBox[2].movingX(-100);
+	smallBox[2].movingZ(-100);
+
+	smallBox[3].movingX(100);
+	smallBox[3].movingZ(50);
+	otherBox.movingX(-90);
 	//-------------
 }
 void main(int argc, char *argv[]) {
@@ -153,7 +164,10 @@ GLvoid drawScene(GLvoid)
 	{
 		camera.drawCamera();
 
-		smallBox.drawBox(29, 100, 255, 100);
+		smallBox[0].drawBox(29, 100, 255, 100);
+		smallBox[1].drawBox(29, 50, 100, 255);
+		smallBox[2].drawBox(29, 20, 100, 255);
+		smallBox[3].drawBox(29, 255, 255, 0);
 		box.drawBox(30, 255, 255, 0);
 	}
 	glPopMatrix();
@@ -188,18 +202,19 @@ void Keyboard(unsigned char key, int x, int y) {
 		//rotate
 	case ' ':
 		box.movingY(1);
-		if (box.returnBoxCenterY() + 15 >= smallBox.returnBoxCenterY() - 12.5 && !(box.returnBoxCenterY() - 15 >= smallBox.returnBoxCenterY() + 12.5)) {
-			if (smallBox.returnBoxCenterX() - 12.5 < box.returnBoxCenterX() + 15 && smallBox.returnBoxCenterX() + 12.5 > box.returnBoxCenterX() - 15 && smallBox.returnBoxCenterZ() + 12.5 > box.returnBoxCenterZ() - 15 && smallBox.returnBoxCenterZ() - 12.5 < box.returnBoxCenterZ() + 15)
-				smallBox.movingY(1);
+	
+		if (box.returnBoxCenterY() + 15 >= smallBox[0].returnBoxCenterY() - 12.5 && !(box.returnBoxCenterY() - 15 >= smallBox[0].returnBoxCenterY() + 12.5)) {
+			if (smallBox[0].returnBoxCenterX() - 12.5 < box.returnBoxCenterX() + 15 && smallBox[0].returnBoxCenterX() + 12.5 > box.returnBoxCenterX() - 15 && smallBox[0].returnBoxCenterZ() + 12.5 > box.returnBoxCenterZ() - 15 && smallBox[0].returnBoxCenterZ() - 12.5 < box.returnBoxCenterZ() + 15)
+				smallBox[0].movingY(1);
 		}
 
 		break;
 
 	case '/':
 		box.movingY(-1);
-		if (box.returnBoxCenterY() - 15 <= smallBox.returnBoxCenterY() + 12.5 && !(box.returnBoxCenterY() + 15 <= smallBox.returnBoxCenterY() - 12.5)) {
-			if (smallBox.returnBoxCenterX() - 12.5 < box.returnBoxCenterX() + 15 && smallBox.returnBoxCenterX() + 12.5 > box.returnBoxCenterX() - 15 && smallBox.returnBoxCenterZ() + 12.5 > box.returnBoxCenterZ() - 15 && smallBox.returnBoxCenterZ() - 12.5 < box.returnBoxCenterZ() + 15)
-				smallBox.movingY(-1);
+		if (box.returnBoxCenterY() - 15 <= smallBox[0].returnBoxCenterY() + 12.5 && !(box.returnBoxCenterY() + 15 <= smallBox[0].returnBoxCenterY() - 12.5)) {
+			if (smallBox[0].returnBoxCenterX() - 12.5 < box.returnBoxCenterX() + 15 && smallBox[0].returnBoxCenterX() + 12.5 > box.returnBoxCenterX() - 15 && smallBox[0].returnBoxCenterZ() + 12.5 > box.returnBoxCenterZ() - 15 && smallBox[0].returnBoxCenterZ() - 12.5 < box.returnBoxCenterZ() + 15)
+				smallBox[0].movingY(-1);
 		}
 		break;
 
@@ -336,39 +351,186 @@ GLvoid Reshape(int w, int h)
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 }
+BOOL check = FALSE;
 
 void SpecialKeys(int key, int x, int y) {
+	
+	int cycle = 0;
 	if (key == GLUT_KEY_UP) {
+		int i = 0;
 		box.movingZ(-1);
-		if (box.returnBoxCenterZ() - 15 <= smallBox.returnBoxCenterZ() + 12.5 && !(box.returnBoxCenterZ() + 15 <= smallBox.returnBoxCenterZ() - 12.5)) {
-			if(smallBox.returnBoxCenterX() - 12.5 < box.returnBoxCenterX() + 15 && smallBox.returnBoxCenterX() + 12.5 > box.returnBoxCenterX() - 15 && smallBox.returnBoxCenterY() + 12.5 > box.returnBoxCenterY() - 15 && smallBox.returnBoxCenterY() - 12.5 < box.returnBoxCenterY() + 15)
-				smallBox.movingZ(-1);
+		int count = 0;
+		while (check == FALSE) {
+	
+			if (box.returnBoxCenterZ() - 15 <= smallBox[i].returnBoxCenterZ() + 12.5 && !(box.returnBoxCenterZ() + 15 <= smallBox[i].returnBoxCenterZ() - 12.5)) {
+				if (smallBox[i].returnBoxCenterX() - 12.5 < box.returnBoxCenterX() + 15 && smallBox[i].returnBoxCenterX() + 12.5 > box.returnBoxCenterX() - 15 && smallBox[i].returnBoxCenterY() + 12.5 > box.returnBoxCenterY() - 15 && smallBox[i].returnBoxCenterY() - 12.5 < box.returnBoxCenterY() + 15) {
+					if (smallBox[i].returnCheck() == 0) {
+						box.addZrate(-29);
+						smallBox[i].movingZ(-1);
+						smallBox[i].checkUpdate(1);
+					}
+				}
+			}
+
+			if (i == whatBox - 1) {
+				cycle++;
+				for (int j = 0; j < whatBox; ++j) {
+					if (smallBox[j].returnCheck()) {
+						count++;
+					}
+				}
+				if (count == whatBox || count == 0 || cycle == whatBox)
+					check = TRUE;
+				else
+					i = 0;
+
+				count = 0;
+			}
+			else {
+				i++;
+
+			}
+
 		}
+
+		for (int k = 0; k < whatBox; ++k)
+			smallBox[k].checkUpdate(0);
+		check = FALSE;
+		cycle = 0;
+		box.clearAdd();
 	}
 
 	if (key == GLUT_KEY_DOWN) {
+		int i = 0;
 		box.movingZ(1);
-		if (box.returnBoxCenterZ() + 15 >= smallBox.returnBoxCenterZ() - 12.5 && !(box.returnBoxCenterZ() - 15 >= smallBox.returnBoxCenterZ() + 12.5)) {
-			if (smallBox.returnBoxCenterX() - 12.5 < box.returnBoxCenterX() + 15 && smallBox.returnBoxCenterX() + 12.5 > box.returnBoxCenterX() - 15 && smallBox.returnBoxCenterY() + 12.5 > box.returnBoxCenterY() - 15 && smallBox.returnBoxCenterY() - 12.5 < box.returnBoxCenterY() + 15)
-				smallBox.movingZ(1);
+		int count = 0;
+		while (check == FALSE) {
+
+			if (box.returnBoxCenterZ() + 15 >= smallBox[i].returnBoxCenterZ() - 12.5 && !(box.returnBoxCenterZ() - 15 >= smallBox[i].returnBoxCenterZ() + 12.5)) {
+				if (smallBox[i].returnBoxCenterX() - 12.5 < box.returnBoxCenterX() + 15 && smallBox[i].returnBoxCenterX() + 12.5 > box.returnBoxCenterX() - 15 && smallBox[i].returnBoxCenterY() + 12.5 > box.returnBoxCenterY() - 15 && smallBox[i].returnBoxCenterY() - 12.5 < box.returnBoxCenterY() + 15) {
+					if (smallBox[i].returnCheck() == 0) {
+						box.addZrate(29);
+						smallBox[i].movingZ(1);
+						smallBox[i].checkUpdate(1);
+					}
+				}
+			}
+
+			if (i == whatBox - 1) {
+				cycle++;
+				for (int j = 0; j < whatBox; ++j) {
+					if (smallBox[j].returnCheck()) {
+						count++;
+					}
+				}
+				if (count == whatBox || count == 0 || cycle == whatBox)
+					check = TRUE;
+				else
+					i = 0;
+
+				count = 0;
+			}
+			else {
+				i++;
+			}
 		}
+
+		for (int k = 0; k < whatBox; ++k)
+			smallBox[k].checkUpdate(0);
+		check = FALSE;
+		cycle = 0;
+		box.clearAdd();
+
 	}
 
 	if (key == GLUT_KEY_LEFT) {
+		int i = 0;
 		box.movingX(-1);
-		if (box.returnBoxCenterX() - 15 <= smallBox.returnBoxCenterX() + 12.5 && !(box.returnBoxCenterX() + 15 <= smallBox.returnBoxCenterX() - 12.5)) {
-			if (smallBox.returnBoxCenterZ() - 12.5 < box.returnBoxCenterZ() + 15 && smallBox.returnBoxCenterZ() + 12.5 > box.returnBoxCenterZ() - 15 && smallBox.returnBoxCenterY() + 12.5 > box.returnBoxCenterY() - 15 && smallBox.returnBoxCenterY() - 12.5 < box.returnBoxCenterY() + 15)
-				smallBox.movingX(-1);
+		int count = 0;
+		while (check == FALSE) {
+			
+			if (box.returnBoxCenterX() - 15 <= smallBox[i].returnBoxCenterX() + 12.5 && !(box.returnBoxCenterX() + 15 <= smallBox[i].returnBoxCenterX() - 12.5)) {
+				if (smallBox[i].returnBoxCenterZ() - 12.5 < box.returnBoxCenterZ() + 15 && smallBox[i].returnBoxCenterZ() + 12.5 > box.returnBoxCenterZ() - 15 && smallBox[i].returnBoxCenterY() + 12.5 > box.returnBoxCenterY() - 15 && smallBox[i].returnBoxCenterY() - 12.5 < box.returnBoxCenterY() + 15) {
+					if (smallBox[i].returnCheck() == 0) {
+						box.addXrate(-29);
+						smallBox[i].movingX(-1);
+						smallBox[i].checkUpdate(1);
+					}
+				}
+			}
+
+			if (i >= whatBox - 1) {
+				cycle++;
+				for (int j = 0; j < whatBox; ++j) {
+					if (smallBox[j].returnCheck()) {
+						count++;
+					}
+				}
+
+				if (count == whatBox || count == 0 || cycle == whatBox)
+					check = TRUE;
+				else
+					i = 0;
+				
+				count = 0;
+			}
+
+			else {
+				i++;
+
+			}
 		}
+
+		for (int k = 0; k < whatBox; ++k)
+			smallBox[k].checkUpdate(0);
+		check = FALSE;
+		cycle = 0;
+		box.clearAdd();
 
 	}
 
 	if (key == GLUT_KEY_RIGHT) {
+		int i = 0;
 		box.movingX(1);
-		if (box.returnBoxCenterX() + 15 >= smallBox.returnBoxCenterX() - 12.5 && !(box.returnBoxCenterX() - 15 >= smallBox.returnBoxCenterX() + 12.5)) {
-			if (smallBox.returnBoxCenterZ() - 12.5 < box.returnBoxCenterZ() + 15 && smallBox.returnBoxCenterZ() + 12.5 > box.returnBoxCenterZ() - 15 && smallBox.returnBoxCenterY() + 12.5 > box.returnBoxCenterY() - 15 && smallBox.returnBoxCenterY() - 12.5 < box.returnBoxCenterY() + 15)
-				smallBox.movingX(1);
+
+		int count = 0;
+
+		while (check == FALSE) {
+			if (box.returnBoxCenterX() + 15 >= smallBox[i].returnBoxCenterX() - 12.5 && !(box.returnBoxCenterX() - 15 >= smallBox[i].returnBoxCenterX() + 12.5)) {
+				if (smallBox[i].returnBoxCenterZ() - 12.5 < box.returnBoxCenterZ() + 15 && smallBox[i].returnBoxCenterZ() + 12.5 > box.returnBoxCenterZ() - 15 && smallBox[i].returnBoxCenterY() + 12.5 > box.returnBoxCenterY() - 15 && smallBox[i].returnBoxCenterY() - 12.5 < box.returnBoxCenterY() + 15) {
+					if (smallBox[i].returnCheck() == 0) {
+						box.addXrate(29);
+						smallBox[i].movingX(1);
+						smallBox[i].checkUpdate(1);
+					}
+				}
+			}
+
+			if (i == whatBox - 1) {
+				cycle++;
+				for (int j = 0; j < whatBox; ++j) {
+					if (smallBox[j].returnCheck()) {
+						count++;
+					}
+				}
+				if (count == whatBox || count == 0 || cycle == whatBox)
+					check = TRUE;
+				else
+					i = 0;
+
+				count = 0;
+			}
+			else {
+				i++;
+
+			}
 		}
+
+		for (int k = 0; k < whatBox; ++k)
+			smallBox[k].checkUpdate(0);
+		check = FALSE;
+		cycle = 0;
+		box.clearAdd();
 	}
 	glutPostRedisplay();
 }
