@@ -485,13 +485,26 @@ void banana_body(int body_x, int pivot_y, int pivot_z, int size , float rot_degr
 
 }
 
-
+void banana_leg(int body_x, int pivot_y, int pivot_z, int size, float rot_degree, int state) {
+	banana_save_index();
+	glPushMatrix();
+	{
+		float t = index.pos[3 + 5 * 5].x + size + 50 + body_x;
+		glColor3f(1, 1, 1);
+		glTranslatef(t, -40, 0);
+		//»ö À§Ä¡
+		glutSolidSphere(size * 2, 8, 8);
+		
+	}
+	glPopMatrix();
+}
 
 void banana_draw(int pivot_x, int pivot_y, int pivot_z, int size,int state , float sub_degree) {
 	if (state == IDLE) {
 		
 		banana_head(pivot_x, pivot_y, pivot_z, size , sub_degree / 2 , IDLE);//¸Ó¸®
 		banana_body(pivot_x, pivot_y, pivot_z, size , sub_degree * 2 , IDLE);//¸ö
+		banana_leg(pivot_x, pivot_y, pivot_z, size, sub_degree * 2, IDLE); // ÆÈ
 	}
 	//else if (state == RUN) {
 	//	banana_head(pivot_x, pivot_y, pivot_z, size);//¸Ó¸®
