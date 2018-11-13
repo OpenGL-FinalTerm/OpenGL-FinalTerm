@@ -264,7 +264,7 @@ float calculate_y(int degree, int rot_size) {
 	return y;
 }
 
-void banana_head(int head_x, int pivot_y, int pivot_z, int size, int degree) {
+void banana_head(int head_x, int head_y, int head_z, int size, int degree) {
 	
 	banana_save_index();
 
@@ -279,14 +279,11 @@ void banana_head(int head_x, int pivot_y, int pivot_z, int size, int degree) {
 		else {
 			glFrontFace(GL_CCW);
 		}
-
+		//printf("test \n");
 
 		glPushMatrix(); {
-
-			glTranslated(head_x, pivot_y, pivot_z);
-		
+			glTranslated(head_x, head_y, head_z);
 			glScaled(size, size, size);
-			glPopMatrix();
 			glColor3f(1.0f, 1.0f, 1.0f);
 
 			glBegin(GL_POLYGON); {//아래
@@ -471,7 +468,7 @@ void banana_body(int head_x, int pivot_y, int pivot_z, int size, int degree) {
 void banana_draw(int pivot_x, int pivot_y, int pivot_z, int size,int state , int sub_degree) {
 	if (state == IDLE) {
 		
-		banana_head(pivot_x, pivot_y, pivot_z, size ,sub_degree);//머리
+		banana_head(pivot_x, pivot_y, pivot_z, size,sub_degree);//머리
 		banana_body(pivot_x, pivot_y, pivot_z, size, 0);//몸
 	}
 	//else if (state == RUN) {
