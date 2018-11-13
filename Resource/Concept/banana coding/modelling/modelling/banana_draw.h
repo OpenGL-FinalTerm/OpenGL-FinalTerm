@@ -46,6 +46,11 @@ typedef struct QUAD
 
 QUAD index;
 
+#define IDLE 0
+#define RUN 1
+#define JUMP 2
+#define DOWN_JUMP 3
+
 void Swap(float a, float b) {
 	float temp;
 	temp = a;
@@ -263,13 +268,15 @@ float vegier_line(float complete ,float base, float arrive, float ctrl_pt,float 
 	return complete;
 }
 float __tmp;
-void banana_head(int head_x, int pivot_y, int pivot_z, int size, float degree) {
+void banana_head(int head_x, int pivot_y, int pivot_z, int size, float degree , int state) {
 	
 	banana_save_index();
-	for (int i = 0; i <= 5; i++) {
+	for (int i = 0; i <= 5; i++) {		
+		if (state == IDLE) {
+			index.pos[i].y = index.pos[i].y + sin(degree / 5 * 3.14);
+			index.pos[i].z = index.pos[i].z + cos(degree / 5 * 3.14);
 
-		index.pos[i].y = index.pos[i].y + sin(degree * 3.14);
-		index.pos[i].z = index.pos[i].z + cos(degree *3.14);
+		}
 	}
 	for (int i = 0; i < 2; i++) {
 		if (i == 1) {
@@ -363,14 +370,22 @@ void banana_head(int head_x, int pivot_y, int pivot_z, int size, float degree) {
 
 
 }
-void banana_body(int head_x, int pivot_y, int pivot_z, int size , float rot_degree) {
+int sign = 1;
+float t = 0.f;
+
+void banana_body(int body_x, int pivot_y, int pivot_z, int size , float rot_degree, int state) {
 
 	banana_save_index();
-	for (int i = 20; i <= 41-4*2; i++) {
-		if ((i % 5 == 1) || (i % 5 == 2)) {
-			index.pos[i].y = index.pos[i].y - sin(rot_degree/5 * 3.14);
-			index.pos[i].z = index.pos[i].z - cos(rot_degree/5 * 3.14);
+	if (state == IDLE) {
+		
+		for (int i = 20; i <= 41 - 4 * 3; i++) {
+
+			if ((i % 5 == 1) || (i % 5 == 2)) {
+				index.pos[i].y = (index.pos[i].y + (rot_degree/10));
+				index.pos[i].z = (index.pos[i].z + (rot_degree/10));
+			}
 		}
+
 	}
 
 	for (int i = 0; i < 2; i++) {
@@ -389,9 +404,9 @@ void banana_body(int head_x, int pivot_y, int pivot_z, int size , float rot_degr
 
 		glPushMatrix(); {
 
-			glTranslated(head_x, pivot_y, pivot_z);
+			glTranslated(body_x, pivot_y, pivot_z);
+			//glRotated(rot_degree, 1, 0, 0);
 			glScaled(size, size, size);
-
 			for (int j = 1; j < 7; j++) {
 
 				glColor3f(j + 0.5 * 0.5, j * 0.2, 0);
@@ -470,16 +485,13 @@ void banana_body(int head_x, int pivot_y, int pivot_z, int size , float rot_degr
 
 }
 
-#define IDLE 0
-#define RUN 1
-#define JUMP 2
-#define DOWN_JUMP 3
+
 
 void banana_draw(int pivot_x, int pivot_y, int pivot_z, int size,int state , float sub_degree) {
 	if (state == IDLE) {
 		
-		banana_head(pivot_x, pivot_y, pivot_z, size , sub_degree);//赣府
-		banana_body(pivot_x, pivot_y, pivot_z, size , sub_degree);//个
+		banana_head(pivot_x, pivot_y, pivot_z, size , sub_degree / 2 , IDLE);//赣府
+		banana_body(pivot_x, pivot_y, pivot_z, size , sub_degree * 2 , IDLE);//个
 	}
 	//else if (state == RUN) {
 	//	banana_head(pivot_x, pivot_y, pivot_z, size);//赣府
