@@ -96,6 +96,7 @@ Shape ball[10];
 
 int index_box_size;
 #define BALL_NUM 5
+Shape banana;
 
 void SetupRC()
 {
@@ -186,13 +187,22 @@ void Motion(int x, int y, BOOL state) {
 
 }
 
+int switch_sign = 1;
 void Timerfunction(int value) {
 
 
 	glutPostRedisplay(); //타이머에 넣는다.
-	glutTimerFunc(100, Timerfunction, 1); //타이머 다시 출력
 
+	if ((banana.rot.degree == -10) || (banana.rot.degree == 10))
+	{
+		switch_sign *= -1;
+	}
+	banana.rot.degree += 1 * switch_sign;
+
+	glutPostRedisplay(); //타이머에 넣는다.
+	glutTimerFunc(100, Timerfunction, 1); //타이머 다시 출력
 }
+
 int ttt;
 int ani_count;
 void Keyboard(unsigned char key, int x, int y) {

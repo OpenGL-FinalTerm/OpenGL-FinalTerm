@@ -37,7 +37,7 @@ typedef struct QUAD
 	int height;
 	int slice;
 	int stacks;
-	BoOL b;
+	BOOL b;
 	BOOL any;
 
 };
