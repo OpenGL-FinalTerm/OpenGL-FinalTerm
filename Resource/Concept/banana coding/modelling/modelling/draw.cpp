@@ -192,14 +192,16 @@ void Mouse(int button, int state, int x, int y) {
 void Motion(int x, int y, BOOL state) {
 
 }
-int switch_sign = 1;
+int switch_sign = -1;
+int Time_count;
 void Timerfunction(int value) {
-
-	if ((banana.rot.degree == -10) || (banana.rot.degree == 10))
+	Time_count++;
+	if (Time_count % 20 == 0)
 	{
 		switch_sign *= -1;
 	}
-	banana.rot.degree += 1 * switch_sign;
+	banana.rot.degree += 0.1f * switch_sign;
+	printf("%f", banana.rot.degree);
 
 	glutPostRedisplay(); //타이머에 넣는다.
 	glutTimerFunc(100, Timerfunction, 1); //타이머 다시 출력

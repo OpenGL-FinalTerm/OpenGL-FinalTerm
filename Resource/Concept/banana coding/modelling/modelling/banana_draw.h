@@ -26,8 +26,8 @@ typedef struct BoOL
 
 typedef struct QUAD
 {
-	Color cl[50];//ªˆªÛ
-	Translate_pos pos[50];//√— ¡§¡° ºˆ 74 / 2
+	Color cl[50];//ÏÉâÏÉÅ
+	Translate_pos pos[50];//Ï¥ù Ï†ïÏ†ê Ïàò 74 / 2
 	Translate_pos move;
 	Translate_pos scale;
 	Translate_pos rot;
@@ -42,9 +42,14 @@ typedef struct QUAD
 
 };
 
-//∏”∏Æ 3
+//Î®∏Î¶¨ 3
 
 QUAD index;
+
+#define IDLE 0
+#define RUN 1
+#define JUMP 2
+#define DOWN_JUMP 3
 
 void Swap(float a, float b) {
 	float temp;
@@ -54,9 +59,9 @@ void Swap(float a, float b) {
 }
 int array_count = 0;
 void banana_save_index() {
-	//¿Œµ¶Ω∫ πˆ∆€ ¿˙¿Â
-	//πŸ≥™≥™ «ÏµÂ
-	//∏”∏Æ 1
+	//Ïù∏Îç±Ïä§ Î≤ÑÌçº Ï†ÄÏû•
+	//Î∞îÎÇòÎÇò Ìó§Îìú
+	//Î®∏Î¶¨ 1
 	index.pos[0].x = 0.0f;
 	index.pos[0].y = -2.761;
 	index.pos[0].z = 17.274;
@@ -81,7 +86,7 @@ void banana_save_index() {
 	index.pos[5].y = 1.842;
 	index.pos[5].z = 18.588f;
 
-	//∏”∏Æ 2
+	//Î®∏Î¶¨ 2
 	index.pos[1 + 1 * 5].x = 0.0f;
 	index.pos[1 + 1 * 5].y = 1.258;
 	index.pos[1 + 1 * 5].z = 9.247;
@@ -102,7 +107,7 @@ void banana_save_index() {
 	index.pos[5 + 1 * 5].y = 3.927;
 	index.pos[5 + 1 * 5].z = 12.576;
 
-	//∏”∏Æ 3
+	//Î®∏Î¶¨ 3
 	index.pos[1 + 2 * 5].x = 0.0f;
 	index.pos[1 + 2 * 5].y = 1.568;
 	index.pos[1 + 2 * 5].z = 8.439;
@@ -123,7 +128,7 @@ void banana_save_index() {
 	index.pos[5 + 2 * 5].y = 4.318;
 	index.pos[5 + 2 * 5].z = 12.241;
 
-	//∏”∏Æ 4
+	//Î®∏Î¶¨ 4
 	index.pos[1 + 3 * 5].x = 0.0f;
 	index.pos[1 + 3 * 5].y = 0.745;
 	index.pos[1 + 3 * 5].z = 3.886;
@@ -144,7 +149,7 @@ void banana_save_index() {
 	index.pos[5 + 3 * 5].y = 9.382;
 	index.pos[5 + 3 * 5].z = 9.133;
 
-	//∏”∏Æ 5
+	//Î®∏Î¶¨ 5
 	index.pos[1 + 4 * 5].x = 0.0f;
 	index.pos[1 + 4 * 5].y = -1.533;
 	index.pos[1 + 4 * 5].z = -3.874;
@@ -165,7 +170,7 @@ void banana_save_index() {
 	index.pos[5 + 4 * 5].y = 12.002;
 	index.pos[5 + 4 * 5].z = -0.415;
 
-	//∏”∏Æ 6
+	//Î®∏Î¶¨ 6
 	index.pos[1 + 5 * 5].x = 0.0f;
 	index.pos[1 + 5 * 5].y = -4.107;
 	index.pos[1 + 5 * 5].z = -7.083;
@@ -186,7 +191,7 @@ void banana_save_index() {
 	index.pos[5 + 5 * 5].y = 8.641;
 	index.pos[5 + 5 * 5].z = -13.97f;
 
-	//∏”∏Æ 7
+	//Î®∏Î¶¨ 7
 	index.pos[1 + 6 * 5].x = 0.0f;
 	index.pos[1 + 6 * 5].y = -6.58f;
 	index.pos[1 + 6 * 5].z = -9.429;
@@ -207,7 +212,7 @@ void banana_save_index() {
 	index.pos[5 + 6 * 5].y = -1.075;
 	index.pos[5 + 6 * 5].z = -20.255;
 
-	//∏”∏Æ 8
+	//Î®∏Î¶¨ 8
 	index.pos[1 + 7 * 5].x = 0.0f;
 	index.pos[1 + 7 * 5].y = -10.789;
 	index.pos[1 + 7 * 5].z = -12.458;
@@ -228,7 +233,7 @@ void banana_save_index() {
 	index.pos[5 + 7 * 5].y = -10.456;
 	index.pos[5 + 7 * 5].z = -19.459;
 
-	//∏”∏Æ 9
+	//Î®∏Î¶¨ 9
 	index.pos[1 + 8 * 5].x = 0.0f;
 	index.pos[1 + 8 * 5].y = -12.017;
 	index.pos[1 + 8 * 5].z = -14.961;
@@ -252,22 +257,27 @@ void banana_save_index() {
 	}
 
 }
-float calculate_x(int degree, int rot_size) {
-	int x;
-	x =  rot_size * cos(degree * 3.14) ;
-	return x;
-}
 
-float calculate_y(int degree, int rot_size) {
-	int y;
-	y = rot_size * cos(degree * 3.14);
-	return y;
-}
+float vegier_line(float complete ,float base, float arrive, float ctrl_pt,float t) {
+	t = t / 100;
 
-void banana_head(int head_x, int head_y, int head_z, int size, int degree) {
+	complete =
+		(
+			(((1-t)*(1-t) * base) + (2*(1-t)*ctrl_pt) + ((t * t)*(arrive)))
+		);
+	return complete;
+}
+float __tmp;
+void banana_head(int head_x, int pivot_y, int pivot_z, int size, float degree , int state) {
 	
 	banana_save_index();
+	for (int i = 0; i <= 5; i++) {		
+		if (state == IDLE) {
+			index.pos[i].y = index.pos[i].y + sin(degree / 5 * 3.14);
+			index.pos[i].z = index.pos[i].z + cos(degree / 5 * 3.14);
 
+		}
+	}
 	for (int i = 0; i < 2; i++) {
 		if (i == 1) {
 
@@ -279,51 +289,52 @@ void banana_head(int head_x, int head_y, int head_z, int size, int degree) {
 		else {
 			glFrontFace(GL_CCW);
 		}
-		//printf("test \n");
-
 		glPushMatrix(); {
-			glTranslated(head_x, head_y, head_z);
+
+			glTranslated(head_x, pivot_y, pivot_z);
 			glScaled(size, size, size);
+
 			glColor3f(1.0f, 1.0f, 1.0f);
 
-			glBegin(GL_POLYGON); {//æ∆∑°
+				
+			glBegin(GL_POLYGON); {//ÏïÑÎûò
 
-				glVertex3f(index.pos[0].x, index.pos[0].y, index.pos[0].z);//¡ﬂΩ…
+				glVertex3f(index.pos[0].x, index.pos[0].y, index.pos[0].z);//Í∑∏Ïô∏
 
-				glVertex3f(index.pos[1].x, index.pos[1].y, index.pos[1].z);//±◊ø‹
+				glVertex3f(index.pos[1].x, index.pos[1].y, index.pos[1].z);//Í∑∏Ïô∏
 
-				glVertex3f(index.pos[2].x, index.pos[2].y, index.pos[2].z);//±◊ø‹
+				glVertex3f(index.pos[2].x, index.pos[2].y, index.pos[2].z);//Í∑∏Ïô∏
 
 			}
 			glEnd();
 
-			glBegin(GL_POLYGON); {//æ∆∑°
+			glBegin(GL_POLYGON); {//ÏïÑÎûò
 
-				glVertex3f(index.pos[0].x, index.pos[0].y, index.pos[0].z);//¡ﬂΩ…
+				glVertex3f(index.pos[0].x, index.pos[0].y, index.pos[0].z);//Ï§ëÏã¨
 
-				glVertex3f(index.pos[2].x, index.pos[2].y, index.pos[2].z);//±◊ø‹
+				glVertex3f(index.pos[2].x, index.pos[2].y, index.pos[2].z);//Í∑∏Ïô∏
 
-				glVertex3f(index.pos[3].x, index.pos[3].y, index.pos[3].z);//±◊ø‹
+				glVertex3f(index.pos[3].x, index.pos[3].y, index.pos[3].z);//Í∑∏Ïô∏
 			}
 			glEnd();
 
-			glBegin(GL_POLYGON); {//æ∆∑°
+			glBegin(GL_POLYGON); {//ÏïÑÎûò
 
-				glVertex3f(index.pos[0].x, index.pos[0].y, index.pos[0].z);//¡ﬂΩ…
+				glVertex3f(index.pos[0].x, index.pos[0].y, index.pos[0].z);//Ï§ëÏã¨
 
-				glVertex3f(index.pos[3].x, index.pos[3].y, index.pos[3].z);//±◊ø‹
+				glVertex3f(index.pos[3].x, index.pos[3].y, index.pos[3].z);//Í∑∏Ïô∏
 
-				glVertex3f(index.pos[4].x, index.pos[4].y, index.pos[4].z);//±◊ø‹
+				glVertex3f(index.pos[4].x, index.pos[4].y, index.pos[4].z);//Í∑∏Ïô∏
 			}
 			glEnd();
 
-			glBegin(GL_POLYGON); {//æ∆∑°
+			glBegin(GL_POLYGON); {//ÏïÑÎûò
 
-				glVertex3f(index.pos[0].x, index.pos[0].y, index.pos[0].z);//¡ﬂΩ…
+				glVertex3f(index.pos[0].x, index.pos[0].y, index.pos[0].z);//Ï§ëÏã¨
 
-				glVertex3f(index.pos[4].x, index.pos[4].y, index.pos[4].z);//±◊ø‹
+				glVertex3f(index.pos[4].x, index.pos[4].y, index.pos[4].z);//Í∑∏Ïô∏
 
-				glVertex3f(index.pos[5].x, index.pos[5].y, index.pos[5].z);//±◊ø‹
+				glVertex3f(index.pos[5].x, index.pos[5].y, index.pos[5].z);//Í∑∏Ïô∏
 			}
 			glEnd();
 
@@ -335,15 +346,15 @@ void banana_head(int head_x, int head_y, int head_z, int size, int degree) {
 				for (int i = 4; i > 0; i--) {
 
 
-					glBegin(GL_POLYGON); {//æ∆∑°
+					glBegin(GL_POLYGON); {//ÏïÑÎûò
 
-						glVertex3f(index.pos[i + (j * 5)].x, index.pos[i + (j * 5)].y, index.pos[i + (j * 5)].z);//¡ﬂΩ…
+						glVertex3f(index.pos[i + (j * 5)].x, index.pos[i + (j * 5)].y, index.pos[i + (j * 5)].z);//Ï§ëÏã¨
 
-						glVertex3f(index.pos[(i + 1) + (j * 5)].x, index.pos[(i + 1) + (j * 5)].y, index.pos[(i + 1) + (j * 5)].z);//±◊ø‹
+						glVertex3f(index.pos[(i + 1) + (j * 5)].x, index.pos[(i + 1) + (j * 5)].y, index.pos[(i + 1) + (j * 5)].z);//Í∑∏Ïô∏
 
-						glVertex3f(index.pos[(i + 1) + ((j + 1) * 5)].x, index.pos[(i + 1) + ((j + 1) * 5)].y, index.pos[(i + 1) + ((j + 1) * 5)].z);//±◊ø‹
+						glVertex3f(index.pos[(i + 1) + ((j + 1) * 5)].x, index.pos[(i + 1) + ((j + 1) * 5)].y, index.pos[(i + 1) + ((j + 1) * 5)].z);//Í∑∏Ïô∏
 
-						glVertex3f(index.pos[(i)+((j + 1) * 5)].x, index.pos[(i)+((j + 1) * 5)].y, index.pos[(i)+((j + 1) * 5)].z);//±◊ø‹
+						glVertex3f(index.pos[(i)+((j + 1) * 5)].x, index.pos[(i)+((j + 1) * 5)].y, index.pos[(i)+((j + 1) * 5)].z);//Í∑∏Ïô∏
 
 					}
 					glEnd();
@@ -358,10 +369,23 @@ void banana_head(int head_x, int head_y, int head_z, int size, int degree) {
 
 
 }
-void banana_body(int head_x, int pivot_y, int pivot_z, int size, int degree) {
+int sign = 1;
+float t = 0.f;
+
+void banana_body(int body_x, int pivot_y, int pivot_z, int size , float rot_degree, int state) {
 
 	banana_save_index();
+	if (state == IDLE) {
+		
+		for (int i = 20; i <= 41 - 4 * 3; i++) {
 
+			if ((i % 5 == 1) || (i % 5 == 2)) {
+				index.pos[i].y = (index.pos[i].y + (rot_degree/10));
+				index.pos[i].z = (index.pos[i].z + (rot_degree/10));
+			}
+		}
+
+	}
 
 	for (int i = 0; i < 2; i++) {
 		if (i == 1) {
@@ -379,9 +403,9 @@ void banana_body(int head_x, int pivot_y, int pivot_z, int size, int degree) {
 
 		glPushMatrix(); {
 
-			glTranslated(head_x, pivot_y, pivot_z);
+			glTranslated(body_x, pivot_y, pivot_z);
+			//glRotated(rot_degree, 1, 0, 0);
 			glScaled(size, size, size);
-
 			for (int j = 1; j < 7; j++) {
 
 				glColor3f(j + 0.5 * 0.5, j * 0.2, 0);
@@ -389,15 +413,15 @@ void banana_body(int head_x, int pivot_y, int pivot_z, int size, int degree) {
 				for (int i = 4; i > 0; i--) {
 
 
-					glBegin(GL_POLYGON); {//æ∆∑°
+					glBegin(GL_POLYGON); {//ÏïÑÎûò
 
-						glVertex3f(index.pos[i + (j * 5)].x, index.pos[i + (j * 5)].y, index.pos[i + (j * 5)].z);//¡ﬂΩ…
+						glVertex3f(index.pos[i + (j * 5)].x, index.pos[i + (j * 5)].y, index.pos[i + (j * 5)].z);//Ï§ëÏã¨
 
-						glVertex3f(index.pos[(i + 1) + (j * 5)].x, index.pos[(i + 1) + (j * 5)].y, index.pos[(i + 1) + (j * 5)].z);//±◊ø‹
+						glVertex3f(index.pos[(i + 1) + (j * 5)].x, index.pos[(i + 1) + (j * 5)].y, index.pos[(i + 1) + (j * 5)].z);//Í∑∏Ïô∏
 
-						glVertex3f(index.pos[(i + 1) + ((j + 1) * 5)].x, index.pos[(i + 1) + ((j + 1) * 5)].y, index.pos[(i + 1) + ((j + 1) * 5)].z);//±◊ø‹
+						glVertex3f(index.pos[(i + 1) + ((j + 1) * 5)].x, index.pos[(i + 1) + ((j + 1) * 5)].y, index.pos[(i + 1) + ((j + 1) * 5)].z);//Í∑∏Ïô∏
 
-						glVertex3f(index.pos[(i)+((j + 1) * 5)].x, index.pos[(i)+((j + 1) * 5)].y, index.pos[(i)+((j + 1) * 5)].z);//±◊ø‹
+						glVertex3f(index.pos[(i)+((j + 1) * 5)].x, index.pos[(i)+((j + 1) * 5)].y, index.pos[(i)+((j + 1) * 5)].z);//Í∑∏Ïô∏
 
 					}
 					glEnd();
@@ -405,49 +429,49 @@ void banana_body(int head_x, int pivot_y, int pivot_z, int size, int degree) {
 			}
 			glColor3f(0.5f, 0.1f, 0.1f);
 
-			glBegin(GL_POLYGON); {//æ∆∑°
+			glBegin(GL_POLYGON); {//ÏïÑÎûò
 
-				glVertex3f(index.pos[36 + 0].x, index.pos[36 + 0].y, index.pos[36 + 0].z);//¡ﬂΩ…
+				glVertex3f(index.pos[36 + 0].x, index.pos[36 + 0].y, index.pos[36 + 0].z);//Ï§ëÏã¨
 
-				glVertex3f(index.pos[36 + 1].x, index.pos[36 + 1].y, index.pos[36 + 1].z);//¡ﬂΩ…
+				glVertex3f(index.pos[36 + 1].x, index.pos[36 + 1].y, index.pos[36 + 1].z);//Ï§ëÏã¨
 
-				glVertex3f(index.pos[36 + 5].x, index.pos[36 + 5].y, index.pos[36 + 5].z);//¡ﬂΩ…
-
-			}
-			glEnd();
-			glColor3f(0.5f, 0.1f, 0.1f);
-
-			glBegin(GL_POLYGON); {//æ∆∑°
-
-				glVertex3f(index.pos[36 + 1].x, index.pos[36 + 1].y, index.pos[36 + 1].z);//¡ﬂΩ…
-
-				glVertex3f(index.pos[36 + 2].x, index.pos[36 + 2].y, index.pos[36 + 2].z);//¡ﬂΩ…
-
-				glVertex3f(index.pos[36 + 5].x, index.pos[36 + 5].y, index.pos[36 + 5].z);//¡ﬂΩ…
+				glVertex3f(index.pos[36 + 5].x, index.pos[36 + 5].y, index.pos[36 + 5].z);//Ï§ëÏã¨
 
 			}
 			glEnd();
 			glColor3f(0.5f, 0.1f, 0.1f);
 
-			glBegin(GL_POLYGON); {//æ∆∑°
+			glBegin(GL_POLYGON); {//ÏïÑÎûò
 
-				glVertex3f(index.pos[36 + 2].x, index.pos[36 + 2].y, index.pos[36 + 2].z);//¡ﬂΩ…
+				glVertex3f(index.pos[36 + 1].x, index.pos[36 + 1].y, index.pos[36 + 1].z);//Ï§ëÏã¨
 
-				glVertex3f(index.pos[36 + 3].x, index.pos[36 + 3].y, index.pos[36 + 3].z);//¡ﬂΩ…
+				glVertex3f(index.pos[36 + 2].x, index.pos[36 + 2].y, index.pos[36 + 2].z);//Ï§ëÏã¨
 
-				glVertex3f(index.pos[36 + 5].x, index.pos[36 + 5].y, index.pos[36 + 5].z);//¡ﬂΩ…
+				glVertex3f(index.pos[36 + 5].x, index.pos[36 + 5].y, index.pos[36 + 5].z);//Ï§ëÏã¨
 
 			}
 			glEnd();
 			glColor3f(0.5f, 0.1f, 0.1f);
 
-			glBegin(GL_POLYGON); {//æ∆∑°
+			glBegin(GL_POLYGON); {//ÏïÑÎûò
 
-				glVertex3f(index.pos[36 + 3].x, index.pos[36 + 3].y, index.pos[36 + 3].z);//¡ﬂΩ…
+				glVertex3f(index.pos[36 + 2].x, index.pos[36 + 2].y, index.pos[36 + 2].z);//Ï§ëÏã¨
 
-				glVertex3f(index.pos[36 + 4].x, index.pos[36 + 4].y, index.pos[36 + 4].z);//¡ﬂΩ…
+				glVertex3f(index.pos[36 + 3].x, index.pos[36 + 3].y, index.pos[36 + 3].z);//Ï§ëÏã¨
 
-				glVertex3f(index.pos[36 + 5].x, index.pos[36 + 5].y, index.pos[36 + 5].z);//¡ﬂΩ…
+				glVertex3f(index.pos[36 + 5].x, index.pos[36 + 5].y, index.pos[36 + 5].z);//Ï§ëÏã¨
+
+			}
+			glEnd();
+			glColor3f(0.5f, 0.1f, 0.1f);
+
+			glBegin(GL_POLYGON); {//ÏïÑÎûò
+
+				glVertex3f(index.pos[36 + 3].x, index.pos[36 + 3].y, index.pos[36 + 3].z);//Ï§ëÏã¨
+
+				glVertex3f(index.pos[36 + 4].x, index.pos[36 + 4].y, index.pos[36 + 4].z);//Ï§ëÏã¨
+
+				glVertex3f(index.pos[36 + 5].x, index.pos[36 + 5].y, index.pos[36 + 5].z);//Ï§ëÏã¨
 
 			}
 			glEnd();
@@ -460,28 +484,38 @@ void banana_body(int head_x, int pivot_y, int pivot_z, int size, int degree) {
 
 }
 
-#define IDLE 0
-#define RUN 1
-#define JUMP 2
-#define DOWN_JUMP 3
+void banana_leg(int body_x, int pivot_y, int pivot_z, int size, float rot_degree, int state) {
+	banana_save_index();
+	glPushMatrix();
+	{
+		float t = index.pos[3 + 5 * 5].x + size + 50 + body_x;
+		glColor3f(1, 1, 1);
+		glTranslatef(t, -40, 0);
+		//ÏÉâ ÏúÑÏπò
+		glutSolidSphere(size * 2, 8, 8);
+		
+	}
+	glPopMatrix();
+}
 
-void banana_draw(int pivot_x, int pivot_y, int pivot_z, int size,int state , int sub_degree) {
+void banana_draw(int pivot_x, int pivot_y, int pivot_z, int size,int state , float sub_degree) {
 	if (state == IDLE) {
 		
-		banana_head(pivot_x, pivot_y, pivot_z, size,sub_degree);//∏”∏Æ
-		banana_body(pivot_x, pivot_y, pivot_z, size, 0);//∏ˆ
+		banana_head(pivot_x, pivot_y, pivot_z, size , sub_degree / 2 , IDLE);//Î®∏Î¶¨
+		banana_body(pivot_x, pivot_y, pivot_z, size , sub_degree * 2 , IDLE);//Î™∏
+		banana_leg(pivot_x, pivot_y, pivot_z, size, sub_degree * 2, IDLE); // Ìåî
 	}
 	//else if (state == RUN) {
-	//	banana_head(pivot_x, pivot_y, pivot_z, size);//∏”∏Æ
-	//	banana_body(pivot_x, pivot_y, pivot_z, size);//∏ˆ
+	//	banana_head(pivot_x, pivot_y, pivot_z, size);//Î®∏Î¶¨
+	//	banana_body(pivot_x, pivot_y, pivot_z, size);//Î™∏
 	//}
 	//else if (state == JUMP) {
-	//	banana_head(pivot_x, pivot_y, pivot_z, size);//∏”∏Æ
-	//	banana_body(pivot_x, pivot_y, pivot_z, size);//∏ˆ
+	//	banana_head(pivot_x, pivot_y, pivot_z, size);//Î®∏Î¶¨
+	//	banana_body(pivot_x, pivot_y, pivot_z, size);//Î™∏
 	//}
 	//else if (state == DOWN_JUMP) {
-	//	banana_head(pivot_x, pivot_y, pivot_z, size);//∏”∏Æ
-	//	banana_body(pivot_x, pivot_y, pivot_z, size);//∏ˆ
+	//	banana_head(pivot_x, pivot_y, pivot_z, size);//Î®∏Î¶¨
+	//	banana_body(pivot_x, pivot_y, pivot_z, size);//Î™∏
 	//}
 
 }
