@@ -62,6 +62,9 @@ void banana_save_index() {
 	//인덱스 버퍼 저장
 	//바나나 헤드
 	//머리 1
+
+	// 번호 /  (몇 줄)행 / 라인 갯수
+
 	index.pos[0].x = 0.0f;
 	index.pos[0].y = -2.761;
 	index.pos[0].z = 17.274;
@@ -258,20 +261,20 @@ void banana_save_index() {
 
 }
 
-float vegier_line(float complete ,float base, float arrive, float ctrl_pt,float t) {
+float vegier_line(float complete, float base, float arrive, float ctrl_pt, float t) {
 	t = t / 100;
 
 	complete =
 		(
-			(((1-t)*(1-t) * base) + (2*(1-t)*ctrl_pt) + ((t * t)*(arrive)))
-		);
+		(((1 - t)*(1 - t) * base) + (2 * (1 - t)*ctrl_pt) + ((t * t)*(arrive)))
+			);
 	return complete;
 }
 float __tmp;
-void banana_head(int head_x, int pivot_y, int pivot_z, int size, float degree , int state) {
-	
+void banana_head(int head_x, int pivot_y, int pivot_z, int size, float degree, int state) {
+
 	banana_save_index();
-	for (int i = 0; i <= 5; i++) {		
+	for (int i = 0; i <= 5; i++) {
 		if (state == IDLE) {
 			index.pos[i].y = index.pos[i].y + sin(degree / 5 * 3.14);
 			index.pos[i].z = index.pos[i].z + cos(degree / 5 * 3.14);
@@ -291,12 +294,12 @@ void banana_head(int head_x, int pivot_y, int pivot_z, int size, float degree , 
 		}
 		glPushMatrix(); {
 
-			glTranslated(head_x, pivot_y, pivot_z);
+			glTranslated(head_x, pivot_y + -degree, pivot_z);
 			glScaled(size, size, size);
 
 			glColor3f(1.0f, 1.0f, 1.0f);
 
-				
+
 			glBegin(GL_POLYGON); {//아래
 
 				glVertex3f(index.pos[0].x, index.pos[0].y, index.pos[0].z);//그외
@@ -360,7 +363,7 @@ void banana_head(int head_x, int pivot_y, int pivot_z, int size, float degree , 
 					glEnd();
 				}
 			}
-		
+
 		}
 		glPopMatrix();
 
@@ -372,16 +375,17 @@ void banana_head(int head_x, int pivot_y, int pivot_z, int size, float degree , 
 int sign = 1;
 float t = 0.f;
 
-void banana_body(int body_x, int pivot_y, int pivot_z, int size , float rot_degree, int state) {
+void banana_body(int body_x, int pivot_y, int pivot_z, int size, float rot_degree, int state) {
 
 	banana_save_index();
+
 	if (state == IDLE) {
-		
+
 		for (int i = 20; i <= 41 - 4 * 3; i++) {
 
 			if ((i % 5 == 1) || (i % 5 == 2)) {
-				index.pos[i].y = (index.pos[i].y + (rot_degree/10));
-				index.pos[i].z = (index.pos[i].z + (rot_degree/10));
+				index.pos[i].y = (index.pos[i].y + (rot_degree / 10));
+				index.pos[i].z = (index.pos[i].z + (rot_degree / 10));
 			}
 		}
 
@@ -403,7 +407,7 @@ void banana_body(int body_x, int pivot_y, int pivot_z, int size , float rot_degr
 
 		glPushMatrix(); {
 
-			glTranslated(body_x, pivot_y, pivot_z);
+			glTranslated(body_x, pivot_y + -rot_degree, pivot_z);
 			//glRotated(rot_degree, 1, 0, 0);
 			glScaled(size, size, size);
 			for (int j = 1; j < 7; j++) {
@@ -484,38 +488,273 @@ void banana_body(int body_x, int pivot_y, int pivot_z, int size , float rot_degr
 
 }
 
-void banana_leg(int body_x, int pivot_y, int pivot_z, int size, float rot_degree, int state) {
+void banana_limb(int body_x, int pivot_y, int pivot_z, int size, float rot_degree, int state) {
+
+	//인덱스 버퍼 불러오기 + 축 위치 초기화
 	banana_save_index();
+	for (int i = 0; i <= (1 + 8 * 5 + 1); i++) {
+		index.pos[i].x = -index.pos[i].x;
+	}
+	//-------------------------------------
+	//계층 구조를 만들기 위한 임시 변수
+
+	//-------기본 연산 (팔 초기값)
+
+	float up_joint[3];
+	float down_joint[3];
+	float hand[3];
+
+	up_joint[0] = ((index.pos[3 + 3 * 5].x * size) + (index.pos[3 + 4 * 5].x * size)) / 2;
+	up_joint[1] = ((index.pos[3 + 3 * 5].y * size) + (index.pos[3 + 4 * 5].y * size)) / 2;
+	up_joint[2] = ((index.pos[3 + 3 * 5].z * size) + (index.pos[3 + 4 * 5].z * size)) / 2;
+
+	hand[0] = index.pos[3 + 5 * 5].x + (size * 10) + body_x;
+	hand[1] = -50;
+	hand[2] = 10;
+
+	down_joint[0] = (up_joint[0] + hand[0]) / 2;
+	down_joint[1] = (up_joint[1] + hand[1]) / 1.2;
+	down_joint[2] = (up_joint[2] + hand[2]) / 4;
+
+	//---심화 연산
+	if (state == IDLE) {
+		hand[1] -= 20;
+		down_joint[2] -= (20 + rot_degree);
+		hand[2] -= (20 + rot_degree * 2);
+	}
+
 	glPushMatrix();
 	{
-		float t = index.pos[3 + 5 * 5].x + size + 50 + body_x;
+
 		glColor3f(1, 1, 1);
-		glTranslatef(t, -40, 0);
-		//색 위치
-		glutSolidSphere(size * 2, 8, 8);
-		
+
+		//팔 상단   
+		glPushMatrix();
+		{
+			glColor3f(1, 0, 0);
+			glLineWidth(10);
+			glBegin(GL_LINES);
+			glVertex3f(up_joint[0], up_joint[1], up_joint[2]);
+			glVertex3f(down_joint[0], down_joint[1], down_joint[2]);
+			glEnd();
+		}
+		glPopMatrix();
+
+		//팔 하단   
+		glPushMatrix();
+		{
+			glColor3f(1, 0, 0);
+			glLineWidth(10);
+			glBegin(GL_LINES);
+			glVertex3f(down_joint[0], down_joint[1], down_joint[2]);
+			glVertex3f(hand[0], hand[1], hand[2]);
+			glEnd();
+		}
+		glPopMatrix();
+
+		//손
+		glPushMatrix();
+		{
+			glTranslatef(hand[0], hand[1], hand[2]);
+
+			//색 위치
+			glutSolidSphere(size * 2, 8, 8);
+
+		}
+		glPopMatrix();
+
 	}
 	glPopMatrix();
 }
 
-void banana_draw(int pivot_x, int pivot_y, int pivot_z, int size,int state , float sub_degree) {
+void banana_leg(int body_x, int pivot_y, int pivot_z, int size, float rot_degree, int state) {
+
+	//인덱스 버퍼 불러오기 + 축 위치 초기화
+	banana_save_index();
+	for (int i = 0; i <= (1 + 8 * 5 + 1); i++) {
+		index.pos[i].x = -index.pos[i].x;
+	}
+	//-------------------------------------
+	//계층 구조를 만들기 위한 임시 변수
+
+	//-------기본 연산 (팔 초기값)
+
+	float up_joint[3];
+	float down_joint[3];
+	float foot[3];
+
+	up_joint[0] = ((index.pos[5 + 6 * 5].x * size) + (index.pos[4 + 5 * 5].x * size)) / 2;
+	up_joint[1] = ((index.pos[5 + 6 * 5].y * size) + (index.pos[4 + 5 * 5].y * size)) / 2;
+	up_joint[2] = ((index.pos[5 + 6 * 5].z * size) + (index.pos[4 + 5 * 5].z * size)) / 2;
+
+	foot[0] = 10;
+	foot[1] = -120;
+	foot[2] = -10;
+
+	down_joint[0] = (up_joint[0] + foot[0]) / 2;
+	down_joint[1] = (up_joint[1] + foot[1]) / 2;
+	down_joint[2] = (up_joint[2] + foot[2]) / 2;
+
+	//---심화 연산
 	if (state == IDLE) {
-		
-		banana_head(pivot_x, pivot_y, pivot_z, size , sub_degree / 2 , IDLE);//머리
-		banana_body(pivot_x, pivot_y, pivot_z, size , sub_degree * 2 , IDLE);//몸
+		down_joint[2] += (5 + rot_degree);
+
+	}
+
+	glPushMatrix();
+	{
+
+		glColor3f(1, 1, 1);
+
+		//팔 상단   
+		glPushMatrix();
+		{
+			glColor3f(1, 0, 0);
+			glLineWidth(10);
+			glBegin(GL_LINES);
+			glVertex3f(up_joint[0], up_joint[1], up_joint[2]);
+			glVertex3f(down_joint[0], down_joint[1], down_joint[2]);
+			glEnd();
+		}
+		glPopMatrix();
+
+		//팔 하단   
+		glPushMatrix();
+		{
+			glColor3f(1, 0, 0);
+			glLineWidth(10);
+			glBegin(GL_LINES);
+			glVertex3f(down_joint[0], down_joint[1], down_joint[2]);
+			glVertex3f(foot[0], foot[1], foot[2]);
+			glEnd();
+		}
+		glPopMatrix();
+
+		//발
+		glPushMatrix();
+		{
+			glTranslatef(foot[0], foot[1], foot[2]);
+			//색 위치
+			glScalef(0.9, 1.1, 1);
+			glutSolidSphere(size * 2, 8, 8);
+
+		}
+		glPopMatrix();
+
+	}
+	glPopMatrix();
+}
+
+void banana_emotion(int body_x, int pivot_y, int pivot_z, int size, float rot_degree, int state) {
+
+	//인덱스 버퍼 불러오기 + 축 위치 초기화
+	banana_save_index();
+	for (int i = 0; i <= (1 + 8 * 5 + 1); i++) {
+		index.pos[i].x = -index.pos[i].x;
+	}
+	//-------------------------------------
+	//계층 구조를 만들기 위한 임시 변수
+
+	//-------기본 연산 (팔 초기값)
+
+	GLfloat eye_up[3];
+	GLfloat eye_down[3];
+
+	GLfloat mouse1[3];
+	GLfloat mouse2[3];
+
+
+	for (int i = 0; i < 2; i++) {
+
+		if (i == 1) {
+			for (int i = 0; i <= (1 + 8 * 5 + 1); i++) {
+				index.pos[i].x = -index.pos[i].x;
+			}
+		}
+
+		eye_up[0] = ((index.pos[2 + 3 * 5].x * size) + (index.pos[2 + 4 * 5].x * size)) / 3;
+		eye_up[1] = ((index.pos[2 + 3 * 5].y * size) + (index.pos[2 + 4 * 5].y * size)) / 4;
+		eye_up[2] = ((index.pos[2 + 3 * 5].z * size) + (index.pos[2 + 4 * 5].z * size)) / 3;
+
+		eye_down[0] = ((index.pos[2 + 4 * 5].x * size) + (index.pos[2 + 5 * 5].x * size)) / 3;
+		eye_down[1] = ((index.pos[2 + 4 * 5].y * size) + (index.pos[2 + 5 * 5].y * size)) / 3;
+		eye_down[2] = ((index.pos[2 + 4 * 5].z * size) + (index.pos[2 + 5 * 5].z * size)) / 3;
+
+
+		//---심화 연산
+		if (state == IDLE) {
+			//eye_up[0] -= rot_degree * 2;
+			eye_up[1] -= rot_degree * 2;
+			eye_up[2] -= rot_degree * 2;
+
+		}
+
+		glPushMatrix();
+		{
+			glColor3f(0, 0, 0);
+
+			//팔 상단   
+			glPushMatrix();
+			{
+				glLineWidth(10);
+				glBegin(GL_LINES);
+				glVertex3fv(eye_up);
+				glVertex3fv(eye_down);
+				glEnd();
+			}
+			glPopMatrix();
+
+
+		}
+		glPopMatrix();
+
+
+
+		mouse1[0] = (index.pos[1 + 5 * 5].x * size);
+		mouse1[1] = (index.pos[1 + 5 * 5].y * size);
+		mouse1[2] = (index.pos[1 + 5 * 5].z * size);
+
+		mouse2[0] = ((index.pos[2 + 5 * 5].x * size) / 1.5);
+		mouse2[1] = ((index.pos[2 + 5 * 5].y * size) / 1.5);
+		mouse2[2] = ((index.pos[2 + 5 * 5].z * size) / 1.5);
+
+
+		//팔 상단   
+		glPushMatrix();
+		{
+			glLineWidth(10);
+			glBegin(GL_LINES);
+			glVertex3fv(mouse1);
+			glVertex3fv(mouse2);
+			glEnd();
+		}
+		glPopMatrix();
+	}
+
+
+}
+
+void banana_draw(int pivot_x, int pivot_y, int pivot_z, int size, int state, float sub_degree) {
+	if (state == IDLE) {
+
+		banana_head(pivot_x, pivot_y, pivot_z, size, sub_degree / 2, IDLE);//머리
+		banana_body(pivot_x, pivot_y, pivot_z, size, sub_degree * 2, IDLE);//몸
+		banana_limb(pivot_x, pivot_y, pivot_z, size, sub_degree * 2, IDLE); // 팔
 		banana_leg(pivot_x, pivot_y, pivot_z, size, sub_degree * 2, IDLE); // 팔
+		banana_emotion(pivot_x, pivot_y, pivot_z, size, sub_degree * 2, IDLE); // 팔
+
 	}
 	//else if (state == RUN) {
-	//	banana_head(pivot_x, pivot_y, pivot_z, size);//머리
-	//	banana_body(pivot_x, pivot_y, pivot_z, size);//몸
+	//   banana_head(pivot_x, pivot_y, pivot_z, size);//머리
+	//   banana_body(pivot_x, pivot_y, pivot_z, size);//몸
 	//}
 	//else if (state == JUMP) {
-	//	banana_head(pivot_x, pivot_y, pivot_z, size);//머리
-	//	banana_body(pivot_x, pivot_y, pivot_z, size);//몸
+	//   banana_head(pivot_x, pivot_y, pivot_z, size);//머리
+	//   banana_body(pivot_x, pivot_y, pivot_z, size);//몸
 	//}
 	//else if (state == DOWN_JUMP) {
-	//	banana_head(pivot_x, pivot_y, pivot_z, size);//머리
-	//	banana_body(pivot_x, pivot_y, pivot_z, size);//몸
+	//   banana_head(pivot_x, pivot_y, pivot_z, size);//머리
+	//   banana_body(pivot_x, pivot_y, pivot_z, size);//몸
 	//}
 
 }
