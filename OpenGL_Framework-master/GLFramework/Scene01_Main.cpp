@@ -66,7 +66,7 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 			case 's': m_SoundPlayer.shuffle(); break;
 			case 'x': m_SoundPlayer.unshuffle(); break;
 			case 'd': m_SoundPlayer.next(); break;
-			case ' ': m_Framework->toScene("Logo"); break;
+			case ' ': m_Framework->toScene("Map1"); break;
 		}
 }
 

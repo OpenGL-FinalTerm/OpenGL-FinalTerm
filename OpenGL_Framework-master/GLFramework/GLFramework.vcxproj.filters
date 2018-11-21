@@ -105,6 +105,15 @@
     <ClCompile Include="GLScenesInfo.cpp">
       <Filter>Source Files\Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="Scene01_Map1.cpp">
+      <Filter>Source Files\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene01_Map2.cpp">
+      <Filter>Source Files\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene01_Map3.cpp">
+      <Filter>Source Files\Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -156,6 +165,15 @@
       <Filter>Header Files\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="GLScenesInfo.h">
+      <Filter>Header Files\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene01_Map1.h">
+      <Filter>Header Files\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene01_Map2.h">
+      <Filter>Header Files\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene01_Map3.h">
       <Filter>Header Files\Scenes</Filter>
     </ClInclude>
   </ItemGroup>
