@@ -1,0 +1,118 @@
+﻿  draw.cpp
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(11): warning C4091: 'typedef ': 변수를 선언하지 않으면 'Color' 왼쪽은 무시됩니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(17): warning C4091: 'typedef ': 변수를 선언하지 않으면 'Translate_pos' 왼쪽은 무시됩니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(25): warning C4091: 'typedef ': 변수를 선언하지 않으면 'BoOL' 왼쪽은 무시됩니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(43): warning C4091: 'typedef ': 변수를 선언하지 않으면 'QUAD' 왼쪽은 무시됩니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(61): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(62): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(65): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(66): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(68): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(69): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(70): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(72): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(74): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(76): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(78): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(81): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(86): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(87): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(89): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(90): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(91): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(93): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(94): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(95): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(97): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(98): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(99): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(102): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(103): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(107): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(108): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(110): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(111): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(112): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(114): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(115): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(116): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(118): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(119): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(120): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(123): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(124): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(128): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(129): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(131): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(133): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(135): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(136): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(137): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(139): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(140): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(141): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(144): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(145): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(149): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(150): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(152): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(153): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(154): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(156): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(157): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(158): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(160): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(161): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(162): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(165): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(166): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(170): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(171): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(173): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(174): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(175): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(177): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(178): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(179): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(181): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(182): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(183): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(186): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(192): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(194): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(195): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(196): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(198): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(199): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(203): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(204): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(207): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(208): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(212): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(213): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(215): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(216): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(217): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(219): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(220): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(221): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(223): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(224): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(225): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(228): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(229): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(233): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(234): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(249): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(251): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(257): warning C4244: '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(258): warning C4244: 'return': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(263): warning C4244: '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(264): warning C4244: 'return': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(336): warning C4244: '인수': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\banana_draw.h(390): warning C4244: '인수': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\draw.cpp(54): warning C4091: 'typedef ': 변수를 선언하지 않으면 'Shape' 왼쪽은 무시됩니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\draw.cpp(107): warning C4326: 'main'의 반환 형식이 'int'이어야 하는데 'void'입니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\draw.cpp(123): warning C4244: '인수': 'time_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+e:\opengl-finalterm\resource\concept\banana coding\modelling\modelling\draw.cpp(171): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+LINK : fatal error LNK1104: 'freeglut.lib' 파일을 열 수 없습니다.

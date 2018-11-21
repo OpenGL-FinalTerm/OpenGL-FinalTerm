@@ -12,8 +12,8 @@ S01Main::~S01Main()
 
 void S01Main::init()
 {
-	m_SoundPlayer.init();
-	m_SoundPlayer.selectFolder("Resources");
+	//m_SoundPlayer.init();
+	//m_SoundPlayer.selectFolder("Resources");
 
 	m_Princess.load("Resources/model.obj", "Resources/texture.png"); 
 
@@ -37,13 +37,13 @@ void S01Main::exit()
 
 void S01Main::reset()
 {
-	m_SoundPlayer.play();
+	//m_SoundPlayer.play();
 }
 
 void S01Main::render()
 {
 	m_Camera.ready();
-	print(m_SoundPlayer.getSoundFilename(), 0, 500, 200);
+	//print(m_SoundPlayer.getSoundFilename(), 0, 500, 200);
 	for(size_t i = 0; i<10; ++i)
 		m_Object[i].render();
 }
@@ -76,7 +76,7 @@ void S01Main::mouse(int button, bool pressed, int x, int y)
 
 void S01Main::motion(bool pressed, int x, int y)
 {
-	m_Camera.rotate(x, y, pressed);
+	m_Camera.rotate(x, y);
 }
 
 void S01Main::update(float fDeltaTime)
