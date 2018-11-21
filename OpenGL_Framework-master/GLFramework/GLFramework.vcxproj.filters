@@ -176,5 +176,8 @@
     <ClInclude Include="Scene01_Map3.h">
       <Filter>Header Files\Scenes</Filter>
     </ClInclude>
+    <ClInclude Include="banana_draw.h">
+      <Filter>Header Files\Base</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

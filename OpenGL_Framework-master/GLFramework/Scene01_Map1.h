@@ -27,3 +27,4 @@ private:
 	Object			m_Object[10];
 	SoundPlayer		m_SoundPlayer;
 };
+

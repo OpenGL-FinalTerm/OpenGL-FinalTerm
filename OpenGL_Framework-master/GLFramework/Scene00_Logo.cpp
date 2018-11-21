@@ -43,7 +43,7 @@ void S00Logo::reshape(int w, int h)
 void S00Logo::keyboard(int key, bool pressed, int x, int y, bool special)
 {
 	if (pressed)
-		m_Framework->toScene("Main");
+		m_Framework->toScene("Map1");
 }
 
 void S00Logo::mouse(int button, bool pressed, int x, int y)

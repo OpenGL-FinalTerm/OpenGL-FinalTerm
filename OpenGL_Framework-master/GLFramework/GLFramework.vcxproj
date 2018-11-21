@@ -151,6 +151,7 @@
     <ClCompile Include="Transformations.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="banana_draw.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="FolderReader.h" />
     <ClInclude Include="GLFramework.h" />
