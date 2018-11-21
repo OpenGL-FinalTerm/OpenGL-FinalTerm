@@ -66,7 +66,7 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 			case 's': m_SoundPlayer.shuffle(); break;
 			case 'x': m_SoundPlayer.unshuffle(); break;
 			case 'd': m_SoundPlayer.next(); break;
-			case ' ': m_Framework->toScene("Logo"); break;
+			case ' ': m_Framework->toScene("Map1"); break;
 		}
 }
 
@@ -76,7 +76,7 @@ void S01Main::mouse(int button, bool pressed, int x, int y)
 
 void S01Main::motion(bool pressed, int x, int y)
 {
-	m_Camera.rotate(x, y);
+	m_Camera.rotate(x, 0);
 }
 
 void S01Main::update(float fDeltaTime)

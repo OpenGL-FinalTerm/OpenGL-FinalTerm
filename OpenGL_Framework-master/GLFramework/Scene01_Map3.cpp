@@ -40,7 +40,7 @@ void S01Map3::mouse(int button, bool pressed, int x, int y)
 
 void S01Map3::motion(bool pressed, int x, int y)
 {
-	m_Camera.rotate(x, y);
+	m_Camera.rotate(x, 0);
 }
 
 void S01Map3::update(float fDeltaTime)
