@@ -46,8 +46,8 @@ S01Map1::~S01Map1()
 
 void S01Map1::init()
 {
-	m_Camera.setDistance(-500.f);
-	m_Camera.setPerspective(30.f, 0.125f, 7'000.f);
+	m_Camera.setDistance(-300.f);
+	m_Camera.setPerspective(60.f, 800 / 600, 1000.0);
 	m_Camera.setSensitivity(10.f);
 }
 void S01Map1::exit()
@@ -61,23 +61,21 @@ void S01Map1::reset()
 void S01Map1::render()
 {
 	m_Camera.ready();
-	glPushMatrix();//-------------그리기 입력--------------------------
+	glFrontFace(GL_CCW);
+	glPushMatrix();
 	{
-		glPushMatrix();
-		{
-			if (shade) {
-				glShadeModel(GL_SMOOTH);
-			}
-			else {
-				glShadeModel(GL_FLAT);
-			}
-			//상자 그리기
-			//glScaled(100, 100, 100);
-			banana_draw(0, 0, 0, 5, IDLE, banana.rot.degree);
-
+		if (shade) {
+			glShadeModel(GL_SMOOTH);
 		}
-		glPopMatrix();
+		else {
+			glShadeModel(GL_FLAT);
+		}
+		//상자 그리기
+		//glScaled(100, 100, 100);
+		banana_draw(0, 0, 0, 5, IDLE, banana.rot.degree);
+
 	}
+	glPopMatrix();
 }
 
 void S01Map1::reshape(int w, int h)
