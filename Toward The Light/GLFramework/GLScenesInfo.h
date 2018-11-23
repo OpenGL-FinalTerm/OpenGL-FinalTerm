@@ -3,11 +3,10 @@
 /*--------------------ADD SCENES HERE--------------------*/
 
 /*~~~~~HEADER FILES~~~~*/
-#include "Scene00_Logo.h"
-#include "Scene01_Main.h"
-#include "Scene01_Map1.h"
-#include "Scene01_Map2.h"
-#include "Scene01_Map3.h"
+#include "Scene00_Main.h"
+#include "Scene01.h"
+#include "Scene02.h"
+#include "Scene03.h"
 
 
 struct GLSceneInfo
@@ -20,14 +19,13 @@ struct GLSceneInfo
 /*~~~~~~~SCENES~~~~~~~*/
 const GLSceneInfo SCENES[] =
 {
-	{"Logo", new S00Logo, true},
-	{"Main", new S01Main, false},
-	{"Map1", new S01Map1, false},
-	{"Map2", new S01Map2, false},
-	{"Map3", new S01Map3, false}
+	{"Main", new S00Logo, true},
+	{"1", new S01Main, false},
+	{"2", new S02Main, false},
+	{"3", new S03Main, false},
 };
 
 /*~~~STARTING SCENE~~~*/
-const std::string STARTING_SCENE{ "Logo" };
+const std::string STARTING_SCENE { "Main" };
 
 /*-------------------------------------------------------*/

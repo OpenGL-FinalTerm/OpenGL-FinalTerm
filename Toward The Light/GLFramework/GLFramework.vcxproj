@@ -128,6 +128,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AirPlane.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="FolderReader.cpp" />
     <ClCompile Include="GLFramework.cpp" />
@@ -139,11 +140,10 @@
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Picking.cpp" />
     <ClCompile Include="Robot.cpp" />
-    <ClCompile Include="Scene00_Logo.cpp" />
-    <ClCompile Include="Scene01_Main.cpp" />
-    <ClCompile Include="Scene01_Map1.cpp" />
-    <ClCompile Include="Scene01_Map2.cpp" />
-    <ClCompile Include="Scene01_Map3.cpp" />
+    <ClCompile Include="Scene00_Main.cpp" />
+    <ClCompile Include="Scene01.cpp" />
+    <ClCompile Include="Scene02.cpp" />
+    <ClCompile Include="Scene03.cpp" />
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="SoundPlayer.cpp" />
     <ClCompile Include="Source.cpp" />
@@ -166,11 +166,10 @@
     <ClInclude Include="Object.h" />
     <ClInclude Include="Picking.h" />
     <ClInclude Include="Robot.h" />
-    <ClInclude Include="Scene00_Logo.h" />
-    <ClInclude Include="Scene01_Main.h" />
-    <ClInclude Include="Scene01_Map1.h" />
-    <ClInclude Include="Scene01_Map2.h" />
-    <ClInclude Include="Scene01_Map3.h" />
+    <ClInclude Include="Scene00_Main.h" />
+    <ClInclude Include="Scene01.h" />
+    <ClInclude Include="Scene02.h" />
+    <ClInclude Include="Scene03.h" />
     <ClInclude Include="Sound.h" />
     <ClInclude Include="SoundPlayer.h" />
     <ClInclude Include="stdafx.h" />

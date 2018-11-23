@@ -49,7 +49,7 @@ public:
 	void regSpecialFunction(SpecialFunc specialDown, SpecialFunc specialUp);
 	void bindFunctions();
 
-	void addScene(std::string strSceneName, GLScene * pScene, bool bInitAtStart = true);
+	void addScene(std::string strSceneName, GLScene * pScene, bool bInitAtStart=true);
 	void deleteCurrentScene(std::string strNextScene);
 	void deleteScene(std::string strSceneName);
 	void deleteScenes();

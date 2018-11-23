@@ -99,26 +99,26 @@
     <ClCompile Include="GLScenesInfo.cpp">
       <Filter>Source Files\Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="Scene00_Main.cpp">
+      <Filter>Source Files\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene01.cpp">
+      <Filter>Source Files\Scenes</Filter>
+    </ClCompile>
     <ClCompile Include="NormalObject.cpp">
+      <Filter>Source Files\Utilities\3D Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene02.cpp">
+      <Filter>Source Files\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene03.cpp">
+      <Filter>Source Files\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="AirPlane.cpp">
       <Filter>Source Files\Utilities\3D Objects</Filter>
     </ClCompile>
     <ClCompile Include="Robot.cpp">
       <Filter>Source Files\Utilities\Space and Time</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene01_Main.cpp">
-      <Filter>Source Files\Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene01_Map1.cpp">
-      <Filter>Source Files\Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene01_Map2.cpp">
-      <Filter>Source Files\Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene01_Map3.cpp">
-      <Filter>Source Files\Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene00_Logo.cpp">
-      <Filter>Source Files\Scenes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -167,8 +167,20 @@
     <ClInclude Include="GLScenesInfo.h">
       <Filter>Header Files\Scenes</Filter>
     </ClInclude>
+    <ClInclude Include="Scene00_Main.h">
+      <Filter>Header Files\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene01.h">
+      <Filter>Header Files\Scenes</Filter>
+    </ClInclude>
     <ClInclude Include="NormalObject.h">
       <Filter>Header Files\Utilities\3D Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene02.h">
+      <Filter>Header Files\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene03.h">
+      <Filter>Header Files\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="AirPlane.h">
       <Filter>Header Files\Utilities\3D Objects</Filter>
@@ -178,21 +190,6 @@
     </ClInclude>
     <ClInclude Include="banana_draw.h">
       <Filter>Header Files\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene01_Main.h">
-      <Filter>Header Files\Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene01_Map1.h">
-      <Filter>Header Files\Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene01_Map2.h">
-      <Filter>Header Files\Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene00_Logo.h">
-      <Filter>Header Files\Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene01_Map3.h">
-      <Filter>Header Files\Scenes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

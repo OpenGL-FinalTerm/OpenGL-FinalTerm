@@ -2,6 +2,7 @@
 #pragma once
 #pragma once
 #pragma once
+#pragma once
 //#include <GL/freeglut.h> 
 #include "stdafx.h"
 
@@ -685,7 +686,7 @@ void banana_emotion(int body_x, int pivot_y, int pivot_z, int size, float rot_de
 
 		//---심화 연산
 		if (state == IDLE) {
-			//eye_up[0] -= rot_degree * 2;
+			eye_up[0] -= rot_degree * 2;
 			eye_up[1] -= rot_degree * 2;
 			eye_up[2] -= rot_degree * 2;
 
