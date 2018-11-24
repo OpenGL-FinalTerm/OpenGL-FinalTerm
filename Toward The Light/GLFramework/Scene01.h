@@ -34,6 +34,7 @@ private:
 	NormalObject    m_Sphere;
 	SoundPlayer		m_SoundPlayer;
 	Box				objectBox[20];
+	Box				mainCharacter;
 	bool s;
 };
 

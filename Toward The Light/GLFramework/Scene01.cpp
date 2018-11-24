@@ -2,7 +2,7 @@
 #include "Scene01.h"
 #include "GLFramework.h"
 #include "banana_draw.h"
-
+#define whatBox 20
 typedef struct Shape
 {
 	Color cl;//색상
@@ -34,9 +34,9 @@ int shade_count;
 
 
 Shape banana;
-static int x;
-static int y;
-static int z;
+static int bananaX;
+static int bananaY;
+static int bananaZ;
 
 
 
@@ -86,10 +86,10 @@ void S01Main::render()
 	//조명이 여기 어딘가에 들어가야 할거에요
 	//근데 맵....은.....
 	//어따 그리지
-	for (int i = 0; i < 5; ++i)
+	for (int i = 0; i < 20; ++i)
 		objectBox[i].drawBox(50);
 	glPushMatrix();
-	glTranslatef(x, y, z);
+	glTranslatef(bananaX, bananaY, bananaZ);
 	banana_draw(0, 0, 0, 10, IDLE, banana.rot.degree);
 	glPopMatrix();
 
@@ -102,24 +102,72 @@ void S01Main::reshape(int w, int h)
 
 void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 {
+	int cycle = 0;
+	int count = 0;
+	int i = 0;
+	BOOL check = FALSE;
 	if (pressed)
 	{
 		switch (key)
 		{
 		case 'w':
-			z -= 20;
+	
+			bananaZ -= 1;
+
+	
+			mainCharacter.movingZ(-1);
+		
+			while (check == FALSE) {
+
+				if (mainCharacter.returnBoxCenterZ() - 15 <= objectBox[i].returnBoxCenterZ() + 12.5 && !(mainCharacter.returnBoxCenterZ() + 15 <= objectBox[i].returnBoxCenterZ() - 12.5)) {
+					if (objectBox[i].returnBoxCenterX() - 12.5 < mainCharacter.returnBoxCenterX() + 15 && objectBox[i].returnBoxCenterX() + 12.5 > mainCharacter.returnBoxCenterX() - 15 && objectBox[i].returnBoxCenterY() + 12.5 > mainCharacter.returnBoxCenterY() - 15 && objectBox[i].returnBoxCenterY() - 12.5 < mainCharacter.returnBoxCenterY() + 15) {
+						if (objectBox[i].returnCheck() == 0) {
+							mainCharacter.addZrate(-29);
+							objectBox[i].movingZ(-1);
+							objectBox[i].checkUpdate(1);
+						}
+					}
+				}
+
+				if (i == whatBox - 1) {
+					cycle++;
+					for (int j = 0; j < whatBox; ++j) {
+						if (objectBox[j].returnCheck()) {
+							count++;
+						}
+					}
+					if (count == whatBox || count == 0 || cycle == whatBox)
+						check = TRUE;
+					else
+						i = 0;
+
+					count = 0;
+				}
+				else {
+					i++;
+
+				}
+
+			}
+
+			for (int k = 0; k < whatBox; ++k)
+				objectBox[k].checkUpdate(0);
+			check = FALSE;
+			cycle = 0;
+			mainCharacter.clearAdd();
+
 			break;
 
 		case 'a':
-			x -= 20;
+			bananaX -= 20;
 			break;
 
 		case 's':
-			z += 20;
+			bananaZ += 20;
 			break;
 
 		case 'd':
-			x += 20;
+			bananaX += 20;
 			break;
 		}
 	}
