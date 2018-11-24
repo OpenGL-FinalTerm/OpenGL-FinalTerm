@@ -1,4 +1,5 @@
-﻿  Scene01.cpp
+﻿  GLScene.cpp
+  Scene01.cpp
 d:\github\opengl-finalterm\toward the light\glframework\banana_draw.h(14): warning C4091: 'typedef ': 변수를 선언하지 않으면 'Color' 왼쪽은 무시됩니다.
 d:\github\opengl-finalterm\toward the light\glframework\banana_draw.h(20): warning C4091: 'typedef ': 변수를 선언하지 않으면 'Translate_pos' 왼쪽은 무시됩니다.
 d:\github\opengl-finalterm\toward the light\glframework\banana_draw.h(28): warning C4091: 'typedef ': 변수를 선언하지 않으면 'BoOL' 왼쪽은 무시됩니다.
@@ -115,4 +116,5 @@ d:\github\opengl-finalterm\toward the light\glframework\banana_draw.h(720): warn
 d:\github\opengl-finalterm\toward the light\glframework\banana_draw.h(721): warning C4244: '=': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 d:\github\opengl-finalterm\toward the light\glframework\banana_draw.h(722): warning C4244: '=': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 d:\github\opengl-finalterm\toward the light\glframework\scene01.cpp(23): warning C4091: 'typedef ': 변수를 선언하지 않으면 'Shape' 왼쪽은 무시됩니다.
+  코드를 생성하고 있습니다...
   GLFramework.vcxproj -> D:\GitHub\OpenGL-FinalTerm\Toward The Light\Debug\GLFramework.exe

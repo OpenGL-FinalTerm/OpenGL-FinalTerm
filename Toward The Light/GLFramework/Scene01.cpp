@@ -113,7 +113,7 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 		switch (key)
 		{
 		case 'w':
-			mainCharacter.movingZ(-20);
+			mainCharacter.movingZ(-5);
 		
 			//while (check == FALSE) {
 
@@ -157,15 +157,15 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 			break;
 
 		case 'a':
-			mainCharacter.movingX(-20);
+			mainCharacter.movingX(-5);
 			break;
 
 		case 's':
-			mainCharacter.movingZ(20);
+			mainCharacter.movingZ(5);
 			break;
 
 		case 'd':
-			mainCharacter.movingX(20);
+			mainCharacter.movingX(5);
 			break;
 		}
 	}

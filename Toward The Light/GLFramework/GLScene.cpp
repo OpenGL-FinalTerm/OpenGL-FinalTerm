@@ -27,5 +27,5 @@ void GLScene::drawLoadingScreen()
 
 void GLScene::loading()
 {
-	print("Loading...", 0, 0, -250);	
+	print("Loading..... Please Wait!!!", 0, 0, -250);	
 }
