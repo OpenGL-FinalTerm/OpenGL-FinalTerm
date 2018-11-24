@@ -55,7 +55,7 @@ void S01Main::init()
 
 	for (int i = 0; i < 20; ++i) {
 		objectBox[i].CreateBox();
-		objectBox[i].setColor(255, 0, 0);
+		objectBox[i].setColor(rand() % 255, rand() % 255, rand() % 255);
 	}
 
 }
