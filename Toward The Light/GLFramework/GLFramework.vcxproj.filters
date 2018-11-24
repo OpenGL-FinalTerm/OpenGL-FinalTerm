@@ -120,6 +120,9 @@
     <ClCompile Include="Robot.cpp">
       <Filter>Source Files\Utilities\Space and Time</Filter>
     </ClCompile>
+    <ClCompile Include="BoxObject.cpp">
+      <Filter>Source Files\Base</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -189,6 +192,9 @@
       <Filter>Header Files\Utilities\3D Objects</Filter>
     </ClInclude>
     <ClInclude Include="banana_draw.h">
+      <Filter>Header Files\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="BoxObject.h">
       <Filter>Header Files\Base</Filter>
     </ClInclude>
   </ItemGroup>

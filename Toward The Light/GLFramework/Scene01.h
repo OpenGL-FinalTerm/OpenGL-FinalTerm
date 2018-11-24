@@ -6,6 +6,7 @@
 #include "NormalObject.h"
 #include "Camera.h"
 #include "SoundPlayer.h"
+#include "BoxObject.h"
 /* ------------ */
 
 class S01Main :
@@ -32,5 +33,18 @@ private:
 	NormalObject	m_Plane;
 	NormalObject    m_Sphere;
 	SoundPlayer		m_SoundPlayer;
+	Box				objectBox[20];
 	bool s;
+};
+
+class Light {
+public:
+	Light()
+	{
+	}
+
+	~Light() 
+	{
+	}
+
 };

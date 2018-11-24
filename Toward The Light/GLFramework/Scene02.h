@@ -5,6 +5,7 @@
 #include "Model.h"
 #include "NormalObject.h"
 #include "Camera.h"
+#include "SoundPlayer.h"
 
 class S02Main : public GLScene
 {
@@ -28,8 +29,9 @@ private:
 	float			rY = 0;
 	Camera			m_Camera;
 	NormalObject	m_Plane;
-	NormalObject    m_Box[3];NormalObject    m_wBox[3];
-
+	NormalObject    m_Box[3];
+	NormalObject    m_wBox[3];
+	SoundPlayer		m_SoundPlayer;
 	float			secX = 0, secY = 0;
 	float			thdX = 0, thdZ = 0;
 	bool direction = false;

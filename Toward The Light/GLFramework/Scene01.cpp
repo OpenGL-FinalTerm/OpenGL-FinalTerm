@@ -37,6 +37,9 @@ Shape banana;
 static int x;
 static int y;
 static int z;
+
+
+
 S01Main::S01Main()
 {
 }
@@ -54,6 +57,12 @@ void S01Main::init()
 	m_Camera.setDistance(3000.f);
 	m_Camera.setPerspective(45.f, 0.125f, 7'000.f);
 	m_Camera.setSensitivity(10.f);
+
+	for (int i = 0; i < 20; ++i) {
+		objectBox[i].CreateBox();
+		objectBox[i].setColor(255, 0, 0);
+	}
+
 }
 
 void S01Main::exit()
@@ -71,7 +80,16 @@ void S01Main::render()
 	m_Camera.ready();
 	glPushMatrix();
 
-	banana_draw(x, y, z, 30, IDLE, banana.rot.degree);
+	//맵은 언제와요?
+	//외로운 빈공간
+	//BGM이랑 바나나만 있으니깐 공포겜이에요
+	//조명이 여기 어딘가에 들어가야 할거에요
+	//근데 맵....은.....
+	//어따 그리지
+	for (int i = 0; i < 5; ++i)
+		objectBox[i].drawBox(50);
+
+	banana_draw(x, y, z, 10, IDLE, banana.rot.degree);
 	glPopMatrix();
 
 }

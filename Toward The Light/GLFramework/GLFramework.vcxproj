@@ -129,6 +129,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AirPlane.cpp" />
+    <ClCompile Include="BoxObject.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="FolderReader.cpp" />
     <ClCompile Include="GLFramework.cpp" />
@@ -155,6 +156,7 @@
   <ItemGroup>
     <ClInclude Include="AirPlane.h" />
     <ClInclude Include="banana_draw.h" />
+    <ClInclude Include="BoxObject.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="FolderReader.h" />
     <ClInclude Include="GLFramework.h" />
