@@ -34,11 +34,6 @@ int shade_count;
 
 
 Shape banana;
-static int bananaX;
-static int bananaY;
-static int bananaZ;
-
-
 
 S01Main::S01Main()
 {
@@ -89,7 +84,7 @@ void S01Main::render()
 	for (int i = 0; i < 20; ++i)
 		objectBox[i].drawBox(50);
 	glPushMatrix();
-	glTranslatef(bananaX, bananaY, bananaZ);
+	glTranslatef(mainCharacter.returnBoxCenterX(), mainCharacter.returnBoxCenterY(), mainCharacter.returnBoxCenterZ());
 	banana_draw(0, 0, 0, 10, IDLE, banana.rot.degree);
 	glPopMatrix();
 
@@ -111,63 +106,59 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 		switch (key)
 		{
 		case 'w':
-	
-			bananaZ -= 1;
-
-	
-			mainCharacter.movingZ(-1);
+			mainCharacter.movingZ(-20);
 		
-			while (check == FALSE) {
+			//while (check == FALSE) {
 
-				if (mainCharacter.returnBoxCenterZ() - 15 <= objectBox[i].returnBoxCenterZ() + 12.5 && !(mainCharacter.returnBoxCenterZ() + 15 <= objectBox[i].returnBoxCenterZ() - 12.5)) {
-					if (objectBox[i].returnBoxCenterX() - 12.5 < mainCharacter.returnBoxCenterX() + 15 && objectBox[i].returnBoxCenterX() + 12.5 > mainCharacter.returnBoxCenterX() - 15 && objectBox[i].returnBoxCenterY() + 12.5 > mainCharacter.returnBoxCenterY() - 15 && objectBox[i].returnBoxCenterY() - 12.5 < mainCharacter.returnBoxCenterY() + 15) {
-						if (objectBox[i].returnCheck() == 0) {
-							mainCharacter.addZrate(-29);
-							objectBox[i].movingZ(-1);
-							objectBox[i].checkUpdate(1);
-						}
-					}
-				}
+			//	if (mainCharacter.returnBoxCenterZ() - 15 <= objectBox[i].returnBoxCenterZ() + 12.5 && !(mainCharacter.returnBoxCenterZ() + 15 <= objectBox[i].returnBoxCenterZ() - 12.5)) {
+			//		if (objectBox[i].returnBoxCenterX() - 12.5 < mainCharacter.returnBoxCenterX() + 15 && objectBox[i].returnBoxCenterX() + 12.5 > mainCharacter.returnBoxCenterX() - 15 && objectBox[i].returnBoxCenterY() + 12.5 > mainCharacter.returnBoxCenterY() - 15 && objectBox[i].returnBoxCenterY() - 12.5 < mainCharacter.returnBoxCenterY() + 15) {
+			//			if (objectBox[i].returnCheck() == 0) {
+			//				mainCharacter.addZrate(-29);
+			//				objectBox[i].movingZ(-1);
+			//				objectBox[i].checkUpdate(1);
+			//			}
+			//		}
+			//	}
 
-				if (i == whatBox - 1) {
-					cycle++;
-					for (int j = 0; j < whatBox; ++j) {
-						if (objectBox[j].returnCheck()) {
-							count++;
-						}
-					}
-					if (count == whatBox || count == 0 || cycle == whatBox)
-						check = TRUE;
-					else
-						i = 0;
+			//	if (i == whatBox - 1) {
+			//		cycle++;
+			//		for (int j = 0; j < whatBox; ++j) {
+			//			if (objectBox[j].returnCheck()) {
+			//				count++;
+			//			}
+			//		}
+			//		if (count == whatBox || count == 0 || cycle == whatBox)
+			//			check = TRUE;
+			//		else
+			//			i = 0;
 
-					count = 0;
-				}
-				else {
-					i++;
+			//		count = 0;
+			//	}
+			//	else {
+			//		i++;
 
-				}
+			//	}
 
-			}
+			//}
 
-			for (int k = 0; k < whatBox; ++k)
-				objectBox[k].checkUpdate(0);
-			check = FALSE;
-			cycle = 0;
-			mainCharacter.clearAdd();
+			//for (int k = 0; k < whatBox; ++k)
+			//	objectBox[k].checkUpdate(0);
+			//check = FALSE;
+			//cycle = 0;
+			//mainCharacter.clearAdd();
 
 			break;
 
 		case 'a':
-			bananaX -= 20;
+			mainCharacter.movingX(-20);
 			break;
 
 		case 's':
-			bananaZ += 20;
+			mainCharacter.movingZ(20);
 			break;
 
 		case 'd':
-			bananaX += 20;
+			mainCharacter.movingX(20);
 			break;
 		}
 	}
