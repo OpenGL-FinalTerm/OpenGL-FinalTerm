@@ -49,7 +49,7 @@ void S01Main::init()
 	m_SoundPlayer.init();
 	m_SoundPlayer.selectFolder("Resources\\BGM");
 
-	m_Camera.setDistance(3000.f);
+	m_Camera.setDistance(300.f);
 	m_Camera.setPerspective(45.f, 0.125f, 7'000.f);
 	m_Camera.setSensitivity(10.f);
 
@@ -73,7 +73,14 @@ void S01Main::reset()
 void S01Main::render()
 {
 	m_Camera.ready();
-	
+	glColor3f(1.0f, 1.0f, 1.0f);
+	glBegin(GL_QUADS);
+	glNormal3f(0, 1, 0);
+	glVertex3f(-500, -10, -500);
+	glVertex3f(-500, -10, 500);
+	glVertex3f(500, -10, 500);
+	glVertex3f(500, -10, -500);
+	glEnd();
 
 	//맵은 언제와요?
 	//외로운 빈공간
@@ -82,10 +89,10 @@ void S01Main::render()
 	//근데 맵....은.....
 	//어따 그리지
 	for (int i = 0; i < 20; ++i)
-		objectBox[i].drawBox(50);
+		objectBox[i].drawBox(20);
 	glPushMatrix();
 	glTranslatef(mainCharacter.returnBoxCenterX(), mainCharacter.returnBoxCenterY(), mainCharacter.returnBoxCenterZ());
-	banana_draw(0, 0, 0, 10, IDLE, banana.rot.degree);
+	banana_draw(0, 0, 0, 1, IDLE, banana.rot.degree);
 	glPopMatrix();
 
 }
