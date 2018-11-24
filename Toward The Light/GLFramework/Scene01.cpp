@@ -34,7 +34,9 @@ int shade_count;
 
 
 Shape banana;
-
+static int x;
+static int y;
+static int z;
 S01Main::S01Main()
 {
 }
@@ -45,6 +47,10 @@ S01Main::~S01Main()
 
 void S01Main::init()
 {
+
+	m_SoundPlayer.init();
+	m_SoundPlayer.selectFolder("Resources\\BGM");
+
 	m_Camera.setDistance(3000.f);
 	m_Camera.setPerspective(45.f, 0.125f, 7'000.f);
 	m_Camera.setSensitivity(10.f);
@@ -52,18 +58,21 @@ void S01Main::init()
 
 void S01Main::exit()
 {
+	m_SoundPlayer.exit();
 }
 
 void S01Main::reset()
 {
-
+	m_SoundPlayer.play();
 }
 
 void S01Main::render()
 {
 	m_Camera.ready();
-	
-	banana_draw(0, 0, 0, 30, IDLE, banana.rot.degree);
+	glPushMatrix();
+
+	banana_draw(x, y, z, 30, IDLE, banana.rot.degree);
+	glPopMatrix();
 
 }
 
@@ -74,6 +83,27 @@ void S01Main::reshape(int w, int h)
 
 void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 {
+	if (pressed)
+	{
+		switch (key)
+		{
+		case 'w':
+			z -= 20;
+			break;
+
+		case 'a':
+			x -= 20;
+			break;
+
+		case 's':
+			z += 20;
+			break;
+
+		case 'd':
+			x += 20;
+			break;
+		}
+	}
 }
 
 void S01Main::mouse(int button, bool pressed, int x, int y)
@@ -82,10 +112,7 @@ void S01Main::mouse(int button, bool pressed, int x, int y)
 
 void S01Main::motion(bool pressed, int x, int y)
 {
-	if (s)
-		m_Camera.rotate(x, 0.f, pressed);
-	else
-		m_Camera.rotate(0.f, y, pressed);
+	m_Camera.rotate(x, y, pressed);
 }
 
 int switch_sign = -1;

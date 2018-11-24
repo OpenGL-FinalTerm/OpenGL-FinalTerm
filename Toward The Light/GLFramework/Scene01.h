@@ -31,6 +31,6 @@ private:
 	Camera			m_Camera;
 	NormalObject	m_Plane;
 	NormalObject    m_Sphere;
-
+	SoundPlayer		m_SoundPlayer;
 	bool s;
 };

@@ -21,5 +21,5 @@
 #include "Dependencies/GL/glew.h"
 #include "Dependencies/GL/freeglut.h"
 
-const int DEF_WIN_HEIGHT = 720;
-const int DEF_WIN_WIDTH = 1280;
+const int DEF_WIN_HEIGHT = 900;
+const int DEF_WIN_WIDTH = 1500;
