@@ -78,7 +78,7 @@ void S01Main::reset()
 void S01Main::render()
 {
 	m_Camera.ready();
-	glPushMatrix();
+	
 
 	//맵은 언제와요?
 	//외로운 빈공간
@@ -88,8 +88,9 @@ void S01Main::render()
 	//어따 그리지
 	for (int i = 0; i < 5; ++i)
 		objectBox[i].drawBox(50);
-
-	banana_draw(x, y, z, 10, IDLE, banana.rot.degree);
+	glPushMatrix();
+	glTranslatef(x, y, z);
+	banana_draw(0, 0, 0, 10, IDLE, banana.rot.degree);
 	glPopMatrix();
 
 }
