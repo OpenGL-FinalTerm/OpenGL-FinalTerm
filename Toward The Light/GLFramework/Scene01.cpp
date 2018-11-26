@@ -74,6 +74,8 @@ void S01Main::reset()
 
 void S01Main::render()
 {
+	glPushMatrix();
+
 	m_Camera.ready();
 	glColor3f(1.0f, 1.0f, 1.0f);
 	glBegin(GL_QUADS);
@@ -98,7 +100,7 @@ void S01Main::render()
 	glTranslatef(mainCharacter.returnBoxCenterX(), mainCharacter.returnBoxCenterY(), mainCharacter.returnBoxCenterZ());
 	banana_draw(0, 0, 0, 1, IDLE, banana.rot.degree);
 	glPopMatrix();
-
+	glPopMatrix();
 }
 
 void S01Main::reshape(int w, int h)
@@ -170,6 +172,16 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 
 		case 'd':
 			mainCharacter.movingX(5);
+			break;
+
+		case 'p':
+			for (int i = 0; i < 4; ++i)
+				mapLight[i].LightOn(true, i);
+			break;
+
+		case 'P':
+			for (int i = 0; i < 4; ++i)
+				mapLight[i].LightOn(false, i);
 			break;
 		}
 	}
@@ -413,7 +425,7 @@ void S01Main::DefaultBoxPosSetting()
 
 	// 조명의 색상 지정
 
-	mapLight[0].settingDiffuse(1.0f, 0.0f, 0.0f, 1.0f);
+	mapLight[0].settingDiffuse(1.f, 0.f, 0.f, 1.f);
 	mapLight[1].settingDiffuse(1.f, 0.f, 0.f, 1.f);
 
 	mapLight[2].settingDiffuse(0.f, 0.f, 1.f, 1.f);
@@ -428,5 +440,5 @@ void S01Main::DefaultBoxPosSetting()
 
 	
 	for (int i = 0; i < 4; ++i)
-		mapLight[i].LightOn(true);
+		mapLight[i].LightOn(true, i);
 }

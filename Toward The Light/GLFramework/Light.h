@@ -22,10 +22,14 @@ public:
 	~Light();
 	virtual void DefaultLightPosSetting(float x, float y, float z, int color);
 	virtual void moveLight(float inX, float inY, float inZ);
-	virtual void LightOn(bool LightSwitch);
+	virtual void LightOn(bool LightSwitch, int i);
 	virtual void settingPos(float inx, float iny, float inz);
 	virtual void settingAmbient(float first, float second, float third, float fourth);
 	virtual void settingDiffuse(float first, float second, float third, float fourth);
 	virtual void settingSpecu(float first, float second, float third, float fourth);
 	virtual void settingGray(float first, float second, float third, float fourth);
+};
+
+enum {
+	selectNumber
 };
