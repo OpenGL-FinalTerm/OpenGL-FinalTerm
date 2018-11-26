@@ -27,6 +27,7 @@ public:
 	virtual void motion(bool pressed, int x, int y);
 	virtual void update(float fDeltaTime);
 	virtual void DefaultBoxPosSetting();
+	virtual void LightSetting();
 
 private:
 	float			rX, rY, rZ;

@@ -58,7 +58,7 @@ void S01Main::init()
 	//	objectBox[i].setColor(rand() % 255, rand() % 255, rand() % 255);
 	//}
 
-
+	LightSetting();
 	DefaultBoxPosSetting();
 }
 
@@ -75,7 +75,6 @@ void S01Main::reset()
 void S01Main::render()
 {
 	glPushMatrix();
-
 	m_Camera.ready();
 	glColor3f(1.0f, 1.0f, 1.0f);
 	glBegin(GL_QUADS);
@@ -415,7 +414,10 @@ void S01Main::DefaultBoxPosSetting()
 	objectBox[64].CreateBox(10, 10, 60);
 	objectBox[64].setColor(rand() % 255, rand() % 255, rand() % 255);
 
+}
 
+void S01Main::LightSetting()
+{
 	//조명 설정
 	mapLight[0].DefaultLightPosSetting(30, 5, 60, 1);
 	mapLight[1].DefaultLightPosSetting(-30, 5, 20, 1);
@@ -432,13 +434,13 @@ void S01Main::DefaultBoxPosSetting()
 	mapLight[2].settingDiffuse(0.f, 0.f, 1.f, 1.f);
 
 	//조명의 거울반사 세기 지정
-	mapLight[0].settingSpecu(1.f, 1.f, 1.f, 1.f);
-	mapLight[1].settingSpecu(1.f, 1.f, 1.f, 1.f);
+	mapLight[0].settingSpecu(1.f, 0.f, 0.f, 1.f);
+	mapLight[1].settingSpecu(1.f, 0.f, 0.f, 1.f);
 
-	mapLight[2].settingSpecu(1.f, 1.f, 1.f, 1.f);
-	mapLight[3].settingSpecu(1.f, 1.f, 1.f, 1.f);
+	mapLight[2].settingSpecu(0.f, 0.f, 1.f, 1.f);
+	mapLight[3].settingSpecu(0.f, 0.f, 1.f, 1.f);
 
-	
+
 	for (int i = 0; i < 4; ++i)
 		mapLight[i].LightOn(true, i);
 }
