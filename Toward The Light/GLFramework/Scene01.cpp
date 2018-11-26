@@ -410,4 +410,23 @@ void S01Main::DefaultBoxPosSetting()
 
 	mapLight[2].DefaultLightPosSetting(30, 5, 0, 0);
 	mapLight[3].DefaultLightPosSetting(-30, 5, -40, 0);
+
+	// 조명의 색상 지정
+
+	mapLight[0].settingDiffuse(1.0f, 0.0f, 0.0f, 1.0f);
+	mapLight[1].settingDiffuse(1.f, 0.f, 0.f, 1.f);
+
+	mapLight[2].settingDiffuse(0.f, 0.f, 1.f, 1.f);
+	mapLight[2].settingDiffuse(0.f, 0.f, 1.f, 1.f);
+
+	//조명의 거울반사 세기 지정
+	mapLight[0].settingSpecu(1.f, 1.f, 1.f, 1.f);
+	mapLight[1].settingSpecu(1.f, 1.f, 1.f, 1.f);
+
+	mapLight[2].settingSpecu(1.f, 1.f, 1.f, 1.f);
+	mapLight[3].settingSpecu(1.f, 1.f, 1.f, 1.f);
+
+	
+	for (int i = 0; i < 4; ++i)
+		mapLight[i].LightOn(true);
 }
