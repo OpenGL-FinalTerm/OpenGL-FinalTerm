@@ -24,7 +24,7 @@ public:
 	Box();
 	virtual ~Box();
 	
-	virtual void CreateBox();
+	virtual void CreateBox(float x, float y, float z);
 	virtual void setColor(GLfloat R, GLfloat G, GLfloat B);
 	virtual void movingX(int inX);
 	virtual void movingY(int inY);
@@ -40,3 +40,5 @@ public:
 	virtual float returnBoxCenterZ();
 	virtual bool returnCheck();
 };
+
+

@@ -8,10 +8,11 @@ Box::~Box()
 {
 }
 
-void Box::CreateBox()
+void Box::CreateBox(float inx, float iny, float inz)
 {
-	x = rand() % 1000 - 500;
-	z = rand() % 1000 - 500;
+	x = inx;
+	y = iny;
+	z = inz;
 }
 
 void Box::setColor(GLfloat R, GLfloat G, GLfloat B)

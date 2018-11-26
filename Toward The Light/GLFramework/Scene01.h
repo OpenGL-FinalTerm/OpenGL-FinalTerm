@@ -25,6 +25,7 @@ public:
 	virtual void mouse(int button, bool pressed, int x, int y);
 	virtual void motion(bool pressed, int x, int y);
 	virtual void update(float fDeltaTime);
+	virtual void DefaultBoxPosSetting();
 
 private:
 	float			rX, rY, rZ;
@@ -33,19 +34,8 @@ private:
 	NormalObject	m_Plane;
 	NormalObject    m_Sphere;
 	SoundPlayer		m_SoundPlayer;
-	Box				objectBox[20];
+	Box				objectBox[65];
 	Box				mainCharacter;
 	bool s;
 };
 
-class Light {
-public:
-	Light()
-	{
-	}
-
-	~Light() 
-	{
-	}
-
-};

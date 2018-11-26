@@ -135,6 +135,7 @@
     <ClCompile Include="GLFramework.cpp" />
     <ClCompile Include="GLScene.cpp" />
     <ClCompile Include="GLScenesInfo.cpp" />
+    <ClCompile Include="Light.cpp" />
     <ClCompile Include="LinearMath.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="NormalObject.cpp" />
@@ -162,6 +163,7 @@
     <ClInclude Include="GLFramework.h" />
     <ClInclude Include="GLScene.h" />
     <ClInclude Include="GLScenesInfo.h" />
+    <ClInclude Include="Light.h" />
     <ClInclude Include="LinearMath.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="NormalObject.h" />
