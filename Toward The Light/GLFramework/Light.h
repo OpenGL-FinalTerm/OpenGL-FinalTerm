@@ -6,7 +6,7 @@ private:
 	float x;
 	float y;
 	float z;
-
+	
 	GLfloat R;
 	GLfloat G;
 	GLfloat B;
