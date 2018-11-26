@@ -12,8 +12,8 @@ private:
 	GLfloat B;
 
 	GLfloat pos[4] = { 0.f, 0.f, 0.f, 1.0f };
-	GLfloat ambientLight[4] = { 0.6f, 0.5f, 0.2f, 1.0f };
-	GLfloat diffuseLight[4] = { 0.6f, 0.5f, 0.2f, 1.0f };
+	GLfloat ambientLight[4] = { 0.1f, 0.1f, 0.1f, 0.1f };
+	GLfloat diffuseLight[4] = { 0.6f, 0.5f, 0.2f, 0.5f};
 	GLfloat specu[4] = { 1.f, 1.f, 1.f, 1.f };
 	GLfloat gray[4] = { 0.25f, 0.25f, 0.25f, 0.25f };
 

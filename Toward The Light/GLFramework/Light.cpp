@@ -21,6 +21,7 @@ void Light::LightOn(bool LightSwitch, int i)
 		if (i == 0) {
 			glEnable(GL_LIGHTING);
 			glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuseLight);
+			glLightfv(GL_LIGHT0, GL_AMBIENT, ambientLight);
 			glLightfv(GL_LIGHT0, GL_SPECULAR, specu);
 			glLightfv(GL_LIGHT0, GL_POSITION, pos);
 
@@ -39,6 +40,7 @@ void Light::LightOn(bool LightSwitch, int i)
 		else if (i == 1) {
 			glEnable(GL_LIGHTING);
 			glLightfv(GL_LIGHT1, GL_DIFFUSE, diffuseLight);
+			glLightfv(GL_LIGHT1, GL_AMBIENT, ambientLight);
 			glLightfv(GL_LIGHT1, GL_SPECULAR, specu);
 			glLightfv(GL_LIGHT1, GL_POSITION, pos);
 
@@ -54,6 +56,7 @@ void Light::LightOn(bool LightSwitch, int i)
 
 		else if (i == 2) {
 			glEnable(GL_LIGHTING);
+			glLightfv(GL_LIGHT2, GL_AMBIENT, ambientLight);
 			glLightfv(GL_LIGHT2, GL_DIFFUSE, diffuseLight);
 			glLightfv(GL_LIGHT2, GL_SPECULAR, specu);
 			glLightfv(GL_LIGHT2, GL_POSITION, pos);
@@ -70,6 +73,7 @@ void Light::LightOn(bool LightSwitch, int i)
 
 		else if (i == 3) {
 			glEnable(GL_LIGHTING);
+			glLightfv(GL_LIGHT3, GL_AMBIENT, ambientLight);
 			glLightfv(GL_LIGHT3, GL_DIFFUSE, diffuseLight);
 			glLightfv(GL_LIGHT3, GL_SPECULAR, specu);
 			glLightfv(GL_LIGHT3, GL_POSITION, pos);

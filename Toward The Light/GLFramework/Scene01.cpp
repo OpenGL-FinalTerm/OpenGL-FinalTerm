@@ -427,11 +427,11 @@ void S01Main::LightSetting()
 
 	// 조명의 색상 지정
 
-	mapLight[0].settingDiffuse(1.f, 0.f, 0.f, 1.f);
-	mapLight[1].settingDiffuse(1.f, 0.f, 0.f, 1.f);
+	mapLight[0].settingDiffuse(1.f, 0.f, 0.f, 0.6f);
+	mapLight[1].settingDiffuse(1.f, 0.f, 0.f, 0.6f);
 
-	mapLight[2].settingDiffuse(0.f, 0.f, 1.f, 1.f);
-	mapLight[2].settingDiffuse(0.f, 0.f, 1.f, 1.f);
+	mapLight[2].settingDiffuse(0.f, 0.f, 1.f, 0.6f);
+	mapLight[2].settingDiffuse(0.f, 0.f, 1.f, 0.6f);
 
 	//조명의 거울반사 세기 지정
 	mapLight[0].settingSpecu(1.f, 0.f, 0.f, 1.f);
@@ -440,6 +440,12 @@ void S01Main::LightSetting()
 	mapLight[2].settingSpecu(0.f, 0.f, 1.f, 1.f);
 	mapLight[3].settingSpecu(0.f, 0.f, 1.f, 1.f);
 
+	// 주변광
+	//mapLight[0].settingAmbient(1.f, 1.f, 1.f, 0.f);
+	//mapLight[1].settingAmbient(1.f, 1.f, 1.f, 0.f);
+
+	//mapLight[2].settingAmbient(1.f, 1.f, 1.f, 0.f);
+	//mapLight[3].settingAmbient(1.f, 1.f, 1.f, 0.f);
 
 	for (int i = 0; i < 4; ++i)
 		mapLight[i].LightOn(true, i);
