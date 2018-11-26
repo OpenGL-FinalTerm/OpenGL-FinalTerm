@@ -405,4 +405,9 @@ void S01Main::DefaultBoxPosSetting()
 
 
 	//조명 설정
+	mapLight[0].DefaultLightPosSetting(30, 5, 60, 1);
+	mapLight[1].DefaultLightPosSetting(-30, 5, 20, 1);
+
+	mapLight[2].DefaultLightPosSetting(30, 5, 0, 0);
+	mapLight[3].DefaultLightPosSetting(-30, 5, -40, 0);
 }

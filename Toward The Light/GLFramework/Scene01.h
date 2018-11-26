@@ -7,6 +7,7 @@
 #include "Camera.h"
 #include "SoundPlayer.h"
 #include "BoxObject.h"
+#include "Light.h"
 /* ------------ */
 
 class S01Main :
@@ -36,6 +37,7 @@ private:
 	SoundPlayer		m_SoundPlayer;
 	Box				objectBox[65];
 	Box				mainCharacter;
+	Light			mapLight[4];
 	bool s;
 };
 
