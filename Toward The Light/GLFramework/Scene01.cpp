@@ -35,6 +35,14 @@ int shade_count;
 
 Shape banana;
 
+struct tmp {
+	float x;
+	float y;
+	float z;
+};
+
+static tmp tmpRect;
+
 S01Main::S01Main()
 {
 }
@@ -57,7 +65,9 @@ void S01Main::init()
 	//	objectBox[i].CreateBox(rand() % 120 - 60, 10, rand() % 140 - 70);
 	//	objectBox[i].setColor(rand() % 255, rand() % 255, rand() % 255);
 	//}
-
+	tmpRect.x = -10;
+	tmpRect.y = 10;
+	tmpRect.z = 60;
 	LightSetting();
 	DefaultBoxPosSetting();
 }
@@ -93,7 +103,12 @@ void S01Main::render()
 	//어따 그리지
 	for (int i = 0; i < 65; ++i)
 		objectBox[i].drawBox(20);
-
+	
+	glPushMatrix();
+	glTranslatef(tmpRect.x, tmpRect.y, tmpRect.z);
+	glColor3f(1.f, 0.4f, 0.2f);
+	glutSolidCube(10);
+	glPopMatrix();
 
 	glPushMatrix();
 	glTranslatef(mainCharacter.returnBoxCenterX(), mainCharacter.returnBoxCenterY(), mainCharacter.returnBoxCenterZ());
@@ -119,6 +134,7 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 		{
 		case 'w':
 			mainCharacter.movingZ(-5);
+			tmpRect.z -= 5;
 		
 			//while (check == FALSE) {
 
@@ -162,14 +178,17 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 			break;
 
 		case 'a':
+			tmpRect.x -= 5;
 			mainCharacter.movingX(-5);
 			break;
 
 		case 's':
+			tmpRect.z += 5;
 			mainCharacter.movingZ(5);
 			break;
 
 		case 'd':
+			tmpRect.x += 5;
 			mainCharacter.movingX(5);
 			break;
 
