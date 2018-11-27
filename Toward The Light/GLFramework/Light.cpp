@@ -131,7 +131,7 @@ void Light::settingGray(float first, float second, float third, float fourth)
 	gray[2] = third;
 	gray[3] = fourth;
 }
-
+	
 void Light::settingSpecu(float first, float second, float third, float fourth)
 {
 	specu[0] = first;
