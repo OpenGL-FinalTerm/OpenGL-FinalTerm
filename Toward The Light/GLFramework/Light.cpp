@@ -146,3 +146,21 @@ void Light::settingPos(float inx, float iny, float inz)
 	y = iny;
 	z = inz;
 }
+
+void Light::drawLight()
+{
+	glPushMatrix();
+	glTranslatef(x, y, z);
+	if (colorType == 1)
+		glColor3f(1.f, 0.f, 0.f);
+	else
+		glColor3f(0.f, 0.f, 1.f);
+
+	glutSolidSphere(4, 4, 4);
+	glPopMatrix();
+}
+
+void Light::setColorType(int color)
+{
+	colorType = color;
+}

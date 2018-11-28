@@ -3,6 +3,7 @@
 #include "GLFramework.h"
 #include "banana_draw.h"
 #define whatBox 65
+#define LightCount 4
 typedef struct Shape
 {
 	Color cl;//색상
@@ -122,6 +123,9 @@ void S01Main::render()
 	//어따 그리지
 	for (int i = 0; i < 65; ++i)
 		objectBox[i].drawBox(20);
+
+	for (int i = 0; i < LightCount; ++i)
+		mapLight[i].drawLight();
 	
 	glPushMatrix();
 	glTranslatef(tmpRect.x, tmpRect.y, tmpRect.z);
@@ -604,6 +608,12 @@ void S01Main::LightSetting()
 	mapLight[2].settingSpecu(0.f, 0.f, 1.f, 1.f);
 	mapLight[3].settingSpecu(0.f, 0.f, 1.f, 1.f);
 
+
+	mapLight[0].setColorType(1);
+	mapLight[1].setColorType(1);
+
+	mapLight[2].setColorType(2);
+	mapLight[3].setColorType(3);
 	// 주변광
 	//mapLight[0].settingAmbient(1.f, 1.f, 1.f, 0.f);
 	//mapLight[1].settingAmbient(1.f, 1.f, 1.f, 0.f);

@@ -6,6 +6,8 @@ private:
 	float x;
 	float y;
 	float z;
+
+	int colorType;
 	
 	GLfloat R;
 	GLfloat G;
@@ -28,6 +30,8 @@ public:
 	virtual void settingDiffuse(float first, float second, float third, float fourth);
 	virtual void settingSpecu(float first, float second, float third, float fourth);
 	virtual void settingGray(float first, float second, float third, float fourth);
+	virtual void drawLight();
+	virtual void setColorType(int color);
 };
 
 enum {
