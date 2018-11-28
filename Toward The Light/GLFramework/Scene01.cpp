@@ -35,7 +35,7 @@ int shade_count;
 
 
 Shape banana;
-
+static int angle = 0;
 struct tmp {
 	float x;
 	float y;
@@ -134,8 +134,8 @@ void S01Main::render()
 	glPopMatrix();
 
 	glPushMatrix();
-	glTranslatef(mainCharacter.returnBoxCenterX(), mainCharacter.returnBoxCenterY(), mainCharacter.returnBoxCenterZ());
-	banana_draw(0, 0, 0, 1, IDLE, banana.rot.degree);
+	glRotatef(angle, 0, 1, 0);
+	banana_draw(mainCharacter.returnBoxCenterX(), mainCharacter.returnBoxCenterY(), mainCharacter.returnBoxCenterZ(), 1, IDLE, banana.rot.degree);
 	glPopMatrix();
 	glPopMatrix();
 }
@@ -145,6 +145,7 @@ void S01Main::reshape(int w, int h)
 
 }
 
+static BOOL jump = FALSE;
 void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 {
 	int cycle = 0;
@@ -156,6 +157,7 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 		switch (key)
 		{
 		case 'w':
+			angle = 180;
 			mainCharacter.movingZ(-1);
 			tmpRect.z -= 1;
 		
@@ -203,6 +205,7 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 			break;
 
 		case 'a':
+			angle = 270;
 			tmpRect.x -= 1;
 			mainCharacter.movingX(-1);
 
@@ -250,6 +253,7 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 			break;
 
 		case 's':
+			angle = 180;
 			tmpRect.z += 1;
 			mainCharacter.movingZ(1);
 
@@ -296,6 +300,7 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 			break;
 
 		case 'd':
+			angle = 90;
 			tmpRect.x += 1;
 			mainCharacter.movingX(1);
 
@@ -341,6 +346,11 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 			tmpRect.zRate = 0;
 			break;
 
+		case ' ':
+			if(jump == FALSE)
+				jump = TRUE;
+			break;
+
 		case 'p':
 			for (int i = 0; i < 4; ++i)
 				mapLight[i].LightOn(true, i);
@@ -374,6 +384,17 @@ void S01Main::update(float fDeltaTime)
 		switch_sign *= -1;
 	}
 	banana.rot.degree += 0.1f * switch_sign;
+
+	if (jump == TRUE) {
+		tmpRect.y += 1;
+		if (tmpRect.y > 30)
+			jump = FALSE;
+	}
+
+	else {
+		if(tmpRect.y > 10)
+			tmpRect.y -= 1;
+	}
 }
 
 void S01Main::DefaultBoxPosSetting()
