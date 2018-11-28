@@ -22,12 +22,12 @@ public:
 			void Runningz();
 			void Ironz();
 			void Circlez();
-			virtual void render();
+	virtual void render();
 	virtual void reshape(int w, int h);
 	virtual void keyboard(int key, bool pressed, int x, int y, bool special);
 	virtual void mouse(int button, bool pressed, int x, int y);
 	virtual void motion(bool pressed, int x, int y);
-	void clap();
+			void clap();
 	virtual void update(float fDeltaTime);
 
 private:
