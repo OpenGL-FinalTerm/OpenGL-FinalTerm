@@ -13,6 +13,7 @@ void Light::DefaultLightPosSetting(float inx, float iny, float inz, int color)
 	x = inx;
 	y = iny;
 	z = inz;
+	colorType = color;
 }
 
 void Light::LightOn(bool LightSwitch, int i)
@@ -158,9 +159,4 @@ void Light::drawLight()
 
 	glutSolidSphere(4, 4, 4);
 	glPopMatrix();
-}
-
-void Light::setColorType(int color)
-{
-	colorType = color;
 }

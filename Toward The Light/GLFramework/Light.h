@@ -31,7 +31,6 @@ public:
 	virtual void settingSpecu(float first, float second, float third, float fourth);
 	virtual void settingGray(float first, float second, float third, float fourth);
 	virtual void drawLight();
-	virtual void setColorType(int color);
 };
 
 enum {

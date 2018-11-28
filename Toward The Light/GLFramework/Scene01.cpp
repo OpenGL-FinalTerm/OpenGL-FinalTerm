@@ -588,7 +588,7 @@ void S01Main::LightSetting()
 {
 	//조명 설정
 	mapLight[0].DefaultLightPosSetting(30, 5, 60, 1);
-	mapLight[1].DefaultLightPosSetting(-30, 5, 20, 1);
+	mapLight[1].DefaultLightPosSetting(-30, 45, 20, 1);
 
 	mapLight[2].DefaultLightPosSetting(30, 5, 0, 0);
 	mapLight[3].DefaultLightPosSetting(-30, 5, -40, 0);
@@ -609,11 +609,6 @@ void S01Main::LightSetting()
 	mapLight[3].settingSpecu(0.f, 0.f, 1.f, 1.f);
 
 
-	mapLight[0].setColorType(1);
-	mapLight[1].setColorType(1);
-
-	mapLight[2].setColorType(2);
-	mapLight[3].setColorType(3);
 	// 주변광
 	//mapLight[0].settingAmbient(1.f, 1.f, 1.f, 0.f);
 	//mapLight[1].settingAmbient(1.f, 1.f, 1.f, 0.f);
