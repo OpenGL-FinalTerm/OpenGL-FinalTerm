@@ -148,6 +148,7 @@ void S01Main::reshape(int w, int h)
 }
 
 static BOOL jump = FALSE;
+static BOOL down = FALSE;
 static bool wPress = false;
 static bool aPress = false;
 static bool sPress = false;
@@ -356,7 +357,7 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 			break;
 
 		case ' ':
-			if (jump == FALSE)
+			if (jump == FALSE && down == FALSE)
 				jump = TRUE;
 			break;
 
@@ -401,23 +402,33 @@ void S01Main::update(float fDeltaTime)
 	}
 	banana.rot.degree += 0.1f * switch_sign;
 
-	if (jump == TRUE) {
+	if (jump == TRUE && down == FALSE) {
 		tmpRect.y += 1;
 		tmpRect.jumpCount += 1;
 		if (tmpRect.jumpCount > 30) {
 			jump = FALSE;
 			tmpRect.jumpCount = 0;
+			down = TRUE;
 		}
 	}
 
 	else {
-		
+		bool tmpcheck = false;
 		for (int i = 0; i < whatBox; ++i) {
-
+			if (objectBox[i].returnBoxCenterX() - 10 < returnMainX() + 5 && objectBox[i].returnBoxCenterX() + 10 > returnMainX() - 5 && objectBox[i].returnBoxCenterZ() + 10 > returnMainZ() - 5 && objectBox[i].returnBoxCenterZ() - 10 < returnMainZ() + 5 && tmpRect.y < objectBox[i].returnBoxCenterY() + 20) {
+				down = FALSE;
+				tmpcheck = true;
+			}
 		}
 		
-		if(tmpRect.y > 10)
+		if (tmpRect.y > 10 && tmpcheck == false) {
 			tmpRect.y -= 1;
+		}
+
+		if(tmpRect.y <= 10 && tmpcheck == false)
+			down = FALSE;
+
+		tmpcheck = false;
 	}
 
 
