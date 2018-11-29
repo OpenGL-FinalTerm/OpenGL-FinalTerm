@@ -44,6 +44,8 @@ struct tmp {
 	float xRate;
 	float yRate;
 	float zRate;
+
+	int jumpCount = 0;
 };
 
 static tmp tmpRect;
@@ -146,6 +148,11 @@ void S01Main::reshape(int w, int h)
 }
 
 static BOOL jump = FALSE;
+static bool wPress = false;
+static bool aPress = false;
+static bool sPress = false;
+static bool dPress = false;
+
 void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 {
 	int cycle = 0;
@@ -157,10 +164,10 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 		switch (key)
 		{
 		case 'w':
-			angle = 180;
+			/*angle = 180;
 			mainCharacter.movingZ(-1);
 			tmpRect.z -= 1;
-		
+
 			while (check == FALSE) {
 
 				if (returnMainZ() - 5 <= objectBox[i].returnBoxCenterZ() + 10 && !(returnMainZ() + 5 <= objectBox[i].returnBoxCenterZ() - 10)) {
@@ -200,12 +207,12 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 			cycle = 0;
 			tmpRect.xRate = 0;
 			tmpRect.yRate = 0;
-			tmpRect.zRate = 0;
-
+			tmpRect.zRate = 0;*/
+			wPress = true;
 			break;
 
 		case 'a':
-			angle = 270;
+			/*angle = 270;
 			tmpRect.x -= 1;
 			mainCharacter.movingX(-1);
 
@@ -248,12 +255,12 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 			cycle = 0;
 			tmpRect.xRate = 0;
 			tmpRect.yRate = 0;
-			tmpRect.zRate = 0;
-
+			tmpRect.zRate = 0;*/
+			aPress = true;
 			break;
 
 		case 's':
-			angle = 180;
+			/*angle = 180;
 			tmpRect.z += 1;
 			mainCharacter.movingZ(1);
 
@@ -296,11 +303,12 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 			cycle = 0;
 			tmpRect.xRate = 0;
 			tmpRect.yRate = 0;
-			tmpRect.zRate = 0;
+			tmpRect.zRate = 0;*/
+			sPress = true;
 			break;
 
 		case 'd':
-			angle = 90;
+			/*angle = 90;
 			tmpRect.x += 1;
 			mainCharacter.movingX(1);
 
@@ -343,11 +351,12 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 			cycle = 0;
 			tmpRect.xRate = 0;
 			tmpRect.yRate = 0;
-			tmpRect.zRate = 0;
+			tmpRect.zRate = 0;*/
+			dPress = true;
 			break;
 
 		case ' ':
-			if(jump == FALSE)
+			if (jump == FALSE)
 				jump = TRUE;
 			break;
 
@@ -362,6 +371,13 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 			break;
 		}
 	}
+	else {
+		wPress = false;
+		aPress = false;
+		sPress = false;
+		dPress = false;
+	}
+
 }
 
 void S01Main::mouse(int button, bool pressed, int x, int y)
@@ -387,13 +403,208 @@ void S01Main::update(float fDeltaTime)
 
 	if (jump == TRUE) {
 		tmpRect.y += 1;
-		if (tmpRect.y > 30)
+		tmpRect.jumpCount += 1;
+		if (tmpRect.jumpCount > 30) {
 			jump = FALSE;
+			tmpRect.jumpCount = 0;
+		}
 	}
 
 	else {
+		
+		for (int i = 0; i < whatBox; ++i) {
+
+		}
+		
 		if(tmpRect.y > 10)
 			tmpRect.y -= 1;
+	}
+
+
+
+	// 캐릭도 연속 이동
+	bool check = false;
+	int cycle = 0;
+	int count = 0;
+	int i = 0;
+	if (wPress == true) {
+		angle = 180;
+		mainCharacter.movingZ(-1);
+		tmpRect.z -= 1;
+
+		while (check == FALSE) {
+
+			if (returnMainZ() - 5 <= objectBox[i].returnBoxCenterZ() + 10 && !(returnMainZ() + 5 <= objectBox[i].returnBoxCenterZ() - 10)) {
+				if (objectBox[i].returnBoxCenterX() - 10 < returnMainX() + 5 && objectBox[i].returnBoxCenterX() + 10 > returnMainX() - 5 && objectBox[i].returnBoxCenterY() + 10 > returnMainY() - 5 && objectBox[i].returnBoxCenterY() - 10 < returnMainY() + 5) {
+					if (objectBox[i].returnCheck() == 0) {
+						tmpRect.zRate -= 20;
+						objectBox[i].movingZ(-1);
+						objectBox[i].checkUpdate(1);
+					}
+				}
+			}
+
+			if (i == whatBox - 1) {
+				cycle++;
+				for (int j = 0; j < whatBox; ++j) {
+					if (objectBox[j].returnCheck()) {
+						count++;
+					}
+				}
+				if (count == whatBox || count == 0 || cycle == whatBox)
+					check = TRUE;
+				else
+					i = 0;
+
+				count = 0;
+			}
+			else {
+				i++;
+
+			}
+
+		}
+
+		for (int k = 0; k < whatBox; ++k)
+			objectBox[k].checkUpdate(0);
+		check = FALSE;
+		cycle = 0;
+		tmpRect.xRate = 0;
+		tmpRect.yRate = 0;
+		tmpRect.zRate = 0;
+	}
+
+	if (aPress == true) {
+		angle = 270;
+		tmpRect.x -= 1;
+		mainCharacter.movingX(-1);
+
+		while (check == FALSE) {
+
+			if (returnMainX() - 5 <= objectBox[i].returnBoxCenterX() + 10 && !(returnMainX() + 5 <= objectBox[i].returnBoxCenterX() - 10)) {
+				if (objectBox[i].returnBoxCenterZ() - 10 < returnMainZ() + 5 && objectBox[i].returnBoxCenterZ() + 10 > returnMainZ() - 5 && objectBox[i].returnBoxCenterY() + 10 > returnMainY() - 5 && objectBox[i].returnBoxCenterY() - 10 < returnMainY() + 5) {
+					if (objectBox[i].returnCheck() == 0) {
+						tmpRect.xRate -= 20;
+						objectBox[i].movingX(-1);
+						objectBox[i].checkUpdate(1);
+					}
+				}
+			}
+
+			if (i == whatBox - 1) {
+				cycle++;
+				for (int j = 0; j < whatBox; ++j) {
+					if (objectBox[j].returnCheck()) {
+						count++;
+					}
+				}
+				if (count == whatBox || count == 0 || cycle == whatBox)
+					check = TRUE;
+				else
+					i = 0;
+
+				count = 0;
+			}
+			else {
+				i++;
+
+			}
+
+		}
+
+		for (int k = 0; k < whatBox; ++k)
+			objectBox[k].checkUpdate(0);
+		check = FALSE;
+		cycle = 0;
+		tmpRect.xRate = 0;
+		tmpRect.yRate = 0;
+		tmpRect.zRate = 0;
+	}
+
+	if (sPress == true) {
+		angle = 180;
+		tmpRect.z += 1;
+		mainCharacter.movingZ(1);
+
+		while (check == FALSE) {
+
+			if (returnMainZ() - 5 <= objectBox[i].returnBoxCenterZ() + 10 && !(returnMainZ() + 5 <= objectBox[i].returnBoxCenterZ() - 10)) {
+				if (objectBox[i].returnBoxCenterX() - 10 < returnMainX() + 5 && objectBox[i].returnBoxCenterX() + 10 > returnMainX() - 5 && objectBox[i].returnBoxCenterY() + 10 > returnMainY() - 5 && objectBox[i].returnBoxCenterY() - 10 < returnMainY() + 5) {
+					if (objectBox[i].returnCheck() == 0) {
+						tmpRect.zRate += 20;
+						objectBox[i].movingZ(1);
+						objectBox[i].checkUpdate(1);
+					}
+				}
+			}
+
+			if (i == whatBox - 1) {
+				cycle++;
+				for (int j = 0; j < whatBox; ++j) {
+					if (objectBox[j].returnCheck()) {
+						count++;
+					}
+				}
+				if (count == whatBox || count == 0 || cycle == whatBox)
+					check = TRUE;
+				else
+					i = 0;
+
+				count = 0;
+			}
+			else {
+				i++;
+
+			}
+
+		}
+
+		for (int k = 0; k < whatBox; ++k)
+			objectBox[k].checkUpdate(0);
+		check = FALSE;
+		cycle = 0;
+		tmpRect.xRate = 0;
+		tmpRect.yRate = 0;
+		tmpRect.zRate = 0;
+	}
+
+	if (dPress == true) {
+		angle = 90;
+		tmpRect.x += 1;
+		mainCharacter.movingX(1);
+
+		while (check == FALSE) {
+
+			if (returnMainX() - 5 <= objectBox[i].returnBoxCenterX() + 10 && !(returnMainX() + 5 <= objectBox[i].returnBoxCenterX() - 10)) {
+				if (objectBox[i].returnBoxCenterZ() - 10 < returnMainZ() + 5 && objectBox[i].returnBoxCenterZ() + 10 > returnMainZ() - 5 && objectBox[i].returnBoxCenterY() + 10 > returnMainY() - 5 && objectBox[i].returnBoxCenterY() - 10 < returnMainY() + 5) {
+					if (objectBox[i].returnCheck() == 0) {
+						tmpRect.xRate += 20;
+						objectBox[i].movingX(1);
+						objectBox[i].checkUpdate(1);
+					}
+				}
+			}
+
+			if (i == whatBox - 1) {
+				cycle++;
+				for (int j = 0; j < whatBox; ++j) {
+					if (objectBox[j].returnCheck()) {
+						count++;
+					}
+				}
+				if (count == whatBox || count == 0 || cycle == whatBox)
+					check = TRUE;
+				else
+					i = 0;
+
+				count = 0;
+			}
+			else {
+				i++;
+
+			}
+
+		}
 	}
 }
 
