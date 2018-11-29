@@ -128,7 +128,7 @@ void S01Main::render()
 
 	for (int i = 0; i < LightCount; ++i)
 		mapLight[i].drawLight();
-	
+
 	glPushMatrix();
 	glTranslatef(tmpRect.x, tmpRect.y, tmpRect.z);
 	glColor3f(1.f, 0.4f, 0.2f);
@@ -420,12 +420,12 @@ void S01Main::update(float fDeltaTime)
 				tmpcheck = true;
 			}
 		}
-		
+
 		if (tmpRect.y > 10 && tmpcheck == false) {
 			tmpRect.y -= 1;
 		}
 
-		if(tmpRect.y <= 10 && tmpcheck == false)
+		if (tmpRect.y <= 10 && tmpcheck == false)
 			down = FALSE;
 
 		tmpcheck = false;
@@ -438,6 +438,38 @@ void S01Main::update(float fDeltaTime)
 	int cycle = 0;
 	int count = 0;
 	int i = 0;
+
+
+	bool boxLanding = false;
+	for (int k = 0; k < whatBox; ++k)
+	{
+		boxLanding = false;
+		i = 0;
+		check = FALSE;
+		if (objectBox[k].returnBoxCenterY() - 10 > 0) {
+			while (check == FALSE) {
+				if ((objectBox[i].returnBoxCenterX() - 10 < objectBox[k].returnBoxCenterX() + 10 && objectBox[i].returnBoxCenterX() + 10 > objectBox[k].returnBoxCenterX() - 10 && objectBox[i].returnBoxCenterZ() + 10 > objectBox[k].returnBoxCenterZ() - 10 && objectBox[i].returnBoxCenterZ() - 10 < objectBox[k].returnBoxCenterZ() + 10) && i != k) {
+					if (objectBox[k].returnBoxCenterY() - 10 <= objectBox[i].returnBoxCenterY() + 10) {
+						boxLanding = true;
+						check = TRUE;
+					}
+				}
+
+				i++;
+				if (i == whatBox) {
+					i = 0;
+					check = TRUE;
+				}
+
+			}
+
+			if (boxLanding != true)
+				objectBox[k].movingY(-1);
+		}
+
+	}
+
+	check = FALSE;
 	if (wPress == true) {
 		angle = 180;
 		mainCharacter.movingZ(-1);
@@ -581,49 +613,49 @@ void S01Main::update(float fDeltaTime)
 
 	if (dPress == true) {
 		angle = 90;
-			tmpRect.x += 1;
-			mainCharacter.movingX(1);
+		tmpRect.x += 1;
+		mainCharacter.movingX(1);
 
-			while (check == FALSE) {
+		while (check == FALSE) {
 
-				if (returnMainX() - 5 <= objectBox[i].returnBoxCenterX() + 10 && !(returnMainX() + 5 <= objectBox[i].returnBoxCenterX() - 10)) {
-					if (objectBox[i].returnBoxCenterZ() - 10 < returnMainZ() + 5 && objectBox[i].returnBoxCenterZ() + 10 > returnMainZ() - 5 && objectBox[i].returnBoxCenterY() + 10 > returnMainY() - 5 && objectBox[i].returnBoxCenterY() - 10 < returnMainY() + 5) {
-						if (objectBox[i].returnCheck() == 0) {
-							tmpRect.xRate += 20;
-							objectBox[i].movingX(1);
-							objectBox[i].checkUpdate(1);
-						}
+			if (returnMainX() - 5 <= objectBox[i].returnBoxCenterX() + 10 && !(returnMainX() + 5 <= objectBox[i].returnBoxCenterX() - 10)) {
+				if (objectBox[i].returnBoxCenterZ() - 10 < returnMainZ() + 5 && objectBox[i].returnBoxCenterZ() + 10 > returnMainZ() - 5 && objectBox[i].returnBoxCenterY() + 10 > returnMainY() - 5 && objectBox[i].returnBoxCenterY() - 10 < returnMainY() + 5) {
+					if (objectBox[i].returnCheck() == 0) {
+						tmpRect.xRate += 20;
+						objectBox[i].movingX(1);
+						objectBox[i].checkUpdate(1);
 					}
 				}
+			}
 
-				if (i == whatBox - 1) {
-					cycle++;
-					for (int j = 0; j < whatBox; ++j) {
-						if (objectBox[j].returnCheck()) {
-							count++;
-						}
+			if (i == whatBox - 1) {
+				cycle++;
+				for (int j = 0; j < whatBox; ++j) {
+					if (objectBox[j].returnCheck()) {
+						count++;
 					}
-					if (count == whatBox || count == 0 || cycle == whatBox)
-						check = TRUE;
-					else
-						i = 0;
-
-					count = 0;
 				}
-				else {
-					i++;
+				if (count == whatBox || count == 0 || cycle == whatBox)
+					check = TRUE;
+				else
+					i = 0;
 
-				}
+				count = 0;
+			}
+			else {
+				i++;
 
 			}
 
-			for (int k = 0; k < whatBox; ++k)
-				objectBox[k].checkUpdate(0);
-			check = FALSE;
-			cycle = 0;
-			tmpRect.xRate = 0;
-			tmpRect.yRate = 0;
-			tmpRect.zRate = 0;
+		}
+
+		for (int k = 0; k < whatBox; ++k)
+			objectBox[k].checkUpdate(0);
+		check = FALSE;
+		cycle = 0;
+		tmpRect.xRate = 0;
+		tmpRect.yRate = 0;
+		tmpRect.zRate = 0;
 	}
 }
 
