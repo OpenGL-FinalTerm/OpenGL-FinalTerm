@@ -581,41 +581,49 @@ void S01Main::update(float fDeltaTime)
 
 	if (dPress == true) {
 		angle = 90;
-		tmpRect.x += 1;
-		mainCharacter.movingX(1);
+			tmpRect.x += 1;
+			mainCharacter.movingX(1);
 
-		while (check == FALSE) {
+			while (check == FALSE) {
 
-			if (returnMainX() - 5 <= objectBox[i].returnBoxCenterX() + 10 && !(returnMainX() + 5 <= objectBox[i].returnBoxCenterX() - 10)) {
-				if (objectBox[i].returnBoxCenterZ() - 10 < returnMainZ() + 5 && objectBox[i].returnBoxCenterZ() + 10 > returnMainZ() - 5 && objectBox[i].returnBoxCenterY() + 10 > returnMainY() - 5 && objectBox[i].returnBoxCenterY() - 10 < returnMainY() + 5) {
-					if (objectBox[i].returnCheck() == 0) {
-						tmpRect.xRate += 20;
-						objectBox[i].movingX(1);
-						objectBox[i].checkUpdate(1);
+				if (returnMainX() - 5 <= objectBox[i].returnBoxCenterX() + 10 && !(returnMainX() + 5 <= objectBox[i].returnBoxCenterX() - 10)) {
+					if (objectBox[i].returnBoxCenterZ() - 10 < returnMainZ() + 5 && objectBox[i].returnBoxCenterZ() + 10 > returnMainZ() - 5 && objectBox[i].returnBoxCenterY() + 10 > returnMainY() - 5 && objectBox[i].returnBoxCenterY() - 10 < returnMainY() + 5) {
+						if (objectBox[i].returnCheck() == 0) {
+							tmpRect.xRate += 20;
+							objectBox[i].movingX(1);
+							objectBox[i].checkUpdate(1);
+						}
 					}
 				}
-			}
 
-			if (i == whatBox - 1) {
-				cycle++;
-				for (int j = 0; j < whatBox; ++j) {
-					if (objectBox[j].returnCheck()) {
-						count++;
+				if (i == whatBox - 1) {
+					cycle++;
+					for (int j = 0; j < whatBox; ++j) {
+						if (objectBox[j].returnCheck()) {
+							count++;
+						}
 					}
+					if (count == whatBox || count == 0 || cycle == whatBox)
+						check = TRUE;
+					else
+						i = 0;
+
+					count = 0;
 				}
-				if (count == whatBox || count == 0 || cycle == whatBox)
-					check = TRUE;
-				else
-					i = 0;
+				else {
+					i++;
 
-				count = 0;
-			}
-			else {
-				i++;
+				}
 
 			}
 
-		}
+			for (int k = 0; k < whatBox; ++k)
+				objectBox[k].checkUpdate(0);
+			check = FALSE;
+			cycle = 0;
+			tmpRect.xRate = 0;
+			tmpRect.yRate = 0;
+			tmpRect.zRate = 0;
 	}
 }
 
