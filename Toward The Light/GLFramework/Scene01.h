@@ -28,6 +28,7 @@ public:
 	virtual void update(float fDeltaTime);
 	virtual void DefaultBoxPosSetting();
 	virtual void LightSetting();
+	virtual void camera();
 
 private:
 	float			rX, rY, rZ;

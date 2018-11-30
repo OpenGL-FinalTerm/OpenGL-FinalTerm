@@ -994,3 +994,8 @@ void S01Main::LightSetting()
 	for (int i = 0; i < 4; ++i)
 		mapLight[i].LightOn(true, i);
 }
+//camera
+void S01Main::camera() {
+	m_Camera.init();
+	m_Camera.getEye();
+}
