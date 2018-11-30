@@ -132,6 +132,12 @@
     <ClCompile Include="LoadMap.cpp">
       <Filter>Source Files\Base</Filter>
     </ClCompile>
+    <ClCompile Include="Character.cpp">
+      <Filter>Source Files\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="BananaSetting.cpp">
+      <Filter>Source Files\Base</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -210,6 +216,12 @@
       <Filter>Header Files\Base</Filter>
     </ClInclude>
     <ClInclude Include="LoadMap.h">
+      <Filter>Header Files\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Character.h">
+      <Filter>Header Files\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="BananaSetting.h">
       <Filter>Header Files\Base</Filter>
     </ClInclude>
   </ItemGroup>

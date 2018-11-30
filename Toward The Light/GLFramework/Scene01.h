@@ -8,6 +8,8 @@
 #include "SoundPlayer.h"
 #include "BoxObject.h"
 #include "Light.h"
+#include "BananaSetting.h"
+#include "Character.h"
 /* ------------ */
 
 class S01Main :
@@ -28,6 +30,9 @@ public:
 	virtual void update(float fDeltaTime);
 	virtual void DefaultBoxPosSetting();
 	virtual void LightSetting();
+	virtual float returnMainX();
+	virtual float returnMainY();
+	virtual float returnMainZ();
 
 private:
 	float			rX, rY, rZ;
@@ -40,6 +45,10 @@ private:
 	Box				objectBox[65];
 	Box				mainCharacter;
 	Light			mapLight[4];
+	Shape			banana;
+	tmp				tmpRect;
 	bool s;
+	int switch_sign = -1;
+	int Time_count;
 };
 

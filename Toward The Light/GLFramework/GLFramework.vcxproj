@@ -129,9 +129,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AirPlane.cpp" />
+    <ClCompile Include="BananaSetting.cpp" />
     <ClCompile Include="banana_draw.cpp" />
     <ClCompile Include="BoxObject.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Character.cpp" />
     <ClCompile Include="FolderReader.cpp" />
     <ClCompile Include="GLFramework.cpp" />
     <ClCompile Include="GLScene.cpp" />
@@ -158,9 +160,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AirPlane.h" />
+    <ClInclude Include="BananaSetting.h" />
     <ClInclude Include="banana_draw.h" />
     <ClInclude Include="BoxObject.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Character.h" />
     <ClInclude Include="FolderReader.h" />
     <ClInclude Include="GLFramework.h" />
     <ClInclude Include="GLScene.h" />
