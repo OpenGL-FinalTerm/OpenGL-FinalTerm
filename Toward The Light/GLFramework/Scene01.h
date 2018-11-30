@@ -32,6 +32,7 @@ public:
 private:
 	float			rX, rY, rZ;
 	int				tX, tY;
+	float			radian;
 	Camera			m_Camera;
 	NormalObject	m_Plane;
 	NormalObject    m_Sphere;

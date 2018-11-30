@@ -129,6 +129,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AirPlane.cpp" />
+    <ClCompile Include="banana_draw.cpp" />
     <ClCompile Include="BoxObject.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="FolderReader.cpp" />

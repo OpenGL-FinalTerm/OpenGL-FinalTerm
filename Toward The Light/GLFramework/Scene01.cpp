@@ -1,7 +1,9 @@
 #include "stdafx.h"
 #include "Scene01.h"
 #include "GLFramework.h"
-#include "banana_draw.h"
+#include "banana_draw.h"// 애 이상한친구인데......................... 다른곳에 넣으면 안돌던데....
+
+						// 11/30 오후 7시반 오지않는 바나나 클래스를 기다리며
 #define whatBox 65
 #define LightCount 4
 typedef struct Shape
@@ -33,9 +35,11 @@ int culling_count;
 BOOL shade;
 int shade_count;
 
+int saveBoxIndex[100];
+
 
 Shape banana;
-
+static int angle = 0;
 struct tmp {
 	float x;
 	float y;
@@ -44,6 +48,8 @@ struct tmp {
 	float xRate;
 	float yRate;
 	float zRate;
+
+	int jumpCount = 0;
 };
 
 static tmp tmpRect;
@@ -73,7 +79,7 @@ S01Main::~S01Main()
 
 void S01Main::init()
 {
-
+	radian = 90;
 	m_SoundPlayer.init();
 	m_SoundPlayer.selectFolder("Resources\\BGM");
 
@@ -115,28 +121,22 @@ void S01Main::render()
 	glVertex3f(60, 0, -70);
 	glEnd();
 
-	//맵은 언제와요?
-	//외로운 빈공간
-	//BGM이랑 바나나만 있으니깐 공포겜이에요
-	//조명이 여기 어딘가에 들어가야 할거에요
-	//근데 맵....은.....
-	//어따 그리지
 	for (int i = 0; i < 65; ++i)
 		objectBox[i].drawBox(20);
 
 	for (int i = 0; i < LightCount; ++i)
 		mapLight[i].drawLight();
-	
-	glPushMatrix();
-	glTranslatef(tmpRect.x, tmpRect.y, tmpRect.z);
-	glColor3f(1.f, 0.4f, 0.2f);
-	glutSolidCube(10);
-	glPopMatrix();
+
+	//glPushMatrix();
+	//glTranslatef(tmpRect.x, tmpRect.y, tmpRect.z);
+	//glColor3f(1.f, 0.4f, 0.2f);
+	//glutSolidCube(10);
+	//glPopMatrix();
 
 	glPushMatrix();
-	glTranslatef(mainCharacter.returnBoxCenterX(), mainCharacter.returnBoxCenterY(), mainCharacter.returnBoxCenterZ());
-	banana_draw(0, 0, 0, 1, IDLE, banana.rot.degree);
+	banana_draw(tmpRect.x, tmpRect.y + 5, tmpRect.z, 0.5, IDLE, banana.rot.degree);
 	glPopMatrix();
+
 	glPopMatrix();
 }
 
@@ -144,6 +144,14 @@ void S01Main::reshape(int w, int h)
 {
 
 }
+
+static BOOL jump = FALSE;
+static BOOL limited = FALSE;
+static BOOL down = FALSE;
+static bool wPress = false;
+static bool aPress = false;
+static bool sPress = false;
+static bool dPress = false;
 
 void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 {
@@ -156,9 +164,10 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 		switch (key)
 		{
 		case 'w':
+			/*angle = 180;
 			mainCharacter.movingZ(-1);
 			tmpRect.z -= 1;
-		
+
 			while (check == FALSE) {
 
 				if (returnMainZ() - 5 <= objectBox[i].returnBoxCenterZ() + 10 && !(returnMainZ() + 5 <= objectBox[i].returnBoxCenterZ() - 10)) {
@@ -198,11 +207,12 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 			cycle = 0;
 			tmpRect.xRate = 0;
 			tmpRect.yRate = 0;
-			tmpRect.zRate = 0;
-
+			tmpRect.zRate = 0;*/
+			wPress = true;
 			break;
 
 		case 'a':
+			/*angle = 270;
 			tmpRect.x -= 1;
 			mainCharacter.movingX(-1);
 
@@ -245,11 +255,12 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 			cycle = 0;
 			tmpRect.xRate = 0;
 			tmpRect.yRate = 0;
-			tmpRect.zRate = 0;
-
+			tmpRect.zRate = 0;*/
+			aPress = true;
 			break;
 
 		case 's':
+			/*angle = 180;
 			tmpRect.z += 1;
 			mainCharacter.movingZ(1);
 
@@ -292,10 +303,12 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 			cycle = 0;
 			tmpRect.xRate = 0;
 			tmpRect.yRate = 0;
-			tmpRect.zRate = 0;
+			tmpRect.zRate = 0;*/
+			sPress = true;
 			break;
 
 		case 'd':
+			/*angle = 90;
 			tmpRect.x += 1;
 			mainCharacter.movingX(1);
 
@@ -338,7 +351,13 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 			cycle = 0;
 			tmpRect.xRate = 0;
 			tmpRect.yRate = 0;
-			tmpRect.zRate = 0;
+			tmpRect.zRate = 0;*/
+			dPress = true;
+			break;
+
+		case ' ':
+			if (jump == FALSE && down == FALSE)
+				jump = TRUE;
 			break;
 
 		case 'p':
@@ -352,6 +371,17 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 			break;
 		}
 	}
+	else {
+		if (key == 'w')
+			wPress = false;
+		else if (key == 'a')
+			aPress = false;
+		else if (key == 's')
+			sPress = false;
+		else if (key == 'd')
+			dPress = false;
+	}
+
 }
 
 void S01Main::mouse(int button, bool pressed, int x, int y)
@@ -374,6 +404,351 @@ void S01Main::update(float fDeltaTime)
 		switch_sign *= -1;
 	}
 	banana.rot.degree += 0.1f * switch_sign;
+
+	if (jump == TRUE && down == FALSE) {
+		tmpRect.y += 1;
+		tmpRect.jumpCount += 1;
+		if (tmpRect.jumpCount > 30) {
+			jump = FALSE;
+			tmpRect.jumpCount = 0;
+			down = TRUE;
+		}
+	}
+
+	else {
+		bool tmpcheck = false;
+		for (int i = 0; i < whatBox; ++i) {
+			if (objectBox[i].returnBoxCenterX() - 10 < returnMainX() + 5 && objectBox[i].returnBoxCenterX() + 10 > returnMainX() - 5 && objectBox[i].returnBoxCenterZ() + 10 > returnMainZ() - 5 && objectBox[i].returnBoxCenterZ() - 10 < returnMainZ() + 5 && tmpRect.y < objectBox[i].returnBoxCenterY() + 20) {
+				down = FALSE;
+				tmpcheck = true;
+			}
+		}
+
+		if (tmpRect.y > 10 && tmpcheck == false) {
+			tmpRect.y -= 1;
+		}
+
+		if (tmpRect.y <= 10 && tmpcheck == false)
+			down = FALSE;
+
+		tmpcheck = false;
+	}
+
+
+
+	// 캐릭도 연속 이동
+	bool check = false;
+	int cycle = 0;
+	int count = 0;
+	int boxCheckCount = 0;
+	int i = 0;
+
+
+	bool boxLanding = false;
+	for (int k = 0; k < whatBox; ++k)
+	{
+		boxLanding = false;
+		i = 0;
+		check = FALSE;
+		if (objectBox[k].returnBoxCenterY() - 10 > 0) {
+
+			while (check == FALSE) {
+				if ((objectBox[i].returnBoxCenterX() - 10 < objectBox[k].returnBoxCenterX() + 10 && objectBox[i].returnBoxCenterX() + 10 > objectBox[k].returnBoxCenterX() - 10 && objectBox[i].returnBoxCenterZ() + 10 > objectBox[k].returnBoxCenterZ() - 10 && objectBox[i].returnBoxCenterZ() - 10 < objectBox[k].returnBoxCenterZ() + 10) && i != k) {
+					if (objectBox[k].returnBoxCenterY() - 10 <= objectBox[i].returnBoxCenterY() + 10 && (objectBox[k].returnBoxCenterY() + 10 > objectBox[i].returnBoxCenterY() - 10)) {
+						boxLanding = true;
+						//check = TRUE;
+					}
+				}
+
+				i++;
+				if (i == whatBox) {
+					i = 0;
+					check = TRUE;
+				}
+
+			}
+
+			if (boxLanding != true)
+				objectBox[k].movingY(-1);
+		}
+
+	}
+
+	check = FALSE;
+	if (wPress == true) {
+		angle = 180;
+		mainCharacter.movingZ(-1);
+		tmpRect.z -= 1;
+		boxCheckCount = 0;
+		if (tmpRect.z > -60) {
+			while (check == FALSE) {
+
+				if (returnMainZ() - 5 <= objectBox[i].returnBoxCenterZ() + 10 && !(returnMainZ() + 5 <= objectBox[i].returnBoxCenterZ() - 10)) {
+					if (objectBox[i].returnBoxCenterX() - 10 < returnMainX() + 5 && objectBox[i].returnBoxCenterX() + 10 > returnMainX() - 5 && objectBox[i].returnBoxCenterY() + 10 > returnMainY() - 5 && objectBox[i].returnBoxCenterY() - 10 < returnMainY() + 5) {
+						if (objectBox[i].returnCheck() == 0) {
+							tmpRect.zRate -= 20;
+							//objectBox[i].movingZ(-1);
+							objectBox[i].checkUpdate(1);
+							saveBoxIndex[boxCheckCount] = i;
+							boxCheckCount++;
+						}
+					}
+				}
+
+				if (i == whatBox - 1) {
+					cycle++;
+					for (int j = 0; j < whatBox; ++j) {
+						if (objectBox[j].returnCheck()) {
+							count++;
+						}
+					}
+					if (count == whatBox || count == 0 || cycle == whatBox)
+						check = TRUE;
+					else
+						i = 0;
+
+					count = 0;
+				}
+				else {
+					i++;
+
+				}
+
+			}
+		}
+
+		if (boxCheckCount < 3) {
+			for (int o = 0; o < boxCheckCount; ++o)
+				objectBox[saveBoxIndex[o]].movingZ(-1);
+		}
+		else
+			tmpRect.z += 1;
+
+		for (int k = 0; k < whatBox; ++k)
+			objectBox[k].checkUpdate(0);
+
+		boxCheckCount = 0;
+		check = FALSE;
+		cycle = 0;
+
+		tmpRect.zRate = 0;
+		limited = FALSE;
+		tmpRect.xRate = 0;
+		tmpRect.yRate = 0;
+	}
+
+	if (aPress == true) {
+		angle = 270;
+		tmpRect.x -= 1;
+		mainCharacter.movingX(-1);
+		boxCheckCount = 0;
+		while (check == FALSE) {
+
+			if (returnMainX() - 5 <= objectBox[i].returnBoxCenterX() + 10 && !(returnMainX() + 5 <= objectBox[i].returnBoxCenterX() - 10)) {
+				if (objectBox[i].returnBoxCenterZ() - 10 < returnMainZ() + 5 && objectBox[i].returnBoxCenterZ() + 10 > returnMainZ() - 5 && objectBox[i].returnBoxCenterY() + 10 > returnMainY() - 5 && objectBox[i].returnBoxCenterY() - 10 < returnMainY() + 5) {
+					if (objectBox[i].returnCheck() == 0) {
+						tmpRect.xRate -= 20;
+
+						//objectBox[i].movingX(-1);
+						objectBox[i].checkUpdate(1);
+						saveBoxIndex[boxCheckCount] = i;
+						boxCheckCount++;
+					}
+
+				}
+			}
+
+			if (i == whatBox - 1) {
+				cycle++;
+				for (int j = 0; j < whatBox; ++j) {
+					if (objectBox[j].returnCheck()) {
+						count++;
+					}
+				}
+				if (count == whatBox || count == 0 || cycle == whatBox)
+					check = TRUE;
+				else
+					i = 0;
+
+				count = 0;
+			}
+			else {
+				i++;
+
+			}
+
+		}
+
+		for (int k = 0; k < whatBox; ++k)
+			objectBox[k].checkUpdate(0);
+
+		if (boxCheckCount < 3) {
+			for (int o = 0; o < boxCheckCount; ++o)
+				objectBox[saveBoxIndex[o]].movingX(-1);
+		}
+		else
+			tmpRect.x += 1;
+
+		boxCheckCount = 0;
+		check = FALSE;
+		cycle = 0;
+		tmpRect.xRate = 0;
+		tmpRect.yRate = 0;
+		tmpRect.zRate = 0;
+	}
+
+	if (sPress == true) {
+		angle = 180;
+		tmpRect.z += 1;
+		mainCharacter.movingZ(1);
+		boxCheckCount = 0;
+		while (check == FALSE) {
+
+			if (returnMainZ() - 5 <= objectBox[i].returnBoxCenterZ() + 10 && !(returnMainZ() + 5 <= objectBox[i].returnBoxCenterZ() - 10)) {
+				if (objectBox[i].returnBoxCenterX() - 10 < returnMainX() + 5 && objectBox[i].returnBoxCenterX() + 10 > returnMainX() - 5 && objectBox[i].returnBoxCenterY() + 10 > returnMainY() - 5 && objectBox[i].returnBoxCenterY() - 10 < returnMainY() + 5) {
+					if (objectBox[i].returnCheck() == 0) {
+						tmpRect.zRate += 20;
+						//objectBox[i].movingZ(1);
+						objectBox[i].checkUpdate(1);
+						saveBoxIndex[boxCheckCount] = i;
+						boxCheckCount++;
+					}
+				}
+			}
+
+			if (i == whatBox - 1) {
+				cycle++;
+				for (int j = 0; j < whatBox; ++j) {
+					if (objectBox[j].returnCheck()) {
+						count++;
+					}
+				}
+				if (count == whatBox || count == 0 || cycle == whatBox)
+					check = TRUE;
+				else
+					i = 0;
+
+				count = 0;
+			}
+			else {
+				i++;
+
+			}
+
+		}
+
+
+		if (boxCheckCount < 3) {
+			for (int o = 0; o < boxCheckCount; ++o)
+				objectBox[saveBoxIndex[o]].movingZ(1);
+		}
+		else
+			tmpRect.z -= 1;
+
+		for (int k = 0; k < whatBox; ++k)
+			objectBox[k].checkUpdate(0);
+
+
+		check = FALSE;
+		boxCheckCount = 0;
+		cycle = 0;
+		tmpRect.xRate = 0;
+		tmpRect.yRate = 0;
+		tmpRect.zRate = 0;
+	}
+
+	if (dPress == true) {
+		angle = 90;
+		tmpRect.x += 1;
+		mainCharacter.movingX(1);
+		boxCheckCount = 0;
+		while (check == FALSE) {
+
+			if (returnMainX() - 5 <= objectBox[i].returnBoxCenterX() + 10 && !(returnMainX() + 5 <= objectBox[i].returnBoxCenterX() - 10)) {
+				if (objectBox[i].returnBoxCenterZ() - 10 < returnMainZ() + 5 && objectBox[i].returnBoxCenterZ() + 10 > returnMainZ() - 5 && objectBox[i].returnBoxCenterY() + 10 > returnMainY() - 5 && objectBox[i].returnBoxCenterY() - 10 < returnMainY() + 5) {
+					if (objectBox[i].returnCheck() == 0) {
+						tmpRect.xRate += 20;
+						//objectBox[i].movingX(1);
+						objectBox[i].checkUpdate(1);
+						saveBoxIndex[boxCheckCount] = i;
+						boxCheckCount++;
+					}
+				}
+			}
+
+			if (i == whatBox - 1) {
+				cycle++;
+				for (int j = 0; j < whatBox; ++j) {
+					if (objectBox[j].returnCheck()) {
+						count++;
+					}
+				}
+				if (count == whatBox || count == 0 || cycle == whatBox)
+					check = TRUE;
+				else
+					i = 0;
+
+				count = 0;
+			}
+			else {
+				i++;
+
+			}
+
+		}
+
+		for (int k = 0; k < whatBox; ++k)
+			objectBox[k].checkUpdate(0);
+
+
+		if (boxCheckCount < 3) {
+			for (int o = 0; o < boxCheckCount; ++o)
+				objectBox[saveBoxIndex[o]].movingX(1);
+		}
+		else
+			tmpRect.x -= 1;
+
+		boxCheckCount = 0;
+		check = FALSE;
+		cycle = 0;
+		tmpRect.xRate = 0;
+		tmpRect.yRate = 0;
+		tmpRect.zRate = 0;
+	}
+
+
+
+
+
+
+	// 캐릭터 회전
+
+	if (wPress == true)
+		radian = 90;
+
+	if (wPress == true && dPress == true)
+		radian = 45;
+
+	if (wPress == true && aPress == true)
+		radian = 135;
+
+	if (aPress == true)
+		radian = 180;
+
+	if (sPress == true)
+		radian = 270;
+
+	if (dPress == true)
+		radian = 0;
+	
+	if (sPress == true && aPress == true)
+		radian = 225;
+
+	if (sPress == true && dPress == true)
+		radian = 315;
+
+
+
 }
 
 void S01Main::DefaultBoxPosSetting()
