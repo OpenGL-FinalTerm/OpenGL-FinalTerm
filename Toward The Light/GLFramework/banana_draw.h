@@ -53,7 +53,7 @@ typedef struct QUAD
 void Swap(float a, float b);
 void banana_save_index();
 void banana_index_change(float size); 
-void banana_draw(int pivot_x, int pivot_y, int pivot_z, float size, int state, float sub_degree);
-void banana_head(int pivot_x, int pivot_y, int pivot_z, int size, float degree, int state);
-void banana_body(int pivot_x, int pivot_y, int pivot_z, int size, float rot_degree, int state);
+void banana_draw(int pivot_x, int pivot_y, int pivot_z, float size, int state, float sub_degree , float rotate);
+void banana_head(int pivot_x, int pivot_y, int pivot_z, int size, float degree, int state, float rotate);
+void banana_body(int pivot_x, int pivot_y, int pivot_z, int size, float rot_degree, int state, float rotate);
 
