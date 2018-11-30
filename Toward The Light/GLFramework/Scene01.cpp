@@ -33,6 +33,8 @@ int culling_count;
 BOOL shade;
 int shade_count;
 
+int saveBoxIndex[100];
+
 
 Shape banana;
 static int angle = 0;
@@ -438,6 +440,7 @@ void S01Main::update(float fDeltaTime)
 	bool check = false;
 	int cycle = 0;
 	int count = 0;
+	int boxCheckCount = 0;
 	int i = 0;
 
 
@@ -475,73 +478,82 @@ void S01Main::update(float fDeltaTime)
 		angle = 180;
 		mainCharacter.movingZ(-1);
 		tmpRect.z -= 1;
+		boxCheckCount = 0;
+		if (tmpRect.z > -60) {
+			while (check == FALSE) {
 
-		while (check == FALSE) {
-
-			if (returnMainZ() - 5 <= objectBox[i].returnBoxCenterZ() + 10 && !(returnMainZ() + 5 <= objectBox[i].returnBoxCenterZ() - 10)) {
-				if (objectBox[i].returnBoxCenterX() - 10 < returnMainX() + 5 && objectBox[i].returnBoxCenterX() + 10 > returnMainX() - 5 && objectBox[i].returnBoxCenterY() + 10 > returnMainY() - 5 && objectBox[i].returnBoxCenterY() - 10 < returnMainY() + 5) {
-					if (objectBox[i].returnCheck() == 0) {
-						tmpRect.zRate -= 20;
-						if (limited == FALSE) {
-							objectBox[i].movingZ(-1);
+				if (returnMainZ() - 5 <= objectBox[i].returnBoxCenterZ() + 10 && !(returnMainZ() + 5 <= objectBox[i].returnBoxCenterZ() - 10)) {
+					if (objectBox[i].returnBoxCenterX() - 10 < returnMainX() + 5 && objectBox[i].returnBoxCenterX() + 10 > returnMainX() - 5 && objectBox[i].returnBoxCenterY() + 10 > returnMainY() - 5 && objectBox[i].returnBoxCenterY() - 10 < returnMainY() + 5) {
+						if (objectBox[i].returnCheck() == 0) {
+							tmpRect.zRate -= 20;
+							//objectBox[i].movingZ(-1);
 							objectBox[i].checkUpdate(1);
-							if(tmpRect.zRate <= -60)
-								limited = TRUE;
+							saveBoxIndex[boxCheckCount] = i;
+							boxCheckCount++;
 						}
 					}
 				}
-			}
 
-			if (i == whatBox - 1) {
-				cycle++;
-				for (int j = 0; j < whatBox; ++j) {
-					if (objectBox[j].returnCheck()) {
-						count++;
+				if (i == whatBox - 1) {
+					cycle++;
+					for (int j = 0; j < whatBox; ++j) {
+						if (objectBox[j].returnCheck()) {
+							count++;
+						}
 					}
+					if (count == whatBox || count == 0 || cycle == whatBox)
+						check = TRUE;
+					else
+						i = 0;
+
+					count = 0;
 				}
-				if (count == whatBox || count == 0 || cycle == whatBox)
-					check = TRUE;
-				else
-					i = 0;
+				else {
+					i++;
 
-				count = 0;
-			}
-			else {
-				i++;
+				}
 
 			}
-
 		}
+
+		if (boxCheckCount < 3) {
+			for (int o = 0; o < boxCheckCount; ++o)
+				objectBox[saveBoxIndex[o]].movingZ(-1);
+		}
+		else
+			tmpRect.z += 1;
 
 		for (int k = 0; k < whatBox; ++k)
 			objectBox[k].checkUpdate(0);
+
+		boxCheckCount = 0;
 		check = FALSE;
 		cycle = 0;
-		if (limited == TRUE)
-			tmpRect.z += 1;
+		
+		tmpRect.zRate = 0;
+		limited = FALSE;
 		tmpRect.xRate = 0;
 		tmpRect.yRate = 0;
-		tmpRect.zRate = 0;
 	}
 
 	if (aPress == true) {
 		angle = 270;
 		tmpRect.x -= 1;
 		mainCharacter.movingX(-1);
-
+		boxCheckCount = 0;
 		while (check == FALSE) {
 
 			if (returnMainX() - 5 <= objectBox[i].returnBoxCenterX() + 10 && !(returnMainX() + 5 <= objectBox[i].returnBoxCenterX() - 10)) {
 				if (objectBox[i].returnBoxCenterZ() - 10 < returnMainZ() + 5 && objectBox[i].returnBoxCenterZ() + 10 > returnMainZ() - 5 && objectBox[i].returnBoxCenterY() + 10 > returnMainY() - 5 && objectBox[i].returnBoxCenterY() - 10 < returnMainY() + 5) {
 					if (objectBox[i].returnCheck() == 0) {
 						tmpRect.xRate -= 20;
-						if (limited == FALSE) {
-							objectBox[i].movingX(-1);
-							objectBox[i].checkUpdate(1);
-							if (tmpRect.xRate <= -60)
-								limited = TRUE;
-						}
+
+						//objectBox[i].movingX(-1);
+						objectBox[i].checkUpdate(1);
+						saveBoxIndex[boxCheckCount] = i;
+						boxCheckCount++;
 					}
+					
 				}
 			}
 
@@ -565,12 +577,18 @@ void S01Main::update(float fDeltaTime)
 			}
 
 		}
-
+		
 		for (int k = 0; k < whatBox; ++k)
 			objectBox[k].checkUpdate(0);
 
-		if (limited == TRUE)
+		if (boxCheckCount < 3) {
+			for (int o = 0; o < boxCheckCount; ++o)
+				objectBox[saveBoxIndex[o]].movingX(-1);
+		}
+		else
 			tmpRect.x += 1;
+
+		boxCheckCount = 0;
 		check = FALSE;
 		cycle = 0;
 		tmpRect.xRate = 0;
@@ -582,19 +600,17 @@ void S01Main::update(float fDeltaTime)
 		angle = 180;
 		tmpRect.z += 1;
 		mainCharacter.movingZ(1);
-
+		boxCheckCount = 0;
 		while (check == FALSE) {
 
 			if (returnMainZ() - 5 <= objectBox[i].returnBoxCenterZ() + 10 && !(returnMainZ() + 5 <= objectBox[i].returnBoxCenterZ() - 10)) {
 				if (objectBox[i].returnBoxCenterX() - 10 < returnMainX() + 5 && objectBox[i].returnBoxCenterX() + 10 > returnMainX() - 5 && objectBox[i].returnBoxCenterY() + 10 > returnMainY() - 5 && objectBox[i].returnBoxCenterY() - 10 < returnMainY() + 5) {
 					if (objectBox[i].returnCheck() == 0) {
 						tmpRect.zRate += 20;
-						if (limited == FALSE) {
-							objectBox[i].movingZ(1);
-							objectBox[i].checkUpdate(1);
-							if (tmpRect.zRate > 60)
-								limited = TRUE;
-						}
+						//objectBox[i].movingZ(1);
+						objectBox[i].checkUpdate(1);
+						saveBoxIndex[boxCheckCount] = i;
+						boxCheckCount++;
 					}
 				}
 			}
@@ -620,12 +636,20 @@ void S01Main::update(float fDeltaTime)
 
 		}
 
+
+		if (boxCheckCount < 3) {
+			for (int o = 0; o < boxCheckCount; ++o)
+				objectBox[saveBoxIndex[o]].movingZ(1);
+		}
+		else
+			tmpRect.z -= 1;
+
 		for (int k = 0; k < whatBox; ++k)
 			objectBox[k].checkUpdate(0);
 
-		if (limited == TRUE)
-			tmpRect.z -= 1;
+
 		check = FALSE;
+		boxCheckCount = 0;
 		cycle = 0;
 		tmpRect.xRate = 0;
 		tmpRect.yRate = 0;
@@ -636,19 +660,17 @@ void S01Main::update(float fDeltaTime)
 		angle = 90;
 		tmpRect.x += 1;
 		mainCharacter.movingX(1);
-
+		boxCheckCount = 0;
 		while (check == FALSE) {
 
 			if (returnMainX() - 5 <= objectBox[i].returnBoxCenterX() + 10 && !(returnMainX() + 5 <= objectBox[i].returnBoxCenterX() - 10)) {
 				if (objectBox[i].returnBoxCenterZ() - 10 < returnMainZ() + 5 && objectBox[i].returnBoxCenterZ() + 10 > returnMainZ() - 5 && objectBox[i].returnBoxCenterY() + 10 > returnMainY() - 5 && objectBox[i].returnBoxCenterY() - 10 < returnMainY() + 5) {
 					if (objectBox[i].returnCheck() == 0) {
 						tmpRect.xRate += 20;
-						if (limited == FALSE) {
-							objectBox[i].movingX(1);
-							objectBox[i].checkUpdate(1);
-							if (tmpRect.xRate > 60)
-								limited = TRUE;
-						}
+						//objectBox[i].movingX(1);
+						objectBox[i].checkUpdate(1);
+						saveBoxIndex[boxCheckCount] = i;
+						boxCheckCount++;
 					}
 				}
 			}
@@ -677,8 +699,15 @@ void S01Main::update(float fDeltaTime)
 		for (int k = 0; k < whatBox; ++k)
 			objectBox[k].checkUpdate(0);
 
-		if (limited == TRUE)
+
+		if (boxCheckCount < 3) {
+			for (int o = 0; o < boxCheckCount; ++o)
+				objectBox[saveBoxIndex[o]].movingX(1);
+		}
+		else
 			tmpRect.x -= 1;
+
+		boxCheckCount = 0;
 		check = FALSE;
 		cycle = 0;
 		tmpRect.xRate = 0;
