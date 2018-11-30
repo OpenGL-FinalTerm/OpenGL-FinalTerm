@@ -1,7 +1,9 @@
 #include "stdafx.h"
 #include "Scene01.h"
 #include "GLFramework.h"
-#include "banana_draw.h"
+#include "banana_draw.h"// 애 이상한친구인데......................... 다른곳에 넣으면 안돌던데....
+
+						// 11/30 오후 7시반 오지않는 바나나 클래스를 기다리며
 #define whatBox 65
 #define LightCount 4
 typedef struct Shape
@@ -119,12 +121,6 @@ void S01Main::render()
 	glVertex3f(60, 0, -70);
 	glEnd();
 
-	//맵은 언제와요?
-	//외로운 빈공간
-	//BGM이랑 바나나만 있으니깐 공포겜이에요
-	//조명이 여기 어딘가에 들어가야 할거에요
-	//근데 맵....은.....
-	//어따 그리지
 	for (int i = 0; i < 65; ++i)
 		objectBox[i].drawBox(20);
 
@@ -141,6 +137,7 @@ void S01Main::render()
 	glRotatef(angle, 0, 1, 0);
 	banana_draw(mainCharacter.returnBoxCenterX(), mainCharacter.returnBoxCenterY(), mainCharacter.returnBoxCenterZ(), 1, IDLE, banana.rot.degree);
 	glPopMatrix();
+
 	glPopMatrix();
 }
 
@@ -376,10 +373,14 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 		}
 	}
 	else {
-		wPress = false;
-		aPress = false;
-		sPress = false;
-		dPress = false;
+		if (key == 'w')
+			wPress = false;
+		else if (key == 'a')
+			aPress = false;
+		else if (key == 's')
+			sPress = false;
+		else if (key == 'd')
+			dPress = false;
 	}
 
 }
@@ -451,6 +452,7 @@ void S01Main::update(float fDeltaTime)
 		i = 0;
 		check = FALSE;
 		if (objectBox[k].returnBoxCenterY() - 10 > 0) {
+
 			while (check == FALSE) {
 				if ((objectBox[i].returnBoxCenterX() - 10 < objectBox[k].returnBoxCenterX() + 10 && objectBox[i].returnBoxCenterX() + 10 > objectBox[k].returnBoxCenterX() - 10 && objectBox[i].returnBoxCenterZ() + 10 > objectBox[k].returnBoxCenterZ() - 10 && objectBox[i].returnBoxCenterZ() - 10 < objectBox[k].returnBoxCenterZ() + 10) && i != k) {
 					if (objectBox[k].returnBoxCenterY() - 10 <= objectBox[i].returnBoxCenterY() + 10 && (objectBox[k].returnBoxCenterY() + 10 > objectBox[i].returnBoxCenterY() - 10)) {
