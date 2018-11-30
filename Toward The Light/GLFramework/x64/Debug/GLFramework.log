@@ -1,73 +1,116 @@
-﻿  Scene01.cpp
+﻿  banana_draw.cpp
 c:\git\opengl-finalterm\toward the light\glframework\banana_draw.h(16): warning C4091: 'typedef ': 변수를 선언하지 않으면 'Color' 왼쪽은 무시됩니다.
 c:\git\opengl-finalterm\toward the light\glframework\banana_draw.h(22): warning C4091: 'typedef ': 변수를 선언하지 않으면 'Translate_pos' 왼쪽은 무시됩니다.
 c:\git\opengl-finalterm\toward the light\glframework\banana_draw.h(30): warning C4091: 'typedef ': 변수를 선언하지 않으면 'BoOL' 왼쪽은 무시됩니다.
 c:\git\opengl-finalterm\toward the light\glframework\banana_draw.h(48): warning C4091: 'typedef ': 변수를 선언하지 않으면 'QUAD' 왼쪽은 무시됩니다.
-c:\git\opengl-finalterm\toward the light\glframework\scene01.cpp(26): warning C4091: 'typedef ': 변수를 선언하지 않으면 'Shape' 왼쪽은 무시됩니다.
-c:\git\opengl-finalterm\toward the light\glframework\scene01.cpp(137): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\git\opengl-finalterm\toward the light\glframework\scene01.cpp(758): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\git\opengl-finalterm\toward the light\glframework\scene01.cpp(761): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\git\opengl-finalterm\toward the light\glframework\scene01.cpp(764): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\git\opengl-finalterm\toward the light\glframework\scene01.cpp(767): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\git\opengl-finalterm\toward the light\glframework\scene01.cpp(770): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\git\opengl-finalterm\toward the light\glframework\scene01.cpp(774): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\git\opengl-finalterm\toward the light\glframework\scene01.cpp(777): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\git\opengl-finalterm\toward the light\glframework\scene01.cpp(780): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\git\opengl-finalterm\toward the light\glframework\scene01.cpp(783): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\git\opengl-finalterm\toward the light\glframework\scene01.cpp(786): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\git\opengl-finalterm\toward the light\glframework\scene01.cpp(789): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\git\opengl-finalterm\toward the light\glframework\scene01.cpp(792): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\git\opengl-finalterm\toward the light\glframework\scene01.cpp(795): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\git\opengl-finalterm\toward the light\glframework\scene01.cpp(798): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\git\opengl-finalterm\toward the light\glframework\scene01.cpp(801): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\git\opengl-finalterm\toward the light\glframework\scene01.cpp(804): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\git\opengl-finalterm\toward the light\glframework\scene01.cpp(808): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\git\opengl-finalterm\toward the light\glframework\scene01.cpp(811): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\git\opengl-finalterm\toward the light\glframework\scene01.cpp(814): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\git\opengl-finalterm\toward the light\glframework\scene01.cpp(817): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\git\opengl-finalterm\toward the light\glframework\scene01.cpp(820): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\git\opengl-finalterm\toward the light\glframework\scene01.cpp(823): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\git\opengl-finalterm\toward the light\glframework\scene01.cpp(826): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\git\opengl-finalterm\toward the light\glframework\scene01.cpp(829): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\git\opengl-finalterm\toward the light\glframework\scene01.cpp(832): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\git\opengl-finalterm\toward the light\glframework\scene01.cpp(836): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\git\opengl-finalterm\toward the light\glframework\scene01.cpp(839): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\git\opengl-finalterm\toward the light\glframework\scene01.cpp(842): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\git\opengl-finalterm\toward the light\glframework\scene01.cpp(845): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\git\opengl-finalterm\toward the light\glframework\scene01.cpp(848): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\git\opengl-finalterm\toward the light\glframework\scene01.cpp(851): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\git\opengl-finalterm\toward the light\glframework\scene01.cpp(854): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\git\opengl-finalterm\toward the light\glframework\scene01.cpp(857): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\git\opengl-finalterm\toward the light\glframework\scene01.cpp(860): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\git\opengl-finalterm\toward the light\glframework\scene01.cpp(863): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\git\opengl-finalterm\toward the light\glframework\scene01.cpp(866): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\git\opengl-finalterm\toward the light\glframework\scene01.cpp(869): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\git\opengl-finalterm\toward the light\glframework\scene01.cpp(872): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\git\opengl-finalterm\toward the light\glframework\scene01.cpp(875): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\git\opengl-finalterm\toward the light\glframework\scene01.cpp(879): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\git\opengl-finalterm\toward the light\glframework\scene01.cpp(882): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\git\opengl-finalterm\toward the light\glframework\scene01.cpp(885): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\git\opengl-finalterm\toward the light\glframework\scene01.cpp(888): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\git\opengl-finalterm\toward the light\glframework\scene01.cpp(891): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\git\opengl-finalterm\toward the light\glframework\scene01.cpp(894): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\git\opengl-finalterm\toward the light\glframework\scene01.cpp(897): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\git\opengl-finalterm\toward the light\glframework\scene01.cpp(900): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\git\opengl-finalterm\toward the light\glframework\scene01.cpp(903): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\git\opengl-finalterm\toward the light\glframework\scene01.cpp(906): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\git\opengl-finalterm\toward the light\glframework\scene01.cpp(909): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\git\opengl-finalterm\toward the light\glframework\scene01.cpp(912): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\git\opengl-finalterm\toward the light\glframework\scene01.cpp(917): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\git\opengl-finalterm\toward the light\glframework\scene01.cpp(920): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\git\opengl-finalterm\toward the light\glframework\scene01.cpp(923): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\git\opengl-finalterm\toward the light\glframework\scene01.cpp(926): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\git\opengl-finalterm\toward the light\glframework\scene01.cpp(929): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\git\opengl-finalterm\toward the light\glframework\scene01.cpp(932): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\git\opengl-finalterm\toward the light\glframework\scene01.cpp(935): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\git\opengl-finalterm\toward the light\glframework\scene01.cpp(938): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\git\opengl-finalterm\toward the light\glframework\scene01.cpp(941): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\git\opengl-finalterm\toward the light\glframework\scene01.cpp(944): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\git\opengl-finalterm\toward the light\glframework\scene01.cpp(947): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\git\opengl-finalterm\toward the light\glframework\scene01.cpp(950): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\git\opengl-finalterm\toward the light\glframework\scene01.cpp(955): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\git\opengl-finalterm\toward the light\glframework\scene01.cpp(958): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(27): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(28): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(31): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(32): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(34): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(35): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(36): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(38): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(40): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(42): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(44): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(47): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(52): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(53): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(55): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(56): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(57): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(59): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(60): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(61): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(63): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(64): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(65): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(68): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(69): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(73): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(74): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(76): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(77): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(78): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(80): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(81): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(82): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(84): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(85): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(86): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(89): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(90): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(94): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(95): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(97): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(99): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(101): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(102): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(103): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(105): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(106): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(107): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(110): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(111): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(115): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(116): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(118): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(119): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(120): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(122): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(123): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(124): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(126): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(127): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(128): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(131): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(132): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(136): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(137): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(139): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(140): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(141): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(143): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(144): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(145): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(147): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(148): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(149): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(152): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(158): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(160): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(161): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(162): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(164): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(165): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(169): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(170): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(173): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(174): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(178): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(179): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(181): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(182): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(183): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(185): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(186): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(187): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(189): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(190): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(191): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(194): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(195): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(199): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(200): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(215): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(217): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(250): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(251): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(315): warning C4244: '인수': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(393): warning C4244: '인수': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(485): warning C4244: '+=': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(486): warning C4244: '+=': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\git\opengl-finalterm\toward the light\glframework\banana_draw.cpp(566): warning C4244: '인수': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  LINK : C:\git\OpenGL-FinalTerm\Toward The Light\x64\Debug\GLFramework.exe을(를) 찾을 수 없거나 마지막 증분 링크에 의해 빌드되지 않았습니다. 전체 링크를 수행하고 있습니다.
   GLFramework.vcxproj -> C:\git\OpenGL-FinalTerm\Toward The Light\x64\Debug\GLFramework.exe
