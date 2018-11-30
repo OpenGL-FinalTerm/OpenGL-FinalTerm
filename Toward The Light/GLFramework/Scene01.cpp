@@ -537,7 +537,6 @@ void S01Main::update(float fDeltaTime)
 		tmpRect.yRate = 0;
 	}
 
-
 	if (aPress == true) {
 		angle = 270;
 		tmpRect.x -= 1;
@@ -727,6 +726,12 @@ void S01Main::update(float fDeltaTime)
 	if (wPress == true)
 		radian = 90;
 
+	if (wPress == true && dPress == true)
+		radian = 45;
+
+	if (wPress == true && aPress == true)
+		radian = 135;
+
 	if (aPress == true)
 		radian = 180;
 
@@ -735,13 +740,7 @@ void S01Main::update(float fDeltaTime)
 
 	if (dPress == true)
 		radian = 0;
-
-	if (wPress == true && dPress == true)
-		radian = 45;
-
-	if (wPress == true && aPress == true)
-		radian = 135;
-
+	
 	if (sPress == true && aPress == true)
 		radian = 225;
 
