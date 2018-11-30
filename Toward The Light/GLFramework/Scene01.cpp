@@ -148,6 +148,7 @@ void S01Main::reshape(int w, int h)
 }
 
 static BOOL jump = FALSE;
+static BOOL limited = FALSE;
 static BOOL down = FALSE;
 static bool wPress = false;
 static bool aPress = false;
@@ -481,8 +482,12 @@ void S01Main::update(float fDeltaTime)
 				if (objectBox[i].returnBoxCenterX() - 10 < returnMainX() + 5 && objectBox[i].returnBoxCenterX() + 10 > returnMainX() - 5 && objectBox[i].returnBoxCenterY() + 10 > returnMainY() - 5 && objectBox[i].returnBoxCenterY() - 10 < returnMainY() + 5) {
 					if (objectBox[i].returnCheck() == 0) {
 						tmpRect.zRate -= 20;
-						objectBox[i].movingZ(-1);
-						objectBox[i].checkUpdate(1);
+						if (limited == FALSE) {
+							objectBox[i].movingZ(-1);
+							objectBox[i].checkUpdate(1);
+							if(tmpRect.zRate <= -60)
+								limited = TRUE;
+						}
 					}
 				}
 			}
@@ -512,6 +517,8 @@ void S01Main::update(float fDeltaTime)
 			objectBox[k].checkUpdate(0);
 		check = FALSE;
 		cycle = 0;
+		if (limited == TRUE)
+			tmpRect.z += 1;
 		tmpRect.xRate = 0;
 		tmpRect.yRate = 0;
 		tmpRect.zRate = 0;
@@ -528,8 +535,12 @@ void S01Main::update(float fDeltaTime)
 				if (objectBox[i].returnBoxCenterZ() - 10 < returnMainZ() + 5 && objectBox[i].returnBoxCenterZ() + 10 > returnMainZ() - 5 && objectBox[i].returnBoxCenterY() + 10 > returnMainY() - 5 && objectBox[i].returnBoxCenterY() - 10 < returnMainY() + 5) {
 					if (objectBox[i].returnCheck() == 0) {
 						tmpRect.xRate -= 20;
-						objectBox[i].movingX(-1);
-						objectBox[i].checkUpdate(1);
+						if (limited == FALSE) {
+							objectBox[i].movingX(-1);
+							objectBox[i].checkUpdate(1);
+							if (tmpRect.xRate <= -60)
+								limited = TRUE;
+						}
 					}
 				}
 			}
@@ -557,6 +568,9 @@ void S01Main::update(float fDeltaTime)
 
 		for (int k = 0; k < whatBox; ++k)
 			objectBox[k].checkUpdate(0);
+
+		if (limited == TRUE)
+			tmpRect.x += 1;
 		check = FALSE;
 		cycle = 0;
 		tmpRect.xRate = 0;
@@ -575,8 +589,12 @@ void S01Main::update(float fDeltaTime)
 				if (objectBox[i].returnBoxCenterX() - 10 < returnMainX() + 5 && objectBox[i].returnBoxCenterX() + 10 > returnMainX() - 5 && objectBox[i].returnBoxCenterY() + 10 > returnMainY() - 5 && objectBox[i].returnBoxCenterY() - 10 < returnMainY() + 5) {
 					if (objectBox[i].returnCheck() == 0) {
 						tmpRect.zRate += 20;
-						objectBox[i].movingZ(1);
-						objectBox[i].checkUpdate(1);
+						if (limited == FALSE) {
+							objectBox[i].movingZ(1);
+							objectBox[i].checkUpdate(1);
+							if (tmpRect.zRate > 60)
+								limited = TRUE;
+						}
 					}
 				}
 			}
@@ -604,6 +622,9 @@ void S01Main::update(float fDeltaTime)
 
 		for (int k = 0; k < whatBox; ++k)
 			objectBox[k].checkUpdate(0);
+
+		if (limited == TRUE)
+			tmpRect.z -= 1;
 		check = FALSE;
 		cycle = 0;
 		tmpRect.xRate = 0;
@@ -622,8 +643,12 @@ void S01Main::update(float fDeltaTime)
 				if (objectBox[i].returnBoxCenterZ() - 10 < returnMainZ() + 5 && objectBox[i].returnBoxCenterZ() + 10 > returnMainZ() - 5 && objectBox[i].returnBoxCenterY() + 10 > returnMainY() - 5 && objectBox[i].returnBoxCenterY() - 10 < returnMainY() + 5) {
 					if (objectBox[i].returnCheck() == 0) {
 						tmpRect.xRate += 20;
-						objectBox[i].movingX(1);
-						objectBox[i].checkUpdate(1);
+						if (limited == FALSE) {
+							objectBox[i].movingX(1);
+							objectBox[i].checkUpdate(1);
+							if (tmpRect.xRate > 60)
+								limited = TRUE;
+						}
 					}
 				}
 			}
@@ -651,6 +676,9 @@ void S01Main::update(float fDeltaTime)
 
 		for (int k = 0; k < whatBox; ++k)
 			objectBox[k].checkUpdate(0);
+
+		if (limited == TRUE)
+			tmpRect.x -= 1;
 		check = FALSE;
 		cycle = 0;
 		tmpRect.xRate = 0;
