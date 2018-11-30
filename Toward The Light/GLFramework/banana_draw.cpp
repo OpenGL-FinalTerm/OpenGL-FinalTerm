@@ -234,7 +234,7 @@ void banana_index_change(float size) {
 
 
 float __tmp;
-void banana_head(int pivot_x, int pivot_y, int pivot_z, float size, float degree, int state) {
+void banana_head(int pivot_x, int pivot_y, int pivot_z, float size, float degree, int state, float rotate) {
 
 	QUAD temp;
 	for (int i = 0; i <= (1 + 8 * 5 + 1); i++) {
@@ -265,8 +265,8 @@ void banana_head(int pivot_x, int pivot_y, int pivot_z, float size, float degree
 		}
 		glPushMatrix(); {
 			glTranslated(pivot_x, pivot_y, pivot_z);
+			glRotatef(rotate, 0, 1, 0);
 			glColor3f(1.0f, 1.0f, 1.0f);
-
 
 			glBegin(GL_POLYGON); {//酒贰
 
@@ -343,7 +343,7 @@ void banana_head(int pivot_x, int pivot_y, int pivot_z, float size, float degree
 int sign = 1;
 float t = 0.f;
 
-void banana_body(int pivot_x, int pivot_y, int pivot_z, float size, float rot_degree, int state) {
+void banana_body(int pivot_x, int pivot_y, int pivot_z, float size, float rot_degree, int state, float rotate) {
 
 	QUAD temp;
 	for (int i = 0; i <= (1 + 8 * 5 + 1); i++) {
@@ -386,7 +386,7 @@ void banana_body(int pivot_x, int pivot_y, int pivot_z, float size, float rot_de
 		glPushMatrix(); {
 
 			glTranslated(pivot_x, pivot_y, pivot_z);
-
+			glRotatef(rotate, 0, 1, 0);
 			//glRotated(rot_degree, 1, 0, 0);
 			for (int j = 1; j < 7; j++) {
 
@@ -581,14 +581,14 @@ void banana_body(int pivot_x, int pivot_y, int pivot_z, float size, float rot_de
 
 }
 
-void banana_draw(int pivot_x, int pivot_y, int pivot_z, float size, int state, float sub_degree) {
+void banana_draw(int pivot_x, int pivot_y, int pivot_z, float size, int state, float sub_degree, float rotate) {
 	if (state == IDLE) {
 
 		banana_index_change(size);
-		banana_head(pivot_x, pivot_y, pivot_z, size, sub_degree / 2, IDLE);//赣府
-		banana_body(pivot_x, pivot_y, pivot_z, size, sub_degree * 2, IDLE);//个
+		banana_head(pivot_x, pivot_y, pivot_z, size, sub_degree / 2, IDLE, rotate);//赣府
+		banana_body(pivot_x, pivot_y, pivot_z, size, sub_degree * 2, IDLE, rotate);//个
 
-		//printf("t \n");
+																				   //printf("t \n");
 
 	}
 	//else if (state == RUN) {

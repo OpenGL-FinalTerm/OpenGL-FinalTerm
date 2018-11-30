@@ -2,7 +2,7 @@
 #include "Scene01.h"
 #include "GLFramework.h"
 #include "banana_draw.h"// 애 이상한친구인데......................... 다른곳에 넣으면 안돌던데....
-
+#include "LoadMap.h"
 						// 11/30 오후 7시반 오지않는 바나나 클래스를 기다리며
 #define whatBox 65
 #define LightCount 4
@@ -95,7 +95,8 @@ void S01Main::init()
 	tmpRect.y = 10;
 	tmpRect.z = 60;
 	LightSetting();
-	DefaultBoxPosSetting();
+	//DefaultBoxPosSetting();
+	LoadMap(objectBox, 1);
 }
 
 void S01Main::exit()
@@ -134,7 +135,7 @@ void S01Main::render()
 	//glPopMatrix();
 
 	glPushMatrix();
-	banana_draw(tmpRect.x, tmpRect.y + 5, tmpRect.z, 0.5, IDLE, banana.rot.degree);
+	banana_draw(tmpRect.x, tmpRect.y + 5, tmpRect.z, 0.5, IDLE, banana.rot.degree, radian + 90);
 	glPopMatrix();
 
 	glPopMatrix();
@@ -532,7 +533,6 @@ void S01Main::update(float fDeltaTime)
 		cycle = 0;
 
 		tmpRect.zRate = 0;
-		limited = FALSE;
 		tmpRect.xRate = 0;
 		tmpRect.yRate = 0;
 	}

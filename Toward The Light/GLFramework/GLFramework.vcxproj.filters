@@ -129,6 +129,9 @@
     <ClCompile Include="banana_draw.cpp">
       <Filter>Source Files\Base</Filter>
     </ClCompile>
+    <ClCompile Include="LoadMap.cpp">
+      <Filter>Source Files\Base</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -204,6 +207,9 @@
       <Filter>Header Files\Base</Filter>
     </ClInclude>
     <ClInclude Include="Light.h">
+      <Filter>Header Files\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadMap.h">
       <Filter>Header Files\Base</Filter>
     </ClInclude>
   </ItemGroup>
