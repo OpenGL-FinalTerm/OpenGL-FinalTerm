@@ -79,7 +79,7 @@ S01Main::~S01Main()
 
 void S01Main::init()
 {
-
+	radian = 90;
 	m_SoundPlayer.init();
 	m_SoundPlayer.selectFolder("Resources\\BGM");
 
@@ -127,15 +127,14 @@ void S01Main::render()
 	for (int i = 0; i < LightCount; ++i)
 		mapLight[i].drawLight();
 
-	glPushMatrix();
-	glTranslatef(tmpRect.x, tmpRect.y, tmpRect.z);
-	glColor3f(1.f, 0.4f, 0.2f);
-	glutSolidCube(10);
-	glPopMatrix();
+	//glPushMatrix();
+	//glTranslatef(tmpRect.x, tmpRect.y, tmpRect.z);
+	//glColor3f(1.f, 0.4f, 0.2f);
+	//glutSolidCube(10);
+	//glPopMatrix();
 
 	glPushMatrix();
-	glRotatef(angle, 0, 1, 0);
-	banana_draw(mainCharacter.returnBoxCenterX(), mainCharacter.returnBoxCenterY(), mainCharacter.returnBoxCenterZ(), 1, IDLE, banana.rot.degree);
+	banana_draw(tmpRect.x, tmpRect.y + 5, tmpRect.z, 0.5, IDLE, banana.rot.degree);
 	glPopMatrix();
 
 	glPopMatrix();
@@ -531,7 +530,7 @@ void S01Main::update(float fDeltaTime)
 		boxCheckCount = 0;
 		check = FALSE;
 		cycle = 0;
-		
+
 		tmpRect.zRate = 0;
 		limited = FALSE;
 		tmpRect.xRate = 0;
@@ -555,7 +554,7 @@ void S01Main::update(float fDeltaTime)
 						saveBoxIndex[boxCheckCount] = i;
 						boxCheckCount++;
 					}
-					
+
 				}
 			}
 
@@ -579,7 +578,7 @@ void S01Main::update(float fDeltaTime)
 			}
 
 		}
-		
+
 		for (int k = 0; k < whatBox; ++k)
 			objectBox[k].checkUpdate(0);
 
@@ -716,6 +715,40 @@ void S01Main::update(float fDeltaTime)
 		tmpRect.yRate = 0;
 		tmpRect.zRate = 0;
 	}
+
+
+
+
+
+
+	// 캐릭터 회전
+
+	if (wPress == true)
+		radian = 90;
+
+	if (wPress == true && dPress == true)
+		radian = 45;
+
+	if (wPress == true && aPress == true)
+		radian = 135;
+
+	if (aPress == true)
+		radian = 180;
+
+	if (sPress == true)
+		radian = 270;
+
+	if (dPress == true)
+		radian = 0;
+	
+	if (sPress == true && aPress == true)
+		radian = 225;
+
+	if (sPress == true && dPress == true)
+		radian = 315;
+
+
+
 }
 
 void S01Main::DefaultBoxPosSetting()
