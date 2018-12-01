@@ -390,7 +390,7 @@ void S01Main::mouse(int button, bool pressed, int x, int y)
 
 void S01Main::motion(bool pressed, int x, int y)
 {
-	m_Camera.rotate(x, y, pressed);
+	//m_Camera.rotate(x, y, pressed);
 }
 
 int switch_sign = -1;
@@ -993,9 +993,4 @@ void S01Main::LightSetting()
 
 	for (int i = 0; i < 4; ++i)
 		mapLight[i].LightOn(true, i);
-}
-//camera
-void S01Main::camera() {
-	m_Camera.init();
-	m_Camera.getEye();
 }
