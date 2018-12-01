@@ -13,7 +13,7 @@ static int angle = 0;
 Vector3 Eye;
 Vector3 At;
 int move_Eye[3];
-int camera_deree[3];
+float camera_deree[3];
 
 S01Main::S01Main()
 {
@@ -108,26 +108,23 @@ void S01Main::render()
 	glPushMatrix();
 	banana_draw(tmpRect.x, tmpRect.y + 5, tmpRect.z, 0.5, IDLE, banana.rot.degree, radian + 90);
 	glPopMatrix();
+	//카메라 정리 ---
+	move_Eye[0] = tmpRect.x;
+	//move_Eye[1] = tmpRect.y;
+	move_Eye[2] = tmpRect.z;
 
 	Eye.x = move_Eye[0];
-	Eye.y = tmpRect.y + 5;
+	Eye.y = tmpRect.y + 50;
 	Eye.z = move_Eye[2]+10;
-	//At.x = 10 * (cos((radian + 90)* 3.14) +-sin((radian + 90) * 3.14)) + Eye.x;
-	At.y = tmpRect.y;
-	//At.z = 10 * (sin((radian + 90) * 3.14) +cos((radian + 90) * 3.14)) + Eye.z;
-	At.x = move_Eye[0];
-	At.z = move_Eye[2];
-
-	printf("At.x = %d , At.z = %d \n", camera_deree[0], camera_deree[2]);
 	
-	camera_deree[0] = 10*(Eye.x* sin(__t * 3.14));
-	camera_deree[2] = 10*(Eye.z * cos(__t * 3.14));
+	printf("At.x = %2.f , At.z = %2.f \n", camera_deree[0], camera_deree[2]);
+	//각도에 맞춰서 카메라를 돌려준다.
+	camera_deree[0] = (Eye.x * cos((radian + 90) * 3.141592 / 360) - Eye.z * sin((radian + 90)* 3.141592 / 360)) + move_Eye[0];
+	camera_deree[2] = (Eye.x * sin((radian + 90)* 3.141592 / 360) + Eye.z* cos((radian + 90)* 3.141592 / 360)) + move_Eye[2];
 
-	glPushMatrix();
-	glColor3f(1, 1, 1);
-	glTranslatef(camera_deree[0], camera_deree[1], camera_deree[2]);
-	glutSolidCube(5);
-	glPopMatrix();
+	At.y = 0;
+	At.x = camera_deree[0];
+	At.z = camera_deree[2];
 
 	m_Camera.setEye(Eye);
 	m_Camera.setTarget(At);
