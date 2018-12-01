@@ -28,7 +28,6 @@ public:
 	virtual void mouse(int button, bool pressed, int x, int y);
 	virtual void motion(bool pressed, int x, int y);
 	virtual void update(float fDeltaTime);
-	virtual void DefaultBoxPosSetting();
 	//Ä«¸Þ¶ó
 	virtual void camera_install(int x, int y);
 
