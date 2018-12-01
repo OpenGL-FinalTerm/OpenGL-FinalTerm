@@ -132,7 +132,7 @@ void Camera::updateEye()
 	m_v3PrevEye = Vector3{ m_v3PrevEye.x, m_v3PrevEye.y, m_fDistance };
 }
 
-void Camera::rotate(float angle, const Vector3& axis)
+void Camera::rotate2(float angle, const Vector3& axis)
 {
 	m_QuaternionRotation.rotate(angle, axis);
 }

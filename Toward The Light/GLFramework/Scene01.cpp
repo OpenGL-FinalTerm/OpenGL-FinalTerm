@@ -10,6 +10,10 @@
 #define LightCount 4
 
 static int angle = 0;
+Vector3 Eye;
+Vector3 At;
+int move_Eye[3];
+int camera_deree[3];
 
 S01Main::S01Main()
 {
@@ -39,6 +43,16 @@ void S01Main::init()
 	LightSetting();
 	//DefaultBoxPosSetting();
 	LoadMap(objectBox, 1);
+
+	m_Camera.setEye(Eye);
+
+	
+
+	move_Eye[0] = tmpRect.x;
+	move_Eye[1] = tmpRect.y + 100;
+	move_Eye[2] = tmpRect.z;
+
+
 }
 
 void S01Main::exit()
@@ -65,6 +79,7 @@ float S01Main::returnMainZ()
 {
 	return tmpRect.z + tmpRect.zRate;
 }
+int __t = 0;
 
 void S01Main::render()
 {
@@ -86,7 +101,6 @@ void S01Main::render()
 		mapLight[i].drawLight();
 
 	//glPushMatrix();
-	//glTranslatef(tmpRect.x, tmpRect.y, tmpRect.z);
 	//glColor3f(1.f, 0.4f, 0.2f);
 	//glutSolidCube(10);
 	//glPopMatrix();
@@ -95,8 +109,32 @@ void S01Main::render()
 	banana_draw(tmpRect.x, tmpRect.y + 5, tmpRect.z, 0.5, IDLE, banana.rot.degree, radian + 90);
 	glPopMatrix();
 
+	Eye.x = move_Eye[0];
+	Eye.y = tmpRect.y + 5;
+	Eye.z = move_Eye[2]+10;
+	//At.x = 10 * (cos((radian + 90)* 3.14) +-sin((radian + 90) * 3.14)) + Eye.x;
+	At.y = tmpRect.y;
+	//At.z = 10 * (sin((radian + 90) * 3.14) +cos((radian + 90) * 3.14)) + Eye.z;
+	At.x = move_Eye[0];
+	At.z = move_Eye[2];
+
+	printf("At.x = %d , At.z = %d \n", camera_deree[0], camera_deree[2]);
+	
+	camera_deree[0] = 10*(Eye.x* sin(__t * 3.14));
+	camera_deree[2] = 10*(Eye.z * cos(__t * 3.14));
+
+	glPushMatrix();
+	glColor3f(1, 1, 1);
+	glTranslatef(camera_deree[0], camera_deree[1], camera_deree[2]);
+	glutSolidCube(5);
+	glPopMatrix();
+
+	m_Camera.setEye(Eye);
+	m_Camera.setTarget(At);
+
 	glPopMatrix();
 }
+
 
 void S01Main::reshape(int w, int h)
 {
@@ -111,12 +149,17 @@ static bool aPress = false;
 static bool sPress = false;
 static bool dPress = false;
 
+
+
 void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 {
 	int cycle = 0;
 	int count = 0;
 	int i = 0;
 	BOOL check = FALSE;
+
+	
+
 	if (pressed)
 	{
 		switch (key)
@@ -127,14 +170,19 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 
 		case 'a':
 			aPress = true;
+			//camera_deree[0] = Eye.x * cos(radian * 3.14) + Eye.z * -sin(radian * 3.14);
+			//camera_deree[2] = Eye.x * sin(radian * 3.14) + Eye.z * cos(radian * 3.14);
+
 			break;
 
 		case 's':
 			sPress = true;
+	
 			break;
 
 		case 'd':
 			dPress = true;
+		
 			break;
 
 		case ' ':
@@ -151,7 +199,13 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 			for (int i = 0; i < 4; ++i)
 				mapLight[i].LightOn(false, i);
 			break;
+		case 'u':
+			//------카메라
+			//m_Camera.init();
+			
+			break;
 		}
+	
 	}
 	else {
 		if (key == 'w')
@@ -172,13 +226,15 @@ void S01Main::mouse(int button, bool pressed, int x, int y)
 
 void S01Main::motion(bool pressed, int x, int y)
 {
-	//m_Camera.rotate(x, y, pressed);
+	m_Camera.rotate(x, y, pressed);
 }
 
 
 
 void S01Main::update(float fDeltaTime)
 {
+	__t += 1;
+
 	int saveBoxIndex[100];
 	Time_count++;
 	if (Time_count % 20 == 0)
@@ -258,9 +314,13 @@ void S01Main::update(float fDeltaTime)
 
 	check = FALSE;
 	if (wPress == true) {
+
+		//카메라 이동
+		move_Eye[2] -= 1;
+
 		angle = 180;
 		mainCharacter.movingZ(-1);
-		tmpRect.z -= 1;
+		
 		boxCheckCount = 0;
 		while (check == FALSE) {
 
@@ -302,7 +362,10 @@ void S01Main::update(float fDeltaTime)
 				objectBox[saveBoxIndex[o]].movingZ(-1);
 		}
 		else
+		{
 			tmpRect.z += 1;
+	
+		}
 
 		for (int k = 0; k < whatBox; ++k)
 			objectBox[k].checkUpdate(0);
@@ -317,6 +380,11 @@ void S01Main::update(float fDeltaTime)
 	}
 
 	if (aPress == true) {
+
+
+		//카메라 이동
+		move_Eye[0] -= 1;
+
 		angle = 270;
 		tmpRect.x -= 1;
 		mainCharacter.movingX(-1);
@@ -366,7 +434,9 @@ void S01Main::update(float fDeltaTime)
 				objectBox[saveBoxIndex[o]].movingX(-1);
 		}
 		else
+		{
 			tmpRect.x += 1;
+		}
 
 		boxCheckCount = 0;
 		check = FALSE;
@@ -377,6 +447,10 @@ void S01Main::update(float fDeltaTime)
 	}
 
 	if (sPress == true) {
+
+		//카메라 이동
+		move_Eye[2] += 1;
+
 		angle = 180;
 		tmpRect.z += 1;
 		mainCharacter.movingZ(1);
@@ -422,8 +496,11 @@ void S01Main::update(float fDeltaTime)
 				objectBox[saveBoxIndex[o]].movingZ(1);
 		}
 		else
+		{
+		
 			tmpRect.z -= 1;
 
+		}
 		for (int k = 0; k < whatBox; ++k)
 			objectBox[k].checkUpdate(0);
 
@@ -437,6 +514,10 @@ void S01Main::update(float fDeltaTime)
 	}
 
 	if (dPress == true) {
+
+		//카메라 이동
+		move_Eye[0] += 1;
+
 		angle = 90;
 		tmpRect.x += 1;
 		mainCharacter.movingX(1);
@@ -485,8 +566,11 @@ void S01Main::update(float fDeltaTime)
 				objectBox[saveBoxIndex[o]].movingX(1);
 		}
 		else
+		{
+		
 			tmpRect.x -= 1;
 
+		}
 		boxCheckCount = 0;
 		check = FALSE;
 		cycle = 0;
@@ -772,4 +856,9 @@ void S01Main::LightSetting()
 
 	for (int i = 0; i < 4; ++i)
 		mapLight[i].LightOn(true, i);
+}
+
+void S01Main::camera_install(int x, int y) {
+	printf("ok \n");
+
 }

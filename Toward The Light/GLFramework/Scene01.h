@@ -29,10 +29,15 @@ public:
 	virtual void motion(bool pressed, int x, int y);
 	virtual void update(float fDeltaTime);
 	virtual void DefaultBoxPosSetting();
+	//Ä«¸Þ¶ó
+	virtual void camera_install(int x, int y);
+
 	virtual void LightSetting();
 	virtual float returnMainX();
 	virtual float returnMainY();
 	virtual float returnMainZ();
+
+
 
 private:
 	float			rX, rY, rZ;

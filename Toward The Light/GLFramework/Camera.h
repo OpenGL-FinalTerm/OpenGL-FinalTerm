@@ -31,7 +31,7 @@ public:
 	float getSensitivity();
 	void resetRotation();
 
-	void rotate(float angle, const Vector3& axis);													// rotation about an AXIS with a given angle
+	void rotate2(float angle, const Vector3& axis);													// rotation about an AXIS with a given angle
 	void rotate(int x, int y, bool blDrag = true, bool bInverseX = false, bool bInverseY = false);	// Rotation based on Mouse movement
 	void ready(int nCursorType = GLUT_CURSOR_LEFT_ARROW);
 
