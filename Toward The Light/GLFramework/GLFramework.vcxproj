@@ -129,15 +129,18 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AirPlane.cpp" />
+    <ClCompile Include="BananaSetting.cpp" />
     <ClCompile Include="banana_draw.cpp" />
     <ClCompile Include="BoxObject.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Character.cpp" />
     <ClCompile Include="FolderReader.cpp" />
     <ClCompile Include="GLFramework.cpp" />
     <ClCompile Include="GLScene.cpp" />
     <ClCompile Include="GLScenesInfo.cpp" />
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="LinearMath.cpp" />
+    <ClCompile Include="LoadMap.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="NormalObject.cpp" />
     <ClCompile Include="Object.cpp" />
@@ -157,15 +160,18 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AirPlane.h" />
+    <ClInclude Include="BananaSetting.h" />
     <ClInclude Include="banana_draw.h" />
     <ClInclude Include="BoxObject.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Character.h" />
     <ClInclude Include="FolderReader.h" />
     <ClInclude Include="GLFramework.h" />
     <ClInclude Include="GLScene.h" />
     <ClInclude Include="GLScenesInfo.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="LinearMath.h" />
+    <ClInclude Include="LoadMap.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="NormalObject.h" />
     <ClInclude Include="Object.h" />

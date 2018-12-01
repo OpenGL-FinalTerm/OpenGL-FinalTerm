@@ -2,72 +2,14 @@
 #include "Scene01.h"
 #include "GLFramework.h"
 #include "banana_draw.h"// 애 이상한친구인데......................... 다른곳에 넣으면 안돌던데....
-
+#include "LoadMap.h"
+#include "Character.h"
+#include "BananaSetting.h"
 						// 11/30 오후 7시반 오지않는 바나나 클래스를 기다리며
 #define whatBox 65
 #define LightCount 4
-typedef struct Shape
-{
-	Color cl;//색상
-	Translate_pos sp_pos[36];
-	Translate_pos pos;
-	Translate_pos move;
-	Translate_pos scale;
-	Translate_pos rot;
 
-	int size;
-	int select;
-	int height;
-	int slice;
-	int stacks;
-	BoOL b;
-	BOOL any;
-
-};
-
-//은면제거
-BOOL depth;
-int depth_count;
-//컬링
-BOOL culling;
-int culling_count;
-//쉐이딩
-BOOL shade;
-int shade_count;
-
-int saveBoxIndex[100];
-
-
-Shape banana;
 static int angle = 0;
-struct tmp {
-	float x;
-	float y;
-	float z;
-
-	float xRate;
-	float yRate;
-	float zRate;
-
-	int jumpCount = 0;
-};
-
-static tmp tmpRect;
-
-float returnMainX()
-{
-	return tmpRect.x + tmpRect.xRate;
-}
-
-float returnMainY()
-{
-	return tmpRect.y + tmpRect.yRate;
-}
-
-float returnMainZ()
-{
-	return tmpRect.z + tmpRect.zRate;
-}
 
 S01Main::S01Main()
 {
@@ -95,7 +37,8 @@ void S01Main::init()
 	tmpRect.y = 10;
 	tmpRect.z = 60;
 	LightSetting();
-	DefaultBoxPosSetting();
+	//DefaultBoxPosSetting();
+	LoadMap(objectBox, 1);
 }
 
 void S01Main::exit()
@@ -106,6 +49,21 @@ void S01Main::exit()
 void S01Main::reset()
 {
 	m_SoundPlayer.play();
+}
+
+float S01Main::returnMainX()
+{
+	return tmpRect.x + tmpRect.xRate;
+}
+
+float S01Main::returnMainY()
+{
+	return tmpRect.y + tmpRect.yRate;
+}
+
+float S01Main::returnMainZ()
+{
+	return tmpRect.z + tmpRect.zRate;
 }
 
 void S01Main::render()
@@ -164,194 +122,18 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 		switch (key)
 		{
 		case 'w':
-			/*angle = 180;
-			mainCharacter.movingZ(-1);
-			tmpRect.z -= 1;
-
-			while (check == FALSE) {
-
-				if (returnMainZ() - 5 <= objectBox[i].returnBoxCenterZ() + 10 && !(returnMainZ() + 5 <= objectBox[i].returnBoxCenterZ() - 10)) {
-					if (objectBox[i].returnBoxCenterX() - 10 < returnMainX() + 5 && objectBox[i].returnBoxCenterX() + 10 > returnMainX() - 5 && objectBox[i].returnBoxCenterY() + 10 > returnMainY() - 5 && objectBox[i].returnBoxCenterY() - 10 < returnMainY() + 5) {
-						if (objectBox[i].returnCheck() == 0) {
-							tmpRect.zRate -= 20;
-							objectBox[i].movingZ(-1);
-							objectBox[i].checkUpdate(1);
-						}
-					}
-				}
-
-				if (i == whatBox - 1) {
-					cycle++;
-					for (int j = 0; j < whatBox; ++j) {
-						if (objectBox[j].returnCheck()) {
-							count++;
-						}
-					}
-					if (count == whatBox || count == 0 || cycle == whatBox)
-						check = TRUE;
-					else
-						i = 0;
-
-					count = 0;
-				}
-				else {
-					i++;
-
-				}
-
-			}
-
-			for (int k = 0; k < whatBox; ++k)
-				objectBox[k].checkUpdate(0);
-			check = FALSE;
-			cycle = 0;
-			tmpRect.xRate = 0;
-			tmpRect.yRate = 0;
-			tmpRect.zRate = 0;*/
 			wPress = true;
 			break;
 
 		case 'a':
-			/*angle = 270;
-			tmpRect.x -= 1;
-			mainCharacter.movingX(-1);
-
-			while (check == FALSE) {
-
-				if (returnMainX() - 5 <= objectBox[i].returnBoxCenterX() + 10 && !(returnMainX() + 5 <= objectBox[i].returnBoxCenterX() - 10)) {
-					if (objectBox[i].returnBoxCenterZ() - 10 < returnMainZ() + 5 && objectBox[i].returnBoxCenterZ() + 10 > returnMainZ() - 5 && objectBox[i].returnBoxCenterY() + 10 > returnMainY() - 5 && objectBox[i].returnBoxCenterY() - 10 < returnMainY() + 5) {
-						if (objectBox[i].returnCheck() == 0) {
-							tmpRect.xRate -= 20;
-							objectBox[i].movingX(-1);
-							objectBox[i].checkUpdate(1);
-						}
-					}
-				}
-
-				if (i == whatBox - 1) {
-					cycle++;
-					for (int j = 0; j < whatBox; ++j) {
-						if (objectBox[j].returnCheck()) {
-							count++;
-						}
-					}
-					if (count == whatBox || count == 0 || cycle == whatBox)
-						check = TRUE;
-					else
-						i = 0;
-
-					count = 0;
-				}
-				else {
-					i++;
-
-				}
-
-			}
-
-			for (int k = 0; k < whatBox; ++k)
-				objectBox[k].checkUpdate(0);
-			check = FALSE;
-			cycle = 0;
-			tmpRect.xRate = 0;
-			tmpRect.yRate = 0;
-			tmpRect.zRate = 0;*/
 			aPress = true;
 			break;
 
 		case 's':
-			/*angle = 180;
-			tmpRect.z += 1;
-			mainCharacter.movingZ(1);
-
-			while (check == FALSE) {
-
-				if (returnMainZ() - 5 <= objectBox[i].returnBoxCenterZ() + 10 && !(returnMainZ() + 5 <= objectBox[i].returnBoxCenterZ() - 10)) {
-					if (objectBox[i].returnBoxCenterX() - 10 < returnMainX() + 5 && objectBox[i].returnBoxCenterX() + 10 > returnMainX() - 5 && objectBox[i].returnBoxCenterY() + 10 > returnMainY() - 5 && objectBox[i].returnBoxCenterY() - 10 < returnMainY() + 5) {
-						if (objectBox[i].returnCheck() == 0) {
-							tmpRect.zRate += 20;
-							objectBox[i].movingZ(1);
-							objectBox[i].checkUpdate(1);
-						}
-					}
-				}
-
-				if (i == whatBox - 1) {
-					cycle++;
-					for (int j = 0; j < whatBox; ++j) {
-						if (objectBox[j].returnCheck()) {
-							count++;
-						}
-					}
-					if (count == whatBox || count == 0 || cycle == whatBox)
-						check = TRUE;
-					else
-						i = 0;
-
-					count = 0;
-				}
-				else {
-					i++;
-
-				}
-
-			}
-
-			for (int k = 0; k < whatBox; ++k)
-				objectBox[k].checkUpdate(0);
-			check = FALSE;
-			cycle = 0;
-			tmpRect.xRate = 0;
-			tmpRect.yRate = 0;
-			tmpRect.zRate = 0;*/
 			sPress = true;
 			break;
 
 		case 'd':
-			/*angle = 90;
-			tmpRect.x += 1;
-			mainCharacter.movingX(1);
-
-			while (check == FALSE) {
-
-				if (returnMainX() - 5 <= objectBox[i].returnBoxCenterX() + 10 && !(returnMainX() + 5 <= objectBox[i].returnBoxCenterX() - 10)) {
-					if (objectBox[i].returnBoxCenterZ() - 10 < returnMainZ() + 5 && objectBox[i].returnBoxCenterZ() + 10 > returnMainZ() - 5 && objectBox[i].returnBoxCenterY() + 10 > returnMainY() - 5 && objectBox[i].returnBoxCenterY() - 10 < returnMainY() + 5) {
-						if (objectBox[i].returnCheck() == 0) {
-							tmpRect.xRate += 20;
-							objectBox[i].movingX(1);
-							objectBox[i].checkUpdate(1);
-						}
-					}
-				}
-
-				if (i == whatBox - 1) {
-					cycle++;
-					for (int j = 0; j < whatBox; ++j) {
-						if (objectBox[j].returnCheck()) {
-							count++;
-						}
-					}
-					if (count == whatBox || count == 0 || cycle == whatBox)
-						check = TRUE;
-					else
-						i = 0;
-
-					count = 0;
-				}
-				else {
-					i++;
-
-				}
-
-			}
-
-			for (int k = 0; k < whatBox; ++k)
-				objectBox[k].checkUpdate(0);
-			check = FALSE;
-			cycle = 0;
-			tmpRect.xRate = 0;
-			tmpRect.yRate = 0;
-			tmpRect.zRate = 0;*/
 			dPress = true;
 			break;
 
@@ -393,11 +175,11 @@ void S01Main::motion(bool pressed, int x, int y)
 	//m_Camera.rotate(x, y, pressed);
 }
 
-int switch_sign = -1;
-int Time_count;
+
 
 void S01Main::update(float fDeltaTime)
 {
+	int saveBoxIndex[100];
 	Time_count++;
 	if (Time_count % 20 == 0)
 	{
@@ -480,41 +262,39 @@ void S01Main::update(float fDeltaTime)
 		mainCharacter.movingZ(-1);
 		tmpRect.z -= 1;
 		boxCheckCount = 0;
-		if (tmpRect.z > -60) {
-			while (check == FALSE) {
+		while (check == FALSE) {
 
-				if (returnMainZ() - 5 <= objectBox[i].returnBoxCenterZ() + 10 && !(returnMainZ() + 5 <= objectBox[i].returnBoxCenterZ() - 10)) {
-					if (objectBox[i].returnBoxCenterX() - 10 < returnMainX() + 5 && objectBox[i].returnBoxCenterX() + 10 > returnMainX() - 5 && objectBox[i].returnBoxCenterY() + 10 > returnMainY() - 5 && objectBox[i].returnBoxCenterY() - 10 < returnMainY() + 5) {
-						if (objectBox[i].returnCheck() == 0) {
-							tmpRect.zRate -= 20;
-							//objectBox[i].movingZ(-1);
-							objectBox[i].checkUpdate(1);
-							saveBoxIndex[boxCheckCount] = i;
-							boxCheckCount++;
-						}
+			if (returnMainZ() - 5 <= objectBox[i].returnBoxCenterZ() + 10 && !(returnMainZ() + 5 <= objectBox[i].returnBoxCenterZ() - 10)) {
+				if (objectBox[i].returnBoxCenterX() - 10 < returnMainX() + 5 && objectBox[i].returnBoxCenterX() + 10 > returnMainX() - 5 && objectBox[i].returnBoxCenterY() + 10 > returnMainY() - 5 && objectBox[i].returnBoxCenterY() - 10 < returnMainY() + 5) {
+					if (objectBox[i].returnCheck() == 0) {
+						tmpRect.zRate -= 20;
+						//objectBox[i].movingZ(-1);
+						objectBox[i].checkUpdate(1);
+						saveBoxIndex[boxCheckCount] = i;
+						boxCheckCount++;
 					}
 				}
+			}
 
-				if (i == whatBox - 1) {
-					cycle++;
-					for (int j = 0; j < whatBox; ++j) {
-						if (objectBox[j].returnCheck()) {
-							count++;
-						}
+			if (i == whatBox - 1) {
+				cycle++;
+				for (int j = 0; j < whatBox; ++j) {
+					if (objectBox[j].returnCheck()) {
+						count++;
 					}
-					if (count == whatBox || count == 0 || cycle == whatBox)
-						check = TRUE;
-					else
-						i = 0;
-
-					count = 0;
 				}
-				else {
-					i++;
+				if (count == whatBox || count == 0 || cycle == whatBox)
+					check = TRUE;
+				else
+					i = 0;
 
-				}
+				count = 0;
+			}
+			else {
+				i++;
 
 			}
+
 		}
 
 		if (boxCheckCount < 3) {
@@ -532,7 +312,6 @@ void S01Main::update(float fDeltaTime)
 		cycle = 0;
 
 		tmpRect.zRate = 0;
-		limited = FALSE;
 		tmpRect.xRate = 0;
 		tmpRect.yRate = 0;
 	}

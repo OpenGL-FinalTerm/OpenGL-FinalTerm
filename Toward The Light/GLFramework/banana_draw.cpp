@@ -581,14 +581,14 @@ void banana_body(int pivot_x, int pivot_y, int pivot_z, float size, float rot_de
 
 }
 
-void banana_draw(int pivot_x, int pivot_y, int pivot_z, float size, int state, float sub_degree , float rotate) {
+void banana_draw(int pivot_x, int pivot_y, int pivot_z, float size, int state, float sub_degree, float rotate) {
 	if (state == IDLE) {
 
 		banana_index_change(size);
-		banana_head(pivot_x, pivot_y, pivot_z, size, sub_degree / 2, IDLE , rotate);//赣府
-		banana_body(pivot_x, pivot_y, pivot_z, size, sub_degree * 2, IDLE , rotate);//个
+		banana_head(pivot_x, pivot_y, pivot_z, size, sub_degree / 2, IDLE, rotate);//赣府
+		banana_body(pivot_x, pivot_y, pivot_z, size, sub_degree * 2, IDLE, rotate);//个
 
-		//printf("t \n");
+																				   //printf("t \n");
 
 	}
 	//else if (state == RUN) {
