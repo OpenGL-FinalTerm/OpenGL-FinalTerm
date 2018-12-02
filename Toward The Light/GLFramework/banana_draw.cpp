@@ -592,4 +592,4 @@ void banana_draw(int pivot_x, int pivot_y, int pivot_z, float size, int state, f
 	}
 }
 //오늘은 glPush Pop 짝을 못맞추는 오류를 냈다.
-//바나나가 먹고싶다. 델몬트로
+// 바나나가 먹고싶다. 델몬트로

@@ -39,7 +39,7 @@ void S02Main::init()
 	tmpRect.z = 60;
 	LightSetting();
 	//DefaultBoxPosSetting();
-	LoadMap(objectBox, 1);
+	LoadMap(objectBox, 2);
 }
 
 void S02Main::exit()
@@ -258,13 +258,17 @@ void S02Main::update(float fDeltaTime)
 
 	check = FALSE;
 	if (wPress == true) {
+		cycle = 0;
+		count = 0;
+		boxCheckCount = 0;
+		i = 0;
 		angle = 180;
 		mainCharacter.movingZ(-1);
 		tmpRect.z -= 1;
 		boxCheckCount = 0;
 		while (check == FALSE) {
 
-			if (returnMainZ() - 5 <= objectBox[i].returnBoxCenterZ() + 10 && !(returnMainZ() + 5 <= objectBox[i].returnBoxCenterZ() - 10)) {
+			if (returnMainZ() - 6 <= objectBox[i].returnBoxCenterZ() + 10 && !(returnMainZ() + 6 <= objectBox[i].returnBoxCenterZ() - 10)) {
 				if (objectBox[i].returnBoxCenterX() - 10 < returnMainX() + 5 && objectBox[i].returnBoxCenterX() + 10 > returnMainX() - 5 && objectBox[i].returnBoxCenterY() + 10 > returnMainY() - 5 && objectBox[i].returnBoxCenterY() - 10 < returnMainY() + 5) {
 					if (objectBox[i].returnCheck() == 0) {
 						tmpRect.zRate -= 20;
@@ -317,13 +321,17 @@ void S02Main::update(float fDeltaTime)
 	}
 
 	if (aPress == true) {
+		cycle = 0;
+		count = 0;
+		boxCheckCount = 0;
+		i = 0;
 		angle = 270;
 		tmpRect.x -= 1;
 		mainCharacter.movingX(-1);
 		boxCheckCount = 0;
 		while (check == FALSE) {
 
-			if (returnMainX() - 5 <= objectBox[i].returnBoxCenterX() + 10 && !(returnMainX() + 5 <= objectBox[i].returnBoxCenterX() - 10)) {
+			if (returnMainX() - 6 <= objectBox[i].returnBoxCenterX() + 10 && !(returnMainX() + 6 <= objectBox[i].returnBoxCenterX() - 10)) {
 				if (objectBox[i].returnBoxCenterZ() - 10 < returnMainZ() + 5 && objectBox[i].returnBoxCenterZ() + 10 > returnMainZ() - 5 && objectBox[i].returnBoxCenterY() + 10 > returnMainY() - 5 && objectBox[i].returnBoxCenterY() - 10 < returnMainY() + 5) {
 					if (objectBox[i].returnCheck() == 0) {
 						tmpRect.xRate -= 20;
@@ -377,13 +385,17 @@ void S02Main::update(float fDeltaTime)
 	}
 
 	if (sPress == true) {
+		cycle = 0;
+		count = 0;
+		boxCheckCount = 0;
+		i = 0;
 		angle = 180;
 		tmpRect.z += 1;
 		mainCharacter.movingZ(1);
 		boxCheckCount = 0;
 		while (check == FALSE) {
 
-			if (returnMainZ() - 5 <= objectBox[i].returnBoxCenterZ() + 10 && !(returnMainZ() + 5 <= objectBox[i].returnBoxCenterZ() - 10)) {
+			if (returnMainZ() - 6 <= objectBox[i].returnBoxCenterZ() + 10 && !(returnMainZ() + 6 <= objectBox[i].returnBoxCenterZ() - 10)) {
 				if (objectBox[i].returnBoxCenterX() - 10 < returnMainX() + 5 && objectBox[i].returnBoxCenterX() + 10 > returnMainX() - 5 && objectBox[i].returnBoxCenterY() + 10 > returnMainY() - 5 && objectBox[i].returnBoxCenterY() - 10 < returnMainY() + 5) {
 					if (objectBox[i].returnCheck() == 0) {
 						tmpRect.zRate += 20;
@@ -437,13 +449,17 @@ void S02Main::update(float fDeltaTime)
 	}
 
 	if (dPress == true) {
+		cycle = 0;
+		count = 0;
+		boxCheckCount = 0;
+		i = 0;
 		angle = 90;
 		tmpRect.x += 1;
 		mainCharacter.movingX(1);
 		boxCheckCount = 0;
 		while (check == FALSE) {
 
-			if (returnMainX() - 5 <= objectBox[i].returnBoxCenterX() + 10 && !(returnMainX() + 5 <= objectBox[i].returnBoxCenterX() - 10)) {
+			if (returnMainX() - 6 <= objectBox[i].returnBoxCenterX() + 10 && !(returnMainX() + 6 <= objectBox[i].returnBoxCenterX() - 10)) {
 				if (objectBox[i].returnBoxCenterZ() - 10 < returnMainZ() + 5 && objectBox[i].returnBoxCenterZ() + 10 > returnMainZ() - 5 && objectBox[i].returnBoxCenterY() + 10 > returnMainY() - 5 && objectBox[i].returnBoxCenterY() - 10 < returnMainY() + 5) {
 					if (objectBox[i].returnCheck() == 0) {
 						tmpRect.xRate += 20;

@@ -311,7 +311,10 @@ void S01Main::update(float fDeltaTime)
 
 	check = FALSE;
 	if (wPress == true) {
-
+		cycle = 0;
+		count = 0;
+		boxCheckCount = 0;
+		i = 0;
 		//카메라 이동
 		move_Eye[2] -= 1;
 
@@ -377,7 +380,10 @@ void S01Main::update(float fDeltaTime)
 	}
 
 	if (aPress == true) {
-
+		cycle = 0;
+		count = 0;
+		boxCheckCount = 0;
+		i = 0;
 
 		//카메라 이동
 		move_Eye[0] -= 1;
@@ -444,7 +450,10 @@ void S01Main::update(float fDeltaTime)
 	}
 
 	if (sPress == true) {
-
+		cycle = 0;
+		count = 0;
+		boxCheckCount = 0;
+		i = 0;
 		//카메라 이동
 		move_Eye[2] += 1;
 
@@ -511,7 +520,10 @@ void S01Main::update(float fDeltaTime)
 	}
 
 	if (dPress == true) {
-
+		cycle = 0;
+		count = 0;
+		boxCheckCount = 0;
+		i = 0;
 		//카메라 이동
 		move_Eye[0] += 1;
 
