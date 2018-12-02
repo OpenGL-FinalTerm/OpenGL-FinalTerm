@@ -7,7 +7,13 @@
 
 using namespace std;
 
-GLFramework fw("OpenGL Framework Test");
+//........................이름 바꾸는 장소
+GLFramework fw("Toward The Light");
+// 여긴 찾기 힘들겟지
+// 진짜 D-6인데... 심지어 마감일 일요일 11시 50분까지인데....
+// 매일매일 고민...............
+// 과연 통학과 기숙사와 다른점은 무엇인가.... (통학취침시간 == 기숙사취침시간)....
+// 통학을 했으면 어떗으려나
 
 int main(int argc, char* argv[])
 {
