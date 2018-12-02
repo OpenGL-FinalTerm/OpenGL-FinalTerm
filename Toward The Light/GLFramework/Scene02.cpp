@@ -84,7 +84,7 @@ void S02Main::render()
 		objectBox[i].drawBox(20);
 
 	for (int i = 0; i < LightCount; ++i)
-		mapLight[i].drawLight();
+		mapLight[i].drawLight(TRUE, i);
 
 	//glPushMatrix();
 	//glTranslatef(tmpRect.x, tmpRect.y, tmpRect.z);

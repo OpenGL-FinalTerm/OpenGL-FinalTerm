@@ -98,7 +98,7 @@ void S01Main::render()
 		objectBox[i].drawBox(20);
 
 	for (int i = 0; i < LightCount; ++i)
-		mapLight[i].drawLight();
+		mapLight[i].drawLight(TRUE, i);
 
 	//glPushMatrix();
 	//glColor3f(1.f, 0.4f, 0.2f);
