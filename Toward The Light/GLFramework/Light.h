@@ -30,6 +30,15 @@ public:
 	virtual void settingDiffuse(float first, float second, float third, float fourth);
 	virtual void settingSpecu(float first, float second, float third, float fourth);
 	virtual void settingGray(float first, float second, float third, float fourth);
+	
+	virtual float returnXpos();
+	virtual float returnYpos();
+	virtual float returnZpos();
+
+	virtual void moveX(float inX);
+	virtual void moveY(float inY);
+	virtual void moveZ(float inZ);
+	
 	virtual void drawLight();
 };
 

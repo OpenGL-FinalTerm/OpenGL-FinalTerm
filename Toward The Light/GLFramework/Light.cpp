@@ -160,3 +160,33 @@ void Light::drawLight()
 	glutSolidSphere(4, 4, 4);
 	glPopMatrix();
 }
+
+float Light::returnXpos()
+{
+	return x;
+}
+
+float Light::returnYpos()
+{
+	return y;
+}
+
+float Light::returnZpos()
+{
+	return z;
+}
+
+void Light::moveX(float inX)
+{
+	x += inX;
+}
+
+void Light::moveY(float inY)
+{
+	y += inY;
+}
+
+void Light::moveZ(float inZ)
+{
+	z += inZ;
+}

@@ -495,8 +495,34 @@ void S02Main::update(float fDeltaTime)
 		tmpRect.zRate = 0;
 	}
 
+	//Á¶¸í ³«ÇÏ
+	bool lightLanding = false;
+	for (int light = 0; light < LightCount; ++light) {
 
+		i = 0;
+		check = FALSE;
+		if (mapLight[light].returnYpos() - 3 > 0) {
 
+			while (check == FALSE) {
+				if ((objectBox[i].returnBoxCenterX() - 10 < mapLight[light].returnXpos() + 3 && objectBox[i].returnBoxCenterX() + 10 > mapLight[light].returnXpos() - 3 && objectBox[i].returnBoxCenterZ() + 10 > mapLight[light].returnZpos() - 3 && objectBox[i].returnBoxCenterZ() - 10 < mapLight[light].returnZpos() + 3)) {
+					if (mapLight[light].returnYpos() - 3 <= objectBox[i].returnBoxCenterY() + 10 && (mapLight[light].returnYpos() + 10 > objectBox[i].returnBoxCenterY() - 10)) {
+						lightLanding = true;
+						//check = TRUE;
+					}
+				}
+
+				i++;
+				if (i == whatBox) {
+					i = 0;
+					check = TRUE;
+				}
+
+			}
+
+			if (lightLanding != true)
+				mapLight[light].moveY(-1);
+		}
+	}
 
 
 
