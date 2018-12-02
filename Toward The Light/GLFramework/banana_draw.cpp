@@ -520,11 +520,17 @@ void banana_body(int pivot_x, int pivot_y, int pivot_z, float size, float rot_de
 				leg_up[0] = temp.pos[4 + 5 * 5].x;
 				leg_up[1] = temp.pos[4 + 5 * 5].y;
 				leg_up[2] = temp.pos[4 + 5 * 5].z;
-
-				leg_down[0] = temp.pos[4 + 5 * 5].x;
-				leg_down[1] = temp.pos[4 + 5 * 5].y - (size * 10);
-				leg_down[2] = temp.pos[4 + 5 * 5].z + rot_degree / 2 * mult_default;
-
+				
+				if (state == IDLE) {
+					leg_down[0] = temp.pos[4 + 5 * 5].x;
+					leg_down[1] = temp.pos[4 + 5 * 5].y - (size * 10);
+					leg_down[2] = temp.pos[4 + 5 * 5].z;
+				}
+				else if (state == RUN) {
+					leg_down[0] = temp.pos[4 + 5 * 5].x;
+					leg_down[1] = temp.pos[4 + 5 * 5].y - (size * 10);
+					leg_down[2] = temp.pos[4 + 5 * 5].z + rot_degree / 2 * mult_default;
+				}
 
 				for (int i = 0; i < 3; i++) {
 					leg_mid[i] = (leg_up[i] + leg_down[i]) / 2;
@@ -585,3 +591,5 @@ void banana_draw(int pivot_x, int pivot_y, int pivot_z, float size, int state, f
 		banana_body(pivot_x, pivot_y, pivot_z, size, sub_degree * 2, IDLE, rotate);//¸ö
 	}
 }
+//¿À´ÃÀº glPush Pop Â¦À» ¸ø¸ÂÃß´Â ¿À·ù¸¦ ³Â´Ù.
+//¹Ù³ª³ª°¡ ¸Ô°í½Í´Ù. µ¨¸óÆ®·Î
