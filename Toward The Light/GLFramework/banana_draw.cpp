@@ -1,10 +1,6 @@
 
 #include "banana_draw.h"
-
 QUAD index;
-
-
-
 
 int array_count = 0;
 
@@ -336,7 +332,6 @@ void banana_head(int pivot_x, int pivot_y, int pivot_z, float size, float degree
 		glPopMatrix();
 
 	}
-	glPopMatrix();
 
 
 }
@@ -368,6 +363,7 @@ void banana_body(int pivot_x, int pivot_y, int pivot_z, float size, float rot_de
 	}
 
 	for (int i = 0; i < 2; i++) {
+		float t__t;
 		if (i == 1) {
 
 			for (int i = 0; i <= (1 + 8 * 5 + 1); i++) {
@@ -482,8 +478,8 @@ void banana_body(int pivot_x, int pivot_y, int pivot_z, float size, float rot_de
 				}
 
 				if (state == IDLE) {
-					limb_down[1] += size * 2 * sin(rot_degree / 4 * 3.141592 * 1);
-					limb_down[2] += size * 2 * cos(rot_degree / 4 * 3.141592 * 1);
+					limb_down[1] += size * 2 * sin(rot_degree / 4 * 3.141592 * 1) * mult_default;
+					limb_down[2] += size * 2 * cos(rot_degree / 4 * 3.141592 * 1) * mult_default;
 
 				}
 				//吝埃 包例 焊埃
@@ -527,7 +523,8 @@ void banana_body(int pivot_x, int pivot_y, int pivot_z, float size, float rot_de
 
 				leg_down[0] = temp.pos[4 + 5 * 5].x;
 				leg_down[1] = temp.pos[4 + 5 * 5].y - (size * 10);
-				leg_down[2] = temp.pos[4 + 5 * 5].z;
+				leg_down[2] = temp.pos[4 + 5 * 5].z + rot_degree / 2 * mult_default;
+
 
 				for (int i = 0; i < 3; i++) {
 					leg_mid[i] = (leg_up[i] + leg_down[i]) / 2;
@@ -565,10 +562,10 @@ void banana_body(int pivot_x, int pivot_y, int pivot_z, float size, float rot_de
 				glTranslatef(0, -size, 0);
 				glScalef(0.5, 1.5 *(rot_degree / 2), 0.5);
 				if (size > 1) {
-					glutSolidCube(size * 2);
+					glutSolidCube(size * 1);
 				}
 				else {
-					glutSolidCube(size * 2.5);
+					glutSolidCube(size * 1.5);
 				}
 			}
 			glPopMatrix();
@@ -577,7 +574,6 @@ void banana_body(int pivot_x, int pivot_y, int pivot_z, float size, float rot_de
 		glPopMatrix();
 
 	}
-	glPopMatrix();
 
 }
 
@@ -587,21 +583,5 @@ void banana_draw(int pivot_x, int pivot_y, int pivot_z, float size, int state, f
 		banana_index_change(size);
 		banana_head(pivot_x, pivot_y, pivot_z, size, sub_degree / 2, IDLE, rotate);//赣府
 		banana_body(pivot_x, pivot_y, pivot_z, size, sub_degree * 2, IDLE, rotate);//个
-
-																				   //printf("t \n");
-
 	}
-	//else if (state == RUN) {
-	//   banana_head(pivot_x, pivot_y, pivot_z, size);//赣府
-	//   banana_body(pivot_x, pivot_y, pivot_z, size);//个
-	//}
-	//else if (state == JUMP) {
-	//   banana_head(pivot_x, pivot_y, pivot_z, size);//赣府
-	//   banana_body(pivot_x, pivot_y, pivot_z, size);//个
-	//}
-	//else if (state == DOWN_JUMP) {
-	//   banana_head(pivot_x, pivot_y, pivot_z, size);//赣府
-	//   banana_body(pivot_x, pivot_y, pivot_z, size);//个
-	//}
-
 }
