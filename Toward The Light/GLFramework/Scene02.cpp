@@ -6,8 +6,8 @@
 #include "Character.h"
 #include "BananaSetting.h"
 
-#define whatBox 65
-#define LightCount 4
+static int whatBox;
+static int LightCount;
 
 static int angle = 0;
 
@@ -34,12 +34,15 @@ void S02Main::init()
 	//	objectBox[i].CreateBox(rand() % 120 - 60, 10, rand() % 140 - 70);
 	//	objectBox[i].setColor(rand() % 255, rand() % 255, rand() % 255);
 	//}
-	tmpRect.x = -10;
-	tmpRect.y = 10;
-	tmpRect.z = 60;
-	LightSetting();
+	//tmpRect.x = -10;
+	//tmpRect.y = 10;
+	//tmpRect.z = 60;
+	//LightSetting();
 	//DefaultBoxPosSetting();
-	LoadMap(objectBox, 2);
+	whatBox = LoadMap(objectBox, tmpRect, 2);
+	LoadLight(mapLight, 2);
+	for (int i = 0; i < 4; ++i)
+		mapLight[i].LightOn(true, i);
 }
 
 void S02Main::exit()
@@ -80,7 +83,7 @@ void S02Main::render()
 	glVertex3f(60, 0, -70);
 	glEnd();
 
-	for (int i = 0; i < 65; ++i)
+	for (int i = 0; i < whatBox; ++i)
 		objectBox[i].drawBox(20);
 
 	for (int i = 0; i < LightCount; ++i)
@@ -547,12 +550,6 @@ void S02Main::update(float fDeltaTime)
 	if (wPress == true)
 		radian = 90;
 
-	if (wPress == true && dPress == true)
-		radian = 45;
-
-	if (wPress == true && aPress == true)
-		radian = 135;
-
 	if (aPress == true)
 		radian = 180;
 
@@ -561,6 +558,13 @@ void S02Main::update(float fDeltaTime)
 
 	if (dPress == true)
 		radian = 0;
+
+	if (wPress == true && dPress == true)
+		radian = 45;
+
+	if (wPress == true && aPress == true)
+		radian = 135;
+
 
 	if (sPress == true && aPress == true)
 		radian = 225;
@@ -581,6 +585,8 @@ void S02Main::DefaultBoxPosSetting()
 	// 하루만 더 믿어본다.....................
 	// if(day == 5 && camera == false)
 	//		exit(1);
+
+
 }
 
 void S02Main::LightSetting()

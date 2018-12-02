@@ -6,8 +6,8 @@
 #include "Character.h"
 #include "BananaSetting.h"
 						// 11/30 오후 7시반 오지않는 바나나 클래스를 기다리며
-#define whatBox 65
-#define LightCount 4
+static int whatBox;
+static int LightCount;
 
 static int angle = 0;
 Vector3 Eye;
@@ -42,7 +42,9 @@ void S01Main::init()
 	tmpRect.z = 60;
 	LightSetting();
 	//DefaultBoxPosSetting();
-	LoadMap(objectBox, 1);
+	whatBox = LoadMap(objectBox, tmpRect, 1);
+	for (int i = 0; i < 4; ++i)
+		mapLight[i].LightOn(true, i);
 
 	m_Camera.setEye(Eye);
 
@@ -683,8 +685,7 @@ void S01Main::LightSetting()
 	//mapLight[2].settingAmbient(1.f, 1.f, 1.f, 0.f);
 	//mapLight[3].settingAmbient(1.f, 1.f, 1.f, 0.f);
 
-	for (int i = 0; i < 4; ++i)
-		mapLight[i].LightOn(true, i);
+
 }
 
 void S01Main::camera_install(int x, int y) {

@@ -3,20 +3,34 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void LoadMap(Box objectBox[], int stage)
+
+int LoadMap(Box objectBox[], tmp &tmpRect, int stage)
 {
 	int cnt;
 	int tmp;
 	string fileName;
 
 	if (stage == 1)
-		fileName = "stage_1.txt";
+		fileName = "StageData\\stage_1.txt";
 	else
-		fileName = "stage_2.txt";
+		fileName = "StageData\\stage_2.txt";
 	
 	ifstream in(fileName);
 
 	in >> cnt;
+	
+	int tmpX;
+	int tmpY;
+	int tmpZ;
+
+	in >> tmpX;
+	in >> tmpY;
+	in >> tmpZ;
+
+	tmpRect.x = -50 + (tmpX * 20);
+	tmpRect.y = 10 + (tmpY * 20);
+	tmpRect.z = -60 + (tmpZ * 20);
+
 
 	int **ptr;
 	ptr = (int**)malloc(sizeof(int *) * 6);
@@ -42,4 +56,57 @@ void LoadMap(Box objectBox[], int stage)
 			}
 		}
 	}
+
+	return cnt;
+}
+
+void LoadLight(Light light[], int i)
+{
+	string fileName;
+	int cnt;
+
+	int tmpX;
+	int tmpZ;
+	int colorType;
+
+	float diffuse[4];
+	float specu[4];
+
+	if (i == 1)
+		fileName = "StageData\\LightPos\\stage_1-light.txt";
+	else
+		fileName = "StageData\\LightPos\\stage_2-light.txt";
+
+	ifstream in(fileName);
+
+	in >> cnt;
+	
+	for (int k = 0; k < cnt; ++k) {
+		in >> tmpX;
+		in >> tmpZ;
+		in >> colorType;
+
+	//	in >> diffuse[0] >> diffuse[1] >> diffuse[2] >> diffuse[3];
+	//	in >> specu[0] >> specu[1] >> specu[2] >> specu[3];
+
+		int lx;
+		int ly;
+		int lz;
+
+		lx = -50 + (tmpX * 20);
+		ly = 120;
+		lz = -60 + (tmpZ * 20);
+
+		light[k].DefaultLightPosSetting(lx, ly, lz, colorType);
+		//light[k].settingDiffuse(diffuse[0], diffuse[1], diffuse[2], diffuse[3]);
+		//light[k].settingSpecu(specu[0], specu[1], specu[2], specu[3]);
+		light[k].drawLight(TRUE, k);
+	}
+
+	//mapLight[0].DefaultLightPosSetting(30, 5, 60, 1);
+	//mapLight[1].DefaultLightPosSetting(-30, 45, 20, 1);
+
+	//mapLight[2].DefaultLightPosSetting(30, 5, 0, 0);
+	//mapLight[3].DefaultLightPosSetting(-30, 5, -40, 0);
+	int l;
 }
