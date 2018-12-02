@@ -775,11 +775,11 @@ void S02Main::LightSetting()
 
 	// 조명의 색상 지정
 
-	mapLight[0].settingDiffuse(1.f, 0.f, 0.f, 0.6f);
-	mapLight[1].settingDiffuse(1.f, 0.f, 0.f, 0.6f);
+	mapLight[0].settingDiffuse(1.f, 0.f, 0.f, 1.f);
+	mapLight[1].settingDiffuse(1.f, 0.f, 0.f, 1.f);
 
-	mapLight[2].settingDiffuse(0.f, 0.f, 1.f, 0.6f);
-	mapLight[2].settingDiffuse(0.f, 0.f, 1.f, 0.6f);
+	mapLight[2].settingDiffuse(0.f, 0.f, 1.f, 1.f);
+	mapLight[2].settingDiffuse(0.f, 0.f, 1.f, 1.f);
 
 	//조명의 거울반사 세기 지정
 	mapLight[0].settingSpecu(1.f, 0.f, 0.f, 1.f);
