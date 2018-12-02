@@ -106,7 +106,7 @@ void S01Main::render()
 	//glPopMatrix();
 
 	glPushMatrix();
-	banana_draw(tmpRect.x, tmpRect.y + 5, tmpRect.z, 0.5, IDLE, banana.rot.degree, radian + 90);
+	banana_draw(tmpRect.x, tmpRect.y + 5, tmpRect.z, 0.5, IDLE, banana.rot.degree, radian);
 	glPopMatrix();
 	//카메라 정리 ---
 	move_Eye[0] = tmpRect.x;
@@ -114,18 +114,16 @@ void S01Main::render()
 	move_Eye[2] = tmpRect.z;
 
 	Eye.x = move_Eye[0];
-	Eye.y = tmpRect.y + 50;
-	Eye.z = move_Eye[2]+10;
+	Eye.y = tmpRect.y + 10;
+	Eye.z = move_Eye[2] - 20;
 	
 	printf("At.x = %2.f , At.z = %2.f \n", camera_deree[0], camera_deree[2]);
 	//각도에 맞춰서 카메라를 돌려준다.
-	camera_deree[0] = (Eye.x * cos((radian + 90) * 3.141592 / 360) - Eye.z * sin((radian + 90)* 3.141592 / 360)) + move_Eye[0];
-	camera_deree[2] = (Eye.x * sin((radian + 90)* 3.141592 / 360) + Eye.z* cos((radian + 90)* 3.141592 / 360)) + move_Eye[2];
-
-	At.y = 0;
-	At.x = camera_deree[0];
-	At.z = camera_deree[2];
-
+	At.x = move_Eye[0] + sin(radian  * 3.141592 / 180) * 50;
+	At.z = move_Eye[2] + cos(radian  * 3.141592 / 180) * 50;
+	//		(double)player[view2_count % 2].move.x + sin(player[view2_count % 2].rot.degree *3.141592 / 180) * 100, (double)player[view2_count % 2].move.y, (double)player[view2_count % 2].move.z + 100 * cos(player[view2_count % 2].rot.degree *3.141592 / 180),
+	At.y = tmpRect.y;
+	
 	m_Camera.setEye(Eye);
 	m_Camera.setTarget(At);
 
@@ -223,7 +221,7 @@ void S01Main::mouse(int button, bool pressed, int x, int y)
 
 void S01Main::motion(bool pressed, int x, int y)
 {
-	//m_Camera.rotate(x, y, pressed);
+	m_Camera.rotate(x, y, pressed);
 }
 
 
@@ -313,7 +311,7 @@ void S01Main::update(float fDeltaTime)
 	if (wPress == true) {
 
 		//카메라 이동
-		move_Eye[2] -= 1;
+		//move_Eye[2] -= 1;
 
 		angle = 180;
 		mainCharacter.movingZ(-1);
@@ -380,7 +378,7 @@ void S01Main::update(float fDeltaTime)
 
 
 		//카메라 이동
-		move_Eye[0] -= 1;
+		//move_Eye[0] -= 1;
 
 		angle = 270;
 		tmpRect.x -= 1;
@@ -611,28 +609,28 @@ void S01Main::update(float fDeltaTime)
 	// 캐릭터 회전
 
 	if (wPress == true)
-		radian = 90;
-
-	if (wPress == true && dPress == true)
-		radian = 45;
-
-	if (wPress == true && aPress == true)
-		radian = 135;
-
-	if (aPress == true)
 		radian = 180;
 
-	if (sPress == true)
+	if (wPress == true && dPress == true)
+		radian = (180 - 90) / 2;
+
+	if (wPress == true && aPress == true)
+		radian = (270 - 180) / 2;
+
+	if (aPress == true)
 		radian = 270;
 
+	if (sPress == true)
+		radian = 360;
+
 	if (dPress == true)
-		radian = 0;
+		radian = 90;
 	
 	if (sPress == true && aPress == true)
-		radian = 225;
+		radian = (360 - 270) / 2;
 
 	if (sPress == true && dPress == true)
-		radian = 315;
+		radian = (360 - 90) / 2;
 
 
 
