@@ -39,7 +39,7 @@ public:
 	virtual void moveY(float inY);
 	virtual void moveZ(float inZ);
 	
-	virtual void drawLight();
+	virtual void drawLight(bool LightSwitch, int i);
 };
 
 enum {

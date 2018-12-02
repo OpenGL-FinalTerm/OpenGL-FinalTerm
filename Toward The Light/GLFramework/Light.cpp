@@ -21,6 +21,7 @@ void Light::LightOn(bool LightSwitch, int i)
 	if (LightSwitch == true) {
 		if (i == 0) {
 			glEnable(GL_LIGHTING);
+			glLightfv(GL_LIGHT0, GL_POSITION, pos);
 			glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuseLight);
 			glLightfv(GL_LIGHT0, GL_AMBIENT, ambientLight);
 			glLightfv(GL_LIGHT0, GL_SPECULAR, specu);
@@ -40,6 +41,7 @@ void Light::LightOn(bool LightSwitch, int i)
 
 		else if (i == 1) {
 			glEnable(GL_LIGHTING);
+			glLightfv(GL_LIGHT1, GL_POSITION, pos);
 			glLightfv(GL_LIGHT1, GL_DIFFUSE, diffuseLight);
 			glLightfv(GL_LIGHT1, GL_AMBIENT, ambientLight);
 			glLightfv(GL_LIGHT1, GL_SPECULAR, specu);
@@ -57,6 +59,7 @@ void Light::LightOn(bool LightSwitch, int i)
 
 		else if (i == 2) {
 			glEnable(GL_LIGHTING);
+			glLightfv(GL_LIGHT2, GL_POSITION, pos);
 			glLightfv(GL_LIGHT2, GL_AMBIENT, ambientLight);
 			glLightfv(GL_LIGHT2, GL_DIFFUSE, diffuseLight);
 			glLightfv(GL_LIGHT2, GL_SPECULAR, specu);
@@ -74,6 +77,7 @@ void Light::LightOn(bool LightSwitch, int i)
 
 		else if (i == 3) {
 			glEnable(GL_LIGHTING);
+			glLightfv(GL_LIGHT3, GL_POSITION, pos);
 			glLightfv(GL_LIGHT3, GL_AMBIENT, ambientLight);
 			glLightfv(GL_LIGHT3, GL_DIFFUSE, diffuseLight);
 			glLightfv(GL_LIGHT3, GL_SPECULAR, specu);
@@ -107,6 +111,10 @@ void Light::moveLight(float inx, float iny, float inz)
 	x = inx;
 	y = iny;
 	z = inz;
+
+	pos[0] = x;
+	pos[1] = y;
+	pos[2] = z;
 }
 
 void Light::settingAmbient(float first, float second, float third, float fourth)
@@ -143,13 +151,104 @@ void Light::settingSpecu(float first, float second, float third, float fourth)
 
 void Light::settingPos(float inx, float iny, float inz)
 {
+	
 	x = inx;
 	y = iny;
 	z = inz;
+
+	pos[0] = x;
+	pos[1] = y;
+	pos[2] = z;
 }
 
-void Light::drawLight()
+void Light::drawLight(bool LightSwitch, int i)
 {
+	if (LightSwitch == true) {
+		if (i == 0) {
+			glEnable(GL_LIGHTING);
+			glLightfv(GL_LIGHT0, GL_POSITION, pos);
+			glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuseLight);
+			glLightfv(GL_LIGHT0, GL_AMBIENT, ambientLight);
+			glLightfv(GL_LIGHT0, GL_SPECULAR, specu);
+			glLightfv(GL_LIGHT0, GL_POSITION, pos);
+
+			glEnable(GL_COLOR_MATERIAL);
+
+			glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
+			// 이후에 나오는 모든 재질은 밝게 빛나는 완전 전반사 반사율을 갖는다.
+			//glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, gray);
+			glMaterialfv(GL_FRONT, GL_SPECULAR, specu);
+			glMateriali(GL_FRONT, GL_SHININESS, 64);
+
+			glEnable(GL_LIGHT0);
+
+		}
+
+		else if (i == 1) {
+			glEnable(GL_LIGHTING);
+			glLightfv(GL_LIGHT1, GL_POSITION, pos);
+			glLightfv(GL_LIGHT1, GL_DIFFUSE, diffuseLight);
+			glLightfv(GL_LIGHT1, GL_AMBIENT, ambientLight);
+			glLightfv(GL_LIGHT1, GL_SPECULAR, specu);
+			glLightfv(GL_LIGHT1, GL_POSITION, pos);
+
+			glEnable(GL_COLOR_MATERIAL);
+
+			glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
+			// 이후에 나오는 모든 재질은 밝게 빛나는 완전 전반사 반사율을 갖는다.
+			//glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, gray);
+			glMaterialfv(GL_FRONT, GL_SPECULAR, specu);
+			glMateriali(GL_FRONT, GL_SHININESS, 64);
+			glEnable(GL_LIGHT1);
+		}
+
+		else if (i == 2) {
+			glEnable(GL_LIGHTING);
+			glLightfv(GL_LIGHT2, GL_POSITION, pos);
+			glLightfv(GL_LIGHT2, GL_AMBIENT, ambientLight);
+			glLightfv(GL_LIGHT2, GL_DIFFUSE, diffuseLight);
+			glLightfv(GL_LIGHT2, GL_SPECULAR, specu);
+			glLightfv(GL_LIGHT2, GL_POSITION, pos);
+
+			glEnable(GL_COLOR_MATERIAL);
+
+			glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
+			// 이후에 나오는 모든 재질은 밝게 빛나는 완전 전반사 반사율을 갖는다.
+			//glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, gray);
+			glMaterialfv(GL_FRONT, GL_SPECULAR, specu);
+			glMateriali(GL_FRONT, GL_SHININESS, 64);
+			glEnable(GL_LIGHT2);
+		}
+
+		else if (i == 3) {
+			glEnable(GL_LIGHTING);
+			glLightfv(GL_LIGHT3, GL_POSITION, pos);
+			glLightfv(GL_LIGHT3, GL_AMBIENT, ambientLight);
+			glLightfv(GL_LIGHT3, GL_DIFFUSE, diffuseLight);
+			glLightfv(GL_LIGHT3, GL_SPECULAR, specu);
+			glLightfv(GL_LIGHT3, GL_POSITION, pos);
+
+			glEnable(GL_COLOR_MATERIAL);
+
+			glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
+			// 이후에 나오는 모든 재질은 밝게 빛나는 완전 전반사 반사율을 갖는다.
+			//glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, gray);
+			glMaterialfv(GL_FRONT, GL_SPECULAR, specu);
+			glMateriali(GL_FRONT, GL_SHININESS, 64);
+			glEnable(GL_LIGHT3);
+		}
+	}
+
+	else {
+		if (i == 0)
+			glDisable(GL_LIGHT0);
+		else if (i == 1)
+			glDisable(GL_LIGHT1);
+		else if (i == 2)
+			glDisable(GL_LIGHT2);
+		else if (i == 3)
+			glDisable(GL_LIGHT3);
+	}
 	glPushMatrix();
 	glTranslatef(x, y, z);
 	if (colorType == 1)
@@ -179,14 +278,17 @@ float Light::returnZpos()
 void Light::moveX(float inX)
 {
 	x += inX;
+	pos[0] = x;
 }
 
 void Light::moveY(float inY)
 {
 	y += inY;
+	pos[1] = y;
 }
 
 void Light::moveZ(float inZ)
 {
 	z += inZ;
+	pos[2] = z;
 }
