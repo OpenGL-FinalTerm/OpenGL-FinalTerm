@@ -14,6 +14,8 @@ Vector3 Eye;
 Vector3 At;
 int move_Eye[3];
 float camera_deree[3];
+Vector3 foward_move; //나아가야하는 방향
+
 
 
 bool person_view_1 = false;
@@ -256,6 +258,16 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 			}
 			break;
 
+		case 'q':
+			if (change_person_view_count % 3 == 2) {
+				radian += 1;
+			}
+			break;
+		case 'e':
+			if (change_person_view_count % 3 == 2) {
+				radian -= 1;
+			}
+			break;
 		}
 	
 	}
@@ -279,7 +291,7 @@ void S01Main::mouse(int button, bool pressed, int x, int y)
 float save[3];
 void S01Main::motion(bool pressed, int x, int y)
 {
-	m_Camera.rotate(x, y, true);
+//	m_Camera.rotate(x, y, true);
 }
 
 
@@ -369,8 +381,10 @@ void S01Main::update(float fDeltaTime)
 	if (wPress == true) {
 
 		if (person_view_mouse) {
-			tmpRect.x = sin(radian  * 3.141592 / 180);
-			tmpRect.z = cos(radian  * 3.141592 / 180);
+			foward_move.x = sin(radian  * 3.141592 / 180) * 10;
+			foward_move.z = cos(radian  * 3.141592 / 180) * 10;
+			tmpRect.x += foward_move.x;
+			tmpRect.z += foward_move.z;
 		}
 		else {
 		tmpRect.z -= 1;
@@ -438,8 +452,16 @@ void S01Main::update(float fDeltaTime)
 
 	if (aPress == true) {
 		
+		if (person_view_mouse) {
+			foward_move.x = sin(radian  * 3.141592 / 180) * 10;
+			foward_move.z = cos(radian  * 3.141592 / 180) * 10;
+			tmpRect.x -= foward_move.x;
+			tmpRect.z += foward_move.z;
+		}
+		else {
+			tmpRect.x -= 1;
+		}
 		angle = 270;
-		tmpRect.x -= 1;
 		mainCharacter.movingX(-1);
 		boxCheckCount = 0;
 		while (check == FALSE) {
@@ -501,8 +523,16 @@ void S01Main::update(float fDeltaTime)
 
 	if (sPress == true) {
 
+		if (person_view_mouse) {
+			foward_move.x = sin(radian  * 3.141592 / 180) * 10;
+			foward_move.z = cos(radian  * 3.141592 / 180) * 10;
+			tmpRect.x -= foward_move.x;
+			tmpRect.z -= foward_move.z;
+		}
+		else {
+			tmpRect.z += 1;
+		}
 		angle = 180;
-		tmpRect.z += 1;
 		mainCharacter.movingZ(1);
 		boxCheckCount = 0;
 		while (check == FALSE) {
@@ -565,8 +595,17 @@ void S01Main::update(float fDeltaTime)
 
 	if (dPress == true) {
 
+		if (person_view_mouse) {
+			foward_move.x = sin(radian  * 3.141592 / 180) * 10;
+			foward_move.z = cos(radian  * 3.141592 / 180) * 10;
+			tmpRect.x += foward_move.x;
+			tmpRect.z -= foward_move.z;
+		}
+		else {
+			tmpRect.x += 1;
+
+		}
 		angle = 90;
-		tmpRect.x += 1;
 		mainCharacter.movingX(1);
 		boxCheckCount = 0;
 		while (check == FALSE) {
@@ -659,33 +698,33 @@ void S01Main::update(float fDeltaTime)
 
 
 	// 캐릭터 회전
+	if (!person_view_mouse) {
+		if (wPress == true)
+			radian = 180;
 
-	if (wPress == true)
-		radian = 180;
+		if (wPress == true && dPress == true)
+			radian = (180 - 45);
 
-	if (wPress == true && dPress == true)
-		radian = (180 - 45);
+		if (wPress == true && aPress == true)
+			radian = 180 + 45;
 
-	if (wPress == true && aPress == true)
-		radian = 180+45;
+		if (aPress == true)
+			radian = 270;
 
-	if (aPress == true)
-		radian = 270;
+		if (sPress == true)
+			radian = 360;
 
-	if (sPress == true)
-		radian = 360;
+		if (dPress == true)
+			radian = 90;
 
-	if (dPress == true)
-		radian = 90;
+		if (sPress == true && aPress == true)
+			radian = 360 - 45;
+
+		if (sPress == true && dPress == true)
+			radian = 360 + 45;
+
+	}
 	
-	if (sPress == true && aPress == true)
-		radian = 360-45;
-
-	if (sPress == true && dPress == true)
-		radian = 360+45;
-
-
-
 }
 
 
