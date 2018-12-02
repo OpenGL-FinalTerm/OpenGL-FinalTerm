@@ -18,6 +18,7 @@ float camera_deree[3];
 
 bool person_view_1 = false;
 bool person_view_3 = true;
+bool person_view_mouse = true;
 
 int change_person_view_count = 0;
 
@@ -111,12 +112,10 @@ void S01Main::render()
 	//glutSolidCube(10);
 	//glPopMatrix();
 
-	glPushMatrix();
-	banana_draw(tmpRect.x, tmpRect.y + 5, tmpRect.z, 0.5, IDLE, banana.rot.degree, radian);
-	glPopMatrix();
+
 	//카메라 정리 ---
 	
-	if(person_view_1){
+	if(person_view_1){//1인칭
 		move_Eye[0] = tmpRect.x;
 		//move_Eye[1] = tmpRect.y;
 		move_Eye[2] = tmpRect.z;
@@ -130,7 +129,21 @@ void S01Main::render()
 		At.z = move_Eye[2] + cos(radian  * 3.141592 / 180) * 50;
 		At.y = tmpRect.y + 10;
 	}
-	else if (person_view_3) {
+	else if (person_view_3) {//3인칭
+		move_Eye[0] = tmpRect.x;
+		//move_Eye[1] = tmpRect.y;
+		move_Eye[2] = tmpRect.z;
+
+		Eye.x = move_Eye[0];
+		Eye.y = tmpRect.y + 50;
+		Eye.z = move_Eye[2] + 20;
+
+		//각도에 맞춰서 카메라를 돌려준다.
+		At.x = move_Eye[0] + sin(radian  * 3.141592 / 180) * 50;
+		At.z = move_Eye[2] + cos(radian  * 3.141592 / 180) * 50;
+		At.y = tmpRect.y + 20;
+	}
+	else if (person_view_mouse) {
 		move_Eye[0] = tmpRect.x;
 		//move_Eye[1] = tmpRect.y;
 		move_Eye[2] = tmpRect.z;
@@ -145,6 +158,10 @@ void S01Main::render()
 		At.y = tmpRect.y + 20;
 	}
 	
+	glPushMatrix();
+	banana_draw(tmpRect.x, tmpRect.y + 5, tmpRect.z, 0.5, IDLE, banana.rot.degree, radian);
+	glPopMatrix();
+
 	m_Camera.setEye(Eye);
 	m_Camera.setTarget(At);
 
@@ -222,15 +239,21 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 			break;
 		case 'u':
 			change_person_view_count += 1;
-			if (change_person_view_count % 2 == 0) {
+			if (change_person_view_count % 3 == 0) {
 				person_view_1 = false;
 				person_view_3 = true;
+				person_view_mouse = false;
 			}
-			if (change_person_view_count % 2 == 1) {
+			if (change_person_view_count % 3 == 1) {
 				person_view_1 = true;
 				person_view_3 = false;
+				person_view_mouse = false;
 			}
-
+			if (change_person_view_count % 3 == 2) {
+				person_view_1 = false;
+				person_view_3 = false;
+				person_view_mouse = true;
+			}
 			break;
 
 		}
@@ -251,11 +274,12 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 
 void S01Main::mouse(int button, bool pressed, int x, int y)
 {
-}
 
+}
+float save[3];
 void S01Main::motion(bool pressed, int x, int y)
 {
-	m_Camera.rotate(x, y, pressed);
+	m_Camera.rotate(x, y, true);
 }
 
 
@@ -344,8 +368,13 @@ void S01Main::update(float fDeltaTime)
 	check = FALSE;
 	if (wPress == true) {
 
-
+		if (person_view_mouse) {
+			tmpRect.x = sin(radian  * 3.141592 / 180);
+			tmpRect.z = cos(radian  * 3.141592 / 180);
+		}
+		else {
 		tmpRect.z -= 1;
+		}
 		angle = 180;
 		mainCharacter.movingZ(-1);
 		
