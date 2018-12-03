@@ -193,6 +193,8 @@ void S02Main::update(float fDeltaTime)
 	if (jump == TRUE && down == FALSE) {
 		tmpRect.y += 1;
 		tmpRect.jumpCount += 1;
+
+
 		if (tmpRect.jumpCount > 30) {
 			jump = FALSE;
 			tmpRect.jumpCount = 0;

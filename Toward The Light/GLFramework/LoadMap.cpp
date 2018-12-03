@@ -98,8 +98,8 @@ int LoadLight(Light mapLight[], int i)
 		lz = -60 + (tmpZ * 20);
 
 		mapLight[k].DefaultLightPosSetting(lx, ly, lz, colorType);
-		mapLight[k].settingDiffuse(diffuse[0], diffuse[1], diffuse[2], diffuse[3]);
-		mapLight[k].settingSpecu(specu[0], specu[1], specu[2], specu[3]);
+		mapLight[k].settingDiffuse((float)diffuse[0], (float)diffuse[1], (float)diffuse[2], (float)diffuse[3]);
+		mapLight[k].settingSpecu((float)specu[0], (float)specu[1], (float)specu[2], (float)specu[3]);
 		mapLight[k].drawLight(TRUE, k);
 	}
 
