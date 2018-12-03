@@ -138,7 +138,7 @@
     <ClCompile Include="BananaSetting.cpp">
       <Filter>Source Files\Base</Filter>
     </ClCompile>
-    <ClCompile Include="Scene_Title.cpp">
+    <ClCompile Include="Scene04_Ending.cpp">
       <Filter>Source Files\Scenes</Filter>
     </ClCompile>
   </ItemGroup>
@@ -226,6 +226,9 @@
     </ClInclude>
     <ClInclude Include="BananaSetting.h">
       <Filter>Header Files\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene04_Ending.h">
+      <Filter>Header Files\Scenes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

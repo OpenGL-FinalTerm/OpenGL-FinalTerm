@@ -265,8 +265,17 @@ void S02Main::update(float fDeltaTime)
 
 			}
 
-			if (boxLanding != true)
+			if (boxLanding != true) {
 				objectBox[k].movingY(-1);
+				if (objectBox[k].returnBoxCenterX() - 10 < returnMainX() + 5 && objectBox[k].returnBoxCenterX() + 10 > returnMainX() - 5 && objectBox[k].returnBoxCenterZ() + 10 > returnMainZ() - 5 && objectBox[k].returnBoxCenterZ() - 10 < returnMainZ() + 5 && returnMainY() > objectBox[k].returnBoxCenterY() - 20 && returnMainY() < objectBox[k].returnBoxCenterY() + 20) {
+					m_Camera.init();
+					wPress = false;
+					aPress = false;
+					sPress = false;
+					dPress = false; 
+					m_Framework->toScene("Ending");
+				}
+			}
 		}
 
 	}
