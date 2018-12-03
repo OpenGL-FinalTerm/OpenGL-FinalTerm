@@ -41,7 +41,7 @@ void S04End::render()
 	glPopMatrix();
 
 	glColor3f(1.f, 1.f, 1.f);
-	print("Banana is Dead", 0, 0, -150);
+	print("Banana is Dead", 0, 40, 0);
 }
 
 void S04End::reshape(int w, int h)
