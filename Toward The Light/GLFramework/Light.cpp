@@ -14,6 +14,10 @@ void Light::DefaultLightPosSetting(float inx, float iny, float inz, int color)
 	y = iny;
 	z = inz;
 	colorType = color;
+
+	pos[0] = x;
+	pos[1] = y;
+	pos[2] = z;
 }
 
 void Light::LightOn(bool LightSwitch, int i)

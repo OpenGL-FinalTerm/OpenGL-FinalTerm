@@ -46,7 +46,7 @@ private:
 	SoundPlayer		m_SoundPlayer;
 	Box				objectBox[65];
 	Box				mainCharacter;
-	Light			mapLight[4];
+	Light			mapLight[100];
 	Shape			banana;
 	tmp				tmpRect;
 };

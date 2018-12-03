@@ -4,7 +4,11 @@
 #include <istream>
 #include <iostream>
 #include "BoxObject.h"
+#include "Character.h"
+#include "Light.h"
 using namespace std;
 
 
-void LoadMap(Box objectBox[], int stage);
+int LoadMap(Box objectBox[], tmp &tmpRect, int stage);
+
+int LoadLight(Light mapLight[], int i);

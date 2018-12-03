@@ -5,9 +5,9 @@
 #include "LoadMap.h"
 #include "Character.h"
 #include "BananaSetting.h"
-						// 11/30 오후 7시반 오지않는 바나나 클래스를 기다리며
-#define whatBox 65
-#define LightCount 4
+						// 11/30 오후 7시반 오지않는 바나나 클래스를 
+static int whatBox;
+static int LightCount;
 
 static int angle = 0;
 Vector3 Eye;
@@ -49,9 +49,10 @@ void S01Main::init()
 	tmpRect.x = -10;
 	tmpRect.y = 10;
 	tmpRect.z = 60;
-	LightSetting();
+	//LightSetting();
 	//DefaultBoxPosSetting();
-	LoadMap(objectBox, 1);
+	whatBox = LoadMap(objectBox, tmpRect, 2);
+	LightCount = LoadLight(mapLight, 2);
 
 	m_Camera.setEye(Eye);
 

@@ -6,8 +6,8 @@
 #include "Character.h"
 #include "BananaSetting.h"
 
-#define whatBox 65
-#define LightCount 4
+static int whatBox;
+static int LightCount = 4;
 
 static int angle = 0;
 
@@ -34,12 +34,15 @@ void S02Main::init()
 	//	objectBox[i].CreateBox(rand() % 120 - 60, 10, rand() % 140 - 70);
 	//	objectBox[i].setColor(rand() % 255, rand() % 255, rand() % 255);
 	//}
-	tmpRect.x = -10;
-	tmpRect.y = 10;
-	tmpRect.z = 60;
-	LightSetting();
+	//tmpRect.x = -10;
+	//tmpRect.y = 10;
+	//tmpRect.z = 60;
+	//LightSetting();
 	//DefaultBoxPosSetting();
-	LoadMap(objectBox, 1);
+	whatBox = LoadMap(objectBox, tmpRect, 2);
+	LightCount = LoadLight(mapLight, 2);
+	for (int i = 0; i < 4; ++i)
+		mapLight[i].LightOn(true, i);
 }
 
 void S02Main::exit()
@@ -80,7 +83,7 @@ void S02Main::render()
 	glVertex3f(60, 0, -70);
 	glEnd();
 
-	for (int i = 0; i < 65; ++i)
+	for (int i = 0; i < whatBox; ++i)
 		objectBox[i].drawBox(20);
 
 	for (int i = 0; i < LightCount; ++i)
@@ -190,6 +193,18 @@ void S02Main::update(float fDeltaTime)
 	if (jump == TRUE && down == FALSE) {
 		tmpRect.y += 1;
 		tmpRect.jumpCount += 1;
+		bool tmpcheck = false;
+		for (int i = 0; i < whatBox; ++i) {
+			if (objectBox[i].returnBoxCenterX() - 10 < returnMainX() + 5 && objectBox[i].returnBoxCenterX() + 10 > returnMainX() - 5 && objectBox[i].returnBoxCenterZ() + 10 > returnMainZ() - 5 && objectBox[i].returnBoxCenterZ() - 10 < returnMainZ() + 5 && returnMainY() > objectBox[i].returnBoxCenterY() - 20 && returnMainY() < objectBox[i].returnBoxCenterY() + 20) {
+				down = TRUE;
+				jump = FALSE;
+				tmpRect.jumpCount = 0;
+				tmpRect.y -= 1;
+			}
+		}
+
+		tmpcheck = false;
+
 		if (tmpRect.jumpCount > 30) {
 			jump = FALSE;
 			tmpRect.jumpCount = 0;
@@ -250,21 +265,34 @@ void S02Main::update(float fDeltaTime)
 
 			}
 
-			if (boxLanding != true)
+			if (boxLanding != true) {
 				objectBox[k].movingY(-1);
+				if (objectBox[k].returnBoxCenterX() - 10 < returnMainX() + 5 && objectBox[k].returnBoxCenterX() + 10 > returnMainX() - 5 && objectBox[k].returnBoxCenterZ() + 10 > returnMainZ() - 5 && objectBox[k].returnBoxCenterZ() - 10 < returnMainZ() + 5 && returnMainY() > objectBox[k].returnBoxCenterY() - 20 && returnMainY() < objectBox[k].returnBoxCenterY() + 20) {
+					m_Camera.init();
+					wPress = false;
+					aPress = false;
+					sPress = false;
+					dPress = false; 
+					m_Framework->toScene("Ending");
+				}
+			}
 		}
 
 	}
 
 	check = FALSE;
 	if (wPress == true) {
+		cycle = 0;
+		count = 0;
+		boxCheckCount = 0;
+		i = 0;
 		angle = 180;
 		mainCharacter.movingZ(-1);
 		tmpRect.z -= 1;
 		boxCheckCount = 0;
 		while (check == FALSE) {
 
-			if (returnMainZ() - 5 <= objectBox[i].returnBoxCenterZ() + 10 && !(returnMainZ() + 5 <= objectBox[i].returnBoxCenterZ() - 10)) {
+			if (returnMainZ() - 6 <= objectBox[i].returnBoxCenterZ() + 10 && !(returnMainZ() + 6 <= objectBox[i].returnBoxCenterZ() - 10)) {
 				if (objectBox[i].returnBoxCenterX() - 10 < returnMainX() + 5 && objectBox[i].returnBoxCenterX() + 10 > returnMainX() - 5 && objectBox[i].returnBoxCenterY() + 10 > returnMainY() - 5 && objectBox[i].returnBoxCenterY() - 10 < returnMainY() + 5) {
 					if (objectBox[i].returnCheck() == 0) {
 						tmpRect.zRate -= 20;
@@ -317,13 +345,17 @@ void S02Main::update(float fDeltaTime)
 	}
 
 	if (aPress == true) {
+		cycle = 0;
+		count = 0;
+		boxCheckCount = 0;
+		i = 0;
 		angle = 270;
 		tmpRect.x -= 1;
 		mainCharacter.movingX(-1);
 		boxCheckCount = 0;
 		while (check == FALSE) {
 
-			if (returnMainX() - 5 <= objectBox[i].returnBoxCenterX() + 10 && !(returnMainX() + 5 <= objectBox[i].returnBoxCenterX() - 10)) {
+			if (returnMainX() - 6 <= objectBox[i].returnBoxCenterX() + 10 && !(returnMainX() + 6 <= objectBox[i].returnBoxCenterX() - 10)) {
 				if (objectBox[i].returnBoxCenterZ() - 10 < returnMainZ() + 5 && objectBox[i].returnBoxCenterZ() + 10 > returnMainZ() - 5 && objectBox[i].returnBoxCenterY() + 10 > returnMainY() - 5 && objectBox[i].returnBoxCenterY() - 10 < returnMainY() + 5) {
 					if (objectBox[i].returnCheck() == 0) {
 						tmpRect.xRate -= 20;
@@ -377,13 +409,17 @@ void S02Main::update(float fDeltaTime)
 	}
 
 	if (sPress == true) {
+		cycle = 0;
+		count = 0;
+		boxCheckCount = 0;
+		i = 0;
 		angle = 180;
 		tmpRect.z += 1;
 		mainCharacter.movingZ(1);
 		boxCheckCount = 0;
 		while (check == FALSE) {
 
-			if (returnMainZ() - 5 <= objectBox[i].returnBoxCenterZ() + 10 && !(returnMainZ() + 5 <= objectBox[i].returnBoxCenterZ() - 10)) {
+			if (returnMainZ() - 6 <= objectBox[i].returnBoxCenterZ() + 10 && !(returnMainZ() + 6 <= objectBox[i].returnBoxCenterZ() - 10)) {
 				if (objectBox[i].returnBoxCenterX() - 10 < returnMainX() + 5 && objectBox[i].returnBoxCenterX() + 10 > returnMainX() - 5 && objectBox[i].returnBoxCenterY() + 10 > returnMainY() - 5 && objectBox[i].returnBoxCenterY() - 10 < returnMainY() + 5) {
 					if (objectBox[i].returnCheck() == 0) {
 						tmpRect.zRate += 20;
@@ -437,13 +473,17 @@ void S02Main::update(float fDeltaTime)
 	}
 
 	if (dPress == true) {
+		cycle = 0;
+		count = 0;
+		boxCheckCount = 0;
+		i = 0;
 		angle = 90;
 		tmpRect.x += 1;
 		mainCharacter.movingX(1);
 		boxCheckCount = 0;
 		while (check == FALSE) {
 
-			if (returnMainX() - 5 <= objectBox[i].returnBoxCenterX() + 10 && !(returnMainX() + 5 <= objectBox[i].returnBoxCenterX() - 10)) {
+			if (returnMainX() - 6 <= objectBox[i].returnBoxCenterX() + 10 && !(returnMainX() + 6 <= objectBox[i].returnBoxCenterX() - 10)) {
 				if (objectBox[i].returnBoxCenterZ() - 10 < returnMainZ() + 5 && objectBox[i].returnBoxCenterZ() + 10 > returnMainZ() - 5 && objectBox[i].returnBoxCenterY() + 10 > returnMainY() - 5 && objectBox[i].returnBoxCenterY() - 10 < returnMainY() + 5) {
 					if (objectBox[i].returnCheck() == 0) {
 						tmpRect.xRate += 20;
@@ -498,7 +538,7 @@ void S02Main::update(float fDeltaTime)
 	//조명 낙하
 	bool lightLanding = false;
 	for (int light = 0; light < LightCount; ++light) {
-
+		lightLanding = false;
 		i = 0;
 		check = FALSE;
 		if (mapLight[light].returnYpos() - 3 > 0) {
@@ -531,12 +571,6 @@ void S02Main::update(float fDeltaTime)
 	if (wPress == true)
 		radian = 90;
 
-	if (wPress == true && dPress == true)
-		radian = 45;
-
-	if (wPress == true && aPress == true)
-		radian = 135;
-
 	if (aPress == true)
 		radian = 180;
 
@@ -545,6 +579,13 @@ void S02Main::update(float fDeltaTime)
 
 	if (dPress == true)
 		radian = 0;
+
+	if (wPress == true && dPress == true)
+		radian = 45;
+
+	if (wPress == true && aPress == true)
+		radian = 135;
+
 
 	if (sPress == true && aPress == true)
 		radian = 225;
@@ -565,6 +606,8 @@ void S02Main::DefaultBoxPosSetting()
 	// 하루만 더 믿어본다.....................
 	// if(day == 5 && camera == false)
 	//		exit(1);
+
+
 }
 
 void S02Main::LightSetting()
