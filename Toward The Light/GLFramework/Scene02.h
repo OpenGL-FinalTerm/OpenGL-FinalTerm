@@ -10,6 +10,7 @@
 #include "Light.h"
 #include "BananaSetting.h"
 #include "Character.h"
+#include "Wall.h"
 
 class S02Main : public GLScene
 {

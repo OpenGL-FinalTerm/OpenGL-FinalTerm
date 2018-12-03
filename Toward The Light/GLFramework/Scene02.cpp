@@ -39,6 +39,7 @@ void S02Main::init()
 	//tmpRect.z = 60;
 	//LightSetting();
 	//DefaultBoxPosSetting();
+
 	whatBox = LoadMap(objectBox, tmpRect, 2);
 	LightCount = LoadLight(mapLight, 2);
 	for (int i = 0; i < 4; ++i)
@@ -94,7 +95,7 @@ void S02Main::render()
 	//glColor3f(1.f, 0.4f, 0.2f);
 	//glutSolidCube(10);
 	//glPopMatrix();
-
+	wall();
 	glPushMatrix();
 	banana_draw(tmpRect.x, tmpRect.y + 5, tmpRect.z, 0.5, IDLE, banana.rot.degree, radian + 90);
 	glPopMatrix();
@@ -325,12 +326,17 @@ void S02Main::update(float fDeltaTime)
 
 		}
 
-		if (boxCheckCount < 3) {
-			for (int o = 0; o < boxCheckCount; ++o)
-				objectBox[saveBoxIndex[o]].movingZ(-1);
+		if (returnMainZ() > -60) {
+			if (boxCheckCount < 3) {
+				for (int o = 0; o < boxCheckCount; ++o)
+					objectBox[saveBoxIndex[o]].movingZ(-1);
+			}
+			else
+				tmpRect.z += 1;
 		}
 		else
 			tmpRect.z += 1;
+
 
 		for (int k = 0; k < whatBox; ++k)
 			objectBox[k].checkUpdate(0);
@@ -393,9 +399,14 @@ void S02Main::update(float fDeltaTime)
 		for (int k = 0; k < whatBox; ++k)
 			objectBox[k].checkUpdate(0);
 
-		if (boxCheckCount < 3) {
-			for (int o = 0; o < boxCheckCount; ++o)
-				objectBox[saveBoxIndex[o]].movingX(-1);
+		if (returnMainX() > -55) {
+			if (boxCheckCount < 3) {
+				for (int o = 0; o < boxCheckCount; ++o)
+					objectBox[saveBoxIndex[o]].movingX(-1);
+			}
+
+			else
+				tmpRect.x += 1;
 		}
 		else
 			tmpRect.x += 1;
@@ -452,10 +463,13 @@ void S02Main::update(float fDeltaTime)
 
 		}
 
-
-		if (boxCheckCount < 3) {
-			for (int o = 0; o < boxCheckCount; ++o)
-				objectBox[saveBoxIndex[o]].movingZ(1);
+		if (returnMainZ() < 60) {
+			if (boxCheckCount < 3) {
+				for (int o = 0; o < boxCheckCount; ++o)
+					objectBox[saveBoxIndex[o]].movingZ(1);
+			}
+			else
+				tmpRect.z -= 1;
 		}
 		else
 			tmpRect.z -= 1;
@@ -520,9 +534,13 @@ void S02Main::update(float fDeltaTime)
 			objectBox[k].checkUpdate(0);
 
 
-		if (boxCheckCount < 3) {
-			for (int o = 0; o < boxCheckCount; ++o)
-				objectBox[saveBoxIndex[o]].movingX(1);
+		if (returnMainX() < 55) {
+			if (boxCheckCount < 3) {
+				for (int o = 0; o < boxCheckCount; ++o)
+					objectBox[saveBoxIndex[o]].movingX(1);
+			}
+			else
+				tmpRect.x -= 1;
 		}
 		else
 			tmpRect.x -= 1;
