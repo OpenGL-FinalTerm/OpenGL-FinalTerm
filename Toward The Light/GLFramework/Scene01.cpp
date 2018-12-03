@@ -163,12 +163,23 @@ void S01Main::render()
 	glPushMatrix();
 	banana_draw(tmpRect.x, tmpRect.y + 5, tmpRect.z, 0.5, IDLE, banana.rot.degree, radian);
 	glPopMatrix();
-
-	m_Camera.setEye(Eye);
-	m_Camera.setTarget(At);
-
+	if (person_view_mouse) {
+		m_Camera.setDistance(100);
+		m_Camera.setTarget(At);
+	}
+	else {
+		//m_Camera.setEye(Eye);
+		m_Camera.setDistance(100);
+		m_Camera.setTarget(At);
+	}
+	//카메라 및 시점이 맞는지 확인한다.
 	glPushMatrix();
-
+	{
+		glColor3f(1, 1, 1);
+		glTranslatef(At.x , At.y , At.z);
+		
+		glutSolidSphere(1, 8 , 8);
+	}
 	glPopMatrix();
 
 
@@ -291,7 +302,9 @@ void S01Main::mouse(int button, bool pressed, int x, int y)
 float save[3];
 void S01Main::motion(bool pressed, int x, int y)
 {
-//	m_Camera.rotate(x, y, true);
+	if (person_view_mouse) {
+	m_Camera.rotate(x, y, true);
+	}
 }
 
 
