@@ -40,7 +40,7 @@ void S02Main::init()
 	//LightSetting();
 	//DefaultBoxPosSetting();
 	whatBox = LoadMap(objectBox, tmpRect, 2);
-	LoadLight(mapLight, 2);
+	LightCount = LoadLight(mapLight, 2);
 	for (int i = 0; i < 4; ++i)
 		mapLight[i].LightOn(true, i);
 }
@@ -193,7 +193,17 @@ void S02Main::update(float fDeltaTime)
 	if (jump == TRUE && down == FALSE) {
 		tmpRect.y += 1;
 		tmpRect.jumpCount += 1;
+		bool tmpcheck = false;
+		for (int i = 0; i < whatBox; ++i) {
+			if (objectBox[i].returnBoxCenterX() - 10 < returnMainX() + 5 && objectBox[i].returnBoxCenterX() + 10 > returnMainX() - 5 && objectBox[i].returnBoxCenterZ() + 10 > returnMainZ() - 5 && objectBox[i].returnBoxCenterZ() - 10 < returnMainZ() + 5 && returnMainY() > objectBox[i].returnBoxCenterY() - 20 && returnMainY() < objectBox[i].returnBoxCenterY() + 20) {
+				down = TRUE;
+				jump = FALSE;
+				tmpRect.jumpCount = 0;
+				tmpRect.y -= 1;
+			}
+		}
 
+		tmpcheck = false;
 
 		if (tmpRect.jumpCount > 30) {
 			jump = FALSE;

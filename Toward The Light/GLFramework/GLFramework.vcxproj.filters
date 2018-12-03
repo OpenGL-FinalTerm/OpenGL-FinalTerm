@@ -138,6 +138,9 @@
     <ClCompile Include="BananaSetting.cpp">
       <Filter>Source Files\Base</Filter>
     </ClCompile>
+    <ClCompile Include="Scene_Title.cpp">
+      <Filter>Source Files\Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
