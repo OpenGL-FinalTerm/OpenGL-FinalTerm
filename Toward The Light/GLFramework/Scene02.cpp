@@ -7,7 +7,7 @@
 #include "BananaSetting.h"
 
 static int whatBox;
-static int LightCount;
+static int LightCount = 4;
 
 static int angle = 0;
 
@@ -517,7 +517,7 @@ void S02Main::update(float fDeltaTime)
 	//Á¶¸í ³«ÇÏ
 	bool lightLanding = false;
 	for (int light = 0; light < LightCount; ++light) {
-
+		lightLanding = false;
 		i = 0;
 		check = FALSE;
 		if (mapLight[light].returnYpos() - 3 > 0) {

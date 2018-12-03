@@ -43,6 +43,7 @@ void S01Main::init()
 	LightSetting();
 	//DefaultBoxPosSetting();
 	whatBox = LoadMap(objectBox, tmpRect, 1);
+	LightCount = LoadLight(mapLight, 1);
 	for (int i = 0; i < 4; ++i)
 		mapLight[i].LightOn(true, i);
 

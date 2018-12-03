@@ -11,4 +11,4 @@ using namespace std;
 
 int LoadMap(Box objectBox[], tmp &tmpRect, int stage);
 
-void LoadLight(Light light[], int i);
+int LoadLight(Light mapLight[], int i);

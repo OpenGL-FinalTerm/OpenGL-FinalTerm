@@ -60,7 +60,7 @@ int LoadMap(Box objectBox[], tmp &tmpRect, int stage)
 	return cnt;
 }
 
-void LoadLight(Light light[], int i)
+int LoadLight(Light mapLight[], int i)
 {
 	string fileName;
 	int cnt;
@@ -86,8 +86,8 @@ void LoadLight(Light light[], int i)
 		in >> tmpZ;
 		in >> colorType;
 
-	//	in >> diffuse[0] >> diffuse[1] >> diffuse[2] >> diffuse[3];
-	//	in >> specu[0] >> specu[1] >> specu[2] >> specu[3];
+		in >> diffuse[0] >> diffuse[1] >> diffuse[2] >> diffuse[3];
+		in >> specu[0] >> specu[1] >> specu[2] >> specu[3];
 
 		int lx;
 		int ly;
@@ -97,16 +97,17 @@ void LoadLight(Light light[], int i)
 		ly = 120;
 		lz = -60 + (tmpZ * 20);
 
-		light[k].DefaultLightPosSetting(lx, ly, lz, colorType);
-		//light[k].settingDiffuse(diffuse[0], diffuse[1], diffuse[2], diffuse[3]);
-		//light[k].settingSpecu(specu[0], specu[1], specu[2], specu[3]);
-		light[k].drawLight(TRUE, k);
+		mapLight[k].DefaultLightPosSetting(lx, ly, lz, colorType);
+		mapLight[k].settingDiffuse(diffuse[0], diffuse[1], diffuse[2], diffuse[3]);
+		mapLight[k].settingSpecu(specu[0], specu[1], specu[2], specu[3]);
+		mapLight[k].drawLight(TRUE, k);
 	}
+
 
 	//mapLight[0].DefaultLightPosSetting(30, 5, 60, 1);
 	//mapLight[1].DefaultLightPosSetting(-30, 45, 20, 1);
 
 	//mapLight[2].DefaultLightPosSetting(30, 5, 0, 0);
 	//mapLight[3].DefaultLightPosSetting(-30, 5, -40, 0);
-	int l;
+	return cnt;
 }

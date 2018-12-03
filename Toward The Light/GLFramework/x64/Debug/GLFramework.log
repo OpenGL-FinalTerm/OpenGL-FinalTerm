@@ -1,19 +1,44 @@
-﻿  LoadMap.cpp
-e:\opengl-finalterm\toward the light\glframework\loadmap.cpp(30): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-e:\opengl-finalterm\toward the light\glframework\loadmap.cpp(31): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-e:\opengl-finalterm\toward the light\glframework\loadmap.cpp(32): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-e:\opengl-finalterm\toward the light\glframework\loadmap.cpp(54): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-e:\opengl-finalterm\toward the light\glframework\loadmap.cpp(55): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-e:\opengl-finalterm\toward the light\glframework\loadmap.cpp(100): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-e:\opengl-finalterm\toward the light\glframework\loadmap.cpp(72): warning C4101: 'diffuse' :참조되지 않은 지역 변수입니다.
-e:\opengl-finalterm\toward the light\glframework\loadmap.cpp(111): warning C4101: 'l' :참조되지 않은 지역 변수입니다.
-e:\opengl-finalterm\toward the light\glframework\loadmap.cpp(73): warning C4101: 'specu' :참조되지 않은 지역 변수입니다.
+﻿  GLFramework.cpp
+d:\github\opengl-finalterm\toward the light\glframework\banana_draw.h(16): warning C4091: 'typedef ': 변수를 선언하지 않으면 'Color' 왼쪽은 무시됩니다.
+d:\github\opengl-finalterm\toward the light\glframework\banana_draw.h(22): warning C4091: 'typedef ': 변수를 선언하지 않으면 'Translate_pos' 왼쪽은 무시됩니다.
+d:\github\opengl-finalterm\toward the light\glframework\banana_draw.h(30): warning C4091: 'typedef ': 변수를 선언하지 않으면 'BoOL' 왼쪽은 무시됩니다.
+d:\github\opengl-finalterm\toward the light\glframework\banana_draw.h(48): warning C4091: 'typedef ': 변수를 선언하지 않으면 'QUAD' 왼쪽은 무시됩니다.
+d:\github\opengl-finalterm\toward the light\glframework\bananasetting.h(22): warning C4091: 'typedef ': 변수를 선언하지 않으면 'Shape' 왼쪽은 무시됩니다.
+  GLScenesInfo.cpp
+d:\github\opengl-finalterm\toward the light\glframework\banana_draw.h(16): warning C4091: 'typedef ': 변수를 선언하지 않으면 'Color' 왼쪽은 무시됩니다.
+d:\github\opengl-finalterm\toward the light\glframework\banana_draw.h(22): warning C4091: 'typedef ': 변수를 선언하지 않으면 'Translate_pos' 왼쪽은 무시됩니다.
+d:\github\opengl-finalterm\toward the light\glframework\banana_draw.h(30): warning C4091: 'typedef ': 변수를 선언하지 않으면 'BoOL' 왼쪽은 무시됩니다.
+d:\github\opengl-finalterm\toward the light\glframework\banana_draw.h(48): warning C4091: 'typedef ': 변수를 선언하지 않으면 'QUAD' 왼쪽은 무시됩니다.
+d:\github\opengl-finalterm\toward the light\glframework\bananasetting.h(22): warning C4091: 'typedef ': 변수를 선언하지 않으면 'Shape' 왼쪽은 무시됩니다.
+  LoadMap.cpp
+d:\github\opengl-finalterm\toward the light\glframework\loadmap.cpp(30): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\github\opengl-finalterm\toward the light\glframework\loadmap.cpp(31): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\github\opengl-finalterm\toward the light\glframework\loadmap.cpp(32): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\github\opengl-finalterm\toward the light\glframework\loadmap.cpp(54): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\github\opengl-finalterm\toward the light\glframework\loadmap.cpp(55): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\github\opengl-finalterm\toward the light\glframework\loadmap.cpp(100): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Scene01.cpp
+d:\github\opengl-finalterm\toward the light\glframework\banana_draw.h(16): warning C4091: 'typedef ': 변수를 선언하지 않으면 'Color' 왼쪽은 무시됩니다.
+d:\github\opengl-finalterm\toward the light\glframework\banana_draw.h(22): warning C4091: 'typedef ': 변수를 선언하지 않으면 'Translate_pos' 왼쪽은 무시됩니다.
+d:\github\opengl-finalterm\toward the light\glframework\banana_draw.h(30): warning C4091: 'typedef ': 변수를 선언하지 않으면 'BoOL' 왼쪽은 무시됩니다.
+d:\github\opengl-finalterm\toward the light\glframework\banana_draw.h(48): warning C4091: 'typedef ': 변수를 선언하지 않으면 'QUAD' 왼쪽은 무시됩니다.
+d:\github\opengl-finalterm\toward the light\glframework\bananasetting.h(22): warning C4091: 'typedef ': 변수를 선언하지 않으면 'Shape' 왼쪽은 무시됩니다.
+d:\github\opengl-finalterm\toward the light\glframework\scene01.cpp(54): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\github\opengl-finalterm\toward the light\glframework\scene01.cpp(55): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\github\opengl-finalterm\toward the light\glframework\scene01.cpp(56): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\github\opengl-finalterm\toward the light\glframework\scene01.cpp(112): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\github\opengl-finalterm\toward the light\glframework\scene01.cpp(115): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\github\opengl-finalterm\toward the light\glframework\scene01.cpp(117): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\github\opengl-finalterm\toward the light\glframework\scene01.cpp(119): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\github\opengl-finalterm\toward the light\glframework\scene01.cpp(121): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\github\opengl-finalterm\toward the light\glframework\scene01.cpp(125): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\github\opengl-finalterm\toward the light\glframework\scene01.cpp(126): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   Scene02.cpp
-e:\opengl-finalterm\toward the light\glframework\banana_draw.h(16): warning C4091: 'typedef ': 변수를 선언하지 않으면 'Color' 왼쪽은 무시됩니다.
-e:\opengl-finalterm\toward the light\glframework\banana_draw.h(22): warning C4091: 'typedef ': 변수를 선언하지 않으면 'Translate_pos' 왼쪽은 무시됩니다.
-e:\opengl-finalterm\toward the light\glframework\banana_draw.h(30): warning C4091: 'typedef ': 변수를 선언하지 않으면 'BoOL' 왼쪽은 무시됩니다.
-e:\opengl-finalterm\toward the light\glframework\banana_draw.h(48): warning C4091: 'typedef ': 변수를 선언하지 않으면 'QUAD' 왼쪽은 무시됩니다.
-e:\opengl-finalterm\toward the light\glframework\bananasetting.h(22): warning C4091: 'typedef ': 변수를 선언하지 않으면 'Shape' 왼쪽은 무시됩니다.
-e:\opengl-finalterm\toward the light\glframework\scene02.cpp(99): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\github\opengl-finalterm\toward the light\glframework\banana_draw.h(16): warning C4091: 'typedef ': 변수를 선언하지 않으면 'Color' 왼쪽은 무시됩니다.
+d:\github\opengl-finalterm\toward the light\glframework\banana_draw.h(22): warning C4091: 'typedef ': 변수를 선언하지 않으면 'Translate_pos' 왼쪽은 무시됩니다.
+d:\github\opengl-finalterm\toward the light\glframework\banana_draw.h(30): warning C4091: 'typedef ': 변수를 선언하지 않으면 'BoOL' 왼쪽은 무시됩니다.
+d:\github\opengl-finalterm\toward the light\glframework\banana_draw.h(48): warning C4091: 'typedef ': 변수를 선언하지 않으면 'QUAD' 왼쪽은 무시됩니다.
+d:\github\opengl-finalterm\toward the light\glframework\bananasetting.h(22): warning C4091: 'typedef ': 변수를 선언하지 않으면 'Shape' 왼쪽은 무시됩니다.
+d:\github\opengl-finalterm\toward the light\glframework\scene02.cpp(99): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   코드를 생성하고 있습니다...
-  GLFramework.vcxproj -> E:\OpenGL-FinalTerm\Toward The Light\x64\Debug\GLFramework.exe
+  GLFramework.vcxproj -> D:\GitHub\OpenGL-FinalTerm\Toward The Light\x64\Debug\GLFramework.exe
