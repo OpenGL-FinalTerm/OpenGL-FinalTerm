@@ -51,7 +51,7 @@ int LoadMap(Box objectBox[], tmp &tmpRect, int stage)
 	for (int i = 0; i < 7; ++i) {
 		for (int j = 0; j < 6; ++j) {
 			for (int k = 0; k < ptr[j][i]; ++k) {
-				objectBox[insertCount].CreateBox(-50 + (j * 20), 10 + (k * 20), -60 + (i * 20));
+				objectBox[insertCount].CreateBox(-50 + (j * 20), 60 + (k * 20), -60 + (i * 20));
 				objectBox[insertCount++].setColor(rand() % 255, rand() % 255, rand() % 255);
 			}
 		}
