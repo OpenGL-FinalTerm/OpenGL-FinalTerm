@@ -19,12 +19,16 @@ d:\back_git\opengl-finalterm2\toward the light\glframework\scene01.cpp(148): war
 d:\back_git\opengl-finalterm2\toward the light\glframework\scene01.cpp(150): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 d:\back_git\opengl-finalterm2\toward the light\glframework\scene01.cpp(153): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 d:\back_git\opengl-finalterm2\toward the light\glframework\scene01.cpp(154): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-d:\back_git\opengl-finalterm2\toward the light\glframework\scene01.cpp(165): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 d:\back_git\opengl-finalterm2\toward the light\glframework\scene01.cpp(166): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 d:\back_git\opengl-finalterm2\toward the light\glframework\scene01.cpp(167): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-d:\back_git\opengl-finalterm2\toward the light\glframework\scene01.cpp(171): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-d:\back_git\opengl-finalterm2\toward the light\glframework\scene01.cpp(307): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\back_git\opengl-finalterm2\toward the light\glframework\scene01.cpp(168): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\back_git\opengl-finalterm2\toward the light\glframework\scene01.cpp(172): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 d:\back_git\opengl-finalterm2\toward the light\glframework\scene01.cpp(308): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-d:\back_git\opengl-finalterm2\toward the light\glframework\scene01.cpp(497): warning C4244: '+=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-d:\back_git\opengl-finalterm2\toward the light\glframework\scene01.cpp(498): warning C4244: '+=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\back_git\opengl-finalterm2\toward the light\glframework\scene01.cpp(309): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\back_git\opengl-finalterm2\toward the light\glframework\scene01.cpp(427): warning C4244: '+=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\back_git\opengl-finalterm2\toward the light\glframework\scene01.cpp(428): warning C4244: '+=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\back_git\opengl-finalterm2\toward the light\glframework\scene01.cpp(499): warning C4244: '-=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\back_git\opengl-finalterm2\toward the light\glframework\scene01.cpp(500): warning C4244: '+=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\back_git\opengl-finalterm2\toward the light\glframework\scene01.cpp(570): warning C4244: '-=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\back_git\opengl-finalterm2\toward the light\glframework\scene01.cpp(571): warning C4244: '-=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   GLFramework.vcxproj -> D:\Back_git\OpenGL-FinalTerm2\Toward The Light\x64\Debug\GLFramework.exe

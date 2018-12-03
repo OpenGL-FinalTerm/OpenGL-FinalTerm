@@ -156,15 +156,16 @@ void S01Main::render()
 	}
 	else if (person_view_mouse) {
 
-		Eye.x = 40;
+		Eye.x = tmpRect.x;
 		Eye.y = 60 + tmpRect.y;
-		Eye.z = 40;
+		Eye.z = tmpRect.z + 10;
 
 
 		//각도에 맞춰서 카메라를 돌려준다.
-		At.x = Eye.x +  sin(result_degree[0] * 3.141592 / 180) * 50;
+		//이때 카메라의 At 벡터 기준점은 eye가 아닌 바나나의 현재 위치입니다.
+		At.x = tmpRect.x +  sin(result_degree[0] * 3.141592 / 180) * 50;
 		At.y = tmpRect.y + ((cos(result_degree[1] * 3.141592 / 180) * 50));
-		At.z = Eye.z + ((cos(result_degree[0] * 3.141592 / 180) * 50) + (sin(result_degree[1] * 3.141592 / 180) * 50));
+		At.z = tmpRect.z + ((cos(result_degree[0] * 3.141592 / 180) * 50) + (sin(result_degree[1] * 3.141592 / 180) * 50));
 	}
 	
 	glPushMatrix();
@@ -422,9 +423,10 @@ void S01Main::update(float fDeltaTime)
 	if (wPress == true) {
 
 		if (person_view_mouse) {
-	
-		//	tmpRect.x += sin(result_degree[0] * 3.141592 / 180) * 50;
-		//	tmpRect.z += cos(result_degree[0] * 3.141592 / 180) * 50;
+
+			tmpRect.x += (sin(result_degree[0] * 3.141592 / 180)) * 1;
+			tmpRect.z += (cos(result_degree[0] * 3.141592 / 180)) * 1;
+
 		}
 		else {
 		tmpRect.z -= 1;
@@ -493,9 +495,9 @@ void S01Main::update(float fDeltaTime)
 	if (aPress == true) {
 		
 		if (person_view_mouse) {
-		
-			tmpRect.x += sin(result_degree[0] * 3.141592 / 180) * 50;
-			tmpRect.z += (cos(result_degree[0] * 3.141592 / 180) * 50);
+
+			tmpRect.x -= (sin(result_degree[0] * 3.141592 / 180)) * 1;
+			tmpRect.z += (cos(result_degree[0] * 3.141592 / 180)) * 1;
 
 		}
 		else {
@@ -564,8 +566,9 @@ void S01Main::update(float fDeltaTime)
 	if (sPress == true) {
 
 		if (person_view_mouse) {
-			tmpRect.x -= foward_move.x;
-			tmpRect.z -= foward_move.z;
+
+			tmpRect.x -= (sin(result_degree[0] * 3.141592 / 180)) * 1;
+			tmpRect.z -= (cos(result_degree[0] * 3.141592 / 180)) * 1;
 		}
 		else {
 			tmpRect.z += 1;
