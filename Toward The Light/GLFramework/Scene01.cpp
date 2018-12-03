@@ -496,8 +496,8 @@ void S01Main::update(float fDeltaTime)
 		
 		if (person_view_mouse) {
 
-			tmpRect.x -= (sin(result_degree[0] * 3.141592 / 180)) * 1;
-			tmpRect.z += (cos(result_degree[0] * 3.141592 / 180)) * 1;
+			tmpRect.x += (sin(result_degree[0] * 3.141592 / 180)) * 1 / 2;
+			tmpRect.z -= (cos(result_degree[0] * 3.141592 / 180)) * 1 / 2;
 
 		}
 		else {
@@ -637,8 +637,9 @@ void S01Main::update(float fDeltaTime)
 	if (dPress == true) {
 
 		if (person_view_mouse) {
-			tmpRect.x += foward_move.x;
-			tmpRect.z -= foward_move.z;
+			tmpRect.x -= (sin(result_degree[0] * 3.141592 / 180)) * 1;
+			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180)) * 1;
+
 		}
 		else {
 			tmpRect.x += 1;
