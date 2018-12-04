@@ -5,6 +5,8 @@
 #include "Character.h"
 
 static int rotate;
+
+
 S04End::S04End()
 {
 }
@@ -20,6 +22,13 @@ void S04End::init()
 	m_Camera_end.setPerspective(30.f, 0.125f, 3500.f);
 	m_Camera_end.setSensitivity(1.f);
 	rotate = 0;
+	camera_size[0] = 500;
+
+
+	tmpRect.x = 0;
+	tmpRect.y = 0;
+	tmpRect.z = 0;
+	ending_animation_bool = false;
 }
 
 void S04End::exit()
@@ -34,14 +43,30 @@ void S04End::reset()
 void S04End::render()
 {
 	m_Camera_end.ready();
-	m_Camera_end.rotate(rotate++, 0, true);
+	
+
+	//카메라 연산
+	Eye.x = tmpRect.x + sin(camera_degree[0] * 3.141592 / 180) * camera_size[0];
+	Eye.z = tmpRect.z + cos(camera_degree[0] * 3.141592 / 180) * camera_size[0];
+	Eye.y = camera_size[1] + camera_pos[1];
+	//
+
+	At.x = tmpRect.x;
+	At.y = tmpRect.y;
+	At.z = tmpRect.z;
+
 
 	glPushMatrix();
 	banana_draw(tmpRect.x, tmpRect.y + 5, tmpRect.z, 0.5, IDLE, banana.rot.degree, 0);
 	glPopMatrix();
 
+	//카메라 렌더링
+	m_Camera_end.setEye(Eye);
+	m_Camera_end.setTarget(At);
+
 	glColor3f(1.f, 1.f, 1.f);
 	print("Banana is Dead", 0, 40, 0);
+
 }
 
 void S04End::reshape(int w, int h)
@@ -70,6 +95,27 @@ void S04End::motion(bool pressed, int x, int y)
 
 void S04End::update(float fDeltaTime)
 {
+	//엔딩이 나올때는 줌인 한 후에 회전하면서 바나나 가르기키 
+	camera_degree[0] += 1;
+	if (ending_animation_bool) {
+		
+		if (camera_size[0] >= 100) {
+			camera_size[0] -= 1;
+		}
+		if (camera_size[0] == 100) {
+			ending_animation_bool = true;
+		}
+	}
+	else {
+		if (camera_size[0] >= 50) {
+			camera_size[0] -= 1;
+			camera_pos[1] += 1;
+		}
+		if (camera_size[0] == 50) {
+			ending_animation_bool = false;
+		}
+	}
+
 	Time_count++;
 	if (Time_count % 20 == 0)
 	{

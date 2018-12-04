@@ -109,35 +109,8 @@ void S01Main::render()
 
 	//카메라 정리 ---
 
-	if (person_view_1) {//1인칭
-		move_Eye[0] = tmpRect.x;
-		//move_Eye[1] = tmpRect.y;
-		move_Eye[2] = tmpRect.z;
-
-		Eye.x = move_Eye[0];
-		Eye.y = tmpRect.y + 20;
-		Eye.z = move_Eye[2] - 20;
-
-		//각도에 맞춰서 카메라를 돌려준다.
-		At.x = move_Eye[0] + sin(radian  * 3.141592 / 180) * 50;
-		At.z = move_Eye[2] + cos(radian  * 3.141592 / 180) * 50;
-		At.y = tmpRect.y + 10;
-	}
-	else if (person_view_3) {//3인칭
-		move_Eye[0] = tmpRect.x;
-		//move_Eye[1] = tmpRect.y;
-		move_Eye[2] = tmpRect.z;
-
-		Eye.x = move_Eye[0];
-		Eye.y = tmpRect.y + 50;
-		Eye.z = move_Eye[2] + 20;
-
-		//각도에 맞춰서 카메라를 돌려준다.
-		At.x = move_Eye[0] + sin(radian  * 3.141592 / 180) * 50;
-		At.z = move_Eye[2] + cos(radian  * 3.141592 / 180) * 50;
-		At.y = tmpRect.y + 20;
-	}
-	else if (person_view_mouse) {
+	
+	if (person_view_mouse) {
 		//eye 도 각도에 따라 바뀐다.
 		//Eye.x = -sin(result_degree[0] * 3.141592 / 180) * (20 + view_rotate[0]) + tmpRect.x;
 		//Eye.y = tmpRect.y  + -((cos(result_degree[1] * 3.141592 / 180) * (50 + view_rotate[1])));
