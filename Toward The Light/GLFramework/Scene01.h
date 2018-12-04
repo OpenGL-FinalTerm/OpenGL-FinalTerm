@@ -39,42 +39,43 @@ public:
 
 
 private:
-	float      rX, rY, rZ;
-	float      radian;
-	float      camera_deree[3];
+	float		rX, rY, rZ;
+	float		radian;
+	float		camera_deree[3];
 
-	int         switch_sign = -1;
-	int         Time_count;
-	int         tX, tY;
-	int         move_Eye[3];
-	int         change_person_view_count = 0;
-	int         drag_old_postion[2] = {};
-	int         drag_new_postion[2] = {};
+	int			switch_sign = -1;
+	int			Time_count;
+	int			tX, tY;
+	int			move_Eye[3];
+	int			change_person_view_count = 0;
+	int			drag_old_postion[2] = {};
+	int			drag_new_postion[2] = {};
 
-	bool      person_view_1 = false;
-	bool      person_view_3 = false;
-	bool      person_view_mouse = true;
-	bool      s;
+	bool		person_view_1 = false;
+	bool		person_view_3 = false;
+	bool		person_view_mouse = true;
+	bool		s;
 
-	float      difference_new_old[2] = {}; // between drag_old postion and drag new postion --> old - new
-	float      difference_size = 1.f;
-	float      difference_normal_pos[2] = {};
-	float      result_degree[2] = {};
-	float      assist_rotation = 1;
-	float      view_rotate[2] = {};
+	float		difference_new_old[2] = {}; // between drag_old postion and drag new postion --> old - new
+	float		difference_size = 1.f;
+	float		difference_normal_pos[2] = {};
+	float		result_degree[2] = {};
+	float		assist_rotation = 1;
+	float		view_rotate[2] = {};
 
-	Vector3         Eye;
-	Vector3         At;
-	Vector3         foward_move; //나아가야하는 방향
-	Vector2         foward;//player move
-	Camera         m_Camera;
-	NormalObject   m_Plane;
+	Vector3			Eye;
+	Vector3			At;
+	Vector3			foward_move; //나아가야하는 방향
+	Vector2			foward;//player move
+	Camera			m_Camera;
+	NormalObject	m_Plane;
 	NormalObject    m_Sphere;
-	SoundPlayer      m_SoundPlayer;
-	Box            objectBox[65];
-	Box            mainCharacter;
-	Light         mapLight[100];
-	Shape         banana;
-	tmp            tmpRect;
+	SoundPlayer		m_SoundPlayer;
+	Box				objectBox[65];
+	Box				mainCharacter;
+	Light			mapLight[100];
+	Shape			banana;
+	tmp				tmpRect;
 
 };
+
