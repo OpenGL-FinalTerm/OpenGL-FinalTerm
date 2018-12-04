@@ -29,9 +29,13 @@ Vector2 drag_new_postion;
 Vector2 difference_new_btw_old; // between drag_old postion and drag new postion --> old - new
 float difference_size = 0.f;
 <<<<<<< HEAD
+<<<<<<< HEAD
 Vector3 difference_normal_pos;
 Vector3 old_normal_pos;
 Vector3 result_normal;
+=======
+float difference_nomal_pos[2] = {};
+>>>>>>> parent of 9b30ee5... 코드오타수정
 =======
 float difference_nomal_pos[2] = {};
 >>>>>>> parent of 9b30ee5... 코드오타수정
@@ -326,6 +330,7 @@ void S01Main::motion(bool pressed, int x, int y)
 	
 			//step2 re compute diffrence pos / vector size
 <<<<<<< HEAD
+<<<<<<< HEAD
 			difference_normal_pos.x = difference_new_btw_old.x / difference_size;
 			difference_normal_pos.y = difference_new_btw_old.y / difference_size;
 			//printf(" %3.3f \n", difference_size);
@@ -350,6 +355,12 @@ void S01Main::motion(bool pressed, int x, int y)
 			difference_nomal_pos[1] = difference_new_old[1] / difference_size;
 			//printf(" %3.3f \n", difference_size);
 
+=======
+			difference_nomal_pos[0] = difference_new_old[0] / difference_size;
+			difference_nomal_pos[1] = difference_new_old[1] / difference_size;
+			//printf(" %3.3f \n", difference_size);
+
+>>>>>>> parent of 9b30ee5... 코드오타수정
 			//step3 nomal add to radian range 360
 			result_degree[0] += ((difference_nomal_pos[0] * d_Sensitivity * assist_rotation));
 			if(result_degree[1] < 180)
