@@ -23,8 +23,14 @@ S02Main::~S02Main()
 void S02Main::init()
 {
 	radian = 90;
+
+	//인게임 bgm 재생초기화
 	m_SoundPlayer.init();
 	m_SoundPlayer.selectFolder("Resources\\BGM");
+
+	//걷기 효과음 재생 초기화
+	m_walkingSound.init();
+	m_walkingSound.selectFolder("Resources\\Sound");
 
 	m_Camera.setDistance(300.f);
 	m_Camera.setPerspective(45.f, 0.125f, 7'000.f);
@@ -49,6 +55,7 @@ void S02Main::init()
 void S02Main::exit()
 {
 	m_SoundPlayer.exit();
+	m_walkingSound.exit();
 }
 
 void S02Main::reset()
@@ -128,18 +135,22 @@ void S02Main::keyboard(int key, bool pressed, int x, int y, bool special)
 		{
 		case 'w':
 			wPress = true;
+			//m_walkingSound.play();
 			break;
 
 		case 'a':
 			aPress = true;
+			//m_walkingSound.play();
 			break;
 
 		case 's':
 			sPress = true;
+			//m_walkingSound.play();
 			break;
 
 		case 'd':
 			dPress = true;
+			//m_walkingSound.play();
 			break;
 
 		case ' ':
@@ -327,6 +338,8 @@ void S02Main::update(float fDeltaTime)
 		}
 
 		if (returnMainZ() > -60) {
+			if (m_walkingSound.playing() == false)
+				m_walkingSound.play();
 			if (boxCheckCount < 3) {
 				for (int o = 0; o < boxCheckCount; ++o)
 					objectBox[saveBoxIndex[o]].movingZ(-1);
@@ -400,6 +413,8 @@ void S02Main::update(float fDeltaTime)
 			objectBox[k].checkUpdate(0);
 
 		if (returnMainX() > -55) {
+			if (m_walkingSound.playing() == false)
+				m_walkingSound.play();
 			if (boxCheckCount < 3) {
 				for (int o = 0; o < boxCheckCount; ++o)
 					objectBox[saveBoxIndex[o]].movingX(-1);
@@ -464,6 +479,8 @@ void S02Main::update(float fDeltaTime)
 		}
 
 		if (returnMainZ() < 60) {
+			if (m_walkingSound.playing() == false)
+				m_walkingSound.play();
 			if (boxCheckCount < 3) {
 				for (int o = 0; o < boxCheckCount; ++o)
 					objectBox[saveBoxIndex[o]].movingZ(1);
@@ -535,6 +552,9 @@ void S02Main::update(float fDeltaTime)
 
 
 		if (returnMainX() < 55) {
+
+			if(m_walkingSound.playing() == false)
+				m_walkingSound.play();
 			if (boxCheckCount < 3) {
 				for (int o = 0; o < boxCheckCount; ++o)
 					objectBox[saveBoxIndex[o]].movingX(1);

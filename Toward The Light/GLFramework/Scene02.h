@@ -45,6 +45,7 @@ private:
 	NormalObject    m_Box[3];
 	NormalObject    m_wBox[3];
 	SoundPlayer		m_SoundPlayer;
+	SoundPlayer		m_walkingSound;
 	Box				objectBox[65];
 	Box				mainCharacter;
 	Light			mapLight[100];
