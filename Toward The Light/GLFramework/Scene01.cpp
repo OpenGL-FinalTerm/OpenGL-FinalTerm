@@ -28,21 +28,7 @@ Vector2 drag_old_postion;
 Vector2 drag_new_postion;
 Vector2 difference_new_btw_old; // between drag_old postion and drag new postion --> old - new
 float difference_size = 0.f;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-Vector3 difference_normal_pos;
-Vector3 old_normal_pos;
-Vector3 result_normal;
-=======
 float difference_nomal_pos[2] = {};
->>>>>>> parent of 9b30ee5... ì½”ë“œì˜¤íƒ€ìˆ˜ì •
-=======
-float difference_nomal_pos[2] = {};
->>>>>>> parent of 9b30ee5... ì½”ë“œì˜¤íƒ€ìˆ˜ì •
-=======
-float difference_nomal_pos[2] = {};
->>>>>>> parent of 9b30ee5... ì½”ë“œì˜¤íƒ€ìˆ˜ì •
 float result_degree[2] = {};
 float assist_rotation = 1;
 #define d_Sensitivity  3 //°¨µµ how many rotate camera
@@ -333,11 +319,8 @@ void S01Main::motion(bool pressed, int x, int y)
 			difference_size = abs(pow(difference_new_btw_old.x, 2) + pow(difference_new_btw_old.y, 2));
 	
 			//step2 re compute diffrence pos / vector size
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-			difference_normal_pos.x = difference_new_btw_old.x / difference_size;
-			difference_normal_pos.y = difference_new_btw_old.y / difference_size;
+
+			difference_nomal_pos.x = difference_new_btw_old.x / difference_size;
 			//printf(" %3.3f \n", difference_size);
 
 			//add ->  camera walking
@@ -355,29 +338,15 @@ void S01Main::motion(bool pressed, int x, int y)
 			result_degree[0] += ((difference_normal_pos.x * 1));
 			//result_degree[1] += ((difference_normal_pos.y * 1));
 			printf(" %f, %f \n", difference_normal_pos.x, difference_normal_pos.y);
-=======
-			difference_nomal_pos[0] = difference_new_old[0] / difference_size;
-			difference_nomal_pos[1] = difference_new_old[1] / difference_size;
+			difference_nomal_pos[0] = difference_new_btw_old[0] / difference_size;
+			difference_nomal_pos[1] = difference_new_btw_old[1] / difference_size;
 			//printf(" %3.3f \n", difference_size);
 
-=======
-			difference_nomal_pos[0] = difference_new_old[0] / difference_size;
-			difference_nomal_pos[1] = difference_new_old[1] / difference_size;
-			//printf(" %3.3f \n", difference_size);
-
->>>>>>> parent of 9b30ee5... ì½”ë“œì˜¤íƒ€ìˆ˜ì •
-=======
-			difference_nomal_pos[0] = difference_new_old[0] / difference_size;
-			difference_nomal_pos[1] = difference_new_old[1] / difference_size;
-			//printf(" %3.3f \n", difference_size);
-
->>>>>>> parent of 9b30ee5... ì½”ë“œì˜¤íƒ€ìˆ˜ì •
 			//step3 nomal add to radian range 360
 			result_degree[0] += ((difference_nomal_pos[0] * d_Sensitivity * assist_rotation));
 			if(result_degree[1] < 180)
 			result_degree[1] += ((difference_nomal_pos[1] * d_Sensitivity));
 			printf(" %f, %f \n", result_degree[0], result_degree[1]);
->>>>>>> parent of 9b30ee5... ì½”ë“œì˜¤íƒ€ìˆ˜ì •
 			//problem y pos error.... °ª ´©ÀûµÇ´Â°Å °íÄ¡±â
 		}
 		//¿¬»êÀÌ ³¡³­ ÈÄ¿¡ ÀúÀåÇÑ´Ù.
