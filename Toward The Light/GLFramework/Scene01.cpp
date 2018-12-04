@@ -75,6 +75,9 @@ void S01Main::init()
 	move_Eye[1] = tmpRect.y + 100;
 	move_Eye[2] = tmpRect.z;
 
+	result_degree[0] = 180;
+	result_degree[1] = 180;
+
 }
 
 void S01Main::exit()
