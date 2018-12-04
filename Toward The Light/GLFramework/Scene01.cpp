@@ -5,7 +5,7 @@
 #include "LoadMap.h"
 #include "Character.h"
 #include "BananaSetting.h"
-						// 11/30 오후 7시반 오지않는 바나나 클래스를 
+// 11/30 오후 7시반 오지않는 바나나 클래스를 
 static int whatBox;
 static int LightCount;
 
@@ -35,7 +35,7 @@ float view_rotate[2] = {};
 Vector2 foward;//player move
 
 
-#define d_Sensitivity  3 //감도 how many rotate camera
+#define d_Sensitivity  4 //감도 how many rotate camera
 
 S01Main::S01Main()
 {
@@ -56,8 +56,8 @@ void S01Main::init()
 	m_Camera.setSensitivity(10.f);
 
 	//for (int i = 0; i < 20; ++i) {
-	//	objectBox[i].CreateBox(rand() % 120 - 60, 10, rand() % 140 - 70);
-	//	objectBox[i].setColor(rand() % 255, rand() % 255, rand() % 255);
+	//   objectBox[i].CreateBox(rand() % 120 - 60, 10, rand() % 140 - 70);
+	//   objectBox[i].setColor(rand() % 255, rand() % 255, rand() % 255);
 	//}
 	tmpRect.x = -10;
 	tmpRect.y = 10;
@@ -69,7 +69,7 @@ void S01Main::init()
 
 	m_Camera.setEye(Eye);
 
-	
+
 
 	move_Eye[0] = tmpRect.x;
 	move_Eye[1] = tmpRect.y + 100;
@@ -129,8 +129,8 @@ void S01Main::render()
 
 
 	//카메라 정리 ---
-	
-	if(person_view_1){//1인칭
+
+	if (person_view_1) {//1인칭
 		move_Eye[0] = tmpRect.x;
 		//move_Eye[1] = tmpRect.y;
 		move_Eye[2] = tmpRect.z;
@@ -160,43 +160,37 @@ void S01Main::render()
 	}
 	else if (person_view_mouse) {
 		//eye 도 각도에 따라 바뀐다.
-		Eye.x = -sin(result_degree[0] * 3.141592 / 180) * (20 + view_rotate[0]) + tmpRect.x ;
-		Eye.y = 60  + tmpRect.y + view_rotate[1];
-		Eye.z = -cos(result_degree[0] * 3.141592 / 180) * (20 + view_rotate[2]) + tmpRect.z ;
+		Eye.x = -sin(result_degree[0] * 3.141592 / 180) * (20 + view_rotate[0]) + tmpRect.x;
+		Eye.y = tmpRect.y + view_rotate[1];
+		Eye.z = -cos(result_degree[0] * 3.141592 / 180) * (20 + view_rotate[0]) + tmpRect.z;
 
 		//각도에 맞춰서 카메라를 돌려준다.
 		//이때 카메라의 At 벡터 기준점은 eye가 아닌 바나나의 현재 위치입니다.
-		At.x = tmpRect.x +  sin(result_degree[0] * 3.141592 / 180) * 100;
+		At.x = tmpRect.x + sin(result_degree[0] * 3.141592 / 180) * 100;
 		//At.y = tmpRect.y + ((cos(result_degree[1] * 3.141592 / 180) * 50));
 		//At.z = tmpRect.z + ((cos(result_degree[0] * 3.141592 / 180) * 50) + (sin(result_degree[1] * 3.141592 / 180) * 50));
 		//At.z = tmpRect.z + ((cos(result_degree[0] * 3.141592 / 180) * 100));
-		At.y = 0;
-	
-	
+		At.y = 20;
+
+
 		//1인칭 뷰
 		At.z = tmpRect.z + ((cos(result_degree[0] * 3.141592 / 180) * 100));
 	}
-	
+
 	glPushMatrix();
 	banana_draw(tmpRect.x, tmpRect.y + 5, tmpRect.z, 0.5, IDLE, banana.rot.degree, result_degree[0]);
 	glPopMatrix();
 	if (person_view_mouse) {
 		m_Camera.setEye(Eye);
 		m_Camera.setTarget(At);
-		//glPushMatrix();
-		//{
-		//	glColor3f(1, 1, 1);
-		//	glTranslatef(-sin(result_degree[0] * 3.141592 / 180) * 20 + tmpRect.x, 50,  -cos(result_degree[0] * 3.141592 / 180) * 20 + tmpRect.z);
-		//	glutSolidCylinder(3, 3, 8, 8);
-		//}
-		//glPopMatrix();
+
 	}
 	else {
-//		m_Camera.setDistance(100);
+		//      m_Camera.setDistance(100);
 		m_Camera.setTarget(At);
 	}
 
-	
+
 
 	glPopMatrix();
 }
@@ -224,7 +218,7 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 	int i = 0;
 	BOOL check = FALSE;
 
-	
+
 
 	if (pressed)
 	{
@@ -243,12 +237,12 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 
 		case 's':
 			sPress = true;
-	
+
 			break;
 
 		case 'd':
 			dPress = true;
-		
+
 			break;
 
 		case ' ':
@@ -269,20 +263,19 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 			change_person_view_count += 1;
 			//1인칭
 			if (change_person_view_count % 2 == 0) {
-				
-				view_rotate[0] = 20;
-				view_rotate[1] = -20;
-				view_rotate[2] = 20;
+				//view_rotate[0] => 최소 범위 (20) 카메라의 회전반경을 나타냅니다. 
+				// view_rotate[1] => (20) 카메라의 높이를 나타냅니다. 
+				view_rotate[0] = 60;
+				view_rotate[1] = 60;
 
 			}
-			else if (change_person_view_count % 2 == 1) {			//2인칭
+			else if (change_person_view_count % 2 == 1) {         //3인칭
 
-				view_rotate[0] = -20;
-				view_rotate[1] = -40;
-				view_rotate[2] = -20;
+				view_rotate[0] = 40;
+				view_rotate[1] = -30;
 
 			}
-			
+
 			break;
 
 		case 'q':
@@ -298,7 +291,7 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 
 
 		}
-	
+
 	}
 	else {
 		if (key == 'w')
@@ -315,19 +308,19 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 
 void S01Main::mouse(int button, bool pressed, int x, int y)
 {
-	
+
 }
 
 void S01Main::motion(bool pressed, int x, int y)
 {
 	if (person_view_mouse) {
-	//m_Camera.rotate(x, y, true);
-		//get return motion pos
+		//m_Camera.rotate(x, y, true);
+		   //get return motion pos
 		drag_new_postion[0] = x;
 		drag_new_postion[1] = y;
 
 		if (pressed == false) {
-			//	printf("old x : %f, old y : %f // new x : %f, new y : %f\n", drag_old_postion[0], drag_old_postion[1], drag_new_postion[0], drag_new_postion[1]);
+			//   printf("old x : %f, old y : %f // new x : %f, new y : %f\n", drag_old_postion[0], drag_old_postion[1], drag_new_postion[0], drag_new_postion[1]);
 
 			difference_new_old[0] = drag_old_postion[0] - drag_new_postion[0];
 			difference_new_old[1] = drag_old_postion[1] - drag_new_postion[1];
@@ -342,19 +335,26 @@ void S01Main::motion(bool pressed, int x, int y)
 			}
 			difference_normal_pos[0] = difference_new_old[0] / difference_size;
 			difference_normal_pos[1] = difference_new_old[1] / difference_size;
-		
+
 			//step3 nomal add to radian range 360
 			result_degree[0] += difference_normal_pos[0];
 			//if(result_degree[1] < 180)
 			result_degree[1] += difference_normal_pos[1];
 
-			printf("normal: %f %f	size : %f \n", difference_new_old[0], difference_new_old[1], difference_size);
-			printf("normal: %f %f	", difference_normal_pos[0], difference_normal_pos[1]);
-			printf("degree: %f %f \n \n", result_degree[0], result_degree[1]);
+			if ((result_degree[0] > 360) || (result_degree[0] < -360)) {
+				result_degree[0] = 0;
+			}
+			if ((result_degree[1] > 360) || (result_degree[1] < -360)) {
+				result_degree[1] = 0;
+			}
+
+		//	printf("normal: %f %f   size : %f \n", difference_new_old[0], difference_new_old[1], difference_size);
+		//	printf("normal: %f %f   ", difference_normal_pos[0], difference_normal_pos[1]);
+		//	printf("degree: %f %f \n \n", result_degree[0], result_degree[1]);
 		}
 		//연산이 끝난 후에 저장한다.
-			drag_old_postion[0] = drag_new_postion[0];
-			drag_old_postion[1] = drag_new_postion[1];
+		drag_old_postion[0] = drag_new_postion[0];
+		drag_old_postion[1] = drag_new_postion[1];
 
 	}
 }
@@ -376,7 +376,7 @@ void S01Main::update(float fDeltaTime)
 		switch_sign *= -1;
 	}
 	banana.rot.degree += 0.1f * switch_sign;
-	
+
 	if (jump == TRUE && down == FALSE) {
 		tmpRect.y += 1;
 		tmpRect.jumpCount += 1;
@@ -442,8 +442,6 @@ void S01Main::update(float fDeltaTime)
 
 			if (boxLanding != true)
 				objectBox[k].movingY(-1);
-			
-			printf("x : %f, y : %f, z : %f \n", objectBox[k].returnBoxCenterX(), objectBox[k].returnBoxCenterY(), objectBox[k].returnBoxCenterZ());
 		}
 
 	}
@@ -452,15 +450,15 @@ void S01Main::update(float fDeltaTime)
 	if (wPress == true) {
 
 		if (person_view_mouse) {
-			tmpRect.x += foward_move.x ;
-			tmpRect.z += foward_move.z ;
+			tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
+			tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
 		}
 		else {
-		tmpRect.z -= 1;
+			tmpRect.z -= 1;
 		}
 		angle = 180;
 		mainCharacter.movingZ(-1);
-		
+
 		boxCheckCount = 0;
 		while (check == FALSE) {
 
@@ -504,7 +502,7 @@ void S01Main::update(float fDeltaTime)
 		else
 		{
 			tmpRect.z += 1;
-	
+
 		}
 
 		for (int k = 0; k < whatBox; ++k)
@@ -520,12 +518,11 @@ void S01Main::update(float fDeltaTime)
 	}
 
 	if (aPress == true) {
-		
+
 		if (person_view_mouse) {
 
-			tmpRect.x += (foward_move.x);
-		//	tmpRect.z += (foward_move.z);
-
+			tmpRect.x += (sin((result_degree[0] + 90) * 3.141592 / 180));
+			tmpRect.z += (cos((result_degree[0] + 90) * 3.141592 / 180));
 		}
 		else {
 			tmpRect.x -= 1;
@@ -594,8 +591,9 @@ void S01Main::update(float fDeltaTime)
 
 		if (person_view_mouse) {
 
-			tmpRect.x += (foward_move.x);
-			tmpRect.z += (foward_move.z);
+
+			tmpRect.x -= (sin((result_degree[0]) * 3.141592 / 180));
+			tmpRect.z -= (cos((result_degree[0]) * 3.141592 / 180));
 
 		}
 		else {
@@ -646,7 +644,7 @@ void S01Main::update(float fDeltaTime)
 		}
 		else
 		{
-		
+
 			tmpRect.z -= 1;
 
 		}
@@ -665,9 +663,9 @@ void S01Main::update(float fDeltaTime)
 	if (dPress == true) {
 
 		if (person_view_mouse) {
-			tmpRect.x -= (sin(result_degree[0] * 3.141592 / 180)) * 1;
-			tmpRect.z += (cos(result_degree[1] * 3.141592 / 180)) * 1;
 
+			tmpRect.x += (sin((result_degree[0] - 90) * 3.141592 / 180));
+			tmpRect.z += (cos((result_degree[0] - 90) * 3.141592 / 180));
 		}
 		else {
 			tmpRect.x += 1;
@@ -721,7 +719,7 @@ void S01Main::update(float fDeltaTime)
 		}
 		else
 		{
-		
+
 			tmpRect.x -= 1;
 
 		}
@@ -792,7 +790,7 @@ void S01Main::update(float fDeltaTime)
 			radian = 360 + 45;
 
 	}
-	
+
 }
 
 
@@ -833,6 +831,6 @@ void S01Main::LightSetting()
 }
 
 void S01Main::camera_install(int x, int y) {
-	printf("ok \n");
+//	printf("ok \n");
 
 }
