@@ -161,8 +161,8 @@ void S01Main::render()
 	else if (person_view_mouse) {
 		//eye 도 각도에 따라 바뀐다.
 		Eye.x = -sin(result_degree[0] * 3.141592 / 180) * (20 + view_rotate[0]) + tmpRect.x ;
-		Eye.y = 60  + tmpRect.y + view_rotate[1];
-		Eye.z = -cos(result_degree[0] * 3.141592 / 180) * (20 + view_rotate[2]) + tmpRect.z ;
+		Eye.y = tmpRect.y + view_rotate[1];
+		Eye.z = -cos(result_degree[0] * 3.141592 / 180) * (20 + view_rotate[0]) + tmpRect.z ;
 
 		//각도에 맞춰서 카메라를 돌려준다.
 		//이때 카메라의 At 벡터 기준점은 eye가 아닌 바나나의 현재 위치입니다.
@@ -263,20 +263,19 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 			change_person_view_count += 1;
 			//1인칭
 			if (change_person_view_count % 2 == 0) {
-				
-				view_rotate[0] = 20;
-				view_rotate[1] = -20;
-				view_rotate[2] = 20;
+				//view_rotate[0] => 최소 범위 (20) 카메라의 회전반경을 나타냅니다. 
+				// view_rotate[1] => (20) 카메라의 높이를 나타냅니다. 
+				view_rotate[0] = 60;
+				view_rotate[1] = 50;
 
 			}
-			else if (change_person_view_count % 2 == 1) {			//2인칭
+			else if (change_person_view_count % 2 == 1) {			//3인칭
 
-				view_rotate[0] = -20;
-				view_rotate[1] = -40;
-				view_rotate[2] = -20;
+				view_rotate[0] = 40;
+				view_rotate[1] = 30;
 
 			}
-			
+			printf("%d \n", change_person_view_count%2);
 			break;
 
 		case 'q':
