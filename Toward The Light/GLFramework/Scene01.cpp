@@ -28,7 +28,7 @@ float drag_old_postion[2] = {};
 float drag_new_postion[2] = {};
 float difference_new_old[2] = {}; // between drag_old postion and drag new postion --> old - new
 float difference_size = 0.f;
-float difference_nomal_pos[2] = {};
+float difference_normal_pos[2] = {};
 float result_degree[2] = {};
 float assist_rotation = 1;
 #define d_Sensitivity  3 //감도 how many rotate camera
@@ -314,19 +314,19 @@ void S01Main::motion(bool pressed, int x, int y)
 			difference_new_old[0] = drag_old_postion[0] - drag_new_postion[0];
 			difference_new_old[1] = drag_old_postion[1] - drag_new_postion[1];
 
-			//difference_new_old nomalized
+			//difference_new_old normalized
 			//step 1 diffrence vetor size compute
 			difference_size = abs(pow(difference_new_old[0], 2) + pow(difference_new_old[1], 2));
 			
 			//step2 re compute diffrence pos / vector size
-			difference_nomal_pos[0] = difference_new_old[0] / difference_size;
-			difference_nomal_pos[1] = difference_new_old[1] / difference_size;
+			difference_normal_pos[0] = difference_new_old[0] / difference_size;
+			difference_normal_pos[1] = difference_new_old[1] / difference_size;
 			//printf(" %3.3f \n", difference_size);
 
-			//step3 nomal add to radian range 360
-			result_degree[0] += ((difference_nomal_pos[0] * d_Sensitivity * assist_rotation));
+			//step3 normal add to radian range 360
+			result_degree[0] += ((difference_normal_pos[0] * d_Sensitivity * assist_rotation));
 			if(result_degree[1] < 180)
-			result_degree[1] += ((difference_nomal_pos[1] * d_Sensitivity));
+			result_degree[1] += ((difference_normal_pos[1] * d_Sensitivity));
 			printf(" %f, %f \n", result_degree[0], result_degree[1]);
 			//problem y pos error.... 값 누적되는거 고치기
 		}
