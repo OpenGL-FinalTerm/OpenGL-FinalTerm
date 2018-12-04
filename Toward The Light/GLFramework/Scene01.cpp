@@ -24,11 +24,13 @@ bool person_view_mouse = true;
 
 int change_person_view_count = 0;
 
-float drag_old_postion[2] = {};
-float drag_new_postion[2] = {};
-float difference_new_old[2] = {}; // between drag_old postion and drag new postion --> old - new
+Vector2 drag_old_postion;
+Vector2 drag_new_postion;
+Vector2 difference_new_btw_old; // between drag_old postion and drag new postion --> old - new
 float difference_size = 0.f;
-float difference_normal_pos[2] = {};
+Vector3 difference_normal_pos;
+Vector3 old_normal_pos;
+Vector3 result_normal;
 float result_degree[2] = {};
 float assist_rotation = 1;
 #define d_Sensitivity  3 //감도 how many rotate camera
@@ -65,7 +67,7 @@ void S01Main::init()
 
 	m_Camera.setEye(Eye);
 
-	
+	result_degree[1] = -45;
 
 	move_Eye[0] = tmpRect.x;
 	move_Eye[1] = tmpRect.y + 100;
@@ -305,33 +307,43 @@ void S01Main::motion(bool pressed, int x, int y)
 	if (person_view_mouse) {
 	//m_Camera.rotate(x, y, true);
 		//get return motion pos
-		drag_new_postion[0] = (DEF_WIN_WIDTH / 2 - x);
-		drag_new_postion[1] = -(DEF_WIN_HEIGHT / 2 - y );
+		drag_new_postion.x = (DEF_WIN_WIDTH / 2 - x);
+		drag_new_postion.y = -(DEF_WIN_HEIGHT / 2 - y );
 
 		if (pressed == false) {
 			//	printf("old x : %f, old y : %f // new x : %f, new y : %f\n", drag_old_postion[0], drag_old_postion[1], drag_new_postion[0], drag_new_postion[1]);
 
-			difference_new_old[0] = drag_old_postion[0] - drag_new_postion[0];
-			difference_new_old[1] = drag_old_postion[1] - drag_new_postion[1];
+			difference_new_btw_old.x = drag_old_postion.x - drag_new_postion.x;
+			difference_new_btw_old.y = drag_old_postion.y - drag_new_postion.y;
 
 			//difference_new_old normalized
 			//step 1 diffrence vetor size compute
-			difference_size = abs(pow(difference_new_old[0], 2) + pow(difference_new_old[1], 2));
-			
+			difference_size = abs(pow(difference_new_btw_old.x, 2) + pow(difference_new_btw_old.y, 2));
+	
 			//step2 re compute diffrence pos / vector size
-			difference_normal_pos[0] = difference_new_old[0] / difference_size;
-			difference_normal_pos[1] = difference_new_old[1] / difference_size;
+			difference_normal_pos.x = difference_new_btw_old.x / difference_size;
+			difference_normal_pos.y = difference_new_btw_old.y / difference_size;
 			//printf(" %3.3f \n", difference_size);
 
+			//add ->  camera walking
+			if (0 < difference_normal_pos.x)
+				result_normal.x = 1;
+			else
+				result_normal.x = -1;
+
+			if (0 < difference_normal_pos.y)
+				result_normal.y = 1;
+			else
+				result_normal.y = -1;
+
 			//step3 normal add to radian range 360
-			result_degree[0] += ((difference_normal_pos[0] * d_Sensitivity * assist_rotation));
-			if(result_degree[1] < 180)
-			result_degree[1] += ((difference_normal_pos[1] * d_Sensitivity));
-			printf(" %f, %f \n", result_degree[0], result_degree[1]);
+			result_degree[0] += ((difference_normal_pos.x * 1));
+			//result_degree[1] += ((difference_normal_pos.y * 1));
+			printf(" %f, %f \n", difference_normal_pos.x, difference_normal_pos.y);
 			//problem y pos error.... 값 누적되는거 고치기
 		}
 		//연산이 끝난 후에 저장한다.
-		drag_old_postion[0] = drag_new_postion[0], drag_old_postion[1] = drag_new_postion[1];
+		drag_old_postion.x = drag_new_postion.x, drag_old_postion.y = drag_new_postion.y;
 		
 	}
 }
