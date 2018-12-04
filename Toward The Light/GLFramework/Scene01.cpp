@@ -24,8 +24,8 @@ bool person_view_mouse = true;
 
 int change_person_view_count = 0;
 
-float drag_old_postion[2] = {};
-float drag_new_postion[2] = {};
+int drag_old_postion[2] = {};
+int drag_new_postion[2] = {};
 float difference_new_old[2] = {}; // between drag_old postion and drag new postion --> old - new
 float difference_size = 0.f;
 float difference_nomal_pos[2] = {};
@@ -164,8 +164,10 @@ void S01Main::render()
 		//각도에 맞춰서 카메라를 돌려준다.
 		//이때 카메라의 At 벡터 기준점은 eye가 아닌 바나나의 현재 위치입니다.
 		At.x = tmpRect.x +  sin(result_degree[0] * 3.141592 / 180) * 50;
-		At.y = tmpRect.y + ((cos(result_degree[1] * 3.141592 / 180) * 50));
-		At.z = tmpRect.z + ((cos(result_degree[0] * 3.141592 / 180) * 50) + (sin(result_degree[1] * 3.141592 / 180) * 50));
+		//At.y = tmpRect.y + ((cos(result_degree[1] * 3.141592 / 180) * 50));
+		//At.z = tmpRect.z + ((cos(result_degree[0] * 3.141592 / 180) * 50) + (sin(result_degree[1] * 3.141592 / 180) * 50));
+		At.z = tmpRect.z + ((cos(result_degree[0] * 3.141592 / 180) * 50));
+		At.y = 0;
 	}
 	
 	glPushMatrix();
@@ -297,7 +299,7 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 
 void S01Main::mouse(int button, bool pressed, int x, int y)
 {
-
+	
 }
 
 void S01Main::motion(bool pressed, int x, int y)
@@ -305,8 +307,8 @@ void S01Main::motion(bool pressed, int x, int y)
 	if (person_view_mouse) {
 	//m_Camera.rotate(x, y, true);
 		//get return motion pos
-		drag_new_postion[0] = (DEF_WIN_WIDTH / 2 - x);
-		drag_new_postion[1] = -(DEF_WIN_HEIGHT / 2 - y );
+		drag_new_postion[0] = x;
+		drag_new_postion[1] = y;
 
 		if (pressed == false) {
 			//	printf("old x : %f, old y : %f // new x : %f, new y : %f\n", drag_old_postion[0], drag_old_postion[1], drag_new_postion[0], drag_new_postion[1]);
@@ -316,22 +318,24 @@ void S01Main::motion(bool pressed, int x, int y)
 
 			//difference_new_old nomalized
 			//step 1 diffrence vetor size compute
-			difference_size = abs(pow(difference_new_old[0], 2) + pow(difference_new_old[1], 2));
-			
+			difference_size = sqrt(pow(difference_new_old[0], 2) + pow(difference_new_old[1], 2));
+
 			//step2 re compute diffrence pos / vector size
 			difference_nomal_pos[0] = difference_new_old[0] / difference_size;
 			difference_nomal_pos[1] = difference_new_old[1] / difference_size;
-			//printf(" %3.3f \n", difference_size);
-
+		
 			//step3 nomal add to radian range 360
-			result_degree[0] += ((difference_nomal_pos[0] * d_Sensitivity * assist_rotation));
-			if(result_degree[1] < 180)
-			result_degree[1] += ((difference_nomal_pos[1] * d_Sensitivity));
-			printf(" %f, %f \n", result_degree[0], result_degree[1]);
-			//problem y pos error.... 값 누적되는거 고치기
+			result_degree[0] += difference_nomal_pos[0];
+			//if(result_degree[1] < 180)
+			result_degree[1] += difference_nomal_pos[1];
+
+			printf("nomal: %f %f	size : %f \n", difference_new_old[0], difference_new_old[1], difference_size);
+			printf("nomal: %f %f	", difference_nomal_pos[0], difference_nomal_pos[1]);
+			printf("degree: %f %f \n \n", result_degree[0], result_degree[1]);
 		}
 		//연산이 끝난 후에 저장한다.
-		drag_old_postion[0] = drag_new_postion[0], drag_old_postion[1] = drag_new_postion[1];
+		drag_old_postion[0] = drag_new_postion[0];
+		drag_old_postion[1] = drag_new_postion[1];
 		
 	}
 }
@@ -425,7 +429,7 @@ void S01Main::update(float fDeltaTime)
 		if (person_view_mouse) {
 
 			tmpRect.x += (sin(result_degree[0] * 3.141592 / 180)) * 1;
-			tmpRect.z += (cos(result_degree[0] * 3.141592 / 180)) * 1;
+			tmpRect.z += (cos(result_degree[1] * 3.141592 / 180)) * 1;
 
 		}
 		else {
@@ -497,7 +501,7 @@ void S01Main::update(float fDeltaTime)
 		if (person_view_mouse) {
 
 			tmpRect.x += (sin(result_degree[0] * 3.141592 / 180)) * 1 / 2;
-			tmpRect.z -= (cos(result_degree[0] * 3.141592 / 180)) * 1 / 2;
+			tmpRect.z -= (cos(result_degree[1] * 3.141592 / 180)) * 1 / 2;
 
 		}
 		else {
@@ -568,7 +572,7 @@ void S01Main::update(float fDeltaTime)
 		if (person_view_mouse) {
 
 			tmpRect.x -= (sin(result_degree[0] * 3.141592 / 180)) * 1;
-			tmpRect.z -= (cos(result_degree[0] * 3.141592 / 180)) * 1;
+			tmpRect.z -= (cos(result_degree[1] * 3.141592 / 180)) * 1;
 		}
 		else {
 			tmpRect.z += 1;
@@ -638,7 +642,7 @@ void S01Main::update(float fDeltaTime)
 
 		if (person_view_mouse) {
 			tmpRect.x -= (sin(result_degree[0] * 3.141592 / 180)) * 1;
-			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180)) * 1;
+			tmpRect.z += (cos(result_degree[1] * 3.141592 / 180)) * 1;
 
 		}
 		else {
