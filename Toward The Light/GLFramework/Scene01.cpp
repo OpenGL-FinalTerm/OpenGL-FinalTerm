@@ -10,29 +10,7 @@ static int whatBox;
 static int LightCount;
 
 static int angle = 0;
-Vector3 Eye;
-Vector3 At;
-int move_Eye[3];
-float camera_deree[3];
-Vector3 foward_move; //나아가야하는 방향
 
-
-
-bool person_view_1 = false;
-bool person_view_3 = false;
-bool person_view_mouse = true;
-
-int change_person_view_count = 0;
-
-int drag_old_postion[2] = {};
-int drag_new_postion[2] = {};
-float difference_new_old[2] = {}; // between drag_old postion and drag new postion --> old - new
-float difference_size = 1.f;
-float difference_normal_pos[2] = {};
-float result_degree[2] = {};
-float assist_rotation = 1;
-float view_rotate[2] = {};
-Vector2 foward;//player move
 
 
 #define d_Sensitivity  3 //감도 how many rotate camera
@@ -47,6 +25,7 @@ S01Main::~S01Main()
 
 void S01Main::init()
 {
+	ShowCursor(false);
 	radian = 90;
 	m_SoundPlayer.init();
 	m_SoundPlayer.selectFolder("Resources\\BGM");

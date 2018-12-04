@@ -12,6 +12,7 @@ static int LightCount = 4;
 static int angle = 0;
 
 
+
 S02Main::S02Main()
 {
 }
