@@ -26,6 +26,7 @@ S01Main::~S01Main()
 void S01Main::init()
 {
 	ShowCursor(false);
+	glfwDisable(GLFW_MOUSE_CURSOR);
 	radian = 90;
 	m_SoundPlayer.init();
 	m_SoundPlayer.selectFolder("Resources\\BGM");
@@ -204,7 +205,25 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 		switch (key)
 		{
 		case 'w':
-			wPress = true;
+			if (result_degree[0] > 0 && result_degree[0] < 90) {
+				wPress = true;
+				dPress = true;
+			}
+
+			else if (result_degree[0] > 90 && result_degree[0] < 180) {
+				wPress = true;
+				aPress = true;
+			}
+
+			else if (result_degree[0] > 180 && result_degree[0] < 270) {
+				sPress = true;
+				aPress = true;
+			}
+
+			else if (result_degree[0] > 270 && result_degree[0] < 360) {
+				sPress = true;
+				dPress = true;
+			}
 			break;
 
 		case 'a':
@@ -273,14 +292,46 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 	
 	}
 	else {
-		if (key == 'w')
-			wPress = false;
-		else if (key == 'a')
-			aPress = false;
-		else if (key == 's')
-			sPress = false;
-		else if (key == 'd')
-			dPress = false;
+		if (key == 'w') {
+			if(wPress == true)
+				wPress = false;
+			if (aPress == true)
+				aPress = false;
+			if (sPress == true)
+				sPress = false;
+			if (dPress == true)
+				dPress = false;
+		}
+		else if (key == 'a') {
+			if (wPress == true)
+				wPress = false;
+			if (aPress == true)
+				aPress = false;
+			if (sPress == true)
+				sPress = false;
+			if (dPress == true)
+				dPress = false;
+		}
+		else if (key == 's') {
+			if (wPress == true)
+				wPress = false;
+			if (aPress == true)
+				aPress = false;
+			if (sPress == true)
+				sPress = false;
+			if (dPress == true)
+				dPress = false;
+		}
+		else if (key == 'd') {
+			if (wPress == true)
+				wPress = false;
+			if (aPress == true)
+				aPress = false;
+			if (sPress == true)
+				sPress = false;
+			if (dPress == true)
+				dPress = false;
+		}
 	}
 
 }
@@ -433,7 +484,7 @@ void S01Main::update(float fDeltaTime)
 			tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
 		}
 		else {
-		tmpRect.z -= 1;
+		tmpRect.z -= (cos(result_degree[0] * 3.141592 / 180));
 		}
 		angle = 180;
 		mainCharacter.movingZ(-1);
@@ -476,11 +527,11 @@ void S01Main::update(float fDeltaTime)
 
 		if (boxCheckCount < 3) {
 			for (int o = 0; o < boxCheckCount; ++o)
-				objectBox[saveBoxIndex[o]].movingZ(-1);
+				objectBox[saveBoxIndex[o]].movingZ((cos(result_degree[0] * 3.141592 / 180)));
 		}
 		else
 		{
-			tmpRect.z += 1;
+			tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
 	
 		}
 
@@ -504,10 +555,10 @@ void S01Main::update(float fDeltaTime)
 			tmpRect.z += (cos((result_degree[0] + 90) * 3.141592 / 180));
 		}
 		else {
-			tmpRect.x -= 1;
+			tmpRect.x -= (sin((result_degree[0] + 90) * 3.141592 / 180));
 		}
 		angle = 270;
-		mainCharacter.movingX(-1);
+		mainCharacter.movingX(-(sin((result_degree[0] + 90) * 3.141592 / 180)));
 		boxCheckCount = 0;
 		while (check == FALSE) {
 
@@ -551,11 +602,11 @@ void S01Main::update(float fDeltaTime)
 
 		if (boxCheckCount < 3) {
 			for (int o = 0; o < boxCheckCount; ++o)
-				objectBox[saveBoxIndex[o]].movingX(-1);
+				objectBox[saveBoxIndex[o]].movingX(-(sin((result_degree[0] + 90) * 3.141592 / 180)));
 		}
 		else
 		{
-			tmpRect.x += 1;
+			tmpRect.x += (sin((result_degree[0] + 90) * 3.141592 / 180));
 		}
 
 		boxCheckCount = 0;
@@ -576,10 +627,10 @@ void S01Main::update(float fDeltaTime)
 
 		}
 		else {
-			tmpRect.z += 1;
+			tmpRect.z += (cos((result_degree[0]) * 3.141592 / 180));
 		}
 		angle = 180;
-		mainCharacter.movingZ(1);
+		mainCharacter.movingZ((cos((result_degree[0]) * 3.141592 / 180)));
 		boxCheckCount = 0;
 		while (check == FALSE) {
 
@@ -619,12 +670,12 @@ void S01Main::update(float fDeltaTime)
 
 		if (boxCheckCount < 3) {
 			for (int o = 0; o < boxCheckCount; ++o)
-				objectBox[saveBoxIndex[o]].movingZ(1);
+				objectBox[saveBoxIndex[o]].movingZ((cos((result_degree[0]) * 3.141592 / 180)));
 		}
 		else
 		{
 		
-			tmpRect.z -= 1;
+			tmpRect.z -= (cos((result_degree[0]) * 3.141592 / 180));
 
 		}
 		for (int k = 0; k < whatBox; ++k)
@@ -647,11 +698,11 @@ void S01Main::update(float fDeltaTime)
 			tmpRect.z += (cos((result_degree[0] - 90) * 3.141592 / 180));
 		}
 		else {
-			tmpRect.x += 1;
+			tmpRect.x += (sin((result_degree[0] - 90) * 3.141592 / 180));
 
 		}
 		angle = 90;
-		mainCharacter.movingX(1);
+		mainCharacter.movingX((sin((result_degree[0] - 90) * 3.141592 / 180)));
 		boxCheckCount = 0;
 		while (check == FALSE) {
 
@@ -694,12 +745,12 @@ void S01Main::update(float fDeltaTime)
 
 		if (boxCheckCount < 3) {
 			for (int o = 0; o < boxCheckCount; ++o)
-				objectBox[saveBoxIndex[o]].movingX(1);
+				objectBox[saveBoxIndex[o]].movingX((sin((result_degree[0] - 90) * 3.141592 / 180)));
 		}
 		else
 		{
 		
-			tmpRect.x -= 1;
+			tmpRect.x -= (sin((result_degree[0] - 90) * 3.141592 / 180));
 
 		}
 		boxCheckCount = 0;
