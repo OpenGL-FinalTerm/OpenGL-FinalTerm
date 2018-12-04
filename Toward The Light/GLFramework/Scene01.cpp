@@ -47,7 +47,7 @@ void S01Main::init()
 	LightCount = LoadLight(mapLight, 2);
 
 	m_Camera.setEye(Eye);
-
+	result_degree[0] = 180;
 
 
 	move_Eye[0] = tmpRect.x;
@@ -139,21 +139,25 @@ void S01Main::render()
 	}
 	else if (person_view_mouse) {
 		//eye 도 각도에 따라 바뀐다.
+		//Eye.x = -sin(result_degree[0] * 3.141592 / 180) * (20 + view_rotate[0]) + tmpRect.x;
+		//Eye.y = tmpRect.y  + -((cos(result_degree[1] * 3.141592 / 180) * (50 + view_rotate[1])));
+		//Eye.z = -cos(result_degree[0] * 3.141592 / 180) * (20 + view_rotate[0]) + tmpRect.z + -(sin(result_degree[1] * 3.141592 / 180) * (50 + view_rotate[1]));
+		
 		Eye.x = -sin(result_degree[0] * 3.141592 / 180) * (20 + view_rotate[0]) + tmpRect.x;
 		Eye.y = tmpRect.y + view_rotate[1];
 		Eye.z = -cos(result_degree[0] * 3.141592 / 180) * (20 + view_rotate[0]) + tmpRect.z;
+		
 
 		//각도에 맞춰서 카메라를 돌려준다.
 		//이때 카메라의 At 벡터 기준점은 eye가 아닌 바나나의 현재 위치입니다.
-		At.x = tmpRect.x + sin(result_degree[0] * 3.141592 / 180) * 100;
+		//At.x = tmpRect.x + sin(result_degree[0] * 3.141592 / 180) * 100;
 		//At.y = tmpRect.y + ((cos(result_degree[1] * 3.141592 / 180) * 50));
-		//At.z = tmpRect.z + ((cos(result_degree[0] * 3.141592 / 180) * 50) + (sin(result_degree[1] * 3.141592 / 180) * 50));
-		//At.z = tmpRect.z + ((cos(result_degree[0] * 3.141592 / 180) * 100));
-		At.y = 20;
+		//At.z = tmpRect.z + ((cos(result_degree[0] * 3.141592 / 180) * 100) + (sin(result_degree[1] * 3.141592 / 180) * 50));
 
-
-		//1인칭 뷰
+		At.x = tmpRect.x + sin(result_degree[0] * 3.141592 / 180) * 100;
 		At.z = tmpRect.z + ((cos(result_degree[0] * 3.141592 / 180) * 100));
+		At.y = 10;
+
 	}
 
 	glPushMatrix();
@@ -204,25 +208,29 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 		switch (key)
 		{
 		case 'w':
-			if (result_degree[0] > 0 && result_degree[0] < 90) {
+			if ((180 - 45) < result_degree[0] && result_degree[0] < (180 + 45)) {
 				wPress = true;
 				dPress = true;
 			}
 
-			else if (result_degree[0] > 90 && result_degree[0] < 180) {
+			else if ((270 - 45) < result_degree[0] && result_degree[0] < (270 + 45)) {
 				wPress = true;
 				aPress = true;
 			}
 
-			else if (result_degree[0] > 180 && result_degree[0] < 270) {
+			else if ((360 - 45) < result_degree[0] && result_degree[0] < (0 + 45)) {
 				sPress = true;
 				aPress = true;
 			}
 
-			else if (result_degree[0] > 270 && result_degree[0] < 360) {
+			else if ((90 - 45) < result_degree[0] && result_degree[0] < (90 + 45)) {
 				sPress = true;
 				dPress = true;
 			}
+			else {
+				wPress = true;
+			}
+			
 			break;
 
 		case 'a':
@@ -368,12 +376,12 @@ void S01Main::motion(bool pressed, int x, int y)
 			//step3 nomal add to radian range 360
 			result_degree[0] += difference_normal_pos[0];
 			//if(result_degree[1] < 180)
-			result_degree[1] += difference_normal_pos[1];
+			result_degree[1] -= difference_normal_pos[1];
 
-			if ((result_degree[0] > 360) || (result_degree[0] < -360)) {
+			if ((result_degree[0] > 360) || (result_degree[0] < 0)) {
 				result_degree[0] = 0;
 			}
-			if ((result_degree[1] > 360) || (result_degree[1] < -360)) {
+			if ((result_degree[1] > 180) || (result_degree[1] < 0)) {
 				result_degree[1] = 0;
 			}
 
