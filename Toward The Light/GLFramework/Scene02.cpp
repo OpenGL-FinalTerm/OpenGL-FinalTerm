@@ -230,15 +230,50 @@ void S02Main::update(float fDeltaTime)
 			if (objectBox[i].returnBoxCenterX() - 10 < returnMainX() + 5 && objectBox[i].returnBoxCenterX() + 10 > returnMainX() - 5 && objectBox[i].returnBoxCenterZ() + 10 > returnMainZ() - 5 && objectBox[i].returnBoxCenterZ() - 10 < returnMainZ() + 5 && tmpRect.y < objectBox[i].returnBoxCenterY() + 20) {
 				down = FALSE;
 				tmpcheck = true;
+
+				if (depthCheck >= 50) {
+					if (dep == false) {
+						dep = true;
+						depthCheck = 0;
+					}
+					else {
+						wPress = false;
+						aPress = false;
+						sPress = false;
+						dPress = false;
+						dep = false;
+						depthCheck = 0;
+						m_Framework->toScene("Ending");
+					}
+				}
+				depthCheck = 0;
 			}
 		}
 
 		if (tmpRect.y > 10 && tmpcheck == false) {
 			tmpRect.y -= 1;
+			depthCheck++;
 		}
 
-		if (tmpRect.y <= 10 && tmpcheck == false)
+		if (tmpRect.y <= 10 && tmpcheck == false) {
 			down = FALSE;
+			if (depthCheck >= 50) {
+				if (dep == false) {
+					dep = true;
+					depthCheck = 0;
+				}
+				else {
+					wPress = false;
+					aPress = false;
+					sPress = false;
+					dPress = false;
+					dep = false;
+					depthCheck = 0;
+					m_Framework->toScene("Ending");
+				}
+			}
+			depthCheck = 0;
+		}
 
 		tmpcheck = false;
 	}

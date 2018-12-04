@@ -38,8 +38,11 @@ private:
 	float			oX = 0, oY = 0;
 	float			rY = 0;
 	float			radian;
-	int switch_sign = -1;
-	int Time_count;
+	int				switch_sign = -1;
+	int				Time_count;
+	int				depthCheck = 0;
+	bool			dep = false; // 시작할때 낙하하는것도 체크하여서 만들어둠
+
 	Camera			m_Camera;
 	NormalObject	m_Plane;
 	NormalObject    m_Box[3];
