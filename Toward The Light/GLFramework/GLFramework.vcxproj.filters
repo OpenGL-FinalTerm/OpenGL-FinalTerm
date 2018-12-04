@@ -102,9 +102,6 @@
     <ClCompile Include="Scene00_Main.cpp">
       <Filter>Source Files\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="Scene01.cpp">
-      <Filter>Source Files\Scenes</Filter>
-    </ClCompile>
     <ClCompile Include="NormalObject.cpp">
       <Filter>Source Files\Utilities\3D Objects</Filter>
     </ClCompile>
@@ -139,6 +136,12 @@
       <Filter>Source Files\Base</Filter>
     </ClCompile>
     <ClCompile Include="Scene04_Ending.cpp">
+      <Filter>Source Files\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Wall.cpp">
+      <Filter>Source Files\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene01.cpp">
       <Filter>Source Files\Scenes</Filter>
     </ClCompile>
   </ItemGroup>
@@ -229,6 +232,9 @@
     </ClInclude>
     <ClInclude Include="Scene04_Ending.h">
       <Filter>Header Files\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Wall.h">
+      <Filter>Header Files\Base</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -77,6 +77,11 @@ void Box::drawBox(float size)
 	glPopMatrix();
 }
 
+void Box::pickUp(bool check)
+{
+	pick = check;
+}
+
 float Box::returnBoxCenterX() {
 	return x + addX;
 }
@@ -91,4 +96,9 @@ float Box::returnBoxCenterZ() {
 
 bool Box::returnCheck() {
 	return check;
+}
+
+bool Box::returnPickUp()
+{
+	return pick;
 }

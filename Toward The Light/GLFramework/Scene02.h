@@ -10,6 +10,7 @@
 #include "Light.h"
 #include "BananaSetting.h"
 #include "Character.h"
+#include "Wall.h"
 
 class S02Main : public GLScene
 {
@@ -37,13 +38,17 @@ private:
 	float			oX = 0, oY = 0;
 	float			rY = 0;
 	float			radian;
-	int switch_sign = -1;
-	int Time_count;
+	int				switch_sign = -1;
+	int				Time_count;
+	int				depthCheck = 0;
+	bool			dep = false; // 시작할때 낙하하는것도 체크하여서 만들어둠
+
 	Camera			m_Camera;
 	NormalObject	m_Plane;
 	NormalObject    m_Box[3];
 	NormalObject    m_wBox[3];
 	SoundPlayer		m_SoundPlayer;
+	SoundPlayer		m_walkingSound;
 	Box				objectBox[65];
 	Box				mainCharacter;
 	Light			mapLight[100];

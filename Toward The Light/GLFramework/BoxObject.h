@@ -18,6 +18,8 @@ private:
 	float colorG;
 	float colorB;
 
+	bool pick = false;
+
 
 public:
 
@@ -35,10 +37,15 @@ public:
 	virtual void addZrate(int adZ);
 	virtual void clearAdd();
 	virtual void drawBox(float size);
+	virtual void pickUp(bool check);
+
+	virtual bool returnPickUp();
+	virtual bool returnCheck();
+
 	virtual float returnBoxCenterX();
 	virtual float returnBoxCenterY();
 	virtual float returnBoxCenterZ();
-	virtual bool returnCheck();
+
 };
 
 
