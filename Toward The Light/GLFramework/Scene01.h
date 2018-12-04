@@ -55,6 +55,11 @@ private:
 	bool		person_view_3 = false;
 	bool		person_view_mouse = true;
 	bool		s;
+	bool		keyW = false;
+	bool		keyA = false;
+	bool		keyS = false;
+	bool		keyD = false;
+	bool		keyDown = false;
 
 	float		difference_new_old[2] = {}; // between drag_old postion and drag new postion --> old - new
 	float		difference_size = 1.f;

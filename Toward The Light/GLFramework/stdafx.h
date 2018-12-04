@@ -20,6 +20,7 @@
 /* GL */
 #include "Dependencies/GL/glew.h"
 #include "Dependencies/GL/freeglut.h"
+#include <gl/glut.h>
 
 const int DEF_WIN_HEIGHT = 900;
 const int DEF_WIN_WIDTH = 1500;

@@ -26,7 +26,6 @@ S01Main::~S01Main()
 void S01Main::init()
 {
 	ShowCursor(false);
-	glfwDisable(GLFW_MOUSE_CURSOR);
 	radian = 90;
 	m_SoundPlayer.init();
 	m_SoundPlayer.selectFolder("Resources\\BGM");
@@ -205,42 +204,54 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 		switch (key)
 		{
 		case 'w':
-			if (result_degree[0] > 0 && result_degree[0] < 90) {
+			keyW = true;
+			if(result_degree[0] > 90 && result_degree[0] < 180){
+				aPress = false;
+				sPress = false;
 				wPress = true;
 				dPress = true;
-			}
-
-			else if (result_degree[0] > 90 && result_degree[0] < 180) {
-				wPress = true;
-				aPress = true;
 			}
 
 			else if (result_degree[0] > 180 && result_degree[0] < 270) {
+				sPress = false;
+				dPress = false;
+				wPress = true;
+				aPress = true;
+			}
+			else if (result_degree[0] > 270 && result_degree[0] < 360) {
+				wPress = false;
+				dPress = false;
 				sPress = true;
 				aPress = true;
 			}
-
-			else if (result_degree[0] > 270 && result_degree[0] < 360) {
+			else if (result_degree[0] > 0 && result_degree[0] < 90) {
+				wPress = false;
+				aPress = false;
 				sPress = true;
 				dPress = true;
 			}
+			
+			keyDown = true;
 			break;
 
 		case 'a':
+			keyA = true;
 			aPress = true;
 			//camera_deree[0] = Eye.x * cos(radian * 3.14) + Eye.z * -sin(radian * 3.14);
 			//camera_deree[2] = Eye.x * sin(radian * 3.14) + Eye.z * cos(radian * 3.14);
-
+			keyDown = true;
 			break;
 
 		case 's':
+			keyS = true;
 			sPress = true;
-	
+			keyDown = true;
 			break;
 
 		case 'd':
+			keyD = true;
 			dPress = true;
-		
+			keyDown = true;
 			break;
 
 		case ' ':
@@ -293,43 +304,51 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 	}
 	else {
 		if (key == 'w') {
-			if(wPress == true)
+			keyDown = false;
+			keyW = false;
+			if (wPress == true)
 				wPress = false;
-			if (aPress == true)
+			else if (aPress == true)
 				aPress = false;
-			if (sPress == true)
+			else if (sPress == true)
 				sPress = false;
-			if (dPress == true)
+			else if (dPress == true)
 				dPress = false;
 		}
 		else if (key == 'a') {
+			keyDown = false;
+			keyA = false;
 			if (wPress == true)
 				wPress = false;
-			if (aPress == true)
+			else if (aPress == true)
 				aPress = false;
-			if (sPress == true)
+			else if (sPress == true)
 				sPress = false;
-			if (dPress == true)
+			else if (dPress == true)
 				dPress = false;
 		}
-		else if (key == 's') {
+		else if (key == 's'){
+			keyDown = false;
+			keyS = false;
 			if (wPress == true)
 				wPress = false;
-			if (aPress == true)
+			else if (aPress == true)
 				aPress = false;
-			if (sPress == true)
+			else if (sPress == true)
 				sPress = false;
-			if (dPress == true)
+			else if (dPress == true)
 				dPress = false;
 		}
 		else if (key == 'd') {
+			keyDown = false;
+			keyD = false;
 			if (wPress == true)
 				wPress = false;
-			if (aPress == true)
+			else if (aPress == true)
 				aPress = false;
-			if (sPress == true)
+			else if (sPress == true)
 				sPress = false;
-			if (dPress == true)
+			else if (dPress == true)
 				dPress = false;
 		}
 	}
@@ -367,7 +386,7 @@ void S01Main::motion(bool pressed, int x, int y)
 			difference_normal_pos[1] = difference_new_old[1] / difference_size;
 		
 			//step3 nomal add to radian range 360
-			result_degree[0] += difference_normal_pos[0];
+			result_degree[0] += difference_normal_pos[0] * 3;
 			//if(result_degree[1] < 180)
 			result_degree[1] += difference_normal_pos[1];
 
@@ -476,18 +495,54 @@ void S01Main::update(float fDeltaTime)
 
 	}
 
-	check = FALSE;
-	if (wPress == true) {
-
+	if (keyDown == true) {
 		if (person_view_mouse) {
 			tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
 			tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
 		}
-		else {
-		tmpRect.z -= (cos(result_degree[0] * 3.141592 / 180));
+	}
+
+	if (keyW == true) {
+		if (result_degree[0] > 90 && result_degree[0] < 180) {
+			aPress = false;
+			sPress = false;
+			wPress = true;
+			dPress = true;
 		}
+
+		else if (result_degree[0] > 180 && result_degree[0] < 270) {
+			sPress = false;
+			dPress = false;
+			wPress = true;
+			aPress = true;
+		}
+		else if (result_degree[0] > 270 && result_degree[0] < 360) {
+			wPress = false;
+			dPress = false;
+			sPress = true;
+			aPress = true;
+		}
+		else if (result_degree[0] > 0 && result_degree[0] < 90) {
+			wPress = false;
+			aPress = false;
+			sPress = true;
+			dPress = true;
+		}
+	}
+
+	printf("%f", result_degree[0]);
+	check = FALSE;
+	if (wPress == true) {
+
+		/*if (person_view_mouse) {
+			tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
+			tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
+		}
+		else {
+		tmpRect.z -= 1;
+		}*/
 		angle = 180;
-		mainCharacter.movingZ(-1);
+		//mainCharacter.movingZ(-1);
 		
 		boxCheckCount = 0;
 		while (check == FALSE) {
@@ -527,7 +582,7 @@ void S01Main::update(float fDeltaTime)
 
 		if (boxCheckCount < 3) {
 			for (int o = 0; o < boxCheckCount; ++o)
-				objectBox[saveBoxIndex[o]].movingZ((cos(result_degree[0] * 3.141592 / 180)));
+				objectBox[saveBoxIndex[o]].movingZ(-(cos(result_degree[0] * 3.141592 / 180)));
 		}
 		else
 		{
@@ -549,16 +604,16 @@ void S01Main::update(float fDeltaTime)
 
 	if (aPress == true) {
 		
-		if (person_view_mouse) {
+		/*if (person_view_mouse) {
 
 			tmpRect.x += (sin((result_degree[0] + 90) * 3.141592 / 180));
 			tmpRect.z += (cos((result_degree[0] + 90) * 3.141592 / 180));
 		}
 		else {
-			tmpRect.x -= (sin((result_degree[0] + 90) * 3.141592 / 180));
-		}
+			tmpRect.x -= 1;
+		}*/
 		angle = 270;
-		mainCharacter.movingX(-(sin((result_degree[0] + 90) * 3.141592 / 180)));
+		//mainCharacter.movingX(-1);
 		boxCheckCount = 0;
 		while (check == FALSE) {
 
@@ -619,7 +674,7 @@ void S01Main::update(float fDeltaTime)
 
 	if (sPress == true) {
 
-		if (person_view_mouse) {
+		/*if (person_view_mouse) {
 
 
 			tmpRect.x -= (sin((result_degree[0]) * 3.141592 / 180));
@@ -627,10 +682,10 @@ void S01Main::update(float fDeltaTime)
 
 		}
 		else {
-			tmpRect.z += (cos((result_degree[0]) * 3.141592 / 180));
-		}
+			tmpRect.z += 1;
+		}*/
 		angle = 180;
-		mainCharacter.movingZ((cos((result_degree[0]) * 3.141592 / 180)));
+		//mainCharacter.movingZ(1);
 		boxCheckCount = 0;
 		while (check == FALSE) {
 
@@ -692,17 +747,17 @@ void S01Main::update(float fDeltaTime)
 
 	if (dPress == true) {
 
-		if (person_view_mouse) {
+	/*	if (person_view_mouse) {
 
 			tmpRect.x += (sin((result_degree[0] - 90) * 3.141592 / 180));
 			tmpRect.z += (cos((result_degree[0] - 90) * 3.141592 / 180));
 		}
 		else {
-			tmpRect.x += (sin((result_degree[0] - 90) * 3.141592 / 180));
+			tmpRect.x += 1;
 
-		}
+		}*/
 		angle = 90;
-		mainCharacter.movingX((sin((result_degree[0] - 90) * 3.141592 / 180)));
+		//mainCharacter.movingX(1);
 		boxCheckCount = 0;
 		while (check == FALSE) {
 
