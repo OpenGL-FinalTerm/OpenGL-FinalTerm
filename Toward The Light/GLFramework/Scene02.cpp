@@ -12,6 +12,7 @@ static int LightCount = 4;
 static int angle = 0;
 
 
+
 S02Main::S02Main()
 {
 }
@@ -23,22 +24,29 @@ S02Main::~S02Main()
 void S02Main::init()
 {
 	radian = 90;
+
+	//인게임 bgm 재생초기화
 	m_SoundPlayer.init();
 	m_SoundPlayer.selectFolder("Resources\\BGM");
+
+	//걷기 효과음 재생 초기화
+	m_walkingSound.init();
+	m_walkingSound.selectFolder("Resources\\Sound");
 
 	m_Camera.setDistance(300.f);
 	m_Camera.setPerspective(45.f, 0.125f, 7'000.f);
 	m_Camera.setSensitivity(10.f);
 
 	//for (int i = 0; i < 20; ++i) {
-	//	objectBox[i].CreateBox(rand() % 120 - 60, 10, rand() % 140 - 70);
-	//	objectBox[i].setColor(rand() % 255, rand() % 255, rand() % 255);
+	//   objectBox[i].CreateBox(rand() % 120 - 60, 10, rand() % 140 - 70);
+	//   objectBox[i].setColor(rand() % 255, rand() % 255, rand() % 255);
 	//}
 	//tmpRect.x = -10;
 	//tmpRect.y = 10;
 	//tmpRect.z = 60;
 	//LightSetting();
 	//DefaultBoxPosSetting();
+	dep = false;
 	whatBox = LoadMap(objectBox, tmpRect, 2);
 	LightCount = LoadLight(mapLight, 2);
 	for (int i = 0; i < 4; ++i)
@@ -48,6 +56,7 @@ void S02Main::init()
 void S02Main::exit()
 {
 	m_SoundPlayer.exit();
+	m_walkingSound.exit();
 }
 
 void S02Main::reset()
@@ -94,7 +103,7 @@ void S02Main::render()
 	//glColor3f(1.f, 0.4f, 0.2f);
 	//glutSolidCube(10);
 	//glPopMatrix();
-
+	wall();
 	glPushMatrix();
 	banana_draw(tmpRect.x, tmpRect.y + 5, tmpRect.z, 0.5, IDLE, banana.rot.degree, radian + 90);
 	glPopMatrix();
@@ -127,18 +136,22 @@ void S02Main::keyboard(int key, bool pressed, int x, int y, bool special)
 		{
 		case 'w':
 			wPress = true;
+			//m_walkingSound.play();
 			break;
 
 		case 'a':
 			aPress = true;
+			//m_walkingSound.play();
 			break;
 
 		case 's':
 			sPress = true;
+			//m_walkingSound.play();
 			break;
 
 		case 'd':
 			dPress = true;
+			//m_walkingSound.play();
 			break;
 
 		case ' ':
@@ -218,15 +231,50 @@ void S02Main::update(float fDeltaTime)
 			if (objectBox[i].returnBoxCenterX() - 10 < returnMainX() + 5 && objectBox[i].returnBoxCenterX() + 10 > returnMainX() - 5 && objectBox[i].returnBoxCenterZ() + 10 > returnMainZ() - 5 && objectBox[i].returnBoxCenterZ() - 10 < returnMainZ() + 5 && tmpRect.y < objectBox[i].returnBoxCenterY() + 20) {
 				down = FALSE;
 				tmpcheck = true;
+
+				if (depthCheck >= 50) {
+					if (dep == false) {
+						dep = true;
+						depthCheck = 0;
+					}
+					else {
+						wPress = false;
+						aPress = false;
+						sPress = false;
+						dPress = false;
+						dep = false;
+						depthCheck = 0;
+						m_Framework->toScene("Ending");
+					}
+				}
+				depthCheck = 0;
 			}
 		}
 
 		if (tmpRect.y > 10 && tmpcheck == false) {
 			tmpRect.y -= 1;
+			depthCheck++;
 		}
 
-		if (tmpRect.y <= 10 && tmpcheck == false)
+		if (tmpRect.y <= 10 && tmpcheck == false) {
 			down = FALSE;
+			if (depthCheck >= 50) {
+				if (dep == false) {
+					dep = true;
+					depthCheck = 0;
+				}
+				else {
+					wPress = false;
+					aPress = false;
+					sPress = false;
+					dPress = false;
+					dep = false;
+					depthCheck = 0;
+					m_Framework->toScene("Ending");
+				}
+			}
+			depthCheck = 0;
+		}
 
 		tmpcheck = false;
 	}
@@ -272,7 +320,7 @@ void S02Main::update(float fDeltaTime)
 					wPress = false;
 					aPress = false;
 					sPress = false;
-					dPress = false; 
+					dPress = false;
 					m_Framework->toScene("Ending");
 				}
 			}
@@ -325,12 +373,19 @@ void S02Main::update(float fDeltaTime)
 
 		}
 
-		if (boxCheckCount < 3) {
-			for (int o = 0; o < boxCheckCount; ++o)
-				objectBox[saveBoxIndex[o]].movingZ(-1);
+		if (returnMainZ() > -60) {
+			if (m_walkingSound.playing() == false)
+				m_walkingSound.play();
+			if (boxCheckCount < 3) {
+				for (int o = 0; o < boxCheckCount; ++o)
+					objectBox[saveBoxIndex[o]].movingZ(-1);
+			}
+			else
+				tmpRect.z += 1;
 		}
 		else
 			tmpRect.z += 1;
+
 
 		for (int k = 0; k < whatBox; ++k)
 			objectBox[k].checkUpdate(0);
@@ -393,9 +448,16 @@ void S02Main::update(float fDeltaTime)
 		for (int k = 0; k < whatBox; ++k)
 			objectBox[k].checkUpdate(0);
 
-		if (boxCheckCount < 3) {
-			for (int o = 0; o < boxCheckCount; ++o)
-				objectBox[saveBoxIndex[o]].movingX(-1);
+		if (returnMainX() > -55) {
+			if (m_walkingSound.playing() == false)
+				m_walkingSound.play();
+			if (boxCheckCount < 3) {
+				for (int o = 0; o < boxCheckCount; ++o)
+					objectBox[saveBoxIndex[o]].movingX(-1);
+			}
+
+			else
+				tmpRect.x += 1;
 		}
 		else
 			tmpRect.x += 1;
@@ -452,10 +514,15 @@ void S02Main::update(float fDeltaTime)
 
 		}
 
-
-		if (boxCheckCount < 3) {
-			for (int o = 0; o < boxCheckCount; ++o)
-				objectBox[saveBoxIndex[o]].movingZ(1);
+		if (returnMainZ() < 60) {
+			if (m_walkingSound.playing() == false)
+				m_walkingSound.play();
+			if (boxCheckCount < 3) {
+				for (int o = 0; o < boxCheckCount; ++o)
+					objectBox[saveBoxIndex[o]].movingZ(1);
+			}
+			else
+				tmpRect.z -= 1;
 		}
 		else
 			tmpRect.z -= 1;
@@ -520,9 +587,16 @@ void S02Main::update(float fDeltaTime)
 			objectBox[k].checkUpdate(0);
 
 
-		if (boxCheckCount < 3) {
-			for (int o = 0; o < boxCheckCount; ++o)
-				objectBox[saveBoxIndex[o]].movingX(1);
+		if (returnMainX() < 55) {
+
+			if (m_walkingSound.playing() == false)
+				m_walkingSound.play();
+			if (boxCheckCount < 3) {
+				for (int o = 0; o < boxCheckCount; ++o)
+					objectBox[saveBoxIndex[o]].movingX(1);
+			}
+			else
+				tmpRect.x -= 1;
 		}
 		else
 			tmpRect.x -= 1;
@@ -605,7 +679,7 @@ void S02Main::DefaultBoxPosSetting()
 	// 일단 버리는 함수는 일기장
 	// 하루만 더 믿어본다.....................
 	// if(day == 5 && camera == false)
-	//		exit(1);
+	//      exit(1);
 
 
 }
