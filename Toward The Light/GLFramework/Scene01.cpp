@@ -170,7 +170,7 @@ void S01Main::render()
 		//At.y = tmpRect.y + ((cos(result_degree[1] * 3.141592 / 180) * 50));
 		//At.z = tmpRect.z + ((cos(result_degree[0] * 3.141592 / 180) * 50) + (sin(result_degree[1] * 3.141592 / 180) * 50));
 		//At.z = tmpRect.z + ((cos(result_degree[0] * 3.141592 / 180) * 100));
-		At.y = 0;
+		At.y = 20;
 	
 	
 		//1ÀÎÄª ºä
@@ -183,13 +183,7 @@ void S01Main::render()
 	if (person_view_mouse) {
 		m_Camera.setEye(Eye);
 		m_Camera.setTarget(At);
-		//glPushMatrix();
-		//{
-		//	glColor3f(1, 1, 1);
-		//	glTranslatef(-sin(result_degree[0] * 3.141592 / 180) * 20 + tmpRect.x, 50,  -cos(result_degree[0] * 3.141592 / 180) * 20 + tmpRect.z);
-		//	glutSolidCylinder(3, 3, 8, 8);
-		//}
-		//glPopMatrix();
+
 	}
 	else {
 //		m_Camera.setDistance(100);
@@ -348,6 +342,13 @@ void S01Main::motion(bool pressed, int x, int y)
 			//if(result_degree[1] < 180)
 			result_degree[1] += difference_normal_pos[1];
 
+			if ((result_degree[0] > 360) || (result_degree[0] < -360)) {
+				result_degree[0] = 0;
+			}
+			if((result_degree[1] > 360) || (result_degree[1] < -360)) {
+				result_degree[1] = 0;
+			}
+
 			printf("normal: %f %f	size : %f \n", difference_new_old[0], difference_new_old[1], difference_size);
 			printf("normal: %f %f	", difference_normal_pos[0], difference_normal_pos[1]);
 			printf("degree: %f %f \n \n", result_degree[0], result_degree[1]);
@@ -450,8 +451,8 @@ void S01Main::update(float fDeltaTime)
 	if (wPress == true) {
 
 		if (person_view_mouse) {
-			tmpRect.x += foward_move.x ;
-			tmpRect.z += foward_move.z ;
+			tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
+			tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
 		}
 		else {
 		tmpRect.z -= 1;
@@ -521,9 +522,8 @@ void S01Main::update(float fDeltaTime)
 		
 		if (person_view_mouse) {
 
-			tmpRect.x += (foward_move.x);
-		//	tmpRect.z += (foward_move.z);
-
+			tmpRect.x += (sin((result_degree[0] + 90) * 3.141592 / 180));
+			tmpRect.z += (cos((result_degree[0] + 90) * 3.141592 / 180));
 		}
 		else {
 			tmpRect.x -= 1;
@@ -592,8 +592,9 @@ void S01Main::update(float fDeltaTime)
 
 		if (person_view_mouse) {
 
-			tmpRect.x += (foward_move.x);
-			tmpRect.z += (foward_move.z);
+
+			tmpRect.x -= (sin((result_degree[0]) * 3.141592 / 180));
+			tmpRect.z -= (cos((result_degree[0]) * 3.141592 / 180));
 
 		}
 		else {
@@ -663,9 +664,9 @@ void S01Main::update(float fDeltaTime)
 	if (dPress == true) {
 
 		if (person_view_mouse) {
-			tmpRect.x -= (sin(result_degree[0] * 3.141592 / 180)) * 1;
-			tmpRect.z += (cos(result_degree[1] * 3.141592 / 180)) * 1;
 
+			tmpRect.x += (sin((result_degree[0] - 90) * 3.141592 / 180));
+			tmpRect.z += (cos((result_degree[0] - 90) * 3.141592 / 180));
 		}
 		else {
 			tmpRect.x += 1;
