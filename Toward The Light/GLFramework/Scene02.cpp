@@ -45,7 +45,7 @@ void S02Main::init()
 	//tmpRect.z = 60;
 	//LightSetting();
 	//DefaultBoxPosSetting();
-
+	dep = false;
 	whatBox = LoadMap(objectBox, tmpRect, 2);
 	LightCount = LoadLight(mapLight, 2);
 	for (int i = 0; i < 4; ++i)
