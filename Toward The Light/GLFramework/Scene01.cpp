@@ -325,29 +325,30 @@ void S01Main::motion(bool pressed, int x, int y)
 			difference_new_old[0] = drag_old_postion[0] - drag_new_postion[0];
 			difference_new_old[1] = drag_old_postion[1] - drag_new_postion[1];
 
-			//difference_new_old nomalized
-			//step 1 diffrence vetor size compute
+			//new pos와 old po의 차이를 구한다.
+			//step 1 벡터 정규화를 위해 크기 값을 구한다.
 			difference_size = sqrt(pow(difference_new_old[0], 2) + pow(difference_new_old[1], 2));
 
-			//step2 re compute diffrence pos / vector size
+			//step2 정규화를 시킨다.
 			if (difference_size == 0) {
 				difference_size = 0.0001;
 			}
 			difference_normal_pos[0] = difference_new_old[0] / difference_size;
 			difference_normal_pos[1] = difference_new_old[1] / difference_size;
 		
-			//step3 nomal add to radian range 360
+			//step3 정규화된 벡터를 이용하여 degree 값에 더해준다.
+			//result_degree가 최종 각도값이다
 			result_degree[0] += difference_normal_pos[0];
 			//if(result_degree[1] < 180)
 			result_degree[1] += difference_normal_pos[1];
-
+			//범위가 360 ~ -360도 회전하게 만든다.
 			if ((result_degree[0] > 360) || (result_degree[0] < -360)) {
 				result_degree[0] = 0;
 			}
 			if((result_degree[1] > 360) || (result_degree[1] < -360)) {
 				result_degree[1] = 0;
 			}
-
+			//확인용 출력
 			printf("normal: %f %f	size : %f \n", difference_new_old[0], difference_new_old[1], difference_size);
 			printf("normal: %f %f	", difference_normal_pos[0], difference_normal_pos[1]);
 			printf("degree: %f %f \n \n", result_degree[0], result_degree[1]);
