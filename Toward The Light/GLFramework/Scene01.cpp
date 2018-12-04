@@ -24,6 +24,15 @@ bool person_view_mouse = true;
 
 int change_person_view_count = 0;
 
+float drag_old_postion[2] = {};
+float drag_new_postion[2] = {};
+float difference_new_old[2] = {}; // between drag_old postion and drag new postion --> old - new
+float difference_size = 0.f;
+float difference_nomal_pos[2] = {};
+float result_degree[2] = {};
+float assist_rotation = 1;
+#define d_Sensitivity  3 //감도 how many rotate camera
+
 S01Main::S01Main()
 {
 }
@@ -61,7 +70,6 @@ void S01Main::init()
 	move_Eye[0] = tmpRect.x;
 	move_Eye[1] = tmpRect.y + 100;
 	move_Eye[2] = tmpRect.z;
-
 
 }
 
@@ -147,30 +155,32 @@ void S01Main::render()
 		At.y = tmpRect.y + 20;
 	}
 	else if (person_view_mouse) {
-		move_Eye[0] = tmpRect.x;
-		//move_Eye[1] = tmpRect.y;
-		move_Eye[2] = tmpRect.z;
 
-		Eye.x = move_Eye[0];
-		Eye.y = tmpRect.y + 50;
-		Eye.z = move_Eye[2] + 20;
+		Eye.x = tmpRect.x;
+		Eye.y = 60 + tmpRect.y;
+		Eye.z = tmpRect.z + 10;
+
 
 		//각도에 맞춰서 카메라를 돌려준다.
-		At.x = move_Eye[0] + sin(radian  * 3.141592 / 180) * 50;
-		At.z = move_Eye[2] + cos(radian  * 3.141592 / 180) * 50;
-		At.y = tmpRect.y + 20;
+		//이때 카메라의 At 벡터 기준점은 eye가 아닌 바나나의 현재 위치입니다.
+		At.x = tmpRect.x +  sin(result_degree[0] * 3.141592 / 180) * 50;
+		At.y = tmpRect.y + ((cos(result_degree[1] * 3.141592 / 180) * 50));
+		At.z = tmpRect.z + ((cos(result_degree[0] * 3.141592 / 180) * 50) + (sin(result_degree[1] * 3.141592 / 180) * 50));
 	}
 	
 	glPushMatrix();
-	banana_draw(tmpRect.x, tmpRect.y + 5, tmpRect.z, 0.5, IDLE, banana.rot.degree, radian);
+	banana_draw(tmpRect.x, tmpRect.y + 5, tmpRect.z, 0.5, IDLE, banana.rot.degree, result_degree[0]);
 	glPopMatrix();
+	if (person_view_mouse) {
+		m_Camera.setEye(Eye);
+		m_Camera.setTarget(At);
 
-	m_Camera.setEye(Eye);
-	m_Camera.setTarget(At);
+	}
+	else {
+//		m_Camera.setDistance(100);
+		m_Camera.setTarget(At);
+	}
 
-	glPushMatrix();
-
-	glPopMatrix();
 
 
 	glPopMatrix();
@@ -289,10 +299,41 @@ void S01Main::mouse(int button, bool pressed, int x, int y)
 {
 
 }
-float save[3];
+
 void S01Main::motion(bool pressed, int x, int y)
 {
-//	m_Camera.rotate(x, y, true);
+	if (person_view_mouse) {
+	//m_Camera.rotate(x, y, true);
+		//get return motion pos
+		drag_new_postion[0] = (DEF_WIN_WIDTH / 2 - x);
+		drag_new_postion[1] = -(DEF_WIN_HEIGHT / 2 - y );
+
+		if (pressed == false) {
+			//	printf("old x : %f, old y : %f // new x : %f, new y : %f\n", drag_old_postion[0], drag_old_postion[1], drag_new_postion[0], drag_new_postion[1]);
+
+			difference_new_old[0] = drag_old_postion[0] - drag_new_postion[0];
+			difference_new_old[1] = drag_old_postion[1] - drag_new_postion[1];
+
+			//difference_new_old nomalized
+			//step 1 diffrence vetor size compute
+			difference_size = abs(pow(difference_new_old[0], 2) + pow(difference_new_old[1], 2));
+			
+			//step2 re compute diffrence pos / vector size
+			difference_nomal_pos[0] = difference_new_old[0] / difference_size;
+			difference_nomal_pos[1] = difference_new_old[1] / difference_size;
+			//printf(" %3.3f \n", difference_size);
+
+			//step3 nomal add to radian range 360
+			result_degree[0] += ((difference_nomal_pos[0] * d_Sensitivity * assist_rotation));
+			if(result_degree[1] < 180)
+			result_degree[1] += ((difference_nomal_pos[1] * d_Sensitivity));
+			printf(" %f, %f \n", result_degree[0], result_degree[1]);
+			//problem y pos error.... 값 누적되는거 고치기
+		}
+		//연산이 끝난 후에 저장한다.
+		drag_old_postion[0] = drag_new_postion[0], drag_old_postion[1] = drag_new_postion[1];
+		
+	}
 }
 
 
@@ -308,7 +349,7 @@ void S01Main::update(float fDeltaTime)
 		switch_sign *= -1;
 	}
 	banana.rot.degree += 0.1f * switch_sign;
-
+	
 	if (jump == TRUE && down == FALSE) {
 		tmpRect.y += 1;
 		tmpRect.jumpCount += 1;
@@ -382,10 +423,10 @@ void S01Main::update(float fDeltaTime)
 	if (wPress == true) {
 
 		if (person_view_mouse) {
-			foward_move.x = sin(radian  * 3.141592 / 180) * 10;
-			foward_move.z = cos(radian  * 3.141592 / 180) * 10;
-			tmpRect.x += foward_move.x;
-			tmpRect.z += foward_move.z;
+
+			tmpRect.x += (sin(result_degree[0] * 3.141592 / 180)) * 1;
+			tmpRect.z += (cos(result_degree[0] * 3.141592 / 180)) * 1;
+
 		}
 		else {
 		tmpRect.z -= 1;
@@ -454,10 +495,10 @@ void S01Main::update(float fDeltaTime)
 	if (aPress == true) {
 		
 		if (person_view_mouse) {
-			foward_move.x = sin(radian  * 3.141592 / 180) * 10;
-			foward_move.z = cos(radian  * 3.141592 / 180) * 10;
-			tmpRect.x -= foward_move.x;
-			tmpRect.z += foward_move.z;
+
+			tmpRect.x += (sin(result_degree[0] * 3.141592 / 180)) * 1 / 2;
+			tmpRect.z -= (cos(result_degree[0] * 3.141592 / 180)) * 1 / 2;
+
 		}
 		else {
 			tmpRect.x -= 1;
@@ -525,10 +566,9 @@ void S01Main::update(float fDeltaTime)
 	if (sPress == true) {
 
 		if (person_view_mouse) {
-			foward_move.x = sin(radian  * 3.141592 / 180) * 10;
-			foward_move.z = cos(radian  * 3.141592 / 180) * 10;
-			tmpRect.x -= foward_move.x;
-			tmpRect.z -= foward_move.z;
+
+			tmpRect.x -= (sin(result_degree[0] * 3.141592 / 180)) * 1;
+			tmpRect.z -= (cos(result_degree[0] * 3.141592 / 180)) * 1;
 		}
 		else {
 			tmpRect.z += 1;
@@ -597,10 +637,9 @@ void S01Main::update(float fDeltaTime)
 	if (dPress == true) {
 
 		if (person_view_mouse) {
-			foward_move.x = sin(radian  * 3.141592 / 180) * 10;
-			foward_move.z = cos(radian  * 3.141592 / 180) * 10;
-			tmpRect.x += foward_move.x;
-			tmpRect.z -= foward_move.z;
+			tmpRect.x -= (sin(result_degree[0] * 3.141592 / 180)) * 1;
+			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180)) * 1;
+
 		}
 		else {
 			tmpRect.x += 1;
