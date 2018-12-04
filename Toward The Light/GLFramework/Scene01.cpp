@@ -30,9 +30,13 @@ Vector2 difference_new_btw_old; // between drag_old postion and drag new postion
 float difference_size = 0.f;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 Vector3 difference_normal_pos;
 Vector3 old_normal_pos;
 Vector3 result_normal;
+=======
+float difference_nomal_pos[2] = {};
+>>>>>>> parent of 9b30ee5... 코드오타수정
 =======
 float difference_nomal_pos[2] = {};
 >>>>>>> parent of 9b30ee5... 코드오타수정
@@ -331,6 +335,7 @@ void S01Main::motion(bool pressed, int x, int y)
 			//step2 re compute diffrence pos / vector size
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 			difference_normal_pos.x = difference_new_btw_old.x / difference_size;
 			difference_normal_pos.y = difference_new_btw_old.y / difference_size;
 			//printf(" %3.3f \n", difference_size);
@@ -355,6 +360,12 @@ void S01Main::motion(bool pressed, int x, int y)
 			difference_nomal_pos[1] = difference_new_old[1] / difference_size;
 			//printf(" %3.3f \n", difference_size);
 
+=======
+			difference_nomal_pos[0] = difference_new_old[0] / difference_size;
+			difference_nomal_pos[1] = difference_new_old[1] / difference_size;
+			//printf(" %3.3f \n", difference_size);
+
+>>>>>>> parent of 9b30ee5... 코드오타수정
 =======
 			difference_nomal_pos[0] = difference_new_old[0] / difference_size;
 			difference_nomal_pos[1] = difference_new_old[1] / difference_size;
