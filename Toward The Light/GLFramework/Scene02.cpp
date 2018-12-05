@@ -236,22 +236,22 @@ void S02Main::keyboard(int key, bool pressed, int x, int y, bool special)
 
 		case 'a':
 			keyA = true;
-			aPress = true;
-			//camera_deree[0] = Eye.x * cos(radian * 3.14) + Eye.z * -sin(radian * 3.14);
-			//camera_deree[2] = Eye.x * sin(radian * 3.14) + Eye.z * cos(radian * 3.14);
-			keyDown = true;
+			//aPress = true;
+			////camera_deree[0] = Eye.x * cos(radian * 3.14) + Eye.z * -sin(radian * 3.14);
+			////camera_deree[2] = Eye.x * sin(radian * 3.14) + Eye.z * cos(radian * 3.14);
+			//keyDown = true;
 			break;
 
 		case 's':
 			keyS = true;
-			sPress = true;
-			keyDown = true;
+			//sPress = true;
+			//keyDown = true;
 			break;
 
 		case 'd':
 			keyD = true;
-			dPress = true;
-			keyDown = true;
+			//dPress = true;
+			//keyDown = true;
 			break;
 
 		case ' ':
@@ -536,13 +536,122 @@ void S02Main::update(float fDeltaTime)
 			dPress = true;
 		}
 	}
-	//else {
-	//	wPress = false;
-	//	aPress = false;
-	//	sPress = false;
-	//	dPress = false;
-	//}
 
+	if (keyA == true) {
+		if (result_degree[0] >= 90 && result_degree[0] < 180) {
+			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
+			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
+			dPress = false;
+			sPress = false;
+			wPress = true;
+			aPress = true;
+		}
+
+		else if (result_degree[0] >= 180 && result_degree[0] < 270) {
+			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
+			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
+			wPress = false;
+			dPress = false;
+			sPress = true;
+			aPress = true;
+		}
+		else if (result_degree[0] >= 270 && result_degree[0] < 360) {
+			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
+			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
+			wPress = false;
+			aPress = false;
+			sPress = true;
+			dPress = true;
+		}
+		else if (result_degree[0] >= 0 && result_degree[0] < 90) {
+			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
+			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
+			wPress = false;
+			aPress = false;
+			wPress = true;
+			dPress = true;
+		}
+	}
+
+
+	if (keyS == true) {
+		if (result_degree[0] >= 90 && result_degree[0] < 180) {
+			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
+			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
+			aPress = false;
+			sPress = false;
+			wPress = true;
+			dPress = true;
+		}
+
+		else if (result_degree[0] >= 180 && result_degree[0] < 270) {
+			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
+			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
+			sPress = false;
+			dPress = false;
+			wPress = true;
+			aPress = true;
+		}
+		else if (result_degree[0] >= 270 && result_degree[0] < 360) {
+			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
+			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
+			wPress = false;
+			dPress = false;
+			sPress = true;
+			aPress = true;
+		}
+		else if (result_degree[0] >= 0 && result_degree[0] < 90) {
+			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
+			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
+			wPress = false;
+			aPress = false;
+			sPress = true;
+			dPress = true;
+		}
+	}
+
+	if (keyD == true) {
+		if (result_degree[0] >= 90 && result_degree[0] < 180) {
+			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
+			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
+			aPress = false;
+			sPress = false;
+			wPress = true;
+			dPress = true;
+		}
+
+		else if (result_degree[0] >= 180 && result_degree[0] < 270) {
+			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
+			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
+			sPress = false;
+			dPress = false;
+			wPress = true;
+			aPress = true;
+		}
+		else if (result_degree[0] >= 270 && result_degree[0] < 360) {
+			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
+			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
+			wPress = false;
+			dPress = false;
+			sPress = true;
+			aPress = true;
+		}
+		else if (result_degree[0] >= 0 && result_degree[0] < 90) {
+			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
+			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
+			wPress = false;
+			aPress = false;
+			sPress = true;
+			dPress = true;
+		}
+	}
+
+	if (keyW == false && keyA == false && keyS == false && keyD == false) {
+		wPress = false;
+		aPress = false;
+		sPress = false;
+		dPress = false;
+	}
 	// 캐릭도 연속 이동
 	bool check = false;
 	int cycle = 0;
@@ -899,7 +1008,12 @@ void S02Main::update(float fDeltaTime)
 				mapLight[light].moveY(-1);
 		}
 	}
+	
+	//조명을 집기 위한 공간
 
+	for (int light = 0; light < LightCount; ++light) {
+		
+	}
 
 
 	// 캐릭터 회전

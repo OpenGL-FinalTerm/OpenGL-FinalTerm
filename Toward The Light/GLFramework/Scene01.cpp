@@ -197,7 +197,7 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 	int i = 0;
 	BOOL check = FALSE;
 
-	
+
 
 	if (pressed)
 	{
@@ -205,53 +205,53 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 		{
 		case 'w':
 			keyW = true;
-			if(result_degree[0] > 90 && result_degree[0] < 180){
-				aPress = false;
-				sPress = false;
-				wPress = true;
-				dPress = true;
-			}
+			/*	if (result_degree[0] > 90 && result_degree[0] < 180) {
+					aPress = false;
+					sPress = false;
+					wPress = true;
+					dPress = true;
+				}
 
-			else if (result_degree[0] > 180 && result_degree[0] < 270) {
-				sPress = false;
-				dPress = false;
-				wPress = true;
-				aPress = true;
-			}
-			else if (result_degree[0] > 270 && result_degree[0] < 360) {
-				wPress = false;
-				dPress = false;
-				sPress = true;
-				aPress = true;
-			}
-			else if (result_degree[0] > 0 && result_degree[0] < 90) {
-				wPress = false;
-				aPress = false;
-				sPress = true;
-				dPress = true;
-			}
-			
+				else if (result_degree[0] > 180 && result_degree[0] < 270) {
+					sPress = false;
+					dPress = false;
+					wPress = true;
+					aPress = true;
+				}
+				else if (result_degree[0] > 270 && result_degree[0] < 360) {
+					wPress = false;
+					dPress = false;
+					sPress = true;
+					aPress = true;
+				}
+				else if (result_degree[0] > 0 && result_degree[0] < 90) {
+					wPress = false;
+					aPress = false;
+					sPress = true;
+					dPress = true;
+				}
+	*/
 			keyDown = true;
 			break;
 
 		case 'a':
 			keyA = true;
-			aPress = true;
-			//camera_deree[0] = Eye.x * cos(radian * 3.14) + Eye.z * -sin(radian * 3.14);
-			//camera_deree[2] = Eye.x * sin(radian * 3.14) + Eye.z * cos(radian * 3.14);
-			keyDown = true;
+			//aPress = true;
+			////camera_deree[0] = Eye.x * cos(radian * 3.14) + Eye.z * -sin(radian * 3.14);
+			////camera_deree[2] = Eye.x * sin(radian * 3.14) + Eye.z * cos(radian * 3.14);
+			//keyDown = true;
 			break;
 
 		case 's':
 			keyS = true;
-			sPress = true;
-			keyDown = true;
+			//sPress = true;
+			//keyDown = true;
 			break;
 
 		case 'd':
 			keyD = true;
-			dPress = true;
-			keyDown = true;
+			//dPress = true;
+			//keyDown = true;
 			break;
 
 		case ' ':
@@ -274,8 +274,8 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 			if (change_person_view_count % 2 == 0) {
 				//view_rotate[0] => 최소 범위 (20) 카메라의 회전반경을 나타냅니다. 
 				// view_rotate[1] => (20) 카메라의 높이를 나타냅니다. 
-				view_rotate[0] = 10;
-				view_rotate[1] = 0;
+				view_rotate[0] = 60;
+				view_rotate[1] = 50;
 
 			}
 			else if (change_person_view_count % 2 == 1) {			//3인칭
@@ -284,7 +284,7 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 				view_rotate[1] = 30;
 
 			}
-		//	printf("%d \n", change_person_view_count%2);
+			//	printf("%d \n", change_person_view_count%2);
 			break;
 
 		case 'q':
@@ -300,11 +300,10 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 
 
 		}
-	
+
 	}
 	else {
 		if (key == 'w') {
-			keyDown = false;
 			keyW = false;
 			if (wPress == true)
 				wPress = false;
@@ -316,7 +315,6 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 				dPress = false;
 		}
 		else if (key == 'a') {
-			keyDown = false;
 			keyA = false;
 			if (wPress == true)
 				wPress = false;
@@ -327,8 +325,7 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 			else if (dPress == true)
 				dPress = false;
 		}
-		else if (key == 's'){
-			keyDown = false;
+		else if (key == 's') {
 			keyS = false;
 			if (wPress == true)
 				wPress = false;
@@ -340,7 +337,6 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 				dPress = false;
 		}
 		else if (key == 'd') {
-			keyDown = false;
 			keyD = false;
 			if (wPress == true)
 				wPress = false;
@@ -417,10 +413,7 @@ void S01Main::motion(bool pressed, int x, int y)
 
 void S01Main::update(float fDeltaTime)
 {
-	printf("x : %f, z : %f \n", tmpRect.x, tmpRect.z);
 	__t += 1;
-	//camera at --> player going foward pos update
-	// banana pos add
 	foward_move.x = (sin(result_degree[0] * 3.141592 / 180));
 	foward_move.z = (cos(result_degree[0] * 3.141592 / 180));
 
@@ -431,10 +424,22 @@ void S01Main::update(float fDeltaTime)
 		switch_sign *= -1;
 	}
 	banana.rot.degree += 0.1f * switch_sign;
-	
+
 	if (jump == TRUE && down == FALSE) {
 		tmpRect.y += 1;
 		tmpRect.jumpCount += 1;
+		bool tmpcheck = false;
+		for (int i = 0; i < whatBox; ++i) {
+			if (objectBox[i].returnBoxCenterX() - 10 < returnMainX() + 5 && objectBox[i].returnBoxCenterX() + 10 > returnMainX() - 5 && objectBox[i].returnBoxCenterZ() + 10 > returnMainZ() - 5 && objectBox[i].returnBoxCenterZ() - 10 < returnMainZ() + 5 && returnMainY() > objectBox[i].returnBoxCenterY() - 20 && returnMainY() < objectBox[i].returnBoxCenterY() + 20) {
+				down = TRUE;
+				jump = FALSE;
+				tmpRect.jumpCount = 0;
+				tmpRect.y -= 1;
+			}
+		}
+
+		tmpcheck = false;
+
 		if (tmpRect.jumpCount > 30) {
 			jump = FALSE;
 			tmpRect.jumpCount = 0;
@@ -448,21 +453,205 @@ void S01Main::update(float fDeltaTime)
 			if (objectBox[i].returnBoxCenterX() - 10 < returnMainX() + 5 && objectBox[i].returnBoxCenterX() + 10 > returnMainX() - 5 && objectBox[i].returnBoxCenterZ() + 10 > returnMainZ() - 5 && objectBox[i].returnBoxCenterZ() - 10 < returnMainZ() + 5 && tmpRect.y < objectBox[i].returnBoxCenterY() + 20) {
 				down = FALSE;
 				tmpcheck = true;
+
+				if (depthCheck >= 50) {
+					if (dep == false) {
+						dep = true;
+						depthCheck = 0;
+					}
+					else {
+						wPress = false;
+						aPress = false;
+						sPress = false;
+						dPress = false;
+						dep = false;
+						depthCheck = 0;
+						m_Framework->toScene("Ending");
+					}
+				}
+				depthCheck = 0;
 			}
 		}
 
 		if (tmpRect.y > 10 && tmpcheck == false) {
 			tmpRect.y -= 1;
+			depthCheck++;
 		}
 
-		if (tmpRect.y <= 10 && tmpcheck == false)
+		if (tmpRect.y <= 10 && tmpcheck == false) {
 			down = FALSE;
+			if (depthCheck >= 50) {
+				if (dep == false) {
+					dep = true;
+					depthCheck = 0;
+				}
+				else {
+					wPress = false;
+					aPress = false;
+					sPress = false;
+					dPress = false;
+					dep = false;
+					depthCheck = 0;
+					m_Framework->toScene("Ending");
+				}
+			}
+			depthCheck = 0;
+		}
 
 		tmpcheck = false;
 	}
+	printf("%f \n", result_degree[0]);
+	if (keyW == true) {
+		if (result_degree[0] >= 90 && result_degree[0] < 180) {
+			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
+			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
+			aPress = false;
+			sPress = false;
+			wPress = true;
+			dPress = true;
+		}
+
+		else if (result_degree[0] >= 180 && result_degree[0] < 270) {
+			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
+			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
+			sPress = false;
+			dPress = false;
+			wPress = true;
+			aPress = true;
+		}
+		else if (result_degree[0] >= 270 && result_degree[0] < 360) {
+			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
+			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
+			wPress = false;
+			dPress = false;
+			sPress = true;
+			aPress = true;
+		}
+		else if (result_degree[0] >= 0 && result_degree[0] < 90) {
+			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
+			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
+			wPress = false;
+			aPress = false;
+			sPress = true;
+			dPress = true;
+		}
+	}
+
+	if (keyA == true) {
+		if (result_degree[0] >= 90 && result_degree[0] < 180) {
+			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
+			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
+			dPress = false;
+			sPress = false;
+			wPress = true;
+			aPress = true;
+		}
+
+		else if (result_degree[0] >= 180 && result_degree[0] < 270) {
+			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
+			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
+			wPress = false;
+			dPress = false;
+			sPress = true;
+			aPress = true;
+		}
+		else if (result_degree[0] >= 270 && result_degree[0] < 360) {
+			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
+			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
+			wPress = false;
+			aPress = false;
+			sPress = true;
+			dPress = true;
+		}
+		else if (result_degree[0] >= 0 && result_degree[0] < 90) {
+			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
+			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
+			wPress = false;
+			aPress = false;
+			wPress = true;
+			dPress = true;
+		}
+	}
 
 
+	if (keyS == true) {
+		if (result_degree[0] >= 90 && result_degree[0] < 180) {
+			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
+			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
+			aPress = false;
+			sPress = false;
+			wPress = true;
+			dPress = true;
+		}
 
+		else if (result_degree[0] >= 180 && result_degree[0] < 270) {
+			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
+			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
+			sPress = false;
+			dPress = false;
+			wPress = true;
+			aPress = true;
+		}
+		else if (result_degree[0] >= 270 && result_degree[0] < 360) {
+			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
+			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
+			wPress = false;
+			dPress = false;
+			sPress = true;
+			aPress = true;
+		}
+		else if (result_degree[0] >= 0 && result_degree[0] < 90) {
+			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
+			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
+			wPress = false;
+			aPress = false;
+			sPress = true;
+			dPress = true;
+		}
+	}
+
+	if (keyD == true) {
+		if (result_degree[0] >= 90 && result_degree[0] < 180) {
+			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
+			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
+			aPress = false;
+			sPress = false;
+			wPress = true;
+			dPress = true;
+		}
+
+		else if (result_degree[0] >= 180 && result_degree[0] < 270) {
+			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
+			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
+			sPress = false;
+			dPress = false;
+			wPress = true;
+			aPress = true;
+		}
+		else if (result_degree[0] >= 270 && result_degree[0] < 360) {
+			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
+			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
+			wPress = false;
+			dPress = false;
+			sPress = true;
+			aPress = true;
+		}
+		else if (result_degree[0] >= 0 && result_degree[0] < 90) {
+			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
+			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
+			wPress = false;
+			aPress = false;
+			sPress = true;
+			dPress = true;
+		}
+	}
+
+	if (keyW == false && keyA == false && keyS == false && keyD == false) {
+		wPress = false;
+		aPress = false;
+		sPress = false;
+		dPress = false;
+	}
 	// 캐릭도 연속 이동
 	bool check = false;
 	int cycle = 0;
@@ -495,79 +684,34 @@ void S01Main::update(float fDeltaTime)
 
 			}
 
-			if (boxLanding != true)
+			if (boxLanding != true) {
 				objectBox[k].movingY(-1);
+				if (objectBox[k].returnBoxCenterX() - 10 < returnMainX() + 5 && objectBox[k].returnBoxCenterX() + 10 > returnMainX() - 5 && objectBox[k].returnBoxCenterZ() + 10 > returnMainZ() - 5 && objectBox[k].returnBoxCenterZ() - 10 < returnMainZ() + 5 && returnMainY() > objectBox[k].returnBoxCenterY() - 20 && returnMainY() < objectBox[k].returnBoxCenterY() + 20) {
+					m_Camera.init();
+					wPress = false;
+					aPress = false;
+					sPress = false;
+					dPress = false;
+					m_Framework->toScene("Ending");
+				}
+			}
 		}
 
 	}
 
-	//if (keyDown == true) {
-	//	if (person_view_mouse) {
-	//		tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
-	//		tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
-	//	}
-	//}
-
-	if (keyW == true) {
-		if (result_degree[0] > 90 && result_degree[0] < 180) {
-			tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
-			tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
-			aPress = true;
-			sPress = true;
-			wPress = true;
-			dPress = true;
-		}
-
-		else if (result_degree[0] > 180 && result_degree[0] < 270) {
-			tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
-			tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
-			sPress = true;
-			dPress = true;
-			wPress = true;
-			aPress = true;
-		}
-		else if (result_degree[0] > 270 && result_degree[0] < 360) {
-			tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
-			tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
-			wPress = true;
-			dPress = true;
-			sPress = true;
-			aPress = true;
-		}
-		else if (result_degree[0] > 0 && result_degree[0] < 90) {
-			tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
-			tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
-			wPress = true;
-			aPress = true;
-			sPress = true;
-			dPress = true;
-		}
-	}
-	else {
-		wPress = false;
-		aPress = false;
-		sPress = false;
-		dPress = false;
-	}
-
-	printf("%f", result_degree[0]);
 	check = FALSE;
 	if (wPress == true) {
-
-		/*if (person_view_mouse) {
-			tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
-			tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
-		}
-		else {
-		tmpRect.z -= 1;
-		}*/
+		cycle = 0;
+		count = 0;
+		boxCheckCount = 0;
+		i = 0;
 		angle = 180;
-		//mainCharacter.movingZ(-1);
-		
+		mainCharacter.movingZ(foward_move.z);
+		tmpRect.z += foward_move.z;
 		boxCheckCount = 0;
 		while (check == FALSE) {
 
-			if (returnMainZ() - 5 <= objectBox[i].returnBoxCenterZ() + 10 && !(returnMainZ() + 5 <= objectBox[i].returnBoxCenterZ() - 10)) {
+			if (returnMainZ() - 6 <= objectBox[i].returnBoxCenterZ() + 10 && !(returnMainZ() + 6 <= objectBox[i].returnBoxCenterZ() - 10)) {
 				if (objectBox[i].returnBoxCenterX() - 10 < returnMainX() + 5 && objectBox[i].returnBoxCenterX() + 10 > returnMainX() - 5 && objectBox[i].returnBoxCenterY() + 10 > returnMainY() - 5 && objectBox[i].returnBoxCenterY() - 10 < returnMainY() + 5) {
 					if (objectBox[i].returnCheck() == 0) {
 						tmpRect.zRate -= 20;
@@ -600,15 +744,19 @@ void S01Main::update(float fDeltaTime)
 
 		}
 
-		if (boxCheckCount < 3) {
-			for (int o = 0; o < boxCheckCount; ++o)
-				objectBox[saveBoxIndex[o]].movingZ((cos(result_degree[0] * 3.141592 / 180)));
+		if (returnMainZ() > -60) {
+			if (m_walkingSound.playing() == false)
+				m_walkingSound.play();
+			if (boxCheckCount < 3) {
+				for (int o = 0; o < boxCheckCount; ++o)
+					objectBox[saveBoxIndex[o]].movingZ(foward_move.z);
+			}
+			else
+				tmpRect.z -= foward_move.z;
 		}
 		else
-		{
-			tmpRect.z -= (cos(result_degree[0] * 3.141592 / 180));
-	
-		}
+			tmpRect.z -= foward_move.z;
+
 
 		for (int k = 0; k < whatBox; ++k)
 			objectBox[k].checkUpdate(0);
@@ -623,22 +771,17 @@ void S01Main::update(float fDeltaTime)
 	}
 
 	if (aPress == true) {
-		
-		/*if (person_view_mouse) {
-
-			tmpRect.x += (sin((result_degree[0] + 90) * 3.141592 / 180));
-			tmpRect.z += (cos((result_degree[0] + 90) * 3.141592 / 180));
-		}
-		else {
-			tmpRect.x -= 1;
-		}*/
+		cycle = 0;
+		count = 0;
+		boxCheckCount = 0;
+		i = 0;
 		angle = 270;
-		//mainCharacter.movingX(-1);
-		check = FALSE;
+		tmpRect.x += foward_move.x;
+		mainCharacter.movingX(foward_move.x);
 		boxCheckCount = 0;
 		while (check == FALSE) {
 
-			if (returnMainX() - 5 <= objectBox[i].returnBoxCenterX() + 10 && !(returnMainX() + 5 <= objectBox[i].returnBoxCenterX() - 10)) {
+			if (returnMainX() - 6 <= objectBox[i].returnBoxCenterX() + 10 && !(returnMainX() + 6 <= objectBox[i].returnBoxCenterX() - 10)) {
 				if (objectBox[i].returnBoxCenterZ() - 10 < returnMainZ() + 5 && objectBox[i].returnBoxCenterZ() + 10 > returnMainZ() - 5 && objectBox[i].returnBoxCenterY() + 10 > returnMainY() - 5 && objectBox[i].returnBoxCenterY() - 10 < returnMainY() + 5) {
 					if (objectBox[i].returnCheck() == 0) {
 						tmpRect.xRate -= 20;
@@ -676,14 +819,19 @@ void S01Main::update(float fDeltaTime)
 		for (int k = 0; k < whatBox; ++k)
 			objectBox[k].checkUpdate(0);
 
-		if (boxCheckCount < 3) {
-			for (int o = 0; o < boxCheckCount; ++o)
-				objectBox[saveBoxIndex[o]].movingX((sin((result_degree[0] + 90) * 3.141592 / 180)));
+		if (returnMainX() > -55) {
+			if (m_walkingSound.playing() == false)
+				m_walkingSound.play();
+			if (boxCheckCount < 3) {
+				for (int o = 0; o < boxCheckCount; ++o)
+					objectBox[saveBoxIndex[o]].movingX(foward_move.x);
+			}
+
+			else
+				tmpRect.x -= foward_move.x;
 		}
 		else
-		{
-			tmpRect.x -= (sin((result_degree[0] + 90) * 3.141592 / 180));
-		}
+			tmpRect.x -= foward_move.x;
 
 		boxCheckCount = 0;
 		check = FALSE;
@@ -694,24 +842,17 @@ void S01Main::update(float fDeltaTime)
 	}
 
 	if (sPress == true) {
-
-		/*if (person_view_mouse) {
-
-
-			tmpRect.x -= (sin((result_degree[0]) * 3.141592 / 180));
-			tmpRect.z -= (cos((result_degree[0]) * 3.141592 / 180));
-
-		}
-		else {
-			tmpRect.z += 1;
-		}*/
+		cycle = 0;
+		count = 0;
+		boxCheckCount = 0;
+		i = 0;
 		angle = 180;
-		//mainCharacter.movingZ(1);
-		check = FALSE;
+		tmpRect.z += foward_move.z;
+		mainCharacter.movingZ(foward_move.z);
 		boxCheckCount = 0;
 		while (check == FALSE) {
 
-			if (returnMainZ() - 5 <= objectBox[i].returnBoxCenterZ() + 10 && !(returnMainZ() + 5 <= objectBox[i].returnBoxCenterZ() - 10)) {
+			if (returnMainZ() - 6 <= objectBox[i].returnBoxCenterZ() + 10 && !(returnMainZ() + 6 <= objectBox[i].returnBoxCenterZ() - 10)) {
 				if (objectBox[i].returnBoxCenterX() - 10 < returnMainX() + 5 && objectBox[i].returnBoxCenterX() + 10 > returnMainX() - 5 && objectBox[i].returnBoxCenterY() + 10 > returnMainY() - 5 && objectBox[i].returnBoxCenterY() - 10 < returnMainY() + 5) {
 					if (objectBox[i].returnCheck() == 0) {
 						tmpRect.zRate += 20;
@@ -744,17 +885,19 @@ void S01Main::update(float fDeltaTime)
 
 		}
 
-
-		if (boxCheckCount < 3) {
-			for (int o = 0; o < boxCheckCount; ++o)
-				objectBox[saveBoxIndex[o]].movingZ((cos((result_degree[0]) * 3.141592 / 180)) * (-1));
+		if (returnMainZ() < 60) {
+			if (m_walkingSound.playing() == false)
+				m_walkingSound.play();
+			if (boxCheckCount < 3) {
+				for (int o = 0; o < boxCheckCount; ++o)
+					objectBox[saveBoxIndex[o]].movingZ(foward_move.z);
+			}
+			else
+				tmpRect.z -= foward_move.z;
 		}
 		else
-		{
-		
-			tmpRect.z += (cos((result_degree[0]) * 3.141592 / 180));
+			tmpRect.z -= foward_move.z;
 
-		}
 		for (int k = 0; k < whatBox; ++k)
 			objectBox[k].checkUpdate(0);
 
@@ -768,22 +911,17 @@ void S01Main::update(float fDeltaTime)
 	}
 
 	if (dPress == true) {
-
-	/*	if (person_view_mouse) {
-
-			tmpRect.x += (sin((result_degree[0] - 90) * 3.141592 / 180));
-			tmpRect.z += (cos((result_degree[0] - 90) * 3.141592 / 180));
-		}
-		else {
-			tmpRect.x += 1;
-
-		}*/
+		cycle = 0;
+		count = 0;
+		boxCheckCount = 0;
+		i = 0;
 		angle = 90;
-		//mainCharacter.movingX(1);
+		tmpRect.x += foward_move.x;
+		mainCharacter.movingX(foward_move.x);
 		boxCheckCount = 0;
 		while (check == FALSE) {
 
-			if (returnMainX() - 5 <= objectBox[i].returnBoxCenterX() + 10 && !(returnMainX() + 5 <= objectBox[i].returnBoxCenterX() - 10)) {
+			if (returnMainX() - 6 <= objectBox[i].returnBoxCenterX() + 10 && !(returnMainX() + 6 <= objectBox[i].returnBoxCenterX() - 10)) {
 				if (objectBox[i].returnBoxCenterZ() - 10 < returnMainZ() + 5 && objectBox[i].returnBoxCenterZ() + 10 > returnMainZ() - 5 && objectBox[i].returnBoxCenterY() + 10 > returnMainY() - 5 && objectBox[i].returnBoxCenterY() - 10 < returnMainY() + 5) {
 					if (objectBox[i].returnCheck() == 0) {
 						tmpRect.xRate += 20;
@@ -820,16 +958,20 @@ void S01Main::update(float fDeltaTime)
 			objectBox[k].checkUpdate(0);
 
 
-		if (boxCheckCount < 3) {
-			for (int o = 0; o < boxCheckCount; ++o)
-				objectBox[saveBoxIndex[o]].movingX((sin((result_degree[0] - 90) * 3.141592 / 180)));
+		if (returnMainX() < 55) {
+
+			if (m_walkingSound.playing() == false)
+				m_walkingSound.play();
+			if (boxCheckCount < 3) {
+				for (int o = 0; o < boxCheckCount; ++o)
+					objectBox[saveBoxIndex[o]].movingX(foward_move.x);
+			}
+			else
+				tmpRect.x -= foward_move.x;
 		}
 		else
-		{
-		
-			tmpRect.x -= (sin((result_degree[0] - 90) * 3.141592 / 180));
+			tmpRect.x -= foward_move.x;
 
-		}
 		boxCheckCount = 0;
 		check = FALSE;
 		cycle = 0;
@@ -838,11 +980,10 @@ void S01Main::update(float fDeltaTime)
 		tmpRect.zRate = 0;
 	}
 
-
-	// 조명의 낙하(상자위에 있을때)
+	//조명 낙하
 	bool lightLanding = false;
 	for (int light = 0; light < LightCount; ++light) {
-
+		lightLanding = false;
 		i = 0;
 		check = FALSE;
 		if (mapLight[light].returnYpos() - 3 > 0) {
@@ -868,36 +1009,40 @@ void S01Main::update(float fDeltaTime)
 		}
 	}
 
+	//조명을 집기 위한 공간
+
+	for (int light = 0; light < LightCount; ++light) {
+
+	}
 
 
 	// 캐릭터 회전
-	if (!person_view_mouse) {
-		if (wPress == true)
-			radian = 180;
 
-		if (wPress == true && dPress == true)
-			radian = (180 - 45);
+	if (wPress == true)
+		radian = 90;
 
-		if (wPress == true && aPress == true)
-			radian = 180 + 45;
+	if (aPress == true)
+		radian = 180;
 
-		if (aPress == true)
-			radian = 270;
+	if (sPress == true)
+		radian = 270;
 
-		if (sPress == true)
-			radian = 360;
+	if (dPress == true)
+		radian = 0;
 
-		if (dPress == true)
-			radian = 90;
+	if (wPress == true && dPress == true)
+		radian = 45;
 
-		if (sPress == true && aPress == true)
-			radian = 360 - 45;
+	if (wPress == true && aPress == true)
+		radian = 135;
 
-		if (sPress == true && dPress == true)
-			radian = 360 + 45;
 
-	}
-	
+	if (sPress == true && aPress == true)
+		radian = 225;
+
+	if (sPress == true && dPress == true)
+		radian = 315;
+
 }
 
 

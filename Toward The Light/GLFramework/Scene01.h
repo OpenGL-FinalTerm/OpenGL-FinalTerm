@@ -43,6 +43,7 @@ private:
 	float		radian;
 	float		camera_deree[3];
 
+	int			depthCheck = 0;
 	int			switch_sign = -1;
 	int			Time_count;
 	int			tX, tY;
@@ -52,6 +53,7 @@ private:
 	int			drag_new_postion[2] = {};
 	int			__t = 0;
 
+	bool		dep = false; // 시작할때 낙하하는것도 체크하여서 만들어둠
 	bool		person_view_1 = false;
 	bool		person_view_3 = false;
 	bool		person_view_mouse = true;
@@ -77,6 +79,7 @@ private:
 	NormalObject	m_Plane;
 	NormalObject    m_Sphere;
 	SoundPlayer		m_SoundPlayer;
+	SoundPlayer		m_walkingSound;
 	Box				objectBox[65];
 	Box				mainCharacter;
 	Light			mapLight[100];
