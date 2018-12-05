@@ -81,6 +81,7 @@ void S01Main::init()
 	view_rotate[1] = 50;
 
 	dep = false;
+	depthCheck = 0;
 	pickLight = false;
 	pickLightNumber = -1;
 }

@@ -147,6 +147,15 @@
     <ClCompile Include="camera_working.cpp">
       <Filter>Source Files\Base</Filter>
     </ClCompile>
+    <ClCompile Include="HUD.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HUD.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadBitmap.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -241,6 +250,9 @@
     </ClInclude>
     <ClInclude Include="camera_working.h">
       <Filter>Header Files\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadBitmap.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
