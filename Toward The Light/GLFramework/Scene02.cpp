@@ -59,8 +59,45 @@ void S02Main::init()
 	}
 	pickLight = false;
 	pickLightNumber = -1;
-	pBytes = LoadDIBitmap("Test.bmp", &texture);
 
+	glGenTextures(6, IDtmp);
+	glBindTexture(GL_TEXTURE_2D, IDtmp[0]);
+	pBytes = LoadDIBitmap("Test.bmp", &info);
+	glTexImage2D(GL_TEXTURE_2D, 0, 3, 150, 150, 0, GL_BGR_EXT, GL_UNSIGNED_BYTE, pBytes);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+
+	glBindTexture(GL_TEXTURE_2D, IDtmp[1]);
+	pBytes = LoadDIBitmap("Test.bmp", &info);
+	glTexImage2D(GL_TEXTURE_2D, 0, 3, 150, 150, 0, GL_BGR_EXT, GL_UNSIGNED_BYTE, pBytes);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+
+	glBindTexture(GL_TEXTURE_2D, IDtmp[2]);
+	pBytes = LoadDIBitmap("Test.bmp", &info);
+	glTexImage2D(GL_TEXTURE_2D, 0, 3, 150, 150, 0, GL_BGR_EXT, GL_UNSIGNED_BYTE, pBytes);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+
+	glBindTexture(GL_TEXTURE_2D, IDtmp[3]);
+	pBytes = LoadDIBitmap("Test.bmp", &info);
+	glTexImage2D(GL_TEXTURE_2D, 0, 3, 150, 150, 0, GL_BGR_EXT, GL_UNSIGNED_BYTE, pBytes);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+
+	glBindTexture(GL_TEXTURE_2D, IDtmp[4]);
+	pBytes = LoadDIBitmap("Test.bmp", &info);
+	glTexImage2D(GL_TEXTURE_2D, 0, 3, 150, 150, 0, GL_BGR_EXT, GL_UNSIGNED_BYTE, pBytes);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+
+	glBindTexture(GL_TEXTURE_2D, IDtmp[5]);
+	pBytes = LoadDIBitmap("Test.bmp", &info);
+	glTexImage2D(GL_TEXTURE_2D, 0, 3, 150, 150, 0, GL_BGR_EXT, GL_UNSIGNED_BYTE, pBytes);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+
+	
 }
 
 void S02Main::exit()
@@ -1115,12 +1152,12 @@ void S02Main::HUD()
 
 	//GLuint tex;
 
-	glEnable(GL_TEXTURE_2D);
 	
+	//IDtmp[0] = LoadTexture("Test.bmp", 150, 150);
 	glColor3f(1.f, 1.f, 1.f);
 	glPushMatrix();
+	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, IDtmp[0]);
-	glTexImage2D(GL_TEXTURE_2D, 0, 3, w, h, 0, GL_BGR_EXT, GL_UNSIGNED_BYTE, pBytes);
 	glBegin(GL_QUADS);
 	glTexCoord2f(0.f, 1.f);		glVertex2f(50, 50);
 	glTexCoord2f(1.f, 1.f);		glVertex2f(200, 50);
@@ -1143,12 +1180,12 @@ void S02Main::drawHUD()
 	glLoadIdentity();
 
 	HUD();
-
+	glDisable(GL_TEXTURE_2D);
 	glMatrixMode(GL_PROJECTION);
 	glPopMatrix();
 	glMatrixMode(GL_MODELVIEW);
 	glPopMatrix();
-	glDisable(GL_TEXTURE_2D);
+	
 }
 
 void S02Main::LightSetting()
@@ -1227,8 +1264,8 @@ GLuint S02Main::LoadTexture(const char * filename, int width_1, int height_1)
 	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_COLOR, GL_MODULATE);
 
 	// ³ª´Â ¹Ó¸ÊÀ¸·Î ¸¸µë
-
-	gluBuild2DMipmaps(GL_TEXTURE_2D, 3, width, height, GL_BGR_EXT, GL_UNSIGNED_BYTE, data);
+	glTexImage2D(GL_TEXTURE_2D, 0, 3, width, height, 0, GL_BGR_EXT, GL_UNSIGNED_BYTE, data);
+	//gluBuild2DMipmaps(GL_TEXTURE_2D, 3, width, height, GL_BGR_EXT, GL_UNSIGNED_BYTE, data);
 	free(data);
 
 	return texture;

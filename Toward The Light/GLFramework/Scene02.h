@@ -96,7 +96,7 @@ private:
 	GLuint			texCord;
 	GLubyte			*pBytes;
 	BITMAPINFO		*info;
-	GLuint			IDtmp[1];
+	GLuint			IDtmp[6];
 	Vector2			foward;//player move
 	Vector3			Eye;
 	Vector3			At;
