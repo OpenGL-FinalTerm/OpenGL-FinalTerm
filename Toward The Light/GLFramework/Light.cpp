@@ -312,4 +312,8 @@ void Light::pickSetPos(float inX, float inY, float inZ)
 	x = inX;
 	y = inY;
 	z = inZ;
+
+	pos[0] = inX;
+	pos[1] = inY;
+	pos[2] = inZ;
 }

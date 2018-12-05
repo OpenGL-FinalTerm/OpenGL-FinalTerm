@@ -62,6 +62,7 @@ void S02Main::init()
 		mapLight[i].pickUp(false);
 	}
 	pickLight = false;
+	pickLightNumber = -1;
 }
 
 void S02Main::exit()
@@ -317,14 +318,17 @@ void S02Main::keyboard(int key, bool pressed, int x, int y, bool special)
 				pickLight = true;
 			}
 
-			if (pickCount % 2 == 1) {
-				mapLight[pickLightNumber].pickUp(false);
-				pickCount = 0;
-				pickLight = false;
+			if (pickLight == true) {
+				if (pickCount % 2 == 1) {
+					mapLight[pickLightNumber].pickUp(false);
+					pickCount = 0;
+					pickLight = false;
+					beforePick = false;
+					pickLightNumber = -1;
+				}
+				else
+					pickCount++;
 			}
-			else
-				pickCount++;
-
 			beforePick = false;
 			break;
 
@@ -1045,10 +1049,12 @@ void S02Main::update(float fDeltaTime)
 		if (pickLight == false) {
 			if (mapLight[light].returnXpos() - 10 < tmpRect.x && mapLight[light].returnXpos() + 10 > tmpRect.x
 				&& mapLight[light].returnZpos() - 10 < tmpRect.z && mapLight[light].returnZpos() + 10 > tmpRect.z) {
-				print("press 'E' you can pick up this light",0, 100, 0);
+				print("press 'E' you can pick up this light", 0, 100, 0);
 				pickLightNumber = light;
 				break;
 			}
+			else
+				pickLightNumber = -1;
 			
 		}
 	}
