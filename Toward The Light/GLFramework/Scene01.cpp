@@ -5,6 +5,7 @@
 #include "LoadMap.h"
 #include "Character.h"
 #include "BananaSetting.h"
+#include "opening.h"
 // 11/30 오후 7시반 오지않는 바나나 클래스를 
 static int whatBox;
 static int LightCount;
@@ -17,6 +18,7 @@ bool go_left;
 bool go_right;
 bool go_back;
 
+//코딩 3일차 오프닝 엔딩 카메라까지 전부 구현했다 델몬트 바나나가 먹고싶다
 
 #define d_Sensitivity  3 //감도 how many rotate camera
 
@@ -131,39 +133,12 @@ void S01Main::render()
 		if (opening_bezier_t >= 1) {
 			opening_camera_working = false;
 		}
-		opening_bezier_t += 0.01f;
-		//pt = ((pow((1 - t) .2) * p0) + (2 * t * (1 - t) * p1) + (pow(t , 2) * p2))
-		/*
-		pt = 
-		((p0 * pow((1-t), 3))+ 
-		 (3 * p1 * t * pow((1-t), 2)) + 
-		 (3 * p2 * pow(t, 2) * (1 - t)) +
-		 (p3 * pos(t, 3))
-		 )
-		*/
-
-		//Eye.x = ((pow((1 - opening_bezier_t), 2) * red_right_cylinder.x) + (2 * opening_bezier_t * (1 - opening_bezier_t) * (red_right_cylinder.x + tmpRect.x)/2) + (pow(opening_bezier_t, 2) * tmpRect.x));
-		//Eye.y = ((pow((1 - opening_bezier_t), 2) * red_right_cylinder.y) + (2 * opening_bezier_t * (1 - opening_bezier_t) * (200)) + (pow(opening_bezier_t, 2) * tmpRect.y));
-		//Eye.z = ((pow((1 - opening_bezier_t), 2) * red_right_cylinder.z) + (2 * opening_bezier_t * (1 - opening_bezier_t) * (red_right_cylinder.z + tmpRect.z) / 2) + (pow(opening_bezier_t, 2) * tmpRect.z));
-
+		opening_bezier_t += 0.001f;
+		//
+		ending_camera_Eye(red_right_cylinder.y, red_right_cylinder.y, red_right_cylinder.z, tmpRect.x, tmpRect.y, tmpRect.z, opening_bezier_t, Eye.x, Eye.y, Eye.z);
+		ending_camera_At(red_right_cylinder.y, red_right_cylinder.y, red_right_cylinder.z, tmpRect.x, tmpRect.y, tmpRect.z, opening_bezier_t, &At.x, &At.y, &At.z);
 		//3차
-		Eye.x =(1 - opening_bezier_t) * red_right_cylinder.x + opening_bezier_t * tmpRect.x;
-
-		Eye.z = (1 - opening_bezier_t) * red_right_cylinder.z + opening_bezier_t * tmpRect.z;
-
-		Eye.y =
-			((red_right_cylinder.y * pow((1 - opening_bezier_t), 3)) + //실린더 위치
-			(3 * (130) * opening_bezier_t * pow((1 - opening_bezier_t), 2)) + //제어점 1
-				(3 * (180) * pow(opening_bezier_t, 2) * (1 - opening_bezier_t)) + //제어점 2
-				(tmpRect.y * pow(opening_bezier_t, 3)) //도착지점
-				);
-
-		
-		//직선 구하는 함수
-		// pt = (1 - t ) * p0 + t * p1
-		At.x = (1 - opening_bezier_t) *  (-20) + opening_bezier_t * (tmpRect.x + sin(result_degree[0] * 3.141592 / 180) * 100);
-		At.z = (1 - opening_bezier_t) *  (-20) + opening_bezier_t * (tmpRect.z + cos(result_degree[0] * 3.141592 / 180) * 100);
-		At.y = 10;
+	
 		printf("opeing %f \n", opening_bezier_t);
 	}
 	
@@ -271,7 +246,7 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 				view_rotate[1] = 50;
 
 			}
-			else if (change_person_view_count % 2 == 1) {         //3인칭
+			else if (change_person_view_count % 2 == 1) {	//3인칭
 
 				view_rotate[0] = -20;
 				view_rotate[1] = 20;

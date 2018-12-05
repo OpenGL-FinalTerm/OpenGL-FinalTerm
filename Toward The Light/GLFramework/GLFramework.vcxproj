@@ -144,6 +144,7 @@
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="NormalObject.cpp" />
     <ClCompile Include="Object.cpp" />
+    <ClCompile Include="opening.cpp" />
     <ClCompile Include="Picking.cpp" />
     <ClCompile Include="Robot.cpp" />
     <ClCompile Include="Scene00_Main.cpp" />
@@ -181,6 +182,7 @@
     <ClInclude Include="Model.h" />
     <ClInclude Include="NormalObject.h" />
     <ClInclude Include="Object.h" />
+    <ClInclude Include="opening.h" />
     <ClInclude Include="Picking.h" />
     <ClInclude Include="Robot.h" />
     <ClInclude Include="Scene00_Main.h" />
