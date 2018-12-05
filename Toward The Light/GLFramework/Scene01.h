@@ -54,6 +54,7 @@ private:
 	int			drag_old_postion[2] = {};
 	int			drag_new_postion[2] = {};
 	int			__t = 0;
+	int			pickLightNumber = -1;
 
 	bool		dep = false; // 시작할때 낙하하는것도 체크하여서 만들어둠
 	bool		person_view_1 = false;
@@ -65,6 +66,7 @@ private:
 	bool		keyS = false;
 	bool		keyD = false;
 	bool		keyDown = false;
+	bool		pickLight = false;
 
 	float		difference_new_old[2] = {}; // between drag_old postion and drag new postion --> old - new
 	float		difference_size = 1.f;
