@@ -66,3 +66,15 @@ void ending_camera_At(float* start_x, float* start_y, float* start_z, float* end
 	}
 	//return out_x, out_y, out_z;
 }
+
+void camera_moving_Eye(float* pos_x, float* pos_y, float* pos_z, float* degree, int* size_w, int* size_y, float* out_x, float* out_y, float* out_z){
+	*out_x = -sin(*degree * 3.141592 / 180) * (*size_w + 0.1) + *pos_x;
+	*out_y = *pos_y + *size_y;
+	*out_z = -cos(*degree * 3.141592 / 180) * (*size_w + 0.1) + *pos_z;
+}
+
+void camera_moving_At(float* pos_x, float* pos_y, float* pos_z, float* degree, int* size_w, int* size_y, float* out_x, float* out_y, float* out_z) {
+	*out_x = sin(*degree * 3.141592 / 180) * (100) + *pos_x;
+	*out_y = 10;
+	*out_z = cos(*degree * 3.141592 / 180) * (100) + *pos_z;
+}

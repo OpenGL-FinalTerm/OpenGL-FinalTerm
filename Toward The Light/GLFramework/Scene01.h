@@ -60,7 +60,7 @@ private:
 	float		difference_normal_pos[2] = {};
 	float		result_degree[2] = {};
 	float		assist_rotation = 1;
-	float		view_rotate[2] = {};
+	int		view_rotate[2] = {};
 
 	//∫”¿∫ ¡∂∏Ì±‚µ’
 	Vector3 red_right_cylinder;
