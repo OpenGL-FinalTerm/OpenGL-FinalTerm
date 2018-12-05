@@ -17,11 +17,6 @@ bool go_left;
 bool go_right;
 bool go_back;
 
-//붉은 조명기둥
-Vector3 red_right_cylinder;
-//오프닝 시작
-bool opening_camera_working;
-float opening_bezier_t = 0;
 
 #define d_Sensitivity  3 //감도 how many rotate camera
 
@@ -60,16 +55,23 @@ void S01Main::init()
 	result_degree[0] = 180;
 
 	//붉은 조명기둥 위치 읽어오기
-	red_right_cylinder.x = -100;
-	red_right_cylinder.z = -200;
+	red_right_cylinder.x = -50;
+	red_right_cylinder.y = 100;
+	red_right_cylinder.z = -100;
 
 	//카메라 위치를 셋업합니다.
 	//초기 카메라 위치를 설정합니다.
 	Eye.x = red_right_cylinder.x;
 	Eye.x = red_right_cylinder.z;
+	Eye.x = red_right_cylinder.y;
 
-	opening_camera_working = false;
+	opening_camera_working = true;
+	opening_bezier_t = 0;
 	//
+
+	view_rotate[0] = 60;
+	view_rotate[1] = 50;
+
 }
 
 void S01Main::exit()
@@ -126,12 +128,43 @@ void S01Main::render()
 	//카메라 정리 ---
 	if (opening_camera_working) {//오프닝 영상이 시작되면
 		
-		if (opening_bezier_t == 1) {
+		if (opening_bezier_t >= 1) {
 			opening_camera_working = false;
 		}
-		opening_bezier_t += 0.01;
-		//pt = ((1-t) * 3 * p0) + (3 * t * (1- t) * 2 * p1) + (3 * t * 2 )
-		Eye.x = (())
+		opening_bezier_t += 0.01f;
+		//pt = ((pow((1 - t) .2) * p0) + (2 * t * (1 - t) * p1) + (pow(t , 2) * p2))
+		/*
+		pt = 
+		((p0 * pow((1-t), 3))+ 
+		 (3 * p1 * t * pow((1-t), 2)) + 
+		 (3 * p2 * pow(t, 2) * (1 - t)) +
+		 (p3 * pos(t, 3))
+		 )
+		*/
+
+		//Eye.x = ((pow((1 - opening_bezier_t), 2) * red_right_cylinder.x) + (2 * opening_bezier_t * (1 - opening_bezier_t) * (red_right_cylinder.x + tmpRect.x)/2) + (pow(opening_bezier_t, 2) * tmpRect.x));
+		//Eye.y = ((pow((1 - opening_bezier_t), 2) * red_right_cylinder.y) + (2 * opening_bezier_t * (1 - opening_bezier_t) * (200)) + (pow(opening_bezier_t, 2) * tmpRect.y));
+		//Eye.z = ((pow((1 - opening_bezier_t), 2) * red_right_cylinder.z) + (2 * opening_bezier_t * (1 - opening_bezier_t) * (red_right_cylinder.z + tmpRect.z) / 2) + (pow(opening_bezier_t, 2) * tmpRect.z));
+
+		//3차
+		Eye.x =(1 - opening_bezier_t) * red_right_cylinder.x + opening_bezier_t * tmpRect.x;
+
+		Eye.z = (1 - opening_bezier_t) * red_right_cylinder.z + opening_bezier_t * tmpRect.z;
+
+		Eye.y =
+			((red_right_cylinder.y * pow((1 - opening_bezier_t), 3)) + //실린더 위치
+			(3 * (130) * opening_bezier_t * pow((1 - opening_bezier_t), 2)) + //제어점 1
+				(3 * (180) * pow(opening_bezier_t, 2) * (1 - opening_bezier_t)) + //제어점 2
+				(tmpRect.y * pow(opening_bezier_t, 3)) //도착지점
+				);
+
+		
+		//직선 구하는 함수
+		// pt = (1 - t ) * p0 + t * p1
+		At.x = (1 - opening_bezier_t) *  (-20) + opening_bezier_t * (tmpRect.x + sin(result_degree[0] * 3.141592 / 180) * 100);
+		At.z = (1 - opening_bezier_t) *  (-20) + opening_bezier_t * (tmpRect.z + cos(result_degree[0] * 3.141592 / 180) * 100);
+		At.y = 10;
+		printf("opeing %f \n", opening_bezier_t);
 	}
 	
 	
@@ -240,8 +273,8 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 			}
 			else if (change_person_view_count % 2 == 1) {         //3인칭
 
-				view_rotate[0] = 40;
-				view_rotate[1] = 30;
+				view_rotate[0] = -20;
+				view_rotate[1] = 20;
 
 			}
 			printf("%d \n", change_person_view_count % 2);
@@ -354,7 +387,7 @@ void S01Main::mouse(int button, bool pressed, int x, int y)
 
 void S01Main::motion(bool pressed, int x, int y)
 {
-	if (person_view_mouse) {
+	if (!opening_camera_working) {
 		//m_Camera.rotate(x, y, true);
 		//get return motion pos
 		drag_new_postion[0] = x;

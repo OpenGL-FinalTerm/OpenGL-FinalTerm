@@ -30,7 +30,6 @@ public:
 	virtual void update(float fDeltaTime);
 	//Ä«¸Þ¶ó
 	virtual void camera_install(int x, int y);
-
 	virtual void LightSetting();
 	virtual float returnMainX();
 	virtual float returnMainY();
@@ -62,6 +61,14 @@ private:
 	float		result_degree[2] = {};
 	float		assist_rotation = 1;
 	float		view_rotate[2] = {};
+
+	//ºÓÀº Á¶¸í±âµÕ
+	Vector3 red_right_cylinder;
+	//¿ÀÇÁ´× ½ÃÀÛ
+	bool opening_camera_working;
+	float opening_bezier_t;
+
+
 
 	Vector3			Eye;
 	Vector3			At;
