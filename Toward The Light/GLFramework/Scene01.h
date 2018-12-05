@@ -67,8 +67,8 @@ private:
 	//오프닝 시작
 	bool opening_camera_working;
 	float opening_bezier_t;
-
-
+	Vector3 start_At;
+	Vector3 end_At;
 
 	Vector3			Eye;
 	Vector3			At;

@@ -22,7 +22,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{41CB5F89-B7A0-4500-8DAF-7D2EC972D93A}</ProjectGuid>
     <RootNamespace>GLFramework</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -144,7 +144,7 @@
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="NormalObject.cpp" />
     <ClCompile Include="Object.cpp" />
-    <ClCompile Include="opening.cpp" />
+    <ClCompile Include="camera_working.cpp" />
     <ClCompile Include="Picking.cpp" />
     <ClCompile Include="Robot.cpp" />
     <ClCompile Include="Scene00_Main.cpp" />
@@ -182,7 +182,7 @@
     <ClInclude Include="Model.h" />
     <ClInclude Include="NormalObject.h" />
     <ClInclude Include="Object.h" />
-    <ClInclude Include="opening.h" />
+    <ClInclude Include="camera_working.h" />
     <ClInclude Include="Picking.h" />
     <ClInclude Include="Robot.h" />
     <ClInclude Include="Scene00_Main.h" />

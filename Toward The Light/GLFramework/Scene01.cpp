@@ -5,7 +5,7 @@
 #include "LoadMap.h"
 #include "Character.h"
 #include "BananaSetting.h"
-#include "opening.h"
+#include "camera_working.h"
 // 11/30 오후 7시반 오지않는 바나나 클래스를 
 static int whatBox;
 static int LightCount;
@@ -46,8 +46,10 @@ void S01Main::init()
 	//   objectBox[i].setColor(rand() % 255, rand() % 255, rand() % 255);
 	//}
 	tmpRect.x = -10;
-	tmpRect.y = 10;
 	tmpRect.z = 60;
+	tmpRect.y = 10;
+
+	
 	//LightSetting();
 	//DefaultBoxPosSetting();
 	whatBox = LoadMap(objectBox, tmpRect, 2);
@@ -64,12 +66,16 @@ void S01Main::init()
 	//카메라 위치를 셋업합니다.
 	//초기 카메라 위치를 설정합니다.
 	Eye.x = red_right_cylinder.x;
-	Eye.x = red_right_cylinder.z;
-	Eye.x = red_right_cylinder.y;
+	Eye.y = red_right_cylinder.y;
+	Eye.z = red_right_cylinder.z;
 
 	opening_camera_working = true;
 	opening_bezier_t = 0;
 	//
+	end_At.x = tmpRect.x + sin(180 * 3.141592 / 180) * 100;
+	end_At.z = tmpRect.z + cos(180 * 3.141592 / 180) * 100;
+	start_At.x = 1;
+	start_At.y = 1;
 
 	view_rotate[0] = 60;
 	view_rotate[1] = 50;
@@ -135,11 +141,11 @@ void S01Main::render()
 		}
 		opening_bezier_t += 0.001f;
 		//
-		ending_camera_Eye(red_right_cylinder.y, red_right_cylinder.y, red_right_cylinder.z, tmpRect.x, tmpRect.y, tmpRect.z, opening_bezier_t, Eye.x, Eye.y, Eye.z);
-		ending_camera_At(red_right_cylinder.y, red_right_cylinder.y, red_right_cylinder.z, tmpRect.x, tmpRect.y, tmpRect.z, opening_bezier_t, &At.x, &At.y, &At.z);
+		opening_camera_Eye(&red_right_cylinder.x, &red_right_cylinder.y, &red_right_cylinder.z, &tmpRect.x, &tmpRect.y, &tmpRect.z, &opening_bezier_t, &Eye.x, &Eye.y, &Eye.z);
+		opening_camera_At(&start_At.x, &start_At.y, &start_At.z, &end_At.x, &end_At.y, &end_At.z, &opening_bezier_t, &At.x, &At.y, &At.z);
 		//3차
 	
-		printf("opeing %f \n", opening_bezier_t);
+		printf("opeing %f \n", Eye.y);
 	}
 	
 	

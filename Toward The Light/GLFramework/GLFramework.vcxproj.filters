@@ -144,7 +144,7 @@
     <ClCompile Include="Wall.cpp">
       <Filter>Source Files\Base</Filter>
     </ClCompile>
-    <ClCompile Include="opening.cpp">
+    <ClCompile Include="camera_working.cpp">
       <Filter>Source Files\Base</Filter>
     </ClCompile>
   </ItemGroup>
@@ -239,7 +239,7 @@
     <ClInclude Include="Wall.h">
       <Filter>Header Files\Base</Filter>
     </ClInclude>
-    <ClInclude Include="opening.h">
+    <ClInclude Include="camera_working.h">
       <Filter>Header Files\Base</Filter>
     </ClInclude>
   </ItemGroup>

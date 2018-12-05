@@ -3,9 +3,10 @@
 #include "GLFramework.h"
 #include "banana_draw.h"
 #include "Character.h"
-
+#include "camera_working.h"
 static int rotate;
 
+Vector3 old_At_pos;
 
 S04End::S04End()
 {
@@ -29,6 +30,8 @@ void S04End::init()
 	tmpRect.y = 0;
 	tmpRect.z = 0;
 	ending_animation_bool = false;
+
+
 }
 
 void S04End::exit()
@@ -39,22 +42,15 @@ void S04End::reset()
 {
 }
 
-
+float ttt;
 void S04End::render()
 {
 	m_Camera_end.ready();
 	
 
 	//카메라 연산
-	Eye.x = tmpRect.x + sin(camera_degree[0] * 3.141592 / 180) * camera_size[0];
-	Eye.z = tmpRect.z + cos(camera_degree[0] * 3.141592 / 180) * camera_size[0];
-	Eye.y = camera_size[1] + camera_pos[1];
-	//
-
-	At.x = tmpRect.x;
-	At.y = tmpRect.y;
-	At.z = tmpRect.z;
-
+	ending_camera_Eye(&tmpRect.x, &tmpRect.y, &tmpRect.z, &camera_degree[0], &camera_size[0], &camera_size[1], &Eye.x, &Eye.y, &Eye.z);
+	ending_camera_At(&old_At_pos.x ,&old_At_pos.y , &old_At_pos.z, &tmpRect.x, &tmpRect.y, &tmpRect.z, &ttt, &At.x, &At.y, &At.z);
 
 	glPushMatrix();
 	banana_draw(tmpRect.x, tmpRect.y + 5, tmpRect.z, 0.5, IDLE, banana.rot.degree, 0);
