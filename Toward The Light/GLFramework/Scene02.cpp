@@ -34,8 +34,8 @@ void S02Main::init()
 	m_Camera.setSensitivity(10.f);
 
 	//for (int i = 0; i < 20; ++i) {
-	//	objectBox[i].CreateBox(rand() % 120 - 60, 10, rand() % 140 - 70);
-	//	objectBox[i].setColor(rand() % 255, rand() % 255, rand() % 255);
+	//   objectBox[i].CreateBox(rand() % 120 - 60, 10, rand() % 140 - 70);
+	//   objectBox[i].setColor(rand() % 255, rand() % 255, rand() % 255);
 	//}
 	//tmpRect.x = -10;
 	//tmpRect.y = 10;
@@ -759,7 +759,7 @@ void S02Main::update(float fDeltaTime)
 					wPress = false;
 					aPress = false;
 					sPress = false;
-					dPress = false; 
+					dPress = false;
 					m_Framework->toScene("Ending");
 				}
 			}
@@ -1028,7 +1028,7 @@ void S02Main::update(float fDeltaTime)
 
 		if (returnMainX() < 55) {
 
-			if(m_walkingSound.playing() == false)
+			if (m_walkingSound.playing() == false)
 				m_walkingSound.play();
 			if (boxCheckCount < 3) {
 				for (int o = 0; o < boxCheckCount; ++o)
@@ -1141,7 +1141,7 @@ void S02Main::DefaultBoxPosSetting()
 	// 일단 버리는 함수는 일기장
 	// 하루만 더 믿어본다.....................
 	// if(day == 5 && camera == false)
-	//		exit(1);
+	//      exit(1);
 
 
 }

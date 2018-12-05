@@ -26,10 +26,25 @@ public:
 	virtual void motion(bool pressed, int x, int y);
 	virtual void update(float fDeltaTime);
 
+	float		difference_new_old[2] = {}; // between drag_old postion and drag new postion --> old - new
+	float		difference_size = 1.f;
+	float		difference_normal_pos[2] = {};
+	float		result_degree[2] = {};
+	float		assist_rotation = 1;
+	float		view_rotate[2] = {};
+
+
 private:
 	int switch_sign = -1;
 	int Time_count;
 
+	float camera_size[3];//회전반경
+	float camera_degree[3];//회전 각도
+	float camera_pos[3];
+	bool ending_animation_bool = true;
+
+	Vector3	Eye;
+	Vector3	At;
 	Camera	m_Camera_end;
 	Model	m_Model;
 	Object	m_Title;

@@ -10,7 +10,7 @@ void wall()
 	glVertex3f(-60, 0, 70);
 	glVertex3f(-60, 160, 70);
 	glVertex3f(-60, 160, -70);
-	glEnd();	
+	glEnd();
 
 	//오른쪽벽
 	glBegin(GL_QUADS);

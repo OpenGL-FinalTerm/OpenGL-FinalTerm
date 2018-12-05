@@ -102,6 +102,9 @@
     <ClCompile Include="Scene00_Main.cpp">
       <Filter>Source Files\Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="Scene01.cpp">
+      <Filter>Source Files\Scenes</Filter>
+    </ClCompile>
     <ClCompile Include="NormalObject.cpp">
       <Filter>Source Files\Utilities\3D Objects</Filter>
     </ClCompile>
@@ -141,16 +144,7 @@
     <ClCompile Include="Wall.cpp">
       <Filter>Source Files\Base</Filter>
     </ClCompile>
-    <ClCompile Include="Scene01.cpp">
-      <Filter>Source Files\Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="HUD.h">
-      <Filter>Header Files\Base</Filter>
-    </ClCompile>
-    <ClCompile Include="HUD.cpp">
-      <Filter>Source Files\Base</Filter>
-    </ClCompile>
-    <ClCompile Include="LoadBitmap.cpp">
+    <ClCompile Include="camera_working.cpp">
       <Filter>Source Files\Base</Filter>
     </ClCompile>
   </ItemGroup>
@@ -245,7 +239,7 @@
     <ClInclude Include="Wall.h">
       <Filter>Header Files\Base</Filter>
     </ClInclude>
-    <ClInclude Include="LoadBitmap.h">
+    <ClInclude Include="camera_working.h">
       <Filter>Header Files\Base</Filter>
     </ClInclude>
   </ItemGroup>
