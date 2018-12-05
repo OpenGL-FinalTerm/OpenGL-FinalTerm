@@ -57,6 +57,11 @@ void S02Main::init()
 	aPress = false;
 	sPress = false;
 	dPress = false;
+
+	for (int i = 0; i < LightCount; ++i) {
+		mapLight[i].pickUp(false);
+	}
+	pickLight = false;
 }
 
 void S02Main::exit()
@@ -196,7 +201,8 @@ void S02Main::keyboard(int key, bool pressed, int x, int y, bool special)
 	int count = 0;
 	int i = 0;
 	BOOL check = FALSE;
-
+	bool beforePick = false;
+	static int pickCount = 0;
 
 
 	if (pressed)
@@ -296,6 +302,30 @@ void S02Main::keyboard(int key, bool pressed, int x, int y, bool special)
 			if (change_person_view_count % 3 == 2) {
 				radian -= 1;
 			}
+			break;
+
+		case 'f':
+		case 'F':
+
+			for (int i = 0; i < LightCount; ++i) {
+				if (mapLight[i].returnPickCheck() == true)
+					beforePick = true;
+			}
+
+			if (pickLightNumber != -1 && beforePick == false) {
+				mapLight[pickLightNumber].pickUp(true);
+				pickLight = true;
+			}
+
+			if (pickCount % 2 == 1) {
+				mapLight[pickLightNumber].pickUp(false);
+				pickCount = 0;
+				pickLight = false;
+			}
+			else
+				pickCount++;
+
+			beforePick = false;
 			break;
 
 
@@ -986,7 +1016,7 @@ void S02Main::update(float fDeltaTime)
 		lightLanding = false;
 		i = 0;
 		check = FALSE;
-		if (mapLight[light].returnYpos() - 3 > 0) {
+		if (mapLight[light].returnYpos() - 3 > 0 && mapLight[light].returnPickCheck() == false) {
 
 			while (check == FALSE) {
 				if ((objectBox[i].returnBoxCenterX() - 10 < mapLight[light].returnXpos() + 3 && objectBox[i].returnBoxCenterX() + 10 > mapLight[light].returnXpos() - 3 && objectBox[i].returnBoxCenterZ() + 10 > mapLight[light].returnZpos() - 3 && objectBox[i].returnBoxCenterZ() - 10 < mapLight[light].returnZpos() + 3)) {
@@ -1012,7 +1042,21 @@ void S02Main::update(float fDeltaTime)
 	//조명을 집기 위한 공간
 
 	for (int light = 0; light < LightCount; ++light) {
-		
+		if (pickLight == false) {
+			if (mapLight[light].returnXpos() - 10 < tmpRect.x && mapLight[light].returnXpos() + 10 > tmpRect.x
+				&& mapLight[light].returnZpos() - 10 < tmpRect.z && mapLight[light].returnZpos() + 10 > tmpRect.z) {
+				print("press 'E' you can pick up this light",0, 100, 0);
+				pickLightNumber = light;
+				break;
+			}
+			
+		}
+	}
+
+	for (int light = 0; light < LightCount; ++light) {
+		if (mapLight[light].returnPickCheck() == true) {
+				mapLight[light].pickSetPos(tmpRect.x, tmpRect.y + 15, tmpRect.z);
+		}
 	}
 
 

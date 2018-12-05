@@ -9,6 +9,8 @@ private:
 
 	int colorType;
 	
+	bool pick = false;
+
 	GLfloat R;
 	GLfloat G;
 	GLfloat B;
@@ -30,16 +32,19 @@ public:
 	virtual void settingDiffuse(float first, float second, float third, float fourth);
 	virtual void settingSpecu(float first, float second, float third, float fourth);
 	virtual void settingGray(float first, float second, float third, float fourth);
-	
+	virtual void pickUp(bool check);
+
 	virtual float returnXpos();
 	virtual float returnYpos();
 	virtual float returnZpos();
 
+	virtual void pickSetPos(float inX, float inY, float inZ);
 	virtual void moveX(float inX);
 	virtual void moveY(float inY);
 	virtual void moveZ(float inZ);
-	
 	virtual void drawLight(bool LightSwitch, int i);
+
+	virtual bool returnPickCheck();
 };
 
 enum {

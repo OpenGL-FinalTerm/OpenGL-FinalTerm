@@ -296,3 +296,20 @@ void Light::moveZ(float inZ)
 	z += inZ;
 	pos[2] = z;
 }
+
+bool Light::returnPickCheck()
+{
+	return pick;
+}
+
+void Light::pickUp(bool check)
+{
+	pick = check;
+}
+
+void Light::pickSetPos(float inX, float inY, float inZ)
+{
+	x = inX;
+	y = inY;
+	z = inZ;
+}

@@ -52,7 +52,9 @@ private:
 	bool		keyS = false;
 	bool		keyD = false;
 	bool		keyDown = false;
+	bool		pickLight = false;
 
+	int			pickLightNumber = -1;
 	int			drag_old_postion[2] = {};
 	int			drag_new_postion[2] = {};
 	int			change_person_view_count = 0;
