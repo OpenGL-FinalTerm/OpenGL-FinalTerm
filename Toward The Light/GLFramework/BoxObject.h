@@ -1,5 +1,5 @@
 #pragma once
-#include <gl/freeglut.h>
+#include "stdafx.h"
 
 class Box {
 private:
@@ -28,9 +28,9 @@ public:
 	
 	virtual void CreateBox(float x, float y, float z);
 	virtual void setColor(GLfloat R, GLfloat G, GLfloat B);
-	virtual void movingX(int inX);
-	virtual void movingY(int inY);
-	virtual void movingZ(int inZ);
+	virtual void movingX(float inX);
+	virtual void movingY(float inY);
+	virtual void movingZ(float inZ);
 	virtual void checkUpdate(int c);
 	virtual void addXrate(int adX);
 	virtual void addYrate(int adY);

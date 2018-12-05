@@ -53,7 +53,7 @@ void S01Main::init()
 	move_Eye[0] = tmpRect.x;
 	move_Eye[1] = tmpRect.y + 100;
 	move_Eye[2] = tmpRect.z;
-
+	result_degree[0] = 180;
 }
 
 void S01Main::exit()
@@ -80,7 +80,7 @@ float S01Main::returnMainZ()
 {
 	return tmpRect.z + tmpRect.zRate;
 }
-int __t = 0;
+
 
 void S01Main::render()
 {
@@ -274,8 +274,8 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 			if (change_person_view_count % 2 == 0) {
 				//view_rotate[0] => 최소 범위 (20) 카메라의 회전반경을 나타냅니다. 
 				// view_rotate[1] => (20) 카메라의 높이를 나타냅니다. 
-				view_rotate[0] = 60;
-				view_rotate[1] = 50;
+				view_rotate[0] = 10;
+				view_rotate[1] = 0;
 
 			}
 			else if (change_person_view_count % 2 == 1) {			//3인칭
@@ -284,7 +284,7 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 				view_rotate[1] = 30;
 
 			}
-			printf("%d \n", change_person_view_count%2);
+		//	printf("%d \n", change_person_view_count%2);
 			break;
 
 		case 'q':
@@ -386,20 +386,25 @@ void S01Main::motion(bool pressed, int x, int y)
 			difference_normal_pos[1] = difference_new_old[1] / difference_size;
 		
 			//step3 nomal add to radian range 360
-			result_degree[0] += difference_normal_pos[0] * 3;
+
 			//if(result_degree[1] < 180)
 			result_degree[1] += difference_normal_pos[1];
 
-			if ((result_degree[0] > 360) || (result_degree[0] < -360)) {
-				result_degree[0] = 0;
+			if ((result_degree[0] < 360) && (result_degree[0] >= 0)) {
+				result_degree[0] += int(difference_normal_pos[0] * 3);
 			}
+			else if (result_degree[0] >= 360)
+				result_degree[0] = 0;
+			else
+				result_degree[0] = 359;
+
 			if((result_degree[1] > 360) || (result_degree[1] < -360)) {
 				result_degree[1] = 0;
 			}
 
-			printf("normal: %f %f	size : %f \n", difference_new_old[0], difference_new_old[1], difference_size);
-			printf("normal: %f %f	", difference_normal_pos[0], difference_normal_pos[1]);
-			printf("degree: %f %f \n \n", result_degree[0], result_degree[1]);
+	//		printf("normal: %f %f	size : %f \n", difference_new_old[0], difference_new_old[1], difference_size);
+		//	printf("normal: %f %f	", difference_normal_pos[0], difference_normal_pos[1]);
+		//	printf("degree: %f %f \n \n", result_degree[0], result_degree[1]);
 		}
 		//연산이 끝난 후에 저장한다.
 			drag_old_postion[0] = drag_new_postion[0];
@@ -412,6 +417,7 @@ void S01Main::motion(bool pressed, int x, int y)
 
 void S01Main::update(float fDeltaTime)
 {
+	printf("x : %f, z : %f \n", tmpRect.x, tmpRect.z);
 	__t += 1;
 	//camera at --> player going foward pos update
 	// banana pos add
@@ -495,39 +501,53 @@ void S01Main::update(float fDeltaTime)
 
 	}
 
-	if (keyDown == true) {
-		if (person_view_mouse) {
-			tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
-			tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
-		}
-	}
+	//if (keyDown == true) {
+	//	if (person_view_mouse) {
+	//		tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
+	//		tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
+	//	}
+	//}
 
 	if (keyW == true) {
 		if (result_degree[0] > 90 && result_degree[0] < 180) {
-			aPress = false;
-			sPress = false;
+			tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
+			tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
+			aPress = true;
+			sPress = true;
 			wPress = true;
 			dPress = true;
 		}
 
 		else if (result_degree[0] > 180 && result_degree[0] < 270) {
-			sPress = false;
-			dPress = false;
+			tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
+			tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
+			sPress = true;
+			dPress = true;
 			wPress = true;
 			aPress = true;
 		}
 		else if (result_degree[0] > 270 && result_degree[0] < 360) {
-			wPress = false;
-			dPress = false;
+			tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
+			tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
+			wPress = true;
+			dPress = true;
 			sPress = true;
 			aPress = true;
 		}
 		else if (result_degree[0] > 0 && result_degree[0] < 90) {
-			wPress = false;
-			aPress = false;
+			tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
+			tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
+			wPress = true;
+			aPress = true;
 			sPress = true;
 			dPress = true;
 		}
+	}
+	else {
+		wPress = false;
+		aPress = false;
+		sPress = false;
+		dPress = false;
 	}
 
 	printf("%f", result_degree[0]);
@@ -582,11 +602,11 @@ void S01Main::update(float fDeltaTime)
 
 		if (boxCheckCount < 3) {
 			for (int o = 0; o < boxCheckCount; ++o)
-				objectBox[saveBoxIndex[o]].movingZ(-(cos(result_degree[0] * 3.141592 / 180)));
+				objectBox[saveBoxIndex[o]].movingZ((cos(result_degree[0] * 3.141592 / 180)));
 		}
 		else
 		{
-			tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
+			tmpRect.z -= (cos(result_degree[0] * 3.141592 / 180));
 	
 		}
 
@@ -614,6 +634,7 @@ void S01Main::update(float fDeltaTime)
 		}*/
 		angle = 270;
 		//mainCharacter.movingX(-1);
+		check = FALSE;
 		boxCheckCount = 0;
 		while (check == FALSE) {
 
@@ -657,11 +678,11 @@ void S01Main::update(float fDeltaTime)
 
 		if (boxCheckCount < 3) {
 			for (int o = 0; o < boxCheckCount; ++o)
-				objectBox[saveBoxIndex[o]].movingX(-(sin((result_degree[0] + 90) * 3.141592 / 180)));
+				objectBox[saveBoxIndex[o]].movingX((sin((result_degree[0] + 90) * 3.141592 / 180)));
 		}
 		else
 		{
-			tmpRect.x += (sin((result_degree[0] + 90) * 3.141592 / 180));
+			tmpRect.x -= (sin((result_degree[0] + 90) * 3.141592 / 180));
 		}
 
 		boxCheckCount = 0;
@@ -686,6 +707,7 @@ void S01Main::update(float fDeltaTime)
 		}*/
 		angle = 180;
 		//mainCharacter.movingZ(1);
+		check = FALSE;
 		boxCheckCount = 0;
 		while (check == FALSE) {
 
@@ -725,12 +747,12 @@ void S01Main::update(float fDeltaTime)
 
 		if (boxCheckCount < 3) {
 			for (int o = 0; o < boxCheckCount; ++o)
-				objectBox[saveBoxIndex[o]].movingZ((cos((result_degree[0]) * 3.141592 / 180)));
+				objectBox[saveBoxIndex[o]].movingZ((cos((result_degree[0]) * 3.141592 / 180)) * (-1));
 		}
 		else
 		{
 		
-			tmpRect.z -= (cos((result_degree[0]) * 3.141592 / 180));
+			tmpRect.z += (cos((result_degree[0]) * 3.141592 / 180));
 
 		}
 		for (int k = 0; k < whatBox; ++k)

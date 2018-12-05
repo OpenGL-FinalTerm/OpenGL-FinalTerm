@@ -1,5 +1,5 @@
 #pragma once
-#include <gl/freeglut.h>
+#include "stdafx.h"
 
 class Light {
 private:

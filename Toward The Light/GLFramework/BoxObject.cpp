@@ -22,17 +22,17 @@ void Box::setColor(GLfloat R, GLfloat G, GLfloat B)
 	colorB = B;
 }
 
-void Box::movingX(int inX)
+void Box::movingX(float inX)
 {
 	x += inX;
 }
 
-void Box::movingY(int inY)
+void Box::movingY(float inY)
 {
 	y += inY;
 }
 
-void Box::movingZ(int inZ)
+void Box::movingZ(float inZ)
 {
 	z += inZ;
 }

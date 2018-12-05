@@ -50,6 +50,7 @@ private:
 	int			change_person_view_count = 0;
 	int			drag_old_postion[2] = {};
 	int			drag_new_postion[2] = {};
+	int			__t = 0;
 
 	bool		person_view_1 = false;
 	bool		person_view_3 = false;
