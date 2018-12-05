@@ -43,6 +43,9 @@ private:
 	float		radian;
 	float		camera_deree[3];
 
+	int			whatBox;
+	int			LightCount = 4;
+	int			angle = 0;
 	int			depthCheck = 0;
 	int			switch_sign = -1;
 	int			Time_count;

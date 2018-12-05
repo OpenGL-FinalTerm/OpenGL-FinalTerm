@@ -6,10 +6,6 @@
 #include "Character.h"
 #include "BananaSetting.h"
 						// 11/30 오후 7시반 오지않는 바나나 클래스를 
-static int whatBox;
-static int LightCount;
-
-static int angle = 0;
 
 
 
@@ -269,8 +265,7 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 				mapLight[i].LightOn(false, i);
 			break;
 		case 'u':
-			change_person_view_count += 1;
-			//1인칭
+			change_person_view_count++;
 			if (change_person_view_count % 2 == 0) {
 				//view_rotate[0] => 최소 범위 (20) 카메라의 회전반경을 나타냅니다. 
 				// view_rotate[1] => (20) 카메라의 높이를 나타냅니다. 
@@ -278,13 +273,12 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 				view_rotate[1] = 50;
 
 			}
-			else if (change_person_view_count % 2 == 1) {			//3인칭
+			else if (change_person_view_count % 2 == 1) {         //3인칭
 
-				view_rotate[0] = 40;
-				view_rotate[1] = 30;
+				view_rotate[0] = -20;
+				view_rotate[1] = 20;
 
 			}
-			//	printf("%d \n", change_person_view_count%2);
 			break;
 
 		case 'q':

@@ -6,10 +6,6 @@
 #include "Character.h"
 #include "BananaSetting.h"
 
-static int whatBox;
-static int LightCount = 4;
-
-static int angle = 0;
 
 
 
@@ -63,6 +59,8 @@ void S02Main::init()
 	}
 	pickLight = false;
 	pickLightNumber = -1;
+	pBytes = LoadDIBitmap("Test.bmp", &texture);
+
 }
 
 void S02Main::exit()
@@ -179,7 +177,8 @@ void S02Main::render()
 	}
 
 
-
+	drawHUD();
+	
 	glPopMatrix();
 }
 
@@ -276,8 +275,7 @@ void S02Main::keyboard(int key, bool pressed, int x, int y, bool special)
 				mapLight[i].LightOn(false, i);
 			break;
 		case 'u':
-			change_person_view_count += 1;
-			//1인칭
+			change_person_view_count++;
 			if (change_person_view_count % 2 == 0) {
 				//view_rotate[0] => 최소 범위 (20) 카메라의 회전반경을 나타냅니다. 
 				// view_rotate[1] => (20) 카메라의 높이를 나타냅니다. 
@@ -285,13 +283,12 @@ void S02Main::keyboard(int key, bool pressed, int x, int y, bool special)
 				view_rotate[1] = 50;
 
 			}
-			else if (change_person_view_count % 2 == 1) {			//3인칭
+			else if (change_person_view_count % 2 == 1) {         //3인칭
 
-				view_rotate[0] = 40;
-				view_rotate[1] = 30;
+				view_rotate[0] = -20;
+				view_rotate[1] = 20;
 
 			}
-			//	printf("%d \n", change_person_view_count%2);
 			break;
 
 		case 'q':
@@ -1066,6 +1063,8 @@ void S02Main::update(float fDeltaTime)
 	}
 
 
+	//조명 그림자 shadowMapping
+
 	// 캐릭터 회전
 
 	if (wPress == true)
@@ -1110,6 +1109,48 @@ void S02Main::DefaultBoxPosSetting()
 
 }
 
+void S02Main::HUD()
+{
+	
+
+	//GLuint tex;
+
+	glEnable(GL_TEXTURE_2D);
+	
+	glColor3f(1.f, 1.f, 1.f);
+	glPushMatrix();
+	glBindTexture(GL_TEXTURE_2D, IDtmp[0]);
+	glTexImage2D(GL_TEXTURE_2D, 0, 3, w, h, 0, GL_BGR_EXT, GL_UNSIGNED_BYTE, pBytes);
+	glBegin(GL_QUADS);
+	glTexCoord2f(0.f, 1.f);		glVertex2f(50, 50);
+	glTexCoord2f(1.f, 1.f);		glVertex2f(200, 50);
+	glTexCoord2f(1.f, 0.f);		glVertex2f(200, 200);
+	glTexCoord2f(0.f, 0.f);		glVertex2f(50, 200);
+	glEnd();
+	glPopMatrix();
+
+}
+
+void S02Main::drawHUD()
+{
+	glMatrixMode(GL_PROJECTION);
+	glPushMatrix();
+	glLoadIdentity();
+	gluOrtho2D(0.0, 1500.0, 900.0, 0.0);
+
+	glMatrixMode(GL_MODELVIEW);
+	glPushMatrix();
+	glLoadIdentity();
+
+	HUD();
+
+	glMatrixMode(GL_PROJECTION);
+	glPopMatrix();
+	glMatrixMode(GL_MODELVIEW);
+	glPopMatrix();
+	glDisable(GL_TEXTURE_2D);
+}
+
 void S02Main::LightSetting()
 {
 	//조명 설정
@@ -1144,4 +1185,51 @@ void S02Main::LightSetting()
 
 	for (int i = 0; i < 4; ++i)
 		mapLight[i].LightOn(true, i);
+}
+
+GLuint S02Main::LoadTexture(const char * filename, int width_1, int height_1)
+{
+	GLuint texture;
+	int width, height;
+	unsigned char * data;
+	FILE * file;
+
+	// 파일 열기
+	fopen_s(&file, filename, "rb");
+
+	if (file == NULL) return 0;
+	width = width_1;
+	height = height_1;
+	data = (unsigned char *)malloc(width * height * 3);
+	fread(data, width * height * 3, 1, file);
+	fclose(file);
+
+	// 색상결정
+	for (int i = 0; i < width * height; ++i)
+	{
+		int index = i * 3;
+		unsigned char B, R;
+		B = data[index];
+		R = data[index + 2];
+
+		data[index] = R;
+		data[index + 2] = B;
+	}
+
+	// 이후 PDF동일
+	glGenTextures(1, &texture);
+	glBindTexture(GL_TEXTURE_2D, texture);
+
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+	// Modulate로 함
+	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_COLOR, GL_MODULATE);
+
+	// 나는 밉맵으로 만듬
+
+	gluBuild2DMipmaps(GL_TEXTURE_2D, 3, width, height, GL_BGR_EXT, GL_UNSIGNED_BYTE, data);
+	free(data);
+
+	return texture;
 }

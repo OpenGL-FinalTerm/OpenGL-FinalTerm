@@ -1,4 +1,8 @@
 #pragma once
+//#pragma comment (lib,"SDL2")
+//#pragma comment (lib,"SDL2main")
+//#pragma comment (lib,"SDL2_image")
+//#pragma comment (lib,"opengl32.lib")
 #include "GLScene.h"
 
 /* UTILITIES */
@@ -11,6 +15,11 @@
 #include "BananaSetting.h"
 #include "Character.h"
 #include "Wall.h"
+#include "Texture.h"
+#include "LoadBitmap.h"
+
+
+
 
 class S02Main : public GLScene
 {
@@ -29,9 +38,13 @@ public:
 	virtual void update(float fDeltaTime);
 	virtual void DefaultBoxPosSetting();
 	virtual void LightSetting();
+	virtual void drawHUD();
+	virtual void HUD();
 	virtual float returnMainX();
 	virtual float returnMainY();
 	virtual float returnMainZ();
+
+	virtual GLuint LoadTexture(const char * filename, int width_1, int height_1);
 
 private:
 	float		tX = 0, tY = 0;
@@ -39,6 +52,10 @@ private:
 	float		rY = 0;
 	float		radian;
 	
+	
+	int			whatBox;
+	int			LightCount = 4;
+	int			angle = 0;
 	int			switch_sign = -1;
 	int			Time_count;
 	int			depthCheck = 0;
@@ -60,6 +77,8 @@ private:
 	int			change_person_view_count = 0;
 	int			move_Eye[3];
 	int			__t = 0;
+	int			w = 150;
+	int			h = 150;
 	
 	float		camera_deree[3];
 	float		difference_new_old[2] = {}; // between drag_old postion and drag new postion --> old - new
@@ -74,11 +93,17 @@ private:
 	bool		sPress = false;
 	bool		dPress = false;
 	
+	GLuint			texCord;
+	GLubyte			*pBytes;
+	BITMAPINFO		*info;
+	GLuint			IDtmp[1];
 	Vector2			foward;//player move
 	Vector3			Eye;
 	Vector3			At;
 	Vector3			foward_move; //나아가야하는 방향
 	Camera			m_Camera;
+	BITMAPINFO		*texture;
+	//Texture			textures;
 	NormalObject	m_Plane;
 	NormalObject    m_Box[3];
 	NormalObject    m_wBox[3];
@@ -89,4 +114,8 @@ private:
 	Light			mapLight[100];
 	Shape			banana;
 	tmp				tmpRect;
+
+
+	//GLubyte *map = (GLubyte*)image->pixels;
+
 };
