@@ -13,11 +13,11 @@ void opening_camera_Eye(float* start_x, float* start_y, float* start_z, float* e
 	//		);
 		
 	*out_y = 
-		((-pow(*t, 3) + 2 * pow(*t, 2) - *t)* *start_y +
-		(3 * pow(*t, 3) - 5 * pow(*t, 2) + 2) * ((contrl_pt + *start_y) / 2) +
-		(-3 * pow(*t, 3) + 4 * pow(*t, 2) + *t)* ((contrl_pt + *end_y) / 2) +
-		(pow(*t, 3) - pow(*t, 2))* *end_y
-		)/2;
+		((-pow(*t, 3) + (2 * pow(*t, 2)) - *t)* *start_y +
+		((3 * pow(*t, 3)) - (5 * pow(*t, 2)) + 2) * ((contrl_pt + *start_y) / 2) +
+		((-3 * pow(*t, 3)) + (4 * pow(*t, 2)) + *t)* ((contrl_pt + *end_y) / 2) +
+		(pow(*t, 3) - pow(*t, 2)) * *end_y
+		) / 2;
 }
 //스플라인
 //직선 구하는 함수

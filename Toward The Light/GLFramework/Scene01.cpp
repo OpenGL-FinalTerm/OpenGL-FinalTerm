@@ -139,7 +139,7 @@ void S01Main::render()
 		}
 		opening_bezier_t += 0.01f;
 	
-		opening_camera_Eye(&red_right_cylinder.x, &red_right_cylinder.y, &red_right_cylinder.z, &tmpRect.x, &tmpRect.y, &tmpRect.z, &opening_bezier_t, 200, &Eye.x, &Eye.y, &Eye.z);
+		opening_camera_Eye(&red_right_cylinder.x, &red_right_cylinder.y, &red_right_cylinder.z, &tmpRect.x, &tmpRect.y, &tmpRect.z, &opening_bezier_t, 300, &Eye.x, &Eye.y, &Eye.z);
 		opening_camera_At(&start_At.x, &start_At.y, &start_At.z, &end_At.x, &end_At.y, &end_At.z, &opening_bezier_t, &At.x, &At.y, &At.z);
 	
 		printf("opeing %f \n", Eye.y);
