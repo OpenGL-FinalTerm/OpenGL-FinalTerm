@@ -87,8 +87,8 @@ private:
 	float		difference_normal_pos[2] = {};
 	float		result_degree[2] = {};
 	float		assist_rotation = 1;
-	float		view_rotate[2] = {};
-
+	int		view_rotate[2] = {};
+	int			view_at_size[2];
 	bool		wPress = false;
 	bool		aPress = false;
 	bool		sPress = false;
@@ -104,6 +104,16 @@ private:
 	Vector3			foward_move; //나아가야하는 방향
 	Vector3			Destination;
 	float			ControlPoint[3];
+	float			startPos[3];
+
+	//붉은 조명 위치
+	Vector3 red_right_cylinder;
+
+	//카메라 시작 애니메이션
+	bool opening_camera_working;
+	float opening_bezier_t;
+	Vector3 start_At;
+	Vector3 end_At;
 
 	Camera			m_Camera;
 	BITMAPINFO		*texture;

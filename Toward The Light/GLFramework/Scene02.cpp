@@ -62,41 +62,13 @@ void S02Main::init()
 
 	glGenTextures(6, IDtmp);
 	glBindTexture(GL_TEXTURE_2D, IDtmp[0]);
-	pBytes = LoadDIBitmap("Test.bmp", &info);
-	glTexImage2D(GL_TEXTURE_2D, 0, 3, 150, 150, 0, GL_BGR_EXT, GL_UNSIGNED_BYTE, pBytes);
+	pBytes = LoadDIBitmap("texture5.bmp", &info);
+	glTexImage2D(GL_TEXTURE_2D, 0, 3, 128, 128, 0, GL_BGR_EXT, GL_UNSIGNED_BYTE, pBytes);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
-
-	glBindTexture(GL_TEXTURE_2D, IDtmp[1]);
-	pBytes = LoadDIBitmap("Test.bmp", &info);
-	glTexImage2D(GL_TEXTURE_2D, 0, 3, 150, 150, 0, GL_BGR_EXT, GL_UNSIGNED_BYTE, pBytes);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-
-	glBindTexture(GL_TEXTURE_2D, IDtmp[2]);
-	pBytes = LoadDIBitmap("Test.bmp", &info);
-	glTexImage2D(GL_TEXTURE_2D, 0, 3, 150, 150, 0, GL_BGR_EXT, GL_UNSIGNED_BYTE, pBytes);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-
-	glBindTexture(GL_TEXTURE_2D, IDtmp[3]);
-	pBytes = LoadDIBitmap("Test.bmp", &info);
-	glTexImage2D(GL_TEXTURE_2D, 0, 3, 150, 150, 0, GL_BGR_EXT, GL_UNSIGNED_BYTE, pBytes);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-
-	glBindTexture(GL_TEXTURE_2D, IDtmp[4]);
-	pBytes = LoadDIBitmap("Test.bmp", &info);
-	glTexImage2D(GL_TEXTURE_2D, 0, 3, 150, 150, 0, GL_BGR_EXT, GL_UNSIGNED_BYTE, pBytes);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-
-	glBindTexture(GL_TEXTURE_2D, IDtmp[5]);
-	pBytes = LoadDIBitmap("Test.bmp", &info);
-	glTexImage2D(GL_TEXTURE_2D, 0, 3, 150, 150, 0, GL_BGR_EXT, GL_UNSIGNED_BYTE, pBytes);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-
 	
 }
 
@@ -145,6 +117,26 @@ void S02Main::render()
 	for (int i = 0; i < LightCount; ++i)
 		mapLight[i].drawLight(TRUE, i);
 
+
+	if (opening_camera_working) {//오프닝 영상이 시작되면
+
+		if (opening_bezier_t >= 1) {
+			opening_camera_working = false;
+		}
+		opening_bezier_t += 0.01f;
+
+		opening_camera_Eye(&red_right_cylinder.x, &red_right_cylinder.y, &red_right_cylinder.z, &tmpRect.x, &tmpRect.y, &tmpRect.z, &opening_bezier_t, 300, &Eye.x, &Eye.y, &Eye.z);
+		opening_camera_At(&start_At.x, &start_At.y, &start_At.z, &end_At.x, &end_At.y, &end_At.z, &opening_bezier_t, &At.x, &At.y, &At.z);
+
+		printf("opeing %f \n", Eye.y);
+	}
+
+
+	if (!opening_camera_working) { //오프닝 카메라 워킹이 false
+		//eye 도 각도에 따라 바뀐다.
+		camera_moving_Eye(&tmpRect.x, &tmpRect.y, &tmpRect.z, &result_degree[0], &view_rotate[0], &view_rotate[1], &Eye.x, &Eye.y, &Eye.z);
+		camera_moving_At(&tmpRect.x, &tmpRect.y, &tmpRect.z, &result_degree[0], &view_at_size[0], &view_at_size[1], &At.x, &At.y, &At.z);
+	}
 	//glPushMatrix();
 	//glColor3f(1.f, 0.4f, 0.2f);
 	//glutSolidCube(10);
@@ -429,8 +421,12 @@ void S02Main::mouse(int button, bool pressed, int x, int y)
 			Destination[1] = At[1];
 			Destination[2] = At[2];
 
+			startPos[0] = mapLight[pickLightNumber].returnXpos();
+			startPos[1] = mapLight[pickLightNumber].returnYpos();
+			startPos[2] = mapLight[pickLightNumber].returnZpos();
+
 			ControlPoint[0] = (At[0] - tmpRect.x) / 2;
-			ControlPoint[1] = 60;
+			ControlPoint[1] = startPos[1] + 40;
 			ControlPoint[2] = (At[2] - tmpRect.z) / 2;
 		}
 	}
@@ -535,7 +531,7 @@ void S02Main::update(float fDeltaTime)
 				down = FALSE;
 				tmpcheck = true;
 
-				if (depthCheck >= 50) {
+				if (depthCheck >= 60) {
 					if (dep == false) {
 						dep = true;
 						depthCheck = 0;
@@ -561,7 +557,7 @@ void S02Main::update(float fDeltaTime)
 
 		if (tmpRect.y <= 10 && tmpcheck == false) {
 			down = FALSE;
-			if (depthCheck >= 50) {
+			if (depthCheck >= 60) {
 				if (dep == false) {
 					dep = true;
 					depthCheck = 0;
@@ -581,7 +577,7 @@ void S02Main::update(float fDeltaTime)
 
 		tmpcheck = false;
 	}
-	printf("%f \n", result_degree[0]);
+	//printf("%f \n", result_degree[0]);
 	if (keyW == true) {
 		if (result_degree[0] >= 90 && result_degree[0] < 180) {
 			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
@@ -1124,11 +1120,14 @@ void S02Main::update(float fDeltaTime)
 			tmpy = mapLight[light].returnYpos();
 			tmpz = mapLight[light].returnZpos();
 
-			opening_camera_Eye(&tmpx, &tmpy, &tmpz, &Destination[0], &Destination[1], &Destination[2], &t, &ControlPoint[0], &ControlPoint[1], &ControlPoint[2]);
+			opening_camera_Eye(&startPos[0], &startPos[1], &startPos[2], &Destination[0], &Destination[1], &Destination[2], &t, startPos[1] + 60, &tmpx, &tmpy, &tmpz);
 			mapLight[light].settingPos(tmpx, tmpy, tmpz);
 			t += 0.01f;
-			if (t >= 1.f)
+			if (t >= 1.f) {
 				mapLight[light].throwLightUpdate(false);
+				mapLight[light].pickUp(false);
+				t = 0;
+			}
 		}
 	}
 
@@ -1192,10 +1191,10 @@ void S02Main::HUD()
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, IDtmp[0]);
 	glBegin(GL_QUADS);
-	glTexCoord2f(0.f, 1.f);		glVertex2f(50, 50);
-	glTexCoord2f(1.f, 1.f);		glVertex2f(200, 50);
-	glTexCoord2f(1.f, 0.f);		glVertex2f(200, 200);
-	glTexCoord2f(0.f, 0.f);		glVertex2f(50, 200);
+	glTexCoord2f(0.f, 1.f);		glVertex2f(0, 100);
+	glTexCoord2f(0.f, 0.f);		glVertex2f(0, 0);
+	glTexCoord2f(1.f, 0.f);		glVertex2f(100, 0);
+	glTexCoord2f(1.f, 1.f);		glVertex2f(100, 100);
 	glEnd();
 	glPopMatrix();
 
@@ -1203,21 +1202,22 @@ void S02Main::HUD()
 
 void S02Main::drawHUD()
 {
+	glViewport(10, 10, 500, 500);
 	glMatrixMode(GL_PROJECTION);
-	glPushMatrix();
+	//glPushMatrix();
 	glLoadIdentity();
-	gluOrtho2D(0.0, 1500.0, 900.0, 0.0);
+	gluOrtho2D(0.0, 150.0, 150.0, 0.0);
 
 	glMatrixMode(GL_MODELVIEW);
-	glPushMatrix();
+	//glPushMatrix();
 	glLoadIdentity();
 
 	HUD();
 	glDisable(GL_TEXTURE_2D);
-	glMatrixMode(GL_PROJECTION);
-	glPopMatrix();
-	glMatrixMode(GL_MODELVIEW);
-	glPopMatrix();
+	//glMatrixMode(GL_PROJECTION);
+	//glPopMatrix();
+	//glMatrixMode(GL_MODELVIEW);
+	//glPopMatrix();
 	
 }
 

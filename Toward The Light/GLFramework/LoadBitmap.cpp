@@ -7,7 +7,9 @@ GLubyte * LoadDIBitmap(const char *filename, BITMAPINFO **info)
 	int bitsize, infosize;
 	BITMAPFILEHEADER header;
 	// 바이너리 읽기 모드로 파일을 연다
-	if ((fopen_s(&fp, filename, "rb")) == NULL)
+	//if ((fopen_s(&fp, filename, "rb")) == NULL)
+	fopen_s(&fp, filename, "rb");
+	if ( fp == NULL)
 		return NULL;
 	// 비트맵 파일 헤더를 읽는다.
 	if (fread(&header, sizeof(BITMAPFILEHEADER), 1, fp) < 1) {
@@ -32,7 +34,7 @@ GLubyte * LoadDIBitmap(const char *filename, BITMAPINFO **info)
 		return NULL;
 	}	// 비트맵의 크기 설정
 	if ((bitsize = (*info)->bmiHeader.biSizeImage) == 0)
-		bitsize = ((*info)->bmiHeader.biWidth*(*info)->bmiHeader.biBitCount + 7) / 8.0 * abs((*info) -> bmiHeader.biHeight);
+		bitsize = ((*info)->bmiHeader.biWidth*(*info)->bmiHeader.biBitCount +7) / 8.0 * abs((*info) -> bmiHeader.biHeight);
 	// 비트맵의 크기만큼 메모리를 할당한다.
 	if ((bits = (unsigned char *)malloc(bitsize)) == NULL) {
 		free(*info);

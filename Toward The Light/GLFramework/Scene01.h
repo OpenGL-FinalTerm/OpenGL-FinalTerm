@@ -10,6 +10,7 @@
 #include "Light.h"
 #include "BananaSetting.h"
 #include "Character.h"
+#include "camera_working.h"
 /* ------------ */
 
 class S01Main :
@@ -74,7 +75,7 @@ private:
 	float		result_degree[2] = {};
 	float		assist_rotation = 1;
 	int		view_rotate[2] = {};
-
+	int view_at_size[2];
 	//∫”¿∫ ¡∂∏Ì±‚µ’
 	Vector3 red_right_cylinder;
 	//ø¿«¡¥◊ Ω√¿€
