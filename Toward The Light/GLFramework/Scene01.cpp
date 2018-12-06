@@ -18,6 +18,8 @@ bool go_left;
 bool go_right;
 bool go_back;
 
+int view_at_size[2];
+
 //코딩 3일차 오프닝 엔딩 카메라까지 전부 구현했다 델몬트 바나나가 먹고싶다
 
 #define d_Sensitivity  3 //감도 how many rotate camera
@@ -80,6 +82,8 @@ void S01Main::init()
 	view_rotate[0] = 60;
 	view_rotate[1] = 50;
 
+	view_at_size[0] = 100;
+	view_at_size[1] = 10;
 }
 
 void S01Main::exit()
@@ -135,7 +139,7 @@ void S01Main::render()
 		}
 		opening_bezier_t += 0.01f;
 	
-		opening_camera_Eye(&red_right_cylinder.x, &red_right_cylinder.y, &red_right_cylinder.z, &tmpRect.x, &tmpRect.y, &tmpRect.z, &opening_bezier_t, &Eye.x, &Eye.y, &Eye.z);
+		opening_camera_Eye(&red_right_cylinder.x, &red_right_cylinder.y, &red_right_cylinder.z, &tmpRect.x, &tmpRect.y, &tmpRect.z, &opening_bezier_t, 200, &Eye.x, &Eye.y, &Eye.z);
 		opening_camera_At(&start_At.x, &start_At.y, &start_At.z, &end_At.x, &end_At.y, &end_At.z, &opening_bezier_t, &At.x, &At.y, &At.z);
 	
 		printf("opeing %f \n", Eye.y);
@@ -145,7 +149,7 @@ void S01Main::render()
 	if (!opening_camera_working) { //오프닝 카메라 워킹이 false
 		//eye 도 각도에 따라 바뀐다.
 		camera_moving_Eye(&tmpRect.x, &tmpRect.y, &tmpRect.z, &result_degree[0], &view_rotate[0], &view_rotate[1], &Eye.x, &Eye.y, &Eye.z);
-		camera_moving_At(&tmpRect.x, &tmpRect.y, &tmpRect.z, &result_degree[0], &view_rotate[0], &view_rotate[1], &At.x, &At.y, &At.z);
+		camera_moving_At(&tmpRect.x, &tmpRect.y, &tmpRect.z, &result_degree[0], &view_at_size[0], &view_at_size[1], &At.x, &At.y, &At.z);
 	}
 
 	glPushMatrix();
