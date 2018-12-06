@@ -317,3 +317,35 @@ void Light::pickSetPos(float inX, float inY, float inZ)
 	pos[1] = inY;
 	pos[2] = inZ;
 }
+
+void Light::throwLightUpdate(bool check)
+{
+	throwLight = check;
+}
+
+bool Light::returnThrowCheck()
+{
+	return throwLight;
+}
+
+void Light::insertDestination(float inX, float inY, float inZ)
+{
+	end[0] = inX;
+	end[1] = inY;
+	end[2] = inZ;
+}
+
+float Light::returnDestinationX()
+{
+	return end[0];
+}
+
+float Light::returnDestinationY()
+{
+	return end[1];
+}
+
+float Light::returnDestinationZ()
+{
+	return end[2];
+}

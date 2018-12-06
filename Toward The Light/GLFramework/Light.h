@@ -6,15 +6,18 @@ private:
 	float x;
 	float y;
 	float z;
+	float t;
 
 	int colorType;
 	
+	bool throwLight = false;
 	bool pick = false;
+
 
 	GLfloat R;
 	GLfloat G;
 	GLfloat B;
-
+	float end[3];
 	GLfloat pos[4] = { 0.f, 0.f, 0.f, 1.0f };
 	GLfloat ambientLight[4] = { 0.1f, 0.1f, 0.1f, 0.0f };
 	GLfloat diffuseLight[4] = { 0.6f, 0.5f, 0.2f, 1.0f};
@@ -33,10 +36,15 @@ public:
 	virtual void settingSpecu(float first, float second, float third, float fourth);
 	virtual void settingGray(float first, float second, float third, float fourth);
 	virtual void pickUp(bool check);
+	virtual void throwLightUpdate(bool check);
 
 	virtual float returnXpos();
 	virtual float returnYpos();
 	virtual float returnZpos();
+	virtual void insertDestination(float inX, float inY, float inZ);
+	virtual float returnDestinationX();
+	virtual float returnDestinationY();
+	virtual float returnDestinationZ();
 
 	virtual void pickSetPos(float inX, float inY, float inZ);
 	virtual void moveX(float inX);
@@ -45,6 +53,7 @@ public:
 	virtual void drawLight(bool LightSwitch, int i);
 
 	virtual bool returnPickCheck();
+	virtual bool returnThrowCheck();
 };
 
 enum {

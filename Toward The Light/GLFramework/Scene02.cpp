@@ -421,6 +421,19 @@ void S02Main::keyboard(int key, bool pressed, int x, int y, bool special)
 
 void S02Main::mouse(int button, bool pressed, int x, int y)
 {
+	if (pressed) {
+		if (button == GLUT_LEFT_BUTTON && pickLight == true) {
+			pickLight = false;
+			mapLight[pickLightNumber].throwLightUpdate(true);
+			Destination[0] = At[0];
+			Destination[1] = At[1];
+			Destination[2] = At[2];
+
+			ControlPoint[0] = (At[0] - tmpRect.x) / 2;
+			ControlPoint[1] = 60;
+			ControlPoint[2] = (At[2] - tmpRect.z) / 2;
+		}
+	}
 }
 
 void S02Main::motion(bool pressed, int x, int y)
@@ -1078,9 +1091,9 @@ void S02Main::update(float fDeltaTime)
 	}
 	
 	//조명을 집기 위한 공간
-
+	
 	for (int light = 0; light < LightCount; ++light) {
-		if (pickLight == false) {
+		if (pickLight == false && mapLight[light].returnThrowCheck() == false) {
 			if (mapLight[light].returnXpos() - 10 < tmpRect.x && mapLight[light].returnXpos() + 10 > tmpRect.x
 				&& mapLight[light].returnZpos() - 10 < tmpRect.z && mapLight[light].returnZpos() + 10 > tmpRect.z) {
 				print("press 'E' you can pick up this light", 0, 100, 0);
@@ -1096,6 +1109,26 @@ void S02Main::update(float fDeltaTime)
 	for (int light = 0; light < LightCount; ++light) {
 		if (mapLight[light].returnPickCheck() == true) {
 				mapLight[light].pickSetPos(tmpRect.x, tmpRect.y + 15, tmpRect.z);
+		}
+	}
+
+	//조명 던지는 공간
+
+	for (int light = 0; light < LightCount; ++light) {
+		if (mapLight[light].returnThrowCheck() == true) {
+			float tmpx;
+			float tmpy;
+			float tmpz;
+
+			tmpx = mapLight[light].returnXpos();
+			tmpy = mapLight[light].returnYpos();
+			tmpz = mapLight[light].returnZpos();
+
+			opening_camera_Eye(&tmpx, &tmpy, &tmpz, &Destination[0], &Destination[1], &Destination[2], &t, &ControlPoint[0], &ControlPoint[1], &ControlPoint[2]);
+			mapLight[light].settingPos(tmpx, tmpy, tmpz);
+			t += 0.01f;
+			if (t >= 1.f)
+				mapLight[light].throwLightUpdate(false);
 		}
 	}
 

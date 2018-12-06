@@ -17,7 +17,7 @@
 #include "Wall.h"
 #include "Texture.h"
 #include "LoadBitmap.h"
-
+#include "camera_working.h"
 
 
 
@@ -79,7 +79,8 @@ private:
 	int			__t = 0;
 	int			w = 150;
 	int			h = 150;
-	
+
+	float			t;
 	float		camera_deree[3];
 	float		difference_new_old[2] = {}; // between drag_old postion and drag new postion --> old - new
 	float		difference_size = 1.f;
@@ -101,6 +102,9 @@ private:
 	Vector3			Eye;
 	Vector3			At;
 	Vector3			foward_move; //나아가야하는 방향
+	Vector3			Destination;
+	float			ControlPoint[3];
+
 	Camera			m_Camera;
 	BITMAPINFO		*texture;
 	//Texture			textures;
