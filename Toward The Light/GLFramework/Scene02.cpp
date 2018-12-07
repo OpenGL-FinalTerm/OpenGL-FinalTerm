@@ -1138,6 +1138,15 @@ void S02Main::update(float fDeltaTime)
 					t = 0;
 				}
 
+				if (mapLight[light].returnXpos() - 3 <= -60
+					|| mapLight[light].returnXpos() + 3 >= 60
+					|| mapLight[light].returnZpos() - 3 <= -70
+					|| mapLight[light].returnZpos() + 3 >= 70) {
+					mapLight[light].throwLightUpdate(false);
+					mapLight[light].pickUp(false);
+					t = 0;
+				}
+
 			}
 		}
 	}
