@@ -1128,6 +1128,17 @@ void S02Main::update(float fDeltaTime)
 				mapLight[light].pickUp(false);
 				t = 0;
 			}
+
+			for (int k = 0; k < whatBox; ++k) {
+				if (mapLight[light].returnXpos() - 3 >= objectBox[k].returnBoxCenterX() - 10 && mapLight[light].returnXpos() + 3 <= objectBox[k].returnBoxCenterX() + 10
+					&& mapLight[light].returnYpos() - 3 >= objectBox[k].returnBoxCenterY() - 10 && mapLight[light].returnYpos() + 3 <= objectBox[k].returnBoxCenterY() + 10
+					&& mapLight[light].returnZpos() - 3 >= objectBox[k].returnBoxCenterZ() - 10 && mapLight[light].returnZpos() + 3 <= objectBox[k].returnBoxCenterY() + 10) {
+					mapLight[light].throwLightUpdate(false);
+					mapLight[light].pickUp(false);
+					t = 0;
+				}
+
+			}
 		}
 	}
 
@@ -1202,11 +1213,10 @@ void S02Main::HUD()
 
 void S02Main::drawHUD()
 {
-	glViewport(10, 10, 500, 500);
 	glMatrixMode(GL_PROJECTION);
 	//glPushMatrix();
 	glLoadIdentity();
-	gluOrtho2D(0.0, 150.0, 150.0, 0.0);
+	gluOrtho2D(0.0, 1500.0, 900.0, 0.0);
 
 	glMatrixMode(GL_MODELVIEW);
 	//glPushMatrix();
