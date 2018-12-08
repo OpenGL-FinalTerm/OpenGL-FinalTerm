@@ -123,9 +123,12 @@ private:
 	NormalObject    m_wBox[3];
 	SoundPlayer		m_SoundPlayer;
 	SoundPlayer		m_walkingSound;
-	Box				objectBox[65];
+	Box				objectBox[100];
 	Box				mainCharacter;
+
 	Light			mapLight[100];
+	Light			RedColumn;
+	
 	Shape			banana;
 	tmp				tmpRect;
 	//GLubyte *map = (GLubyte*)image->pixels;

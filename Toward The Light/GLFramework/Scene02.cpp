@@ -44,8 +44,8 @@ void S02Main::init()
 	//DefaultBoxPosSetting();
 	dep = false;
 	whatBox = LoadMap(objectBox, tmpRect, 2);
-	LightCount = LoadLight(mapLight, 2);
-	for (int i = 0; i < 4; ++i)
+	LightCount = LoadLight(mapLight, 2, RedColumn);
+	for (int i = 0; i < LightCount - 1; ++i)
 		mapLight[i].LightOn(true, i);
 
 	keyW = false;
@@ -54,7 +54,7 @@ void S02Main::init()
 	sPress = false;
 	dPress = false;
 
-	for (int i = 0; i < LightCount; ++i) {
+	for (int i = 0; i < LightCount - 1; ++i) {
 		mapLight[i].pickUp(false);
 	}
 	pickLight = false;
@@ -126,8 +126,10 @@ void S02Main::render()
 	for (int i = 0; i < 65; ++i)
 		objectBox[i].drawBox(20);
 
-	for (int i = 0; i < LightCount; ++i)
+	for (int i = 0; i < LightCount - 1; ++i)
 		mapLight[i].drawLight(TRUE, i);
+
+	mapLight[LightCount - 1].drawRedColunm();
 
 
 	if (opening_camera_working) {//오프닝 영상이 시작되면
@@ -307,12 +309,12 @@ void S02Main::keyboard(int key, bool pressed, int x, int y, bool special)
 			break;
 
 		case 'p':
-			for (int i = 0; i < 4; ++i)
+			for (int i = 0; i < LightCount - 1; ++i)
 				mapLight[i].LightOn(true, i);
 			break;
 
 		case 'P':
-			for (int i = 0; i < 4; ++i)
+			for (int i = 0; i < LightCount - 1; ++i)
 				mapLight[i].LightOn(false, i);
 			break;
 		case 'u':
@@ -346,7 +348,7 @@ void S02Main::keyboard(int key, bool pressed, int x, int y, bool special)
 		case 'f':
 		case 'F':
 
-			for (int i = 0; i < LightCount; ++i) {
+			for (int i = 0; i < LightCount - 1; ++i) {
 				if (mapLight[i].returnPickCheck() == true)
 					beforePick = true;
 			}
@@ -1003,7 +1005,7 @@ void S02Main::update(float fDeltaTime)
 
 	//조명 낙하
 	bool lightLanding = false;
-	for (int light = 0; light < LightCount; ++light) {
+	for (int light = 0; light < LightCount - 1; ++light) {
 		lightLanding = false;
 		i = 0;
 		check = FALSE;
@@ -1032,7 +1034,7 @@ void S02Main::update(float fDeltaTime)
 	
 	//조명을 집기 위한 공간
 	
-	for (int light = 0; light < LightCount; ++light) {
+	for (int light = 0; light < LightCount - 1; ++light) {
 		if (pickLight == false && mapLight[light].returnThrowCheck() == false) {
 			if (mapLight[light].returnXpos() - 10 < tmpRect.x && mapLight[light].returnXpos() + 10 > tmpRect.x
 				&& mapLight[light].returnZpos() - 10 < tmpRect.z && mapLight[light].returnZpos() + 10 > tmpRect.z) {
@@ -1048,7 +1050,7 @@ void S02Main::update(float fDeltaTime)
 		}
 	}
 
-	for (int light = 0; light < LightCount; ++light) {
+	for (int light = 0; light < LightCount - 1; ++light) {
 		if (mapLight[light].returnPickCheck() == true) {
 				messageOn = false;
 				mapLight[light].pickSetPos(tmpRect.x, tmpRect.y + 15, tmpRect.z);
@@ -1057,7 +1059,7 @@ void S02Main::update(float fDeltaTime)
 
 	//조명 던지는 공간
 
-	for (int light = 0; light < LightCount; ++light) {
+	for (int light = 0; light < LightCount - 1; ++light) {
 		if (mapLight[light].returnThrowCheck() == true) {
 			float tmpx;
 			float tmpy;
@@ -1123,56 +1125,105 @@ void S02Main::DefaultBoxPosSetting()
 void S02Main::HUD()
 {
 
-
-	glEnable(GL_TEXTURE_2D);
-	
-
 	//GLuint tex;
-	//IDtmp[0] = LoadTexture("Test.bmp", 150, 150);
-	//glColor3f(1.f, 1.f, 1.f);
+
+
+		//IDtmp[0] = LoadTexture("Test.bmp", 150, 150);
+	glColor3f(1.f, 1.f, 1.f);
 	glPushMatrix();
 
 	if (messageOn == true)
 		print("press 'F' you can pick up this light", 630, 900 / 2, 0);
 
+	//a미니맵 그리기
+	//미니맵 배경 그리
 
-
-	glPopMatrix();
 	glEnable(GL_BLEND);
-	//glBindTexture(GL_TEXTURE_2D, IDtmp[0]);
-	glColor3f(1.f, 1.f, 1.f);
-	glBlendFunc(GL_ONE, GL_ONE);
-	glBindTexture(GL_TEXTURE_2D, IDtmp[0]);
-	glBegin(GL_QUADS);
-	glTexCoord2f(0.f, 0.f);
-	glVertex2f(0, 128);
-	glTexCoord2f(0.f, 1.f);
-	glVertex2f(0, 0);
-	glTexCoord2f(1.f, 1.f);
-	glVertex2f(128, 0);
-	glTexCoord2f(1.f, 0.f);
-	glVertex2f(128, 128);
-	glEnd();
-
-	glDisable(GL_BLEND);
-	glPopMatrix();
-
-
-
-
-}
-
-void S02Main::drawHUD()
-{
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glClearColor(1.0, 1.0, 1.0, 0.0);
+	//미니맵 출
 	glDisable(GL_LIGHT0);
 	glDisable(GL_LIGHT1);
 	glDisable(GL_LIGHT2);
 	glDisable(GL_LIGHT3);
-	glDisable(GL_LIGHT4);
-	glDisable(GL_LIGHT5);
-	glDisable(GL_LIGHT6);
-	glDisable(GL_LIGHT7);
 
+	glPushMatrix();
+	glTranslated(50, 40, 0);
+	glBegin(GL_QUADS);
+	glColor4f(1.f, 1.f, 1.f, 0.5);
+	//glColor4f((float)129 / 255, (float)207 / 255, (float)233 / 255, 0.f);
+	glVertex3f(0, 0, 0);
+	glVertex3f(120, 0, 0);
+	glVertex3f(120, 140, 0);
+	glVertex3f(0, 140, 0);
+	glEnd();
+	glPopMatrix();
+
+	for (int i = 0; i < whatBox; i++) {
+
+		//정규화를 시켜준다.
+		//sqrt(pow(difference_new_old[0], 2) + pow(difference_new_old[1], 2));
+
+		glPushMatrix();
+		glTranslated(100 + objectBox[i].returnBoxCenterX(), 100 + objectBox[i].returnBoxCenterZ(), objectBox[i].returnBoxCenterY() / 100);
+		glBegin(GL_QUADS);
+		//glColor4f((float)129 / 255, (float)207 / 255, (float)233 / 255, 0.f);
+		glColor4f(1.f, 1.f, 1.f, 1);
+		glVertex3f(0, 0, 0);
+		glVertex3f(20, 0, 0);
+		glVertex3f(20, 20, 0);
+		glVertex3f(0, 20, 0);
+		glEnd();
+		glPopMatrix();
+	}
+
+	for (int i = 0; i < LightCount - 1; i++) {
+
+		//정규화를 시켜준다.
+		//sqrt(pow(difference_new_old[0], 2) + pow(difference_new_old[1], 2));
+		
+		glPushMatrix();
+		glTranslated(100 + mapLight[i].returnXpos(), 100 + mapLight[i].returnZpos(), mapLight[i].returnYpos() / 100);
+		glBegin(GL_QUADS);
+		if (mapLight[i].returnType() == 1)
+			glColor3f(1.f, 0.f, 0.f);
+		else
+			glColor3f(0.f, 0.f, 1.f);
+		//glColor4f((float)129 / 255, (float)207 / 255, (float)233 / 255, 0.f);
+		glVertex3f(0, 0, 0);
+		glVertex3f(10, 0, 0);
+		glVertex3f(10, 10, 0);
+		glVertex3f(0, 10, 0);
+		glEnd();
+		glPopMatrix();
+	}
+	//바나나 출력
+	glPushMatrix();
+	{
+		glTranslated(100 + tmpRect.x, 100 + tmpRect.z, 1);
+		glBegin(GL_QUADS);
+		glColor3f((float)129 / 255, (float)207 / 255, (float)233 / 255);
+		//glColor4f((float)129 / 255, (float)207 / 255, (float)233 / 255, 0.f);
+		glVertex3f(0, 0, 0);
+		glVertex3f(10, 0, 0);
+		glVertex3f(10, 10, 0);
+		glVertex3f(0, 10, 0);
+		glEnd();
+	}
+	glPopMatrix();
+	//	printf("%d \n",mapLight[0].returnYpos());
+	glPopMatrix();//그리기 끝
+	glEnable(GL_LIGHT0);
+	glEnable(GL_LIGHT1);
+	glEnable(GL_LIGHT2);
+	glEnable(GL_LIGHT3);
+	//
+	glDisable(GL_BLEND);
+	glPopMatrix();
+}
+
+void S02Main::drawHUD()
+{
 	glMatrixMode(GL_PROJECTION);
 	//glPushMatrix();
 	glLoadIdentity();
@@ -1188,14 +1239,6 @@ void S02Main::drawHUD()
 	//glPopMatrix();
 	//glMatrixMode(GL_MODELVIEW);
 	//glPopMatrix();
-	glEnable(GL_LIGHT0);
-	glEnable(GL_LIGHT1);
-	glEnable(GL_LIGHT2);
-	glEnable(GL_LIGHT3);
-	glEnable(GL_LIGHT4);
-	glEnable(GL_LIGHT5);
-	glEnable(GL_LIGHT6);
-	glEnable(GL_LIGHT7);
 }
 
 void S02Main::LightSetting()

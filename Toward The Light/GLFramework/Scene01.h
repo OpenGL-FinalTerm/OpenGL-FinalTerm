@@ -97,7 +97,7 @@ private:
 	NormalObject    m_Sphere;
 	SoundPlayer		m_SoundPlayer;
 	SoundPlayer		m_walkingSound;
-	Box				objectBox[65];
+	Box				objectBox[100];
 	Box				mainCharacter;
 	Light			mapLight[100];
 	Shape			banana;
@@ -109,6 +109,7 @@ private:
 	BITMAPINFO		*info;
 	GLuint			IDtmp[6];
 
+	Light			RedColumn;
 	float			t;
 	float			ControlPoint[3];
 	float			startPos[3];

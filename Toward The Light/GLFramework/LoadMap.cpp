@@ -60,7 +60,7 @@ int LoadMap(Box objectBox[], tmp &tmpRect, int stage)
 	return cnt;
 }
 
-int LoadLight(Light mapLight[], int i)
+int LoadLight(Light mapLight[], int i, Light RedColunm)
 {
 	string fileName;
 	int cnt;
@@ -81,7 +81,7 @@ int LoadLight(Light mapLight[], int i)
 
 	in >> cnt;
 	
-	for (int k = 0; k < cnt; ++k) {
+	for (int k = 0; k <= cnt; ++k) {
 		in >> tmpX;
 		in >> tmpZ;
 		in >> colorType;
@@ -89,25 +89,37 @@ int LoadLight(Light mapLight[], int i)
 		in >> diffuse[0] >> diffuse[1] >> diffuse[2] >> diffuse[3];
 		in >> specu[0] >> specu[1] >> specu[2] >> specu[3];
 
-		int lx;
-		int ly;
-		int lz;
+		if (k < cnt) {
+			int lx;
+			int ly;
+			int lz;
 
-		lx = -50 + (tmpX * 20);
-		ly = 120;
-		lz = -60 + (tmpZ * 20);
+			lx = -50 + (tmpX * 20);
+			ly = 120;
+			lz = -60 + (tmpZ * 20);
 
-		mapLight[k].DefaultLightPosSetting(lx, ly, lz, colorType);
-		mapLight[k].settingDiffuse((float)diffuse[0], (float)diffuse[1], (float)diffuse[2], (float)diffuse[3]);
-		mapLight[k].settingSpecu((float)specu[0], (float)specu[1], (float)specu[2], (float)specu[3]);
-		mapLight[k].drawLight(TRUE, k);
+			mapLight[k].DefaultLightPosSetting(lx, ly, lz, colorType);
+			mapLight[k].settingDiffuse((float)diffuse[0], (float)diffuse[1], (float)diffuse[2], (float)diffuse[3]);
+			mapLight[k].settingSpecu((float)specu[0], (float)specu[1], (float)specu[2], (float)specu[3]);
+			mapLight[k].drawLight(TRUE, k);
+		}
+		else {
+
+			tmpX = -50 + (tmpX * 20);
+			tmpZ = -60 + (tmpZ * 20);
+
+			mapLight[k].DefaultLightPosSetting(tmpX, 40, tmpZ, colorType);
+			mapLight[k].settingDiffuse((float)diffuse[0], (float)diffuse[1], (float)diffuse[2], (float)diffuse[3]);
+			mapLight[k].settingSpecu((float)specu[0], (float)specu[1], (float)specu[2], (float)specu[3]);
+			mapLight[k].drawRedColunm();
+
+		}
 	}
-
 
 	//mapLight[0].DefaultLightPosSetting(30, 5, 60, 1);
 	//mapLight[1].DefaultLightPosSetting(-30, 45, 20, 1);
 
 	//mapLight[2].DefaultLightPosSetting(30, 5, 0, 0);
 	//mapLight[3].DefaultLightPosSetting(-30, 5, -40, 0);
-	return cnt;
+	return cnt + 1;
 }

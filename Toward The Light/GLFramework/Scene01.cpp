@@ -54,8 +54,8 @@ void S01Main::init()
 	
 	//LightSetting();
 	//DefaultBoxPosSetting();
-	whatBox = LoadMap(objectBox, tmpRect, 2);
-	LightCount = LoadLight(mapLight, 2);
+	whatBox = LoadMap(objectBox, tmpRect, 1);
+	LightCount = LoadLight(mapLight, 1, RedColumn);
 
 	m_Camera.setEye(Eye);
 	result_degree[0] = 180;
@@ -128,9 +128,10 @@ void S01Main::render()
 	for (int i = 0; i < 65; ++i)
 		objectBox[i].drawBox(20);
 
-	for (int i = 0; i < LightCount; ++i)
+	for (int i = 0; i < LightCount - 1; ++i)
 		mapLight[i].drawLight(TRUE, i);
 
+	mapLight[LightCount - 1].drawRedColunm();
 	//카메라 정리 ---
 	if (opening_camera_working) {//오프닝 영상이 시작되면
 		
@@ -292,7 +293,7 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 		case 'f':
 		case 'F':
 
-			for (int i = 0; i < LightCount; ++i) {
+			for (int i = 0; i < LightCount - 1; ++i) {
 				if (mapLight[i].returnPickCheck() == true)
 					beforePick = true;
 			}
@@ -1012,7 +1013,7 @@ void S01Main::update(float fDeltaTime)
 
 	//조명 낙하
 	bool lightLanding = false;
-	for (int light = 0; light < LightCount; ++light) {
+	for (int light = 0; light < LightCount - 1; ++light) {
 		lightLanding = false;
 		i = 0;
 		check = FALSE;
@@ -1041,7 +1042,7 @@ void S01Main::update(float fDeltaTime)
 
 	//조명을 집기 위한 공간
 
-	for (int light = 0; light < LightCount; ++light) {
+	for (int light = 0; light < LightCount - 1; ++light) {
 		if (pickLight == false && mapLight[light].returnThrowCheck() == false) {
 			if (mapLight[light].returnXpos() - 10 < tmpRect.x && mapLight[light].returnXpos() + 10 > tmpRect.x
 				&& mapLight[light].returnZpos() - 10 < tmpRect.z && mapLight[light].returnZpos() + 10 > tmpRect.z) {
@@ -1057,7 +1058,7 @@ void S01Main::update(float fDeltaTime)
 		}
 	}
 
-	for (int light = 0; light < LightCount; ++light) {
+	for (int light = 0; light < LightCount - 1; ++light) {
 		if (mapLight[light].returnPickCheck() == true) {
 			mapLight[light].pickSetPos(tmpRect.x, tmpRect.y + 15, tmpRect.z);
 			messageOn = false;
@@ -1066,7 +1067,7 @@ void S01Main::update(float fDeltaTime)
 
 	//조명 던지는 공간
 
-	for (int light = 0; light < LightCount; ++light) {
+	for (int light = 0; light < LightCount - 1; ++light) {
 		if (mapLight[light].returnThrowCheck() == true) {
 			float tmpx;
 			float tmpy;
@@ -1181,14 +1182,14 @@ void S01Main::HUD()
 	glDisable(GL_LIGHT2);
 	
 	glPushMatrix();
-	glTranslated(50 , 50, 0);
+	glTranslated(50, 40, 0);
 	glBegin(GL_QUADS);
 	glColor4f(1.f, 1.f, 1.f, 0.5);
 	//glColor4f((float)129 / 255, (float)207 / 255, (float)233 / 255, 0.f);
 	glVertex3f(0, 0, 0);
-	glVertex3f(200, 0, 0);
-	glVertex3f(200,200, 0);
-	glVertex3f(0,200, 0);
+	glVertex3f(120, 0, 0);
+	glVertex3f(120, 140, 0);
+	glVertex3f(0, 140, 0);
 	glEnd();
 	glPopMatrix();
 
@@ -1210,7 +1211,7 @@ void S01Main::HUD()
 		glPopMatrix();
 	}
 
-	for (int i = 0; i < LightCount; i++) {
+	for (int i = 0; i < LightCount - 1; i++) {
 
 		//정규화를 시켜준다.
 		//sqrt(pow(difference_new_old[0], 2) + pow(difference_new_old[1], 2));
@@ -1248,6 +1249,7 @@ void S01Main::HUD()
 	glEnable(GL_LIGHT2);
 	//
 	glDisable(GL_BLEND);
+	glPopMatrix();
 }
 
 void S01Main::drawHUD()

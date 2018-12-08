@@ -5,6 +5,15 @@
 #include "Model.h"
 #include "Object.h"
 #include "Camera.h"
+#include "Model.h"
+#include "NormalObject.h"
+#include "Camera.h"
+#include "SoundPlayer.h"
+#include "BoxObject.h"
+#include "Light.h"
+#include "BananaSetting.h"
+#include "Character.h"
+#include "camera_working.h"
 /* ------------ */
 
 class S00Logo :
@@ -23,11 +32,31 @@ public:
 	virtual void mouse(int button, bool pressed, int x, int y);
 	virtual void motion(bool pressed, int x, int y);
 	virtual void update(float fDeltaTime);
+	virtual void drawHUD();
+	virtual void HUD();
 
 private:
 
-	Camera	m_Camera;
-	Model	m_Model;
-	Object	m_Title;
+	Camera			m_Camera;
+	Model			m_Model;
+	Object			m_Title;
+
+	Box				Map1objectBox[100];
+	Box				Map2objectBox[100];
+
+	tmp				Map1Banana;
+	tmp				Map2Banana;
+
+	Light			Map1RedColumn;
+	Light			Map2RedColumn;
+
+	Light			Map1Light[10];
+	Light			Map2Light[10];
+
+	int				Map1BoxCount;
+	int				Map2BoxCount;
+
+	int				Map1LightCount;
+	int				Map2LightCount;
 };
 
