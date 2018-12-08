@@ -110,6 +110,23 @@ private:
 	BITMAPINFO		*info;
 	GLuint			IDtmp[6];
 
+
+	Vector2 select_map;
+
+	//Exit button
+	Vector3			Exit_button;
+	Vector3			Exit_button_size;
+	bool Exit_button_b;
+	//胶农费 包访等 窃荐
+	Vector3 scroll_bar;
+	Vector3 scroll_bar_size;
+
+	Vector3 scroll_bt;
+	Vector3 scroll_bt_size;
+	bool scroll_bt_b;
+	Vector3 old_mouse_pos;
+	float scroll_result;
+
 	float			t;
 	float			ControlPoint[3];
 	float			startPos[3];
