@@ -8,6 +8,8 @@
 
 //날름 포인터 다이스키
 
+//해야할거 로고 이미지 넣기
+
 S06Start::S06Start()
 {
 }
@@ -109,6 +111,9 @@ void S06Start::render()
 
 	//m_Camera.setEye(Eye);
 	//m_Camera.setTarget(At);
+		//일단 출력할 사각형 출력
+	glPushMatrix();
+
 
 	drawHUD();
 
@@ -135,6 +140,14 @@ void S06Start::keyboard(int key, bool pressed, int x, int y, bool special)
 			m_Framework->toScene("Main");
 			break;
 			//환경설정 나오기
+
+
+		//바로가기 
+		case '1': m_Framework->toScene("1"); break;
+		case '2': m_Framework->toScene("2"); break;
+		case '3': m_Framework->toScene("3"); break;
+		case '4': m_Framework->toScene("Ending"); break;
+		case '5': m_Framework->toScene("Setting"); break;
 		}
 	}
 
@@ -180,6 +193,7 @@ void S06Start::HUD()
 {
 	glColor3f(1.f, 1.f, 1.f);
 	glPushMatrix();
+
 
 	print("press 'Space' Game Start", 630, 900 / 2, 0);
 

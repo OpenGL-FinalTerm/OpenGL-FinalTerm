@@ -5,6 +5,7 @@
 #include "Model.h"
 #include "Object.h"
 #include "Camera.h"
+#include "BoxObject.h"
 /* ------------ */
 
 class S00Logo :
@@ -23,11 +24,22 @@ public:
 	virtual void mouse(int button, bool pressed, int x, int y);
 	virtual void motion(bool pressed, int x, int y);
 	virtual void update(float fDeltaTime);
+	virtual void drawHUD();
+	virtual void HUD();
 
 private:
 
 	Camera	m_Camera;
 	Model	m_Model;
 	Object	m_Title;
+
+
+	Vector2 select_map;
+	int choose = 10;
+	Vector3 choose_map_box[2];
+	//이거 함수로 따로 있나...으악
+	Vector3 Setting_button;
+	float Setting_bt_color[3];
+	int degree;
 };
 
