@@ -568,112 +568,41 @@ void S01Main::update(float fDeltaTime)
 		}
 	}
 
-	if (keyA == true) {
-		if (result_degree[0] >= 90 && result_degree[0] < 180) {
-			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
-			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
-			dPress = false;
-			sPress = false;
-			wPress = true;
-			aPress = true;
-		}
-
-		else if (result_degree[0] >= 180 && result_degree[0] < 270) {
-			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
-			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
-			wPress = false;
-			dPress = false;
-			sPress = true;
-			aPress = true;
-		}
-		else if (result_degree[0] >= 270 && result_degree[0] < 360) {
-			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
-			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
-			wPress = false;
-			aPress = false;
-			sPress = true;
-			dPress = true;
-		}
-		else if (result_degree[0] >= 0 && result_degree[0] < 90) {
-			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
-			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
-			wPress = false;
-			aPress = false;
-			wPress = true;
-			dPress = true;
-		}
-	}
-
-
 	if (keyS == true) {
+		foward_move.x *= -1;
+		foward_move.z *= -1;
 		if (result_degree[0] >= 90 && result_degree[0] < 180) {
 			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
 			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
-			aPress = false;
-			sPress = false;
-			wPress = true;
-			dPress = true;
+			aPress = true;
+			sPress = true;
+			wPress = false;
+			dPress = false;
 		}
 
 		else if (result_degree[0] >= 180 && result_degree[0] < 270) {
 			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
 			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
-			sPress = false;
-			dPress = false;
-			wPress = true;
-			aPress = true;
+			sPress = true;
+			dPress = true;
+			wPress = false;
+			aPress = false;
 		}
 		else if (result_degree[0] >= 270 && result_degree[0] < 360) {
 			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
 			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
-			wPress = false;
-			dPress = false;
-			sPress = true;
-			aPress = true;
+			wPress = true;
+			dPress = true;
+			sPress = false;
+			aPress = false;
 		}
 		else if (result_degree[0] >= 0 && result_degree[0] < 90) {
 			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
 			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
-			wPress = false;
-			aPress = false;
-			sPress = true;
-			dPress = true;
-		}
-	}
-
-	if (keyD == true) {
-		if (result_degree[0] >= 90 && result_degree[0] < 180) {
-			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
-			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
-			aPress = false;
-			sPress = false;
-			wPress = true;
-			dPress = true;
-		}
-
-		else if (result_degree[0] >= 180 && result_degree[0] < 270) {
-			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
-			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
-			sPress = false;
-			dPress = false;
 			wPress = true;
 			aPress = true;
-		}
-		else if (result_degree[0] >= 270 && result_degree[0] < 360) {
-			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
-			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
-			wPress = false;
+			sPress = false;
 			dPress = false;
-			sPress = true;
-			aPress = true;
-		}
-		else if (result_degree[0] >= 0 && result_degree[0] < 90) {
-			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
-			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
-			wPress = false;
-			aPress = false;
-			sPress = true;
-			dPress = true;
 		}
 	}
 
@@ -1158,12 +1087,10 @@ void S01Main::camera_install(int x, int y) {
 
 void S01Main::HUD()
 {
-
-
 	//GLuint tex;
 
 
-	//IDtmp[0] = LoadTexture("Test.bmp", 150, 150);
+		//IDtmp[0] = LoadTexture("Test.bmp", 150, 150);
 	glColor3f(1.f, 1.f, 1.f);
 	glPushMatrix();
 
@@ -1172,15 +1099,16 @@ void S01Main::HUD()
 
 	//a미니맵 그리기
 	//미니맵 배경 그리
-	
-	glEnable(GL_BLEND); 
+
+	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glClearColor(1.0, 1.0, 1.0, 0.0);
 	//미니맵 출
 	glDisable(GL_LIGHT0);
 	glDisable(GL_LIGHT1);
 	glDisable(GL_LIGHT2);
-	
+	glDisable(GL_LIGHT3);
+
 	glPushMatrix();
 	glTranslated(50, 40, 0);
 	glBegin(GL_QUADS);
@@ -1204,8 +1132,8 @@ void S01Main::HUD()
 		//glColor4f((float)129 / 255, (float)207 / 255, (float)233 / 255, 0.f);
 		glColor4f(1.f, 1.f, 1.f, 1);
 		glVertex3f(0, 0, 0);
-		glVertex3f(20, 0 , 0);
-		glVertex3f(20, 20 , 0);
+		glVertex3f(20, 0, 0);
+		glVertex3f(20, 20, 0);
 		glVertex3f(0, 20, 0);
 		glEnd();
 		glPopMatrix();
@@ -1219,7 +1147,10 @@ void S01Main::HUD()
 		glPushMatrix();
 		glTranslated(100 + mapLight[i].returnXpos(), 100 + mapLight[i].returnZpos(), mapLight[i].returnYpos() / 100);
 		glBegin(GL_QUADS);
-		glColor3f(1.f, 1.f, 1.f);
+		if (mapLight[i].returnType() == 1)
+			glColor3f(1.f, 0.f, 0.f);
+		else
+			glColor3f(0.f, 0.f, 1.f);
 		//glColor4f((float)129 / 255, (float)207 / 255, (float)233 / 255, 0.f);
 		glVertex3f(0, 0, 0);
 		glVertex3f(10, 0, 0);
@@ -1233,7 +1164,7 @@ void S01Main::HUD()
 	{
 		glTranslated(100 + tmpRect.x, 100 + tmpRect.z, 1);
 		glBegin(GL_QUADS);
-		glColor4f(1.f, 0.f, 0.f, 1);
+		glColor3f((float)129 / 255, (float)207 / 255, (float)233 / 255);
 		//glColor4f((float)129 / 255, (float)207 / 255, (float)233 / 255, 0.f);
 		glVertex3f(0, 0, 0);
 		glVertex3f(10, 0, 0);
@@ -1242,11 +1173,12 @@ void S01Main::HUD()
 		glEnd();
 	}
 	glPopMatrix();
-//	printf("%d \n",mapLight[0].returnYpos());
+	//	printf("%d \n",mapLight[0].returnYpos());
 	glPopMatrix();//그리기 끝
 	glEnable(GL_LIGHT0);
 	glEnable(GL_LIGHT1);
 	glEnable(GL_LIGHT2);
+	glEnable(GL_LIGHT3);
 	//
 	glDisable(GL_BLEND);
 	glPopMatrix();

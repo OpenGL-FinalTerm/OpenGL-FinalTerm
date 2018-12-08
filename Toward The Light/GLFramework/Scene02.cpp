@@ -507,6 +507,10 @@ void S02Main::update(float fDeltaTime)
 {
 	//camera at --> player going foward pos update
 // banana pos add
+
+	// 박스와 빨간 기둥이 충돌(?) 체크 해야함
+	// 대략적인 위치 -> 모든 충돌이 일어난후(혹은 그냥 겹치기)
+
 	__t += 1;
 	foward_move.x = (sin(result_degree[0] * 3.141592 / 180));
 	foward_move.z = (cos(result_degree[0] * 3.141592 / 180));
