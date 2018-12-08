@@ -603,12 +603,16 @@ void S02Main::update(float fDeltaTime)
 		for (int i = 0; i < whatBox; ++i) {
 			if (objectBox[i].returnCatch() == false) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if (objectBox[i].returnBoxCenterX() - 10 < returnMainX() + 5 && objectBox[i].returnBoxCenterX() + 10 > returnMainX() - 5 && objectBox[i].returnBoxCenterZ() + 10 > returnMainZ() - 5 && objectBox[i].returnBoxCenterZ() - 10 < returnMainZ() + 5 && returnMainY() > objectBox[i].returnBoxCenterY() - 21 && returnMainY() < objectBox[i].returnBoxCenterY() + 21) {
 =======
 				if (objectBox[i].returnBoxCenterX() - 10 < returnMainX() + 5 && objectBox[i].returnBoxCenterX() + 10 > returnMainX() - 5 
 					&& objectBox[i].returnBoxCenterZ() + 10 > returnMainZ() - 5 && objectBox[i].returnBoxCenterZ() - 10 < returnMainZ() + 5 
 					&& returnMainY() + 5 > objectBox[i].returnBoxCenterY() - 10 && returnMainY() - 5 < objectBox[i].returnBoxCenterY() + 10) {
 >>>>>>> parent of d5ae90e... ?�린??
+=======
+				if (objectBox[i].returnBoxCenterX() - 10 < returnMainX() + 5 && objectBox[i].returnBoxCenterX() + 10 > returnMainX() - 5 && objectBox[i].returnBoxCenterZ() + 10 > returnMainZ() - 5 && objectBox[i].returnBoxCenterZ() - 10 < returnMainZ() + 5 && returnMainY() > objectBox[i].returnBoxCenterY() - 21 && returnMainY() < objectBox[i].returnBoxCenterY() + 16) {
+>>>>>>> parent of 6939309... 던진상자에 낑기는 버그 수정
 					down = TRUE;
 					jump = FALSE;
 					tmpRect.jumpCount = 0;
@@ -630,9 +634,7 @@ void S02Main::update(float fDeltaTime)
 		bool tmpcheck = false;
 		for (int i = 0; i < whatBox; ++i) {
 			if (objectBox[i].returnCatch() == false) {
-				if (objectBox[i].returnBoxCenterX() - 10 < returnMainX() + 5 && objectBox[i].returnBoxCenterX() + 10 > returnMainX() - 5
-					&& objectBox[i].returnBoxCenterZ() + 10 > returnMainZ() - 5 && objectBox[i].returnBoxCenterZ() - 10 < returnMainZ() + 5
-					&& tmpRect.y - 5< objectBox[i].returnBoxCenterY() + 20 && !(tmpRect.y + 5 < objectBox[i].returnBoxCenterY()) ){
+				if (objectBox[i].returnBoxCenterX() - 10 < returnMainX() + 5 && objectBox[i].returnBoxCenterX() + 10 > returnMainX() - 5 && objectBox[i].returnBoxCenterZ() + 10 > returnMainZ() - 5 && objectBox[i].returnBoxCenterZ() - 10 < returnMainZ() + 5 && tmpRect.y < objectBox[i].returnBoxCenterY() + 20) {
 					down = FALSE;
 					tmpcheck = true;
 
