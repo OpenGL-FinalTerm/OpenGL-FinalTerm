@@ -51,7 +51,7 @@ void S01Main::init()
 	tmpRect.z = 60;
 	tmpRect.y = 10;
 
-	
+	////-----------------------------------------------------------
 	//LightSetting();
 	//DefaultBoxPosSetting();
 	whatBox = LoadMap(objectBox, tmpRect, 2);
