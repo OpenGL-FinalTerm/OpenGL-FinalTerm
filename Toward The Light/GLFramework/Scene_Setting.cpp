@@ -38,18 +38,23 @@ void S05Setting::init()
 	Exit_button.y = DEF_WIN_HEIGHT - 200;
 	Exit_button_size.x = 200;
 	Exit_button_size.y = 50;
+	for (int i = 0; i < 3; ++i) {
+		scroll_bar[i].x = 700;
+		scroll_bar[i].y = DEF_WIN_HEIGHT  - 400 - 200 * i;
+		scroll_bar_size[i].x = 200;
+		scroll_bar_size[i].y = 10;
 
-	scroll_bar.x = 700;
-	scroll_bar.y = DEF_WIN_HEIGHT - 500;
-	scroll_bar_size.x = 200;
-	scroll_bar_size.y = 10;
+		scroll_bt[i].x = 0.1;
+		scroll_bt[i].y = 0.1;
 
-	scroll_bt.x = 1;
-	scroll_bt.y = 1;
+		scroll_bt_size[i].x = 20;
+		scroll_bt_size[i].y = 40;
 
-	scroll_bt_size.x = 20;
-	scroll_bt_size.y = 40;
+		scroll_bt_b[i] = false;
+		scroll_motion_b[i] = false;
 
+	}
+	
 }
 
 void S05Setting::exit()
@@ -134,17 +139,20 @@ void S05Setting::mouse(int button, bool pressed, int x, int y)
 		if (button == GLUT_LEFT_BUTTON && Exit_button_b == TRUE) {
 			m_Framework->toScene("Main");
 		}
-		else if (button == GLUT_LEFT_BUTTON) {
-			if (
-				(((scroll_bt.x + scroll_bar.x - (scroll_bt_size.x)) < select_map.x) && (select_map.x < ((scroll_bt.x + scroll_bar.x + (scroll_bt_size.x)))) &&
-				((scroll_bt.y + scroll_bar.y - (scroll_bt_size.y)) < select_map.y) && (select_map.y < ((scroll_bt.y + scroll_bar.y + (scroll_bt_size.y)))))
-				) {
-				scroll_bt_b = true;
-				printf("true1 \n");
+		for (int i = 0; i < 3; ++i) {
+			if (button == GLUT_LEFT_BUTTON) {
+				if (
+					(((scroll_bt[i].x + scroll_bar[i].x - (scroll_bt_size[i].x)) < select_map.x) && (select_map.x < ((scroll_bt[i].x + scroll_bar[i].x + (scroll_bt_size[i].x)))) &&
+					((scroll_bt[i].y + scroll_bar[i].y - (scroll_bt_size[i].y)) < select_map.y) && (select_map.y < ((scroll_bt[i].y + scroll_bar[i].y + (scroll_bt_size[i].y)))))
+					) {
+					scroll_bt_b[i] = true;
+					printf("true1 :: %d \n" , i);
+				}
+				else {
+					scroll_bt_b[i] = false;
+				}
 			}
-			else {
-				scroll_bt_b = false;
-			}
+			
 		}
 
 
@@ -165,22 +173,36 @@ void S05Setting::motion(bool pressed, int x, int y)
 		Exit_button_b = false;
 	}
 	//스크롤바
-	if (scroll_bt_b){
-		if ((-scroll_bar_size.x / 2 <= scroll_bt.x) && (scroll_bt.x <= scroll_bar_size.x / 2))
-		{
-			if (old_mouse_pos.x < select_map.x)
+	for (int i = 0; i < 3; ++i) {
+		if (scroll_bt_b[i] && pressed == true) {
+			if ((-scroll_bar_size[i].x / 2 <= scroll_bt[i].x) && (scroll_bt[i].x <= scroll_bar_size[i].x / 2))
 			{
-				scroll_bt.x += 1;
-			}
-			else
-			{
-				scroll_bt.x -= 1;
+				if (old_mouse_pos.x < select_map.x)
+				{
+					scroll_bt[i].x += 1;
+				}
+				else
+				{
+					scroll_bt[i].x -= 1;
+				}
 			}
 		}
+		if (
+			(((scroll_bt[i].x + scroll_bar[i].x - (scroll_bt_size[i].x)) < select_map.x) && (select_map.x < ((scroll_bt[i].x + scroll_bar[i].x + (scroll_bt_size[i].x)))) &&
+			((scroll_bt[i].y + scroll_bar[i].y - (scroll_bt_size[i].y)) < select_map.y) && (select_map.y < ((scroll_bt[i].y + scroll_bar[i].y + (scroll_bt_size[i].y)))))
+			) {
+			scroll_motion_b[i] = true;
+			printf("true1 \n");
+		}
+		else {
+			scroll_motion_b[i] = false;
+		}
+
+		//정규화 시킨 다음에 값을 얻어낸다.
+		scroll_result[i] = 1 + scroll_bt[i].x / (sqrt(pow(scroll_bar_size[i].x, 2) + pow(1, 2)));
+		printf("%f \n", scroll_result[i]);
 	}
-	//정규화 시킨 다음에 값을 얻어낸다.
-	scroll_result = 1 + scroll_bt.x / (sqrt(pow(scroll_bar_size.x, 2) + pow(1, 2)));
-	printf("%f \n", scroll_result);
+	
 	//old 좌표에 다시 저장한다
 	old_mouse_pos.x = select_map.x;
 	old_mouse_pos.y = select_map.y;
@@ -241,27 +263,44 @@ void S05Setting::HUD()
 
 
 	//스크롤 바
-	glPushMatrix();
-	glTranslatef(scroll_bar.x, scroll_bar.y, -0.5);
-	glBegin(GL_QUADS);
-	glVertex3f(-scroll_bar_size.x / 2, -scroll_bar_size.y / 2, 0);
-	glVertex3f(scroll_bar_size.x / 2, -scroll_bar_size.y / 2, 0);
-	glVertex3f(scroll_bar_size.x / 2, scroll_bar_size.y / 2, 0);
-	glVertex3f(-scroll_bar_size.x / 2, scroll_bar_size.y / 2, 0);
-	glEnd();
-	//스크롤 버튼
-	glPushMatrix();
-	glTranslatef(scroll_bt.x, scroll_bt.y, -0.2);
-	glBegin(GL_QUADS);
-	glVertex3f(-scroll_bt_size.x / 2, -scroll_bt_size.y / 2, 0);
-	glVertex3f(scroll_bt_size.x / 2, -scroll_bt_size.y / 2, 0);
-	glVertex3f(scroll_bt_size.x / 2, scroll_bt_size.y / 2, 0);
-	glVertex3f(-scroll_bt_size.x / 2, scroll_bt_size.y / 2, 0);
-	glEnd();
-	glPopMatrix();
-	glPopMatrix();
+	//스크롤바 문구
+	for (int i = 0; i < 3; ++i) {
+		glColor3f(1, 0, 0);
+		print("Scroll", scroll_bar[i].x - scroll_bar_size[i].x, scroll_bar[i].y, 0);
+		glPushMatrix();
+		glTranslatef(scroll_bar[i].x, scroll_bar[i].y, -0.5);
+		glBegin(GL_QUADS);
+		glVertex3f(-scroll_bar_size[i].x / 2, -scroll_bar_size[i].y / 2, 0);
+		glVertex3f(scroll_bar_size[i].x / 2, -scroll_bar_size[i].y / 2, 0);
+		glVertex3f(scroll_bar_size[i].x / 2, scroll_bar_size[i].y / 2, 0);
+		glVertex3f(-scroll_bar_size[i].x / 2, scroll_bar_size[i].y / 2, 0);
+		glEnd();
+		//스크롤 버튼
+		glPushMatrix();
+		glTranslatef(scroll_bt[i].x, scroll_bt[i].y, -0.2);
+		glBegin(GL_QUADS);
+		glVertex3f(-scroll_bt_size[i].x / 2, -scroll_bt_size[i].y / 2, 0);
+		glVertex3f(scroll_bt_size[i].x / 2, -scroll_bt_size[i].y / 2, 0);
+		glVertex3f(scroll_bt_size[i].x / 2, scroll_bt_size[i].y / 2, 0);
+		glVertex3f(-scroll_bt_size[i].x / 2, scroll_bt_size[i].y / 2, 0);
+		glEnd();
+		glPopMatrix();
+		glPopMatrix();
 
-
+		if (scroll_motion_b[i]) {
+			glPushMatrix();
+			glColor3f(1, 1, 1);
+			glTranslatef(scroll_bar[i].x, scroll_bar[i].y, -0.5);
+			glBegin(GL_LINES);
+			glVertex3f(-scroll_bar_size[i].x / 2 - 10, -scroll_bar_size[i].y - 20, 0);
+			glVertex3f(scroll_bar_size[i].x / 2 + 10, -scroll_bar_size[i].y - 20, 0);
+			glVertex3f(scroll_bar_size[i].x / 2 + 10, scroll_bar_size[i].y + 20, 0);
+			glVertex3f(-scroll_bar_size[i].x / 2 - 10, scroll_bar_size[i].y + 20, 0);
+			glEnd();
+			glPopMatrix();
+		}
+	}
+	
 }
 
 void S05Setting::drawHUD()
