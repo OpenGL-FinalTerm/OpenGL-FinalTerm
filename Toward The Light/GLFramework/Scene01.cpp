@@ -1169,16 +1169,85 @@ void S01Main::HUD()
 	if (messageOn == true)
 		print("press 'F' you can pick up this light", 630, 900 / 2, 0);
 
-	glEnable(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D, IDtmp[0]);
+	//a미니맵 그리기
+	//미니맵 배경 그리
+	
+	glEnable(GL_BLEND); 
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glClearColor(1.0, 1.0, 1.0, 0.0);
+	//미니맵 출
+	glDisable(GL_LIGHT0);
+	glDisable(GL_LIGHT1);
+	glDisable(GL_LIGHT2);
+	
+	glPushMatrix();
+	glTranslated(50 , 50, 0);
 	glBegin(GL_QUADS);
-	glTexCoord2f(0.f, 1.f);		glVertex2f(0, 100);
-	glTexCoord2f(0.f, 0.f);		glVertex2f(0, 0);
-	glTexCoord2f(1.f, 0.f);		glVertex2f(100, 0);
-	glTexCoord2f(1.f, 1.f);		glVertex2f(100, 100);
+	glColor4f(1.f, 1.f, 1.f, 0.5);
+	//glColor4f((float)129 / 255, (float)207 / 255, (float)233 / 255, 0.f);
+	glVertex3f(0, 0, 0);
+	glVertex3f(200, 0, 0);
+	glVertex3f(200,100, 0);
+	glVertex3f(0, 100, 0);
 	glEnd();
 	glPopMatrix();
 
+	for (int i = 0; i < whatBox; i++) {
+
+		//정규화를 시켜준다.
+		//sqrt(pow(difference_new_old[0], 2) + pow(difference_new_old[1], 2));
+
+		glPushMatrix();
+		glTranslated(100 + objectBox[i].returnBoxCenterX(), 100 + objectBox[i].returnBoxCenterZ(), objectBox[i].returnBoxCenterY() / 100);
+		glBegin(GL_QUADS);
+		//glColor4f((float)129 / 255, (float)207 / 255, (float)233 / 255, 0.f);
+		glColor4f(1.f, 1.f, 1.f, 1);
+		glVertex3f(0, 0, 0);
+		glVertex3f(20, 0 , 0);
+		glVertex3f(20, 20 , 0);
+		glVertex3f(0, 20, 0);
+		glEnd();
+		glPopMatrix();
+	}
+
+	for (int i = 0; i < LightCount; i++) {
+
+		//정규화를 시켜준다.
+		//sqrt(pow(difference_new_old[0], 2) + pow(difference_new_old[1], 2));
+
+		glPushMatrix();
+		glTranslated(100 + mapLight[i].returnXpos(), 100 + mapLight[i].returnZpos(), mapLight[i].returnYpos() / 100);
+		glBegin(GL_QUADS);
+		glColor4f(1.f, 1.f, 1.f, 1.f);
+		//glColor4f((float)129 / 255, (float)207 / 255, (float)233 / 255, 0.f);
+		glVertex3f(0, 0, 0);
+		glVertex3f(10, 0, 0);
+		glVertex3f(10, 10, 0);
+		glVertex3f(0, 10, 0);
+		glEnd();
+		glPopMatrix();
+	}
+	//바나나 출력
+	glPushMatrix();
+	{
+		glTranslated(100 + tmpRect.x, 100 + tmpRect.z, 1);
+		glBegin(GL_QUADS);
+		glColor4f(1.f, 0.f, 0.f, 1);
+		//glColor4f((float)129 / 255, (float)207 / 255, (float)233 / 255, 0.f);
+		glVertex3f(0, 0, 0);
+		glVertex3f(10, 0, 0);
+		glVertex3f(10, 10, 0);
+		glVertex3f(0, 10, 0);
+		glEnd();
+	}
+	glPopMatrix();
+//	printf("%d \n",mapLight[0].returnYpos());
+	glPopMatrix();//그리기 끝
+	glEnable(GL_LIGHT0);
+	glEnable(GL_LIGHT1);
+	glEnable(GL_LIGHT2);
+	//
+	glDisable(GL_BLEND);
 }
 
 void S01Main::drawHUD()
@@ -1209,7 +1278,6 @@ GLuint S01Main::LoadTexture(const char * filename, int width_1, int height_1)
 
 	// 파일 열기
 	fopen_s(&file, filename, "rb");
-
 	if (file == NULL) return 0;
 	width = width_1;
 	height = height_1;
