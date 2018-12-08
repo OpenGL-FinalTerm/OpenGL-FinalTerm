@@ -11,10 +11,12 @@
 
 S02Main::S02Main()
 {
+
 }
 
 S02Main::~S02Main()
 {
+
 }
 
 void S02Main::init()

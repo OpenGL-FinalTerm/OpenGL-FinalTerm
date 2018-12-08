@@ -34,19 +34,40 @@ void S05Setting::init()
 	
 	whatBox = LoadMap(objectBox, tmpRect, 2);
 	//LightCount = LoadLight(mapLight, 2);
+	Exit_button.x = 300;
+	Exit_button.y = DEF_WIN_HEIGHT - 200;
+	Exit_button_size.x = 200;
+	Exit_button_size.y = 50;
+	for (int i = 0; i < 3; ++i) {
+		scroll_bar[i].x = 700;
+		scroll_bar[i].y = DEF_WIN_HEIGHT  - 400 - 200 * i;
+		scroll_bar_size[i].x = 200;
+		scroll_bar_size[i].y = 10;
 
+		scroll_bt[i].x = 0.1;
+		scroll_bt[i].y = 0.1;
+
+		scroll_bt_size[i].x = 20;
+		scroll_bt_size[i].y = 40;
+
+		scroll_bt_b[i] = false;
+		scroll_motion_b[i] = false;
+
+	}
 	
 }
 
 void S05Setting::exit()
 {
+	select_map.x = 1000;
+	select_map.y = 0;
+	
 	m_SoundPlayer.exit();
 }
 
 void S05Setting::reset()
 {
-	m_SoundPlayer.play();
-}
+	m_SoundPlayer.play();}
 
 float S05Setting::returnMainX()
 {
@@ -66,49 +87,7 @@ float S05Setting::returnMainZ()
 void S05Setting::render()
 {
 	glPushMatrix();
-	//m_Camera.ready();
-	//glColor3f(1.0f, 1.0f, 1.0f);
-	//glBegin(GL_QUADS);
-	//glNormal3f(0, 1, 0);
-	//glVertex3f(-60, 0, -70);
-	//glVertex3f(-60, 0, 70);
-	//glVertex3f(60, 0, 70);
-	//glVertex3f(60, 0, -70);
-	//glEnd();
-
-	//for (int i = 0; i < 65; ++i)
-	//	objectBox[i].drawBox(20);
-
-	//for (int i = 0; i < LightCount; ++i)
-	//	mapLight[i].drawLight(TRUE, i);
-
-	////카메라 정리 ---
-	//if (opening_camera_working) {//오프닝 영상이 시작되면
-
-	//	if (opening_bezier_t >= 1) {
-	//		opening_camera_working = false;
-	//	}
-	//	opening_bezier_t += 0.01f;
-
-	//	opening_camera_Eye(&red_right_cylinder.x, &red_right_cylinder.y, &red_right_cylinder.z, &tmpRect.x, &tmpRect.y, &tmpRect.z, &opening_bezier_t, 300, &Eye.x, &Eye.y, &Eye.z);
-	//	opening_camera_At(&start_At.x, &start_At.y, &start_At.z, &end_At.x, &end_At.y, &end_At.z, &opening_bezier_t, &At.x, &At.y, &At.z);
-
-	//	printf("opeing %f \n", Eye.y);
-	//}
-
-
-	//if (!opening_camera_working) { //오프닝 카메라 워킹이 false
-	//	//eye 도 각도에 따라 바뀐다.
-	//	camera_moving_Eye(&tmpRect.x, &tmpRect.y, &tmpRect.z, &result_degree[0], &view_rotate[0], &view_rotate[1], &Eye.x, &Eye.y, &Eye.z);
-	//	camera_moving_At(&tmpRect.x, &tmpRect.y, &tmpRect.z, &result_degree[0], &view_at_size[0], &view_at_size[1], &At.x, &At.y, &At.z);
-	//}
-
-	//glPushMatrix();
-	//banana_draw(tmpRect.x, tmpRect.y + 5, tmpRect.z, 0.5, IDLE, banana.rot.degree, result_degree[0]);
-	//glPopMatrix();
-
-	//m_Camera.setEye(Eye);
-	//m_Camera.setTarget(At);
+	
 
 	drawHUD();
 
@@ -157,17 +136,78 @@ void S05Setting::keyboard(int key, bool pressed, int x, int y, bool special)
 void S05Setting::mouse(int button, bool pressed, int x, int y)
 {
 	if (pressed) {
-		if (button == GLUT_LEFT_BUTTON && pickLight == true) {
-		
+		if (button == GLUT_LEFT_BUTTON && Exit_button_b == TRUE) {
+			m_Framework->toScene("Main");
 		}
+		for (int i = 0; i < 3; ++i) {
+			if (button == GLUT_LEFT_BUTTON) {
+				if (
+					(((scroll_bt[i].x + scroll_bar[i].x - (scroll_bt_size[i].x)) < select_map.x) && (select_map.x < ((scroll_bt[i].x + scroll_bar[i].x + (scroll_bt_size[i].x)))) &&
+					((scroll_bt[i].y + scroll_bar[i].y - (scroll_bt_size[i].y)) < select_map.y) && (select_map.y < ((scroll_bt[i].y + scroll_bar[i].y + (scroll_bt_size[i].y)))))
+					) {
+					scroll_bt_b[i] = true;
+					printf("true1 :: %d \n" , i);
+				}
+				else {
+					scroll_bt_b[i] = false;
+				}
+			}
+			
+		}
+
+
 	}
 }
 
 void S05Setting::motion(bool pressed, int x, int y)
 {
+	select_map.x = x;
+	select_map.y = y;
+
+	if (((Exit_button.x -(Exit_button_size.x / 2)) < select_map.x) && (select_map.x < ((Exit_button.x + (Exit_button_size.x / 2)))) &&
+		((Exit_button.y - (Exit_button_size.y / 2)) < select_map.y) &&( select_map.y < ((Exit_button.y + (Exit_button_size.y / 2))))) {
+		Exit_button_b = true;
+		printf("true \n");
+	}
+	else {
+		Exit_button_b = false;
+	}
+	//스크롤바
+	for (int i = 0; i < 3; ++i) {
+		if (scroll_bt_b[i] && pressed == true) {
+			if ((-scroll_bar_size[i].x / 2 <= scroll_bt[i].x) && (scroll_bt[i].x <= scroll_bar_size[i].x / 2))
+			{
+				if (old_mouse_pos.x < select_map.x)
+				{
+					scroll_bt[i].x += 1;
+				}
+				else
+				{
+					scroll_bt[i].x -= 1;
+				}
+			}
+		}
+		if (
+			(((scroll_bt[i].x + scroll_bar[i].x - (scroll_bt_size[i].x)) < select_map.x) && (select_map.x < ((scroll_bt[i].x + scroll_bar[i].x + (scroll_bt_size[i].x)))) &&
+			((scroll_bt[i].y + scroll_bar[i].y - (scroll_bt_size[i].y)) < select_map.y) && (select_map.y < ((scroll_bt[i].y + scroll_bar[i].y + (scroll_bt_size[i].y)))))
+			) {
+			scroll_motion_b[i] = true;
+			printf("true1 \n");
+		}
+		else {
+			scroll_motion_b[i] = false;
+		}
+
+		//정규화 시킨 다음에 값을 얻어낸다.
+		scroll_result[i] = 1 + scroll_bt[i].x / (sqrt(pow(scroll_bar_size[i].x, 2) + pow(1, 2)));
+		printf("%f \n", scroll_result[i]);
+	}
+	
+	//old 좌표에 다시 저장한다
+	old_mouse_pos.x = select_map.x;
+	old_mouse_pos.y = select_map.y;
 
 }
-
 
 
 void S05Setting::update(float fDeltaTime)
@@ -194,10 +234,73 @@ void S05Setting::HUD()
 {
 	glColor3f(1.f, 1.f, 1.f);
 	glPushMatrix();
+	glPushMatrix();
+	glTranslatef(Exit_button.x, Exit_button.y, -0.5);
+	glBegin(GL_QUADS);
+	glVertex3f(-Exit_button_size.x / 2, -Exit_button_size.y / 2, 0);
+	glVertex3f(Exit_button_size.x / 2, -Exit_button_size.y / 2, 0);
+	glVertex3f(Exit_button_size.x / 2, Exit_button_size.y / 2, 0);
+	glVertex3f(-Exit_button_size.x / 2, Exit_button_size.y / 2, 0);
+	glEnd();
 
-	print("press 'F' you can pick up this light", 630, 900 / 2, 0);
+	glColor3f(1.f, 0.f, 0.f);
+	print("EXIT", 200, DEF_WIN_HEIGHT - 100 / 2, 0);
+
+	//HUD를 그린다.
+	glPushMatrix();
+	glTranslatef(select_map.x, select_map.y, 1);
+	glColor3f(1, 0, 0);
+	glBegin(GL_QUADS);
+	glVertex3f(-10, -10, 0);
+	glVertex3f(10, -10, 0);
+	glVertex3f(10, 10, 0);
+	glVertex3f(-10, 10, 0);
+	glEnd();
+	glPopMatrix();
 
 	glPopMatrix();
+
+
+
+	//스크롤 바
+	//스크롤바 문구
+	for (int i = 0; i < 3; ++i) {
+		glColor3f(1, 0, 0);
+		print("Scroll", scroll_bar[i].x - scroll_bar_size[i].x, scroll_bar[i].y, 0);
+		glPushMatrix();
+		glTranslatef(scroll_bar[i].x, scroll_bar[i].y, -0.5);
+		glBegin(GL_QUADS);
+		glVertex3f(-scroll_bar_size[i].x / 2, -scroll_bar_size[i].y / 2, 0);
+		glVertex3f(scroll_bar_size[i].x / 2, -scroll_bar_size[i].y / 2, 0);
+		glVertex3f(scroll_bar_size[i].x / 2, scroll_bar_size[i].y / 2, 0);
+		glVertex3f(-scroll_bar_size[i].x / 2, scroll_bar_size[i].y / 2, 0);
+		glEnd();
+		//스크롤 버튼
+		glPushMatrix();
+		glTranslatef(scroll_bt[i].x, scroll_bt[i].y, -0.2);
+		glBegin(GL_QUADS);
+		glVertex3f(-scroll_bt_size[i].x / 2, -scroll_bt_size[i].y / 2, 0);
+		glVertex3f(scroll_bt_size[i].x / 2, -scroll_bt_size[i].y / 2, 0);
+		glVertex3f(scroll_bt_size[i].x / 2, scroll_bt_size[i].y / 2, 0);
+		glVertex3f(-scroll_bt_size[i].x / 2, scroll_bt_size[i].y / 2, 0);
+		glEnd();
+		glPopMatrix();
+		glPopMatrix();
+
+		if (scroll_motion_b[i]) {
+			glPushMatrix();
+			glColor3f(1, 1, 1);
+			glTranslatef(scroll_bar[i].x, scroll_bar[i].y, -0.5);
+			glBegin(GL_LINES);
+			glVertex3f(-scroll_bar_size[i].x / 2 - 10, -scroll_bar_size[i].y - 20, 0);
+			glVertex3f(scroll_bar_size[i].x / 2 + 10, -scroll_bar_size[i].y - 20, 0);
+			glVertex3f(scroll_bar_size[i].x / 2 + 10, scroll_bar_size[i].y + 20, 0);
+			glVertex3f(-scroll_bar_size[i].x / 2 - 10, scroll_bar_size[i].y + 20, 0);
+			glEnd();
+			glPopMatrix();
+		}
+	}
+	
 }
 
 void S05Setting::drawHUD()
