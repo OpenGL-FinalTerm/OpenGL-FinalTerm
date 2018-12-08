@@ -62,7 +62,16 @@ void S02Main::init()
 
 	glGenTextures(6, IDtmp);
 	glBindTexture(GL_TEXTURE_2D, IDtmp[0]);
-	pBytes = LoadDIBitmap("texture5.bmp", &info);
+	pBytes = LoadDIBitmap("CharterRight1.bmp", &info);
+	glTexImage2D(GL_TEXTURE_2D, 0, 3, 128, 128, 0, GL_BGR_EXT, GL_UNSIGNED_BYTE, pBytes);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+
+	glBindTexture(GL_TEXTURE_2D, IDtmp[1]);
+	pBytes = LoadDIBitmap("mask.bmp", &info);
 	glTexImage2D(GL_TEXTURE_2D, 0, 3, 128, 128, 0, GL_BGR_EXT, GL_UNSIGNED_BYTE, pBytes);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -70,6 +79,9 @@ void S02Main::init()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 	
+	glutSetCursor(GLUT_CURSOR_NONE);
+	ShowCursor(FALSE);
+
 }
 
 void S02Main::exit()
@@ -447,6 +459,9 @@ void S02Main::motion(bool pressed, int x, int y)
 			difference_new_old[0] = drag_old_postion[0] - drag_new_postion[0];
 			difference_new_old[1] = drag_old_postion[1] - drag_new_postion[1];
 
+			//difference_new_old[0] = 750;
+			//difference_new_old[1] = 450;
+
 			//difference_new_old nomalized
 			//step 1 diffrence vetor size compute
 			difference_size = sqrt(pow(difference_new_old[0], 2) + pow(difference_new_old[1], 2));
@@ -481,7 +496,7 @@ void S02Main::motion(bool pressed, int x, int y)
 		//연산이 끝난 후에 저장한다.
 		drag_old_postion[0] = drag_new_postion[0];
 		drag_old_postion[1] = drag_new_postion[1];
-
+		//SetCursorPos(750, 450);
 	}
 }
 
@@ -614,112 +629,41 @@ void S02Main::update(float fDeltaTime)
 		}
 	}
 
-	if (keyA == true) {
-		if (result_degree[0] >= 90 && result_degree[0] < 180) {
-			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
-			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
-			dPress = false;
-			sPress = false;
-			wPress = true;
-			aPress = true;
-		}
-
-		else if (result_degree[0] >= 180 && result_degree[0] < 270) {
-			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
-			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
-			wPress = false;
-			dPress = false;
-			sPress = true;
-			aPress = true;
-		}
-		else if (result_degree[0] >= 270 && result_degree[0] < 360) {
-			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
-			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
-			wPress = false;
-			aPress = false;
-			sPress = true;
-			dPress = true;
-		}
-		else if (result_degree[0] >= 0 && result_degree[0] < 90) {
-			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
-			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
-			wPress = false;
-			aPress = false;
-			wPress = true;
-			dPress = true;
-		}
-	}
-
-
 	if (keyS == true) {
+		foward_move.x *= -1;
+		foward_move.z *= -1;
 		if (result_degree[0] >= 90 && result_degree[0] < 180) {
 			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
 			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
-			aPress = false;
-			sPress = false;
-			wPress = true;
-			dPress = true;
+			aPress = true;
+			sPress = true;
+			wPress = false;
+			dPress = false;
 		}
 
 		else if (result_degree[0] >= 180 && result_degree[0] < 270) {
 			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
 			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
-			sPress = false;
-			dPress = false;
-			wPress = true;
-			aPress = true;
+			sPress = true;
+			dPress = true;
+			wPress = false;
+			aPress = false;
 		}
 		else if (result_degree[0] >= 270 && result_degree[0] < 360) {
 			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
 			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
-			wPress = false;
-			dPress = false;
-			sPress = true;
-			aPress = true;
+			wPress = true;
+			dPress = true;
+			sPress = false;
+			aPress = false;
 		}
 		else if (result_degree[0] >= 0 && result_degree[0] < 90) {
 			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
 			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
-			wPress = false;
-			aPress = false;
-			sPress = true;
-			dPress = true;
-		}
-	}
-
-	if (keyD == true) {
-		if (result_degree[0] >= 90 && result_degree[0] < 180) {
-			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
-			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
-			aPress = false;
-			sPress = false;
-			wPress = true;
-			dPress = true;
-		}
-
-		else if (result_degree[0] >= 180 && result_degree[0] < 270) {
-			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
-			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
-			sPress = false;
-			dPress = false;
 			wPress = true;
 			aPress = true;
-		}
-		else if (result_degree[0] >= 270 && result_degree[0] < 360) {
-			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
-			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
-			wPress = false;
+			sPress = false;
 			dPress = false;
-			sPress = true;
-			aPress = true;
-		}
-		else if (result_degree[0] >= 0 && result_degree[0] < 90) {
-			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
-			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
-			wPress = false;
-			aPress = false;
-			sPress = true;
-			dPress = true;
 		}
 	}
 
@@ -1172,34 +1116,63 @@ void S02Main::DefaultBoxPosSetting()
 
 }
 
+
+
+
+
 void S02Main::HUD()
 {
+
+
+	glEnable(GL_TEXTURE_2D);
 	
 
 	//GLuint tex;
-
-	
 	//IDtmp[0] = LoadTexture("Test.bmp", 150, 150);
-	glColor3f(1.f, 1.f, 1.f);
+	//glColor3f(1.f, 1.f, 1.f);
 	glPushMatrix();
 
 	if (messageOn == true)
 		print("press 'F' you can pick up this light", 630, 900 / 2, 0);
 
-	glEnable(GL_TEXTURE_2D);
+
+
+	glPopMatrix();
+	glEnable(GL_BLEND);
+	//glBindTexture(GL_TEXTURE_2D, IDtmp[0]);
+	glColor3f(1.f, 1.f, 1.f);
+	glBlendFunc(GL_ONE, GL_ONE);
 	glBindTexture(GL_TEXTURE_2D, IDtmp[0]);
 	glBegin(GL_QUADS);
-	glTexCoord2f(0.f, 1.f);		glVertex2f(0, 100);
-	glTexCoord2f(0.f, 0.f);		glVertex2f(0, 0);
-	glTexCoord2f(1.f, 0.f);		glVertex2f(100, 0);
-	glTexCoord2f(1.f, 1.f);		glVertex2f(100, 100);
+	glTexCoord2f(0.f, 0.f);
+	glVertex2f(0, 128);
+	glTexCoord2f(0.f, 1.f);
+	glVertex2f(0, 0);
+	glTexCoord2f(1.f, 1.f);
+	glVertex2f(128, 0);
+	glTexCoord2f(1.f, 0.f);
+	glVertex2f(128, 128);
 	glEnd();
+
+	glDisable(GL_BLEND);
 	glPopMatrix();
+
+
+
 
 }
 
 void S02Main::drawHUD()
 {
+	glDisable(GL_LIGHT0);
+	glDisable(GL_LIGHT1);
+	glDisable(GL_LIGHT2);
+	glDisable(GL_LIGHT3);
+	glDisable(GL_LIGHT4);
+	glDisable(GL_LIGHT5);
+	glDisable(GL_LIGHT6);
+	glDisable(GL_LIGHT7);
+
 	glMatrixMode(GL_PROJECTION);
 	//glPushMatrix();
 	glLoadIdentity();
@@ -1215,7 +1188,14 @@ void S02Main::drawHUD()
 	//glPopMatrix();
 	//glMatrixMode(GL_MODELVIEW);
 	//glPopMatrix();
-	
+	glEnable(GL_LIGHT0);
+	glEnable(GL_LIGHT1);
+	glEnable(GL_LIGHT2);
+	glEnable(GL_LIGHT3);
+	glEnable(GL_LIGHT4);
+	glEnable(GL_LIGHT5);
+	glEnable(GL_LIGHT6);
+	glEnable(GL_LIGHT7);
 }
 
 void S02Main::LightSetting()

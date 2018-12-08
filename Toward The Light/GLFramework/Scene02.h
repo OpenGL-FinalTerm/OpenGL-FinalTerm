@@ -17,9 +17,8 @@
 #include "Wall.h"
 #include "Texture.h"
 #include "LoadBitmap.h"
+#include <Windows.h>
 #include "camera_working.h"
-
-
 
 class S02Main : public GLScene
 {
@@ -129,8 +128,6 @@ private:
 	Light			mapLight[100];
 	Shape			banana;
 	tmp				tmpRect;
-
-
 	//GLubyte *map = (GLubyte*)image->pixels;
 
 };
