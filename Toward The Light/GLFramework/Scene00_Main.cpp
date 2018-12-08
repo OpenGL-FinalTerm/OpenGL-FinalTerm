@@ -69,10 +69,10 @@ void S00Logo::render()
 
 					glTranslated(0, 50, 0);
 					glBegin(GL_QUADS);
-					glVertex3f(-choose_map_box[choose].z, -choose_map_box[choose].z / 2, -choose_map_box[choose].z);
-					glVertex3f(choose_map_box[choose].z, choose_map_box[choose].z / 2, -choose_map_box[choose].z);
-					glVertex3f(choose_map_box[choose].z, choose_map_box[choose].z / 2, choose_map_box[choose].z);
-					glVertex3f(-choose_map_box[choose].z, -choose_map_box[choose].z / 2, choose_map_box[choose].z);
+					glVertex3f(-choose_map_box[choose].z, 0, -choose_map_box[choose].z);
+					glVertex3f(choose_map_box[choose].z, 0, -choose_map_box[choose].z);
+					glVertex3f(choose_map_box[choose].z, 0, choose_map_box[choose].z);
+					glVertex3f(-choose_map_box[choose].z, 0, choose_map_box[choose].z);
 					glEnd();
 
 				}
