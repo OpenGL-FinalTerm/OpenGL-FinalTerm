@@ -283,10 +283,62 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 			break;
 
 		case 'q':
-			if (change_person_view_count % 3 == 2) {
-				radian += 1;
+			if (catchBox == false && pickLight == false) {
+				if (result_degree[0] >= 135 && result_degree[0] < 225) { //앞에있는거 wPress
+					for (int i = 0; i < whatBox; ++i) {
+						if (objectBox[i].returnBoxCenterX() - 10 < tmpRect.x + 5 && objectBox[i].returnBoxCenterX() + 10 > tmpRect.x - 5
+							&& objectBox[i].returnBoxCenterZ() + 10 > tmpRect.z - 5 - 20 && objectBox[i].returnBoxCenterZ() - 10 < tmpRect.z + 5 - 20
+							&& objectBox[i].returnBoxCenterY() - 10 < tmpRect.y + 5 && objectBox[i].returnBoxCenterY() + 10 > tmpRect.y - 5) {
+							catchBox = true;
+							boxIndex = i;
+							objectBox[i].updateCatch(true);
+							objectBox[i].catchBoxPos(tmpRect.x, tmpRect.y + 30, tmpRect.z);
+							break;
+						}
+					}
+				}
+				else if (result_degree[0] >= 225 && result_degree[0] < 315) { // 왼쪽에 있는거 aPress
+					for (int i = 0; i < whatBox; ++i) {
+						if (objectBox[i].returnBoxCenterX() - 10 < tmpRect.x + 5 - 20 && objectBox[i].returnBoxCenterX() + 10 > tmpRect.x - 5 - 20
+							&& objectBox[i].returnBoxCenterZ() + 10 > tmpRect.z - 5 && objectBox[i].returnBoxCenterZ() - 10 < tmpRect.z + 5
+							&& objectBox[i].returnBoxCenterY() - 10 < tmpRect.y + 5 && objectBox[i].returnBoxCenterY() + 10 > tmpRect.y - 5) {
+							catchBox = true;
+							boxIndex = i;
+							objectBox[i].updateCatch(true);
+							objectBox[i].catchBoxPos(tmpRect.x, tmpRect.y + 20, tmpRect.z);
+							break;
+						}
+					}
+				}
+				else if ((result_degree[0] >= 315 && result_degree[0] < 360) || (result_degree[0] >= 0 && result_degree[0] < 45)) {  // 뒤에있는거 sPress
+					for (int i = 0; i < whatBox; ++i) {
+						if (objectBox[i].returnBoxCenterX() - 10 < tmpRect.x + 5 && objectBox[i].returnBoxCenterX() + 10 > tmpRect.x - 5
+							&& objectBox[i].returnBoxCenterZ() + 10 > tmpRect.z - 5 + 20 && objectBox[i].returnBoxCenterZ() - 10 < tmpRect.z + 5 + 20
+							&& objectBox[i].returnBoxCenterY() - 10 < tmpRect.y + 5 && objectBox[i].returnBoxCenterY() + 10 > tmpRect.y - 5) {
+							catchBox = true;
+							boxIndex = i;
+							objectBox[i].updateCatch(true);
+							objectBox[i].catchBoxPos(tmpRect.x, tmpRect.y + 20, tmpRect.z);
+							break;
+						}
+					}
+				}
+				else if (result_degree[0] >= 45 && result_degree[0] < 135) {  // 오른쪽에 있는거 dPress
+					for (int i = 0; i < whatBox; ++i) {
+						if (objectBox[i].returnBoxCenterX() - 10 < tmpRect.x + 5 + 20 && objectBox[i].returnBoxCenterX() + 10 > tmpRect.x - 5 + 20
+							&& objectBox[i].returnBoxCenterZ() + 10 > tmpRect.z - 5 && objectBox[i].returnBoxCenterZ() - 10 < tmpRect.z + 5
+							&& objectBox[i].returnBoxCenterY() - 10 < tmpRect.y + 5 && objectBox[i].returnBoxCenterY() + 10 > tmpRect.y - 5) {
+							catchBox = true;
+							boxIndex = i;
+							objectBox[i].updateCatch(true);
+							objectBox[i].catchBoxPos(tmpRect.x, tmpRect.y + 20, tmpRect.z);
+							break;
+						}
+					}
+				}
 			}
 			break;
+
 		case 'e':
 			if (change_person_view_count % 3 == 2) {
 				radian -= 1;
@@ -295,10 +347,11 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 
 		case 'f':
 		case 'F':
-
-			for (int i = 0; i < LightCount - 1; ++i) {
-				if (mapLight[i].returnPickCheck() == true)
-					beforePick = true;
+			if (catchBox != true) {
+				for (int i = 0; i < LightCount - 1; ++i) {
+					if (mapLight[i].returnPickCheck() == true)
+						beforePick = true;
+				}
 			}
 
 			if (pickLightNumber != -1 && beforePick == false) {
@@ -306,16 +359,18 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 				pickLight = true;
 			}
 
-			if (pickLight == true) {
-				if (pickCount % 2 == 1) {
-					mapLight[pickLightNumber].pickUp(false);
-					pickCount = 0;
-					pickLight = false;
-					beforePick = false;
-					pickLightNumber = -1;
+			if (catchBox != true) {
+				if (pickLight == true) {
+					if (pickCount % 2 == 1) {
+						mapLight[pickLightNumber].pickUp(false);
+						pickCount = 0;
+						pickLight = false;
+						beforePick = false;
+						pickLightNumber = -1;
+					}
+					else
+						pickCount++;
 				}
-				else
-					pickCount++;
 			}
 			beforePick = false;
 			break;
@@ -390,6 +445,19 @@ void S01Main::mouse(int button, bool pressed, int x, int y)
 			ControlPoint[1] = startPos[1] + 40;
 			ControlPoint[2] = (At[2] - tmpRect.z) / 2;
 		}
+
+		if (button == GLUT_LEFT_BUTTON && catchBox == true) {
+			catchBox = false;
+			objectBox[boxIndex].updateCatch(false);
+			if (result_degree[0] >= 135 && result_degree[0] < 225)
+				objectBox[boxIndex].catchBoxPos(tmpRect.x, tmpRect.y + 50, tmpRect.z - 20);
+			else if (result_degree[0] >= 225 && result_degree[0] < 315)
+				objectBox[boxIndex].catchBoxPos(tmpRect.x - 20, tmpRect.y + 50, tmpRect.z);
+			else if (result_degree[0] >= 315 || result_degree[0] < 45)
+				objectBox[boxIndex].catchBoxPos(tmpRect.x, tmpRect.y + 50, tmpRect.z + 20);
+			else if (result_degree[0] >= 45 && result_degree[0] < 135)
+				objectBox[boxIndex].catchBoxPos(tmpRect.x + 20, tmpRect.y + 50, tmpRect.z);
+		}
 	}
 }
 
@@ -448,6 +516,10 @@ void S01Main::update(float fDeltaTime)
 {
 	//camera at --> player going foward pos update
 // banana pos add
+
+	// 박스와 빨간 기둥이 충돌(?) 체크 해야함
+	// 대략적인 위치 -> 모든 충돌이 일어난후(혹은 그냥 겹치기)
+
 	__t += 1;
 	foward_move.x = (sin(result_degree[0] * 3.141592 / 180));
 	foward_move.z = (cos(result_degree[0] * 3.141592 / 180));
@@ -465,11 +537,13 @@ void S01Main::update(float fDeltaTime)
 		tmpRect.jumpCount += 1;
 		bool tmpcheck = false;
 		for (int i = 0; i < whatBox; ++i) {
-			if (objectBox[i].returnBoxCenterX() - 10 < returnMainX() + 5 && objectBox[i].returnBoxCenterX() + 10 > returnMainX() - 5 && objectBox[i].returnBoxCenterZ() + 10 > returnMainZ() - 5 && objectBox[i].returnBoxCenterZ() - 10 < returnMainZ() + 5 && returnMainY() > objectBox[i].returnBoxCenterY() - 20 && returnMainY() < objectBox[i].returnBoxCenterY() + 20) {
-				down = TRUE;
-				jump = FALSE;
-				tmpRect.jumpCount = 0;
-				tmpRect.y -= 1;
+			if (objectBox[i].returnCatch() == false) {
+				if (objectBox[i].returnBoxCenterX() - 10 < returnMainX() + 5 && objectBox[i].returnBoxCenterX() + 10 > returnMainX() - 5 && objectBox[i].returnBoxCenterZ() + 10 > returnMainZ() - 5 && objectBox[i].returnBoxCenterZ() - 10 < returnMainZ() + 5 && returnMainY() > objectBox[i].returnBoxCenterY() - 21 && returnMainY() < objectBox[i].returnBoxCenterY() + 16) {
+					down = TRUE;
+					jump = FALSE;
+					tmpRect.jumpCount = 0;
+					tmpRect.y -= 1;
+				}
 			}
 		}
 
@@ -485,26 +559,28 @@ void S01Main::update(float fDeltaTime)
 	else {
 		bool tmpcheck = false;
 		for (int i = 0; i < whatBox; ++i) {
-			if (objectBox[i].returnBoxCenterX() - 10 < returnMainX() + 5 && objectBox[i].returnBoxCenterX() + 10 > returnMainX() - 5 && objectBox[i].returnBoxCenterZ() + 10 > returnMainZ() - 5 && objectBox[i].returnBoxCenterZ() - 10 < returnMainZ() + 5 && tmpRect.y < objectBox[i].returnBoxCenterY() + 20) {
-				down = FALSE;
-				tmpcheck = true;
+			if (objectBox[i].returnCatch() == false) {
+				if (objectBox[i].returnBoxCenterX() - 10 < returnMainX() + 5 && objectBox[i].returnBoxCenterX() + 10 > returnMainX() - 5 && objectBox[i].returnBoxCenterZ() + 10 > returnMainZ() - 5 && objectBox[i].returnBoxCenterZ() - 10 < returnMainZ() + 5 && tmpRect.y < objectBox[i].returnBoxCenterY() + 20) {
+					down = FALSE;
+					tmpcheck = true;
 
-				if (depthCheck >= 60) {
-					if (dep == false) {
-						dep = true;
-						depthCheck = 0;
+					if (depthCheck >= 60) {
+						if (dep == false) {
+							dep = true;
+							depthCheck = 0;
+						}
+						else {
+							wPress = false;
+							aPress = false;
+							sPress = false;
+							dPress = false;
+							dep = false;
+							depthCheck = 0;
+							m_Framework->toScene("Ending");
+						}
 					}
-					else {
-						wPress = false;
-						aPress = false;
-						sPress = false;
-						dPress = false;
-						dep = false;
-						depthCheck = 0;
-						m_Framework->toScene("Ending");
-					}
+					depthCheck = 0;
 				}
-				depthCheck = 0;
 			}
 		}
 
@@ -627,40 +703,45 @@ void S01Main::update(float fDeltaTime)
 	bool boxLanding = false;
 	for (int k = 0; k < whatBox; ++k)
 	{
-		boxLanding = false;
-		i = 0;
-		check = FALSE;
-		if (objectBox[k].returnBoxCenterY() - 10 > 0) {
+		if (objectBox[k].returnCatch() == false) {
+			boxLanding = false;
+			i = 0;
+			check = FALSE;
+			if (objectBox[k].returnBoxCenterY() - 10 > 0) {
 
-			while (check == FALSE) {
-				if ((objectBox[i].returnBoxCenterX() - 10 < objectBox[k].returnBoxCenterX() + 10 && objectBox[i].returnBoxCenterX() + 10 > objectBox[k].returnBoxCenterX() - 10 && objectBox[i].returnBoxCenterZ() + 10 > objectBox[k].returnBoxCenterZ() - 10 && objectBox[i].returnBoxCenterZ() - 10 < objectBox[k].returnBoxCenterZ() + 10) && i != k) {
-					if (objectBox[k].returnBoxCenterY() - 10 <= objectBox[i].returnBoxCenterY() + 10 && (objectBox[k].returnBoxCenterY() + 10 > objectBox[i].returnBoxCenterY() - 10)) {
-						boxLanding = true;
-						//check = TRUE;
+				while (check == FALSE) {
+					if ((objectBox[i].returnBoxCenterX() - 10 < objectBox[k].returnBoxCenterX() + 10 && objectBox[i].returnBoxCenterX() + 10 > objectBox[k].returnBoxCenterX() - 10 && objectBox[i].returnBoxCenterZ() + 10 > objectBox[k].returnBoxCenterZ() - 10 && objectBox[i].returnBoxCenterZ() - 10 < objectBox[k].returnBoxCenterZ() + 10) && i != k) {
+						if (objectBox[k].returnBoxCenterY() - 10 <= objectBox[i].returnBoxCenterY() + 10 && (objectBox[k].returnBoxCenterY() + 10 > objectBox[i].returnBoxCenterY() - 10)) {
+							boxLanding = true;
+							//check = TRUE;
+						}
 					}
+
+					i++;
+					if (i == whatBox) {
+						i = 0;
+						check = TRUE;
+					}
+
 				}
 
-				i++;
-				if (i == whatBox) {
-					i = 0;
-					check = TRUE;
-				}
-
-			}
-
-			if (boxLanding != true) {
-				objectBox[k].movingY(-1);
-				if (objectBox[k].returnBoxCenterX() - 10 < returnMainX() + 5 && objectBox[k].returnBoxCenterX() + 10 > returnMainX() - 5 && objectBox[k].returnBoxCenterZ() + 10 > returnMainZ() - 5 && objectBox[k].returnBoxCenterZ() - 10 < returnMainZ() + 5 && returnMainY() > objectBox[k].returnBoxCenterY() - 20 && returnMainY() < objectBox[k].returnBoxCenterY() + 20) {
-					m_Camera.init();
-					wPress = false;
-					aPress = false;
-					sPress = false;
-					dPress = false;
-					m_Framework->toScene("Ending");
+				if (boxLanding != true) {
+					objectBox[k].movingY(-1);
+					if (objectBox[k].returnBoxCenterX() - 10 < returnMainX() + 5 && objectBox[k].returnBoxCenterX() + 10 > returnMainX() - 5 && objectBox[k].returnBoxCenterZ() + 10 > returnMainZ() - 5 && objectBox[k].returnBoxCenterZ() - 10 < returnMainZ() + 5 && returnMainY() > objectBox[k].returnBoxCenterY() - 20 && returnMainY() < objectBox[k].returnBoxCenterY() + 20) {
+						m_Camera.init();
+						wPress = false;
+						aPress = false;
+						sPress = false;
+						dPress = false;
+						m_Framework->toScene("Ending");
+					}
 				}
 			}
 		}
+	}
 
+	if (catchBox == true) {
+		objectBox[boxIndex].catchBoxPos(tmpRect.x, tmpRect.y + 30, tmpRect.z);
 	}
 
 	check = FALSE;
@@ -985,16 +1066,16 @@ void S01Main::update(float fDeltaTime)
 				break;
 			}
 			else {
-				messageOn = false;
 				pickLightNumber = -1;
+				messageOn = false;
 			}
 		}
 	}
 
 	for (int light = 0; light < LightCount - 1; ++light) {
 		if (mapLight[light].returnPickCheck() == true) {
-			mapLight[light].pickSetPos(tmpRect.x, tmpRect.y + 15, tmpRect.z);
 			messageOn = false;
+			mapLight[light].pickSetPos(tmpRect.x, tmpRect.y + 15, tmpRect.z);
 		}
 	}
 

@@ -86,6 +86,11 @@ private:
 	int view_at_size[2];
 	//붉은 조명기둥
 	Vector3 red_right_cylinder;
+
+	// 상자를 집었나 안집었나 체크
+	bool			catchBox;
+	int				boxIndex;
+
 	//오프닝 시작
 	bool opening_camera_working;
 	float opening_bezier_t;
