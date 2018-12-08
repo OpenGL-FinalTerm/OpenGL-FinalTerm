@@ -1045,19 +1045,22 @@ void S01Main::update(float fDeltaTime)
 		if (pickLight == false && mapLight[light].returnThrowCheck() == false) {
 			if (mapLight[light].returnXpos() - 10 < tmpRect.x && mapLight[light].returnXpos() + 10 > tmpRect.x
 				&& mapLight[light].returnZpos() - 10 < tmpRect.z && mapLight[light].returnZpos() + 10 > tmpRect.z) {
-				print("press 'E' you can pick up this light", 0, 100, 0);
+				print("press 'F' you can pick up this light", 0, 100, 0);
+				messageOn = true;
 				pickLightNumber = light;
 				break;
 			}
-			else
+			else {
+				messageOn = false;
 				pickLightNumber = -1;
-
+			}
 		}
 	}
 
 	for (int light = 0; light < LightCount; ++light) {
 		if (mapLight[light].returnPickCheck() == true) {
 			mapLight[light].pickSetPos(tmpRect.x, tmpRect.y + 15, tmpRect.z);
+			messageOn = false;
 		}
 	}
 
@@ -1162,6 +1165,10 @@ void S01Main::HUD()
 	//IDtmp[0] = LoadTexture("Test.bmp", 150, 150);
 	glColor3f(1.f, 1.f, 1.f);
 	glPushMatrix();
+
+	if (messageOn == true)
+		print("press 'F' you can pick up this light", 630, 900 / 2, 0);
+
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, IDtmp[0]);
 	glBegin(GL_QUADS);

@@ -70,6 +70,7 @@ private:
 	bool		keyD = false;
 	bool		keyDown = false;
 	bool		pickLight = false;
+	bool		messageOn = false;
 
 	int			pickLightNumber = -1;
 	int			drag_old_postion[2] = {};

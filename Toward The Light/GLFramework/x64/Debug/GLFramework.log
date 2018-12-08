@@ -12,5 +12,4 @@ d:\github\opengl-finalterm\toward the light\glframework\scene01.cpp(404): warnin
 d:\github\opengl-finalterm\toward the light\glframework\scene01.cpp(412): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
 d:\github\opengl-finalterm\toward the light\glframework\scene01.cpp(447): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 d:\github\opengl-finalterm\toward the light\glframework\scene01.cpp(448): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-x64\Debug\HUD.obj : warning LNK4042: 개체가 두 번 이상 지정되었습니다. 나머지는 무시됩니다.
   GLFramework.vcxproj -> D:\GitHub\OpenGL-FinalTerm\Toward The Light\x64\Debug\GLFramework.exe

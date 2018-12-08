@@ -71,6 +71,7 @@ private:
 	bool		keyD = false;
 	bool		keyDown = false;
 	bool		pickLight = false;
+	bool		messageOn = false;
 
 	float		difference_new_old[2] = {}; // between drag_old postion and drag new postion --> old - new
 	float		difference_size = 1.f;
