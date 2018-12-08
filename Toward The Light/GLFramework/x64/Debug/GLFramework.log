@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿  AirPlane.cpp
 d:\github\opengl-finalterm\toward the light\glframework\airplane.cpp(89): warning C4244: '인수': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 d:\github\opengl-finalterm\toward the light\glframework\airplane.cpp(97): warning C4244: '인수': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
@@ -127,13 +128,19 @@ d:\github\opengl-finalterm\toward the light\glframework\banana_draw.cpp(366): wa
   Character.cpp
   FolderReader.cpp
   GLFramework.cpp
+=======
+﻿  GLFramework.cpp
+>>>>>>> parent of 6939309... 던진상자에 낑기는 버그 수정
 d:\github\opengl-finalterm\toward the light\glframework\banana_draw.h(16): warning C4091: 'typedef ': 변수를 선언하지 않으면 'Color' 왼쪽은 무시됩니다.
 d:\github\opengl-finalterm\toward the light\glframework\banana_draw.h(22): warning C4091: 'typedef ': 변수를 선언하지 않으면 'Translate_pos' 왼쪽은 무시됩니다.
 d:\github\opengl-finalterm\toward the light\glframework\banana_draw.h(30): warning C4091: 'typedef ': 변수를 선언하지 않으면 'BoOL' 왼쪽은 무시됩니다.
 d:\github\opengl-finalterm\toward the light\glframework\banana_draw.h(48): warning C4091: 'typedef ': 변수를 선언하지 않으면 'QUAD' 왼쪽은 무시됩니다.
 d:\github\opengl-finalterm\toward the light\glframework\bananasetting.h(22): warning C4091: 'typedef ': 변수를 선언하지 않으면 'Shape' 왼쪽은 무시됩니다.
 d:\github\opengl-finalterm\toward the light\glframework\glscenesinfo.h(11): warning C4067: 전처리기 지시문 다음에 예기치 않은 토큰이 있습니다. 줄 바꿈 문자가 필요합니다.
+<<<<<<< HEAD
   GLScene.cpp
+=======
+>>>>>>> parent of 6939309... 던진상자에 낑기는 버그 수정
   GLScenesInfo.cpp
 d:\github\opengl-finalterm\toward the light\glframework\banana_draw.h(16): warning C4091: 'typedef ': 변수를 선언하지 않으면 'Color' 왼쪽은 무시됩니다.
 d:\github\opengl-finalterm\toward the light\glframework\banana_draw.h(22): warning C4091: 'typedef ': 변수를 선언하지 않으면 'Translate_pos' 왼쪽은 무시됩니다.
@@ -141,6 +148,7 @@ d:\github\opengl-finalterm\toward the light\glframework\banana_draw.h(30): warni
 d:\github\opengl-finalterm\toward the light\glframework\banana_draw.h(48): warning C4091: 'typedef ': 변수를 선언하지 않으면 'QUAD' 왼쪽은 무시됩니다.
 d:\github\opengl-finalterm\toward the light\glframework\bananasetting.h(22): warning C4091: 'typedef ': 변수를 선언하지 않으면 'Shape' 왼쪽은 무시됩니다.
 d:\github\opengl-finalterm\toward the light\glframework\glscenesinfo.h(11): warning C4067: 전처리기 지시문 다음에 예기치 않은 토큰이 있습니다. 줄 바꿈 문자가 필요합니다.
+<<<<<<< HEAD
   HUD.cpp
   HUD.h
   Light.cpp
@@ -188,6 +196,8 @@ d:\github\opengl-finalterm\toward the light\glframework\scene00_main.cpp(21): wa
 d:\github\opengl-finalterm\toward the light\glframework\scene00_main.cpp(66): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
 d:\github\opengl-finalterm\toward the light\glframework\scene00_main.cpp(260): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 d:\github\opengl-finalterm\toward the light\glframework\scene00_main.cpp(261): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+=======
+>>>>>>> parent of 6939309... 던진상자에 낑기는 버그 수정
   Scene01.cpp
 d:\github\opengl-finalterm\toward the light\glframework\banana_draw.h(16): warning C4091: 'typedef ': 변수를 선언하지 않으면 'Color' 왼쪽은 무시됩니다.
 d:\github\opengl-finalterm\toward the light\glframework\banana_draw.h(22): warning C4091: 'typedef ': 변수를 선언하지 않으면 'Translate_pos' 왼쪽은 무시됩니다.
@@ -202,6 +212,7 @@ d:\github\opengl-finalterm\toward the light\glframework\scene01.cpp(476): warnin
 d:\github\opengl-finalterm\toward the light\glframework\scene01.cpp(484): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
 d:\github\opengl-finalterm\toward the light\glframework\scene01.cpp(524): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 d:\github\opengl-finalterm\toward the light\glframework\scene01.cpp(525): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+<<<<<<< HEAD
   Scene02.cpp
 d:\github\opengl-finalterm\toward the light\glframework\banana_draw.h(16): warning C4091: 'typedef ': 변수를 선언하지 않으면 'Color' 왼쪽은 무시됩니다.
 d:\github\opengl-finalterm\toward the light\glframework\banana_draw.h(22): warning C4091: 'typedef ': 변수를 선언하지 않으면 'Translate_pos' 왼쪽은 무시됩니다.
@@ -300,6 +311,8 @@ d:\github\opengl-finalterm\toward the light\glframework\banana_draw.h(30): warni
 d:\github\opengl-finalterm\toward the light\glframework\banana_draw.h(48): warning C4091: 'typedef ': 변수를 선언하지 않으면 'QUAD' 왼쪽은 무시됩니다.
 d:\github\opengl-finalterm\toward the light\glframework\bananasetting.h(22): warning C4091: 'typedef ': 변수를 선언하지 않으면 'Shape' 왼쪽은 무시됩니다.
 d:\github\opengl-finalterm\toward the light\glframework\scene04_ending.cpp(56): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+=======
+>>>>>>> parent of 6939309... 던진상자에 낑기는 버그 수정
   코드를 생성하고 있습니다...
 x64\Debug\HUD.obj : warning LNK4042: 개체가 두 번 이상 지정되었습니다. 나머지는 무시됩니다.
   GLFramework.vcxproj -> D:\GitHub\OpenGL-FinalTerm\Toward The Light\x64\Debug\GLFramework.exe
