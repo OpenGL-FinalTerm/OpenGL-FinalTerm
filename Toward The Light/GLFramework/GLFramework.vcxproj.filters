@@ -156,6 +156,9 @@
     <ClCompile Include="LoadBitmap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Scene_Setting.cpp">
+      <Filter>Source Files\Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -253,6 +256,9 @@
     </ClInclude>
     <ClInclude Include="LoadBitmap.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene_Setting.h">
+      <Filter>Header Files\Scenes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
