@@ -106,6 +106,9 @@ private:
 	float			ControlPoint[3];
 	float			startPos[3];
 
+	// 상자를 집었나 안집었나 체크
+	bool			catchBox;
+	int				boxIndex;
 	//붉은 조명 위치
 	Vector3 red_right_cylinder;
 
