@@ -92,7 +92,7 @@ void Light::LightOn(bool LightSwitch, int i)
 			glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
 			// 이후에 나오는 모든 재질은 밝게 빛나는 완전 전반사 반사율을 갖는다.
 			//glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, gray);
-			glMaterialfv(GL_FRONT, GL_SPECULAR, specu);
+			glMaterialfv(GL_FRONT, GL_SPECULAR, specu);\
 			glMateriali(GL_FRONT, GL_SHININESS, 64);
 			glEnable(GL_LIGHT3);
 		}
@@ -163,6 +163,33 @@ void Light::settingPos(float inx, float iny, float inz)
 	pos[0] = x;
 	pos[1] = y;
 	pos[2] = z;
+}
+
+void Light::drawRedColunm()
+{
+	glEnable(GL_LIGHTING);
+	glLightfv(GL_LIGHT7, GL_POSITION, pos);
+	glLightfv(GL_LIGHT7, GL_DIFFUSE, diffuseLight);
+	glLightfv(GL_LIGHT7, GL_AMBIENT, ambientLight);
+	glLightfv(GL_LIGHT7, GL_SPECULAR, specu);
+	glLightfv(GL_LIGHT7, GL_POSITION, pos);
+
+	glEnable(GL_COLOR_MATERIAL);
+
+	glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
+	// 이후에 나오는 모든 재질은 밝게 빛나는 완전 전반사 반사율을 갖는다.
+	//glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, gray);
+	glMaterialfv(GL_FRONT, GL_SPECULAR, specu);
+	glMateriali(GL_FRONT, GL_SHININESS, 64);
+
+	glEnable(GL_LIGHT7);
+	
+	glPushMatrix();
+	glTranslatef(x, y, z);
+	glRotatef(90, 1, 0, 0);
+	glColor3f(1.f, 0.f, 0.f);
+	glutSolidCylinder(3, 40, 40, 40);
+	glPopMatrix();
 }
 
 void Light::drawLight(bool LightSwitch, int i)
@@ -433,4 +460,9 @@ float Light::returnDestinationY()
 float Light::returnDestinationZ()
 {
 	return end[2];
+}
+
+int Light::returnType()
+{
+	return colorType;
 }

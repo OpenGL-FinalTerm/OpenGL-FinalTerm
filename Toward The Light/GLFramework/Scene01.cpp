@@ -39,8 +39,8 @@ void S01Main::init()
 	////-----------------------------------------------------------
 	//LightSetting();
 	//DefaultBoxPosSetting();
-	whatBox = LoadMap(objectBox, tmpRect, 2);
-	LightCount = LoadLight(mapLight, 2);
+	whatBox = LoadMap(objectBox, tmpRect, 1);
+	LightCount = LoadLight(mapLight, 1, RedColumn);
 
 	m_Camera.setEye(Eye);
 	result_degree[0] = 180;
@@ -113,9 +113,10 @@ void S01Main::render()
 	for (int i = 0; i < 65; ++i)
 		objectBox[i].drawBox(20);
 
-	for (int i = 0; i < LightCount; ++i)
+	for (int i = 0; i < LightCount - 1; ++i)
 		mapLight[i].drawLight(TRUE, i);
 
+	mapLight[LightCount - 1].drawRedColunm();
 	//카메라 정리 ---
 	if (opening_camera_working) {//오프닝 영상이 시작되면
 		
@@ -277,7 +278,7 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 		case 'f':
 		case 'F':
 
-			for (int i = 0; i < LightCount; ++i) {
+			for (int i = 0; i < LightCount - 1; ++i) {
 				if (mapLight[i].returnPickCheck() == true)
 					beforePick = true;
 			}
@@ -552,112 +553,41 @@ void S01Main::update(float fDeltaTime)
 		}
 	}
 
-	if (keyA == true) {
-		if (result_degree[0] >= 90 && result_degree[0] < 180) {
-			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
-			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
-			dPress = false;
-			sPress = false;
-			wPress = true;
-			aPress = true;
-		}
-
-		else if (result_degree[0] >= 180 && result_degree[0] < 270) {
-			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
-			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
-			wPress = false;
-			dPress = false;
-			sPress = true;
-			aPress = true;
-		}
-		else if (result_degree[0] >= 270 && result_degree[0] < 360) {
-			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
-			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
-			wPress = false;
-			aPress = false;
-			sPress = true;
-			dPress = true;
-		}
-		else if (result_degree[0] >= 0 && result_degree[0] < 90) {
-			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
-			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
-			wPress = false;
-			aPress = false;
-			wPress = true;
-			dPress = true;
-		}
-	}
-
-
 	if (keyS == true) {
+		foward_move.x *= -1;
+		foward_move.z *= -1;
 		if (result_degree[0] >= 90 && result_degree[0] < 180) {
 			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
 			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
-			aPress = false;
-			sPress = false;
-			wPress = true;
-			dPress = true;
+			aPress = true;
+			sPress = true;
+			wPress = false;
+			dPress = false;
 		}
 
 		else if (result_degree[0] >= 180 && result_degree[0] < 270) {
 			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
 			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
-			sPress = false;
-			dPress = false;
-			wPress = true;
-			aPress = true;
+			sPress = true;
+			dPress = true;
+			wPress = false;
+			aPress = false;
 		}
 		else if (result_degree[0] >= 270 && result_degree[0] < 360) {
 			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
 			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
-			wPress = false;
-			dPress = false;
-			sPress = true;
-			aPress = true;
+			wPress = true;
+			dPress = true;
+			sPress = false;
+			aPress = false;
 		}
 		else if (result_degree[0] >= 0 && result_degree[0] < 90) {
 			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
 			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
-			wPress = false;
-			aPress = false;
-			sPress = true;
-			dPress = true;
-		}
-	}
-
-	if (keyD == true) {
-		if (result_degree[0] >= 90 && result_degree[0] < 180) {
-			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
-			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
-			aPress = false;
-			sPress = false;
-			wPress = true;
-			dPress = true;
-		}
-
-		else if (result_degree[0] >= 180 && result_degree[0] < 270) {
-			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
-			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
-			sPress = false;
-			dPress = false;
 			wPress = true;
 			aPress = true;
-		}
-		else if (result_degree[0] >= 270 && result_degree[0] < 360) {
-			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
-			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
-			wPress = false;
+			sPress = false;
 			dPress = false;
-			sPress = true;
-			aPress = true;
-		}
-		else if (result_degree[0] >= 0 && result_degree[0] < 90) {
-			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
-			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
-			wPress = false;
-			aPress = false;
-			sPress = true;
-			dPress = true;
 		}
 	}
 
@@ -997,7 +927,7 @@ void S01Main::update(float fDeltaTime)
 
 	//조명 낙하
 	bool lightLanding = false;
-	for (int light = 0; light < LightCount; ++light) {
+	for (int light = 0; light < LightCount - 1; ++light) {
 		lightLanding = false;
 		i = 0;
 		check = FALSE;
@@ -1026,7 +956,7 @@ void S01Main::update(float fDeltaTime)
 
 	//조명을 집기 위한 공간
 
-	for (int light = 0; light < LightCount; ++light) {
+	for (int light = 0; light < LightCount - 1; ++light) {
 		if (pickLight == false && mapLight[light].returnThrowCheck() == false) {
 			if (mapLight[light].returnXpos() - 10 < tmpRect.x && mapLight[light].returnXpos() + 10 > tmpRect.x
 				&& mapLight[light].returnZpos() - 10 < tmpRect.z && mapLight[light].returnZpos() + 10 > tmpRect.z) {
@@ -1042,7 +972,7 @@ void S01Main::update(float fDeltaTime)
 		}
 	}
 
-	for (int light = 0; light < LightCount; ++light) {
+	for (int light = 0; light < LightCount - 1; ++light) {
 		if (mapLight[light].returnPickCheck() == true) {
 			mapLight[light].pickSetPos(tmpRect.x, tmpRect.y + 15, tmpRect.z);
 			messageOn = false;
@@ -1051,7 +981,7 @@ void S01Main::update(float fDeltaTime)
 
 	//조명 던지는 공간
 
-	for (int light = 0; light < LightCount; ++light) {
+	for (int light = 0; light < LightCount - 1; ++light) {
 		if (mapLight[light].returnThrowCheck() == true) {
 			float tmpx;
 			float tmpy;
@@ -1142,12 +1072,10 @@ void S01Main::camera_install(int x, int y) {
 
 void S01Main::HUD()
 {
-
-
 	//GLuint tex;
 
 
-	//IDtmp[0] = LoadTexture("Test.bmp", 150, 150);
+		//IDtmp[0] = LoadTexture("Test.bmp", 150, 150);
 	glColor3f(1.f, 1.f, 1.f);
 	glPushMatrix();
 
@@ -1156,24 +1084,25 @@ void S01Main::HUD()
 
 	//a미니맵 그리기
 	//미니맵 배경 그리
-	
-	glEnable(GL_BLEND); 
+
+	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glClearColor(1.0, 1.0, 1.0, 0.0);
 	//미니맵 출
 	glDisable(GL_LIGHT0);
 	glDisable(GL_LIGHT1);
 	glDisable(GL_LIGHT2);
-	
+	glDisable(GL_LIGHT3);
+
 	glPushMatrix();
-	glTranslated(50 , 50, 0);
+	glTranslated(50, 40, 0);
 	glBegin(GL_QUADS);
 	glColor4f(1.f, 1.f, 1.f, 0.5);
 	//glColor4f((float)129 / 255, (float)207 / 255, (float)233 / 255, 0.f);
 	glVertex3f(0, 0, 0);
-	glVertex3f(200, 0, 0);
-	glVertex3f(200,200, 0);
-	glVertex3f(0,200, 0);
+	glVertex3f(120, 0, 0);
+	glVertex3f(120, 140, 0);
+	glVertex3f(0, 140, 0);
 	glEnd();
 	glPopMatrix();
 
@@ -1188,14 +1117,14 @@ void S01Main::HUD()
 		//glColor4f((float)129 / 255, (float)207 / 255, (float)233 / 255, 0.f);
 		glColor4f(1.f, 1.f, 1.f, 1);
 		glVertex3f(0, 0, 0);
-		glVertex3f(20, 0 , 0);
-		glVertex3f(20, 20 , 0);
+		glVertex3f(20, 0, 0);
+		glVertex3f(20, 20, 0);
 		glVertex3f(0, 20, 0);
 		glEnd();
 		glPopMatrix();
 	}
 
-	for (int i = 0; i < LightCount; i++) {
+	for (int i = 0; i < LightCount - 1; i++) {
 
 		//정규화를 시켜준다.
 		//sqrt(pow(difference_new_old[0], 2) + pow(difference_new_old[1], 2));
@@ -1203,7 +1132,10 @@ void S01Main::HUD()
 		glPushMatrix();
 		glTranslated(100 + mapLight[i].returnXpos(), 100 + mapLight[i].returnZpos(), mapLight[i].returnYpos() / 100);
 		glBegin(GL_QUADS);
-		glColor3f(1.f, 1.f, 1.f);
+		if (mapLight[i].returnType() == 1)
+			glColor3f(1.f, 0.f, 0.f);
+		else
+			glColor3f(0.f, 0.f, 1.f);
 		//glColor4f((float)129 / 255, (float)207 / 255, (float)233 / 255, 0.f);
 		glVertex3f(0, 0, 0);
 		glVertex3f(10, 0, 0);
@@ -1217,7 +1149,7 @@ void S01Main::HUD()
 	{
 		glTranslated(100 + tmpRect.x, 100 + tmpRect.z, 1);
 		glBegin(GL_QUADS);
-		glColor4f(1.f, 0.f, 0.f, 1);
+		glColor3f((float)129 / 255, (float)207 / 255, (float)233 / 255);
 		//glColor4f((float)129 / 255, (float)207 / 255, (float)233 / 255, 0.f);
 		glVertex3f(0, 0, 0);
 		glVertex3f(10, 0, 0);
@@ -1226,13 +1158,15 @@ void S01Main::HUD()
 		glEnd();
 	}
 	glPopMatrix();
-//	printf("%d \n",mapLight[0].returnYpos());
+	//	printf("%d \n",mapLight[0].returnYpos());
 	glPopMatrix();//그리기 끝
 	glEnable(GL_LIGHT0);
 	glEnable(GL_LIGHT1);
 	glEnable(GL_LIGHT2);
+	glEnable(GL_LIGHT3);
 	//
 	glDisable(GL_BLEND);
+	glPopMatrix();
 }
 
 void S01Main::drawHUD()

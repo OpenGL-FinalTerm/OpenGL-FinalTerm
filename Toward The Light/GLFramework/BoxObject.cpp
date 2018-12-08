@@ -92,3 +92,17 @@ float Box::returnBoxCenterZ() {
 bool Box::returnCheck() {
 	return check;
 }
+
+void Box::catchBoxPos(float inX, float inY, float inZ) {
+	x = inX;
+	y = inY;
+	z = inZ;
+}
+
+void Box::updateCatch(bool check) {
+	catchBox = check;
+}
+
+bool Box::returnCatch() {
+	return catchBox;
+}

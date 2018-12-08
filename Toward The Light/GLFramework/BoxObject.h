@@ -18,6 +18,7 @@ private:
 	float colorG;
 	float colorB;
 
+	bool catchBox = false;
 
 public:
 
@@ -29,6 +30,7 @@ public:
 	virtual void movingX(float inX);
 	virtual void movingY(float inY);
 	virtual void movingZ(float inZ);
+	virtual void catchBoxPos(float inX, float inY, float inZ);
 	virtual void checkUpdate(int c);
 	virtual void addXrate(int adX);
 	virtual void addYrate(int adY);
@@ -39,6 +41,9 @@ public:
 	virtual float returnBoxCenterY();
 	virtual float returnBoxCenterZ();
 	virtual bool returnCheck();
+	virtual void updateCatch(bool check);
+	virtual bool returnCatch();
+
 };
 
 

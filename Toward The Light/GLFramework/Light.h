@@ -37,10 +37,12 @@ public:
 	virtual void settingGray(float first, float second, float third, float fourth);
 	virtual void pickUp(bool check);
 	virtual void throwLightUpdate(bool check);
+	virtual void drawRedColunm();
 
 	virtual float returnXpos();
 	virtual float returnYpos();
 	virtual float returnZpos();
+	virtual int returnType();
 	virtual void insertDestination(float inX, float inY, float inZ);
 	virtual float returnDestinationX();
 	virtual float returnDestinationY();
