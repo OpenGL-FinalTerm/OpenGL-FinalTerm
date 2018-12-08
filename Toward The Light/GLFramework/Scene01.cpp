@@ -401,6 +401,7 @@ void S01Main::motion(bool pressed, int x, int y)
 			difference_normal_pos[1] = difference_new_old[1] / difference_size;
 
 			//step3 nomal add to radian range 360
+
 			result_degree[0] += difference_normal_pos[0];
 			//if(result_degree[1] < 180)
 			result_degree[1] -= difference_normal_pos[1];

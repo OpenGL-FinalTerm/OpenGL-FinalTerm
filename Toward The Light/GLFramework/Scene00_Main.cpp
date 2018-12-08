@@ -36,6 +36,12 @@ void S00Logo::init()
 	LoadMap(objectBox2, tmpRect, 2);
 
 
+	for (int i = 0; i < 2; i++) {
+		for (int j = 0; j < 3; j++) {
+			color[i][j] = 0.8f;
+		}
+	}
+
 }
 
 void S00Logo::exit()
@@ -75,9 +81,46 @@ void S00Logo::render()
 					glVertex3f(-choose_map_box[choose].z, 0, choose_map_box[choose].z);
 					glEnd();
 
+				
 				}
 				glPopMatrix();
 	
+				//버튼 위 미니맵
+				glPushMatrix();
+				{
+				
+					glScaled(0.1, 0.1, 0.1);	
+					glTranslated(-100 + objectBox[i].returnBoxCenterX(),  objectBox[i].returnBoxCenterZ(), objectBox[i].returnBoxCenterY() / 100);
+					//glScaled(10, 10, 0);
+					glColor3f(color[0][0], color[0][1], color[0][2]);
+					glBegin(GL_QUADS);
+					//glColor4f((float)129 / 255, (float)207 / 255, (float)233 / 255, 0.f);
+					glVertex3f(0, 0, 0);
+					glVertex3f(20, 0, 0);
+					glVertex3f(20, 20, 0);
+					glVertex3f(0, 20, 0);
+					glEnd();
+				}
+				glPopMatrix();
+
+				//버튼 위 미니맵
+				glPushMatrix();
+				{
+
+					glScaled(0.1, 0.1, 0.1);
+					glTranslated(100 + objectBox2[i].returnBoxCenterX(), objectBox2[i].returnBoxCenterZ(), objectBox2[i].returnBoxCenterY() / 100);
+					//glScaled(10, 10, 0);
+					glColor3f(color[1][0], color[1][1], color[1][2]);
+					glBegin(GL_QUADS);
+					//glColor4f((float)129 / 255, (float)207 / 255, (float)233 / 255, 0.f);
+					glVertex3f(0, 0, 0);
+					glVertex3f(20, 0, 0);
+					glVertex3f(20, 20, 0);
+					glVertex3f(0, 20, 0);
+					glEnd();
+				}
+				glPopMatrix();
+
 		}
 	//일단 출력할 사각형 출력
 	glPushMatrix();
@@ -93,22 +136,22 @@ void S00Logo::HUD()
 
 	glDisable(GL_CULL_FACE);
 	
-	//첫번째 사각형
-	for (int i = 0; i < 2; i++) {
-		glPushMatrix();
-		glTranslated(choose_map_box[i].x, choose_map_box[i].y, 0);
-		glColor3f(0.f + i, 1.f, 1.f);
+	////첫번째 사각형
+	//for (int i = 0; i < 2; i++) {
+	//	glPushMatrix();
+	//	glTranslated(choose_map_box[i].x, choose_map_box[i].y, 0);
+	//	glColor3f(0.f + i, 1.f, 1.f);
 
-		glBegin(GL_QUADS);
-		glVertex3f(-choose_map_box[i].z / 2, -choose_map_box[i].z / 2, 0);
-		glVertex3f(choose_map_box[i].z / 2, -choose_map_box[i].z / 2, 0);
-		glVertex3f(choose_map_box[i].z / 2, choose_map_box[i].z / 2, 0);
-		glVertex3f(-choose_map_box[i].z / 2, choose_map_box[i].z / 2, 0);
-		glEnd();
+	//	glBegin(GL_QUADS);
+	//	glVertex3f(-choose_map_box[i].z / 2, -choose_map_box[i].z / 2, 0);
+	//	glVertex3f(choose_map_box[i].z / 2, -choose_map_box[i].z / 2, 0);
+	//	glVertex3f(choose_map_box[i].z / 2, choose_map_box[i].z / 2, 0);
+	//	glVertex3f(-choose_map_box[i].z / 2, choose_map_box[i].z / 2, 0);
+	//	glEnd();
 
-		glPopMatrix();
+	//	glPopMatrix();
 
-	}
+	//}
 	//선택
 	if (choose == 0) {
 		print("Map 1", DEF_WIN_WIDTH / 2, DEF_WIN_HEIGHT - 600, 0);
@@ -218,13 +261,36 @@ void S00Logo::motion(bool pressed, int x, int y)
 		if ((choose_map_box[0].x - (choose_map_box[0].z / 2) < select_map.x) && (select_map.x < (choose_map_box[0].x + choose_map_box[0].z / 2))
 			&& (choose_map_box[0].y - (choose_map_box[0].z / 2) < select_map.y) && (select_map.y < (choose_map_box[0].y + choose_map_box[0].z / 2))) {
 			choose = 0;
+		
+			color[0][0] = 1.f;
+			color[0][1] = 1.f;
+			color[0][2] = 1.f;
+
+			color[1][0] = 0.5f;
+			color[1][1] = 0.5f;
+			color[1][2] = 0.5f;
 		}
 		else if ((choose_map_box[1].x - (choose_map_box[1].z / 2) < select_map.x) && (select_map.x < (choose_map_box[1].x + choose_map_box[1].z / 2))
 			&& (choose_map_box[1].y - (choose_map_box[1].z / 2) < select_map.y) && (select_map.y < (choose_map_box[1].y + choose_map_box[1].z / 2))) {
 			choose = 1;
+			color[1][0] = 1.f;
+			color[1][1] = 1.f;
+			color[1][2] = 1.f;
+
+			color[0][0] = 0.5f;
+			color[0][1] = 0.5f;
+			color[0][2] = 0.5f;
+
 		}
 		else {
 			choose = 10;
+			color[0][0] = 0.5f;
+			color[0][1] = 0.5f;
+			color[0][2] = 0.5f;
+
+			color[1][0] = 0.5f;
+			color[1][1] = 0.5f;
+			color[1][2] = 0.5f;
 		}
 //	
 		if (

@@ -51,8 +51,10 @@ private:
 	tmp	tmpRect;
 	int		whatBox;
 
+
 	Vector2 select_map;
 	int choose = 10;
+	float color[2][3];
 	Vector3 choose_map_box[2];
 	//이거 함수로 따로 있나...으악
 	Vector3 Setting_button;
