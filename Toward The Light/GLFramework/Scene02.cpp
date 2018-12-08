@@ -612,7 +612,9 @@ void S02Main::update(float fDeltaTime)
 		bool tmpcheck = false;
 		for (int i = 0; i < whatBox; ++i) {
 			if (objectBox[i].returnCatch() == false) {
-				if (objectBox[i].returnBoxCenterX() - 10 < returnMainX() + 5 && objectBox[i].returnBoxCenterX() + 10 > returnMainX() - 5 && objectBox[i].returnBoxCenterZ() + 10 > returnMainZ() - 5 && objectBox[i].returnBoxCenterZ() - 10 < returnMainZ() + 5 && returnMainY() > objectBox[i].returnBoxCenterY() - 21 && returnMainY() < objectBox[i].returnBoxCenterY() + 16) {
+				if (objectBox[i].returnBoxCenterX() - 10 < returnMainX() + 5 && objectBox[i].returnBoxCenterX() + 10 > returnMainX() - 5 
+					&& objectBox[i].returnBoxCenterZ() + 10 > returnMainZ() - 5 && objectBox[i].returnBoxCenterZ() - 10 < returnMainZ() + 5 
+					&& returnMainY() + 5 > objectBox[i].returnBoxCenterY() - 10 && returnMainY() - 5 < objectBox[i].returnBoxCenterY() + 10) {
 					down = TRUE;
 					jump = FALSE;
 					tmpRect.jumpCount = 0;
@@ -634,7 +636,9 @@ void S02Main::update(float fDeltaTime)
 		bool tmpcheck = false;
 		for (int i = 0; i < whatBox; ++i) {
 			if (objectBox[i].returnCatch() == false) {
-				if (objectBox[i].returnBoxCenterX() - 10 < returnMainX() + 5 && objectBox[i].returnBoxCenterX() + 10 > returnMainX() - 5 && objectBox[i].returnBoxCenterZ() + 10 > returnMainZ() - 5 && objectBox[i].returnBoxCenterZ() - 10 < returnMainZ() + 5 && tmpRect.y < objectBox[i].returnBoxCenterY() + 20) {
+				if (objectBox[i].returnBoxCenterX() - 10 < returnMainX() + 5 && objectBox[i].returnBoxCenterX() + 10 > returnMainX() - 5
+					&& objectBox[i].returnBoxCenterZ() + 10 > returnMainZ() - 5 && objectBox[i].returnBoxCenterZ() - 10 < returnMainZ() + 5
+					&& tmpRect.y - 5< objectBox[i].returnBoxCenterY() + 20 && !(tmpRect.y + 5 < objectBox[i].returnBoxCenterY()) ){
 					down = FALSE;
 					tmpcheck = true;
 
