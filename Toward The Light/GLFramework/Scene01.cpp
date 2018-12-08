@@ -463,7 +463,7 @@ void S01Main::update(float fDeltaTime)
 					tmpRect.jumpCount = 0;
 					tmpRect.y -= 1;
 				}
->>>>>>> parent of d5ae90e... 살린다
+>>>>>>> parent of d5ae90e... ?�린??
 			}
 		}
 
@@ -519,7 +519,7 @@ void S01Main::update(float fDeltaTime)
 							depthCheck = 0;
 							m_Framework->toScene("Ending");
 						}
->>>>>>> parent of d5ae90e... 살린다
+>>>>>>> parent of d5ae90e... ?�린??
 					}
 				}
 				depthCheck = 0;

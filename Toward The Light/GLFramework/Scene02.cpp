@@ -608,7 +608,7 @@ void S02Main::update(float fDeltaTime)
 				if (objectBox[i].returnBoxCenterX() - 10 < returnMainX() + 5 && objectBox[i].returnBoxCenterX() + 10 > returnMainX() - 5 
 					&& objectBox[i].returnBoxCenterZ() + 10 > returnMainZ() - 5 && objectBox[i].returnBoxCenterZ() - 10 < returnMainZ() + 5 
 					&& returnMainY() + 5 > objectBox[i].returnBoxCenterY() - 10 && returnMainY() - 5 < objectBox[i].returnBoxCenterY() + 10) {
->>>>>>> parent of d5ae90e... 살린다
+>>>>>>> parent of d5ae90e... ?�린??
 					down = TRUE;
 					jump = FALSE;
 					tmpRect.jumpCount = 0;
