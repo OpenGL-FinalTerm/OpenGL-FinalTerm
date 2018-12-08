@@ -11,16 +11,18 @@
 
 S02Main::S02Main()
 {
+
 }
 
 S02Main::~S02Main()
 {
+
 }
 
 void S02Main::init()
 {
 	radian = 90;
-
+	glEnable(GL_LIGHTING);
 	//인게임 bgm 재생초기화
 	m_SoundPlayer.init();
 	m_SoundPlayer.selectFolder("Resources\\BGM");
@@ -49,6 +51,7 @@ void S02Main::init()
 		mapLight[i].LightOn(true, i);
 
 	keyW = false;
+	keyS = false;
 	wPress = false;
 	aPress = false;
 	sPress = false;
@@ -94,6 +97,15 @@ void S02Main::exit()
 {
 	m_SoundPlayer.exit();
 	m_walkingSound.exit();
+//	glDisable(GL_LIGHT0);
+//	glDisable(GL_LIGHT1);
+//	glDisable(GL_LIGHT2);
+//	glDisable(GL_LIGHT3);
+////	glDisable(GL_LIGHT4);
+////	glDisable(GL_LIGHT5);
+////	glDisable(GL_LIGHT6);
+//	glDisable(GL_LIGHT7);
+	glDisable(GL_LIGHTING);
 }
 
 void S02Main::reset()
@@ -602,7 +614,7 @@ void S02Main::update(float fDeltaTime)
 		bool tmpcheck = false;
 		for (int i = 0; i < whatBox; ++i) {
 			if (objectBox[i].returnCatch() == false) {
-				if (objectBox[i].returnBoxCenterX() - 10 < returnMainX() + 5 && objectBox[i].returnBoxCenterX() + 10 > returnMainX() - 5 && objectBox[i].returnBoxCenterZ() + 10 > returnMainZ() - 5 && objectBox[i].returnBoxCenterZ() - 10 < returnMainZ() + 5 && returnMainY() > objectBox[i].returnBoxCenterY() - 21 && returnMainY() < objectBox[i].returnBoxCenterY() + 21) {
+				if (objectBox[i].returnBoxCenterX() - 10 < returnMainX() + 5 && objectBox[i].returnBoxCenterX() + 10 > returnMainX() - 5 && objectBox[i].returnBoxCenterZ() + 10 > returnMainZ() - 5 && objectBox[i].returnBoxCenterZ() - 10 < returnMainZ() + 5 && returnMainY() > objectBox[i].returnBoxCenterY() - 21 && returnMainY() < objectBox[i].returnBoxCenterY() + 16) {
 					down = TRUE;
 					jump = FALSE;
 					tmpRect.jumpCount = 0;

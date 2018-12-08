@@ -12,6 +12,7 @@
 #include "BananaSetting.h"
 #include "Character.h"
 #include "camera_working.h"
+#include "LoadBitmap.h"
 /* ------------ */
 
 class S06Start :
