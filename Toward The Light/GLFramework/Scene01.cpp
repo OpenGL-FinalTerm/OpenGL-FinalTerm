@@ -447,11 +447,23 @@ void S01Main::update(float fDeltaTime)
 		tmpRect.jumpCount += 1;
 		bool tmpcheck = false;
 		for (int i = 0; i < whatBox; ++i) {
+<<<<<<< HEAD
 			if (objectBox[i].returnBoxCenterX() - 10 < returnMainX() + 5 && objectBox[i].returnBoxCenterX() + 10 > returnMainX() - 5 && objectBox[i].returnBoxCenterZ() + 10 > returnMainZ() - 5 && objectBox[i].returnBoxCenterZ() - 10 < returnMainZ() + 5 && returnMainY() > objectBox[i].returnBoxCenterY() - 20 && returnMainY() < objectBox[i].returnBoxCenterY() + 20) {
 				down = TRUE;
 				jump = FALSE;
 				tmpRect.jumpCount = 0;
 				tmpRect.y -= 1;
+=======
+			if (objectBox[i].returnCatch() == false) {
+				if (objectBox[i].returnBoxCenterX() - 10 < returnMainX() + 5 && objectBox[i].returnBoxCenterX() + 10 > returnMainX() - 5
+					&& objectBox[i].returnBoxCenterZ() + 10 > returnMainZ() - 5 && objectBox[i].returnBoxCenterZ() - 10 < returnMainZ() + 5
+					&& returnMainY() + 5 > objectBox[i].returnBoxCenterY() - 10 && returnMainY() - 5 < objectBox[i].returnBoxCenterY() + 10) {
+					down = TRUE;
+					jump = FALSE;
+					tmpRect.jumpCount = 0;
+					tmpRect.y -= 1;
+				}
+>>>>>>> parent of d5ae90e... 살린다
 			}
 		}
 
@@ -467,6 +479,7 @@ void S01Main::update(float fDeltaTime)
 	else {
 		bool tmpcheck = false;
 		for (int i = 0; i < whatBox; ++i) {
+<<<<<<< HEAD
 			if (objectBox[i].returnBoxCenterX() - 10 < returnMainX() + 5 && objectBox[i].returnBoxCenterX() + 10 > returnMainX() - 5 && objectBox[i].returnBoxCenterZ() + 10 > returnMainZ() - 5 && objectBox[i].returnBoxCenterZ() - 10 < returnMainZ() + 5 && tmpRect.y < objectBox[i].returnBoxCenterY() + 20) {
 				down = FALSE;
 				tmpcheck = true;
@@ -484,6 +497,29 @@ void S01Main::update(float fDeltaTime)
 						dep = false;
 						depthCheck = 0;
 						m_Framework->toScene("Ending");
+=======
+			if (objectBox[i].returnCatch() == false) {
+				if (objectBox[i].returnBoxCenterX() - 10 < returnMainX() + 5 && objectBox[i].returnBoxCenterX() + 10 > returnMainX() - 5
+					&& objectBox[i].returnBoxCenterZ() + 10 > returnMainZ() - 5 && objectBox[i].returnBoxCenterZ() - 10 < returnMainZ() + 5
+					&& tmpRect.y - 5 < objectBox[i].returnBoxCenterY() + 20 && !(tmpRect.y + 5 < objectBox[i].returnBoxCenterY())) {
+					down = FALSE;
+					tmpcheck = true;
+
+					if (depthCheck >= 60) {
+						if (dep == false) {
+							dep = true;
+							depthCheck = 0;
+						}
+						else {
+							wPress = false;
+							aPress = false;
+							sPress = false;
+							dPress = false;
+							dep = false;
+							depthCheck = 0;
+							m_Framework->toScene("Ending");
+						}
+>>>>>>> parent of d5ae90e... 살린다
 					}
 				}
 				depthCheck = 0;
