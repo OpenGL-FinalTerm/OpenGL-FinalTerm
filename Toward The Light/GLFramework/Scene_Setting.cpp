@@ -33,7 +33,7 @@ void S05Setting::init()
 	//}
 	
 	whatBox = LoadMap(objectBox, tmpRect, 2);
-	LightCount = LoadLight(mapLight, 2);
+	//LightCount = LoadLight(mapLight, 2);
 
 	
 }
