@@ -30,7 +30,7 @@ void S00Logo::reset()
 void S00Logo::render()
 {
 	m_Camera.ready();
-	
+	//이미지 드로우
 	print("Press any key to start", 0, 0, -150);
 }
 

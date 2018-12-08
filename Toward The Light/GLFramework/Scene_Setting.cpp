@@ -6,7 +6,7 @@
 #include "BananaSetting.h"
 #include "Scene_Setting.h"
 
-//코딩 3일차 오프닝 엔딩 카메라까지 전부 구현했다 델몬트 바나나가 먹고싶다
+//날름 포인터 다이스키
 
 S05Setting::S05Setting()
 {
@@ -146,6 +146,7 @@ void S05Setting::keyboard(int key, bool pressed, int x, int y, bool special)
 		case 'd':
 	
 			break;
+		//환경설정 나오기
 		case VK_ESCAPE: m_Framework->toScene("Main"); break;
 		}
 
