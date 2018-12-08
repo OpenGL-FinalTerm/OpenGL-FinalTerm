@@ -1187,8 +1187,8 @@ void S01Main::HUD()
 	//glColor4f((float)129 / 255, (float)207 / 255, (float)233 / 255, 0.f);
 	glVertex3f(0, 0, 0);
 	glVertex3f(200, 0, 0);
-	glVertex3f(200,100, 0);
-	glVertex3f(0, 100, 0);
+	glVertex3f(200,200, 0);
+	glVertex3f(0,200, 0);
 	glEnd();
 	glPopMatrix();
 
@@ -1218,7 +1218,7 @@ void S01Main::HUD()
 		glPushMatrix();
 		glTranslated(100 + mapLight[i].returnXpos(), 100 + mapLight[i].returnZpos(), mapLight[i].returnYpos() / 100);
 		glBegin(GL_QUADS);
-		glColor4f(1.f, 1.f, 1.f, 1.f);
+		glColor3f(1.f, 1.f, 1.f);
 		//glColor4f((float)129 / 255, (float)207 / 255, (float)233 / 255, 0.f);
 		glVertex3f(0, 0, 0);
 		glVertex3f(10, 0, 0);
