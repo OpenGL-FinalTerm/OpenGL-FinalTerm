@@ -1116,7 +1116,7 @@ void S02Main::update(float fDeltaTime)
 			float tmpy;
 			float tmpz;
 
-			tmpx = mapLight[light].returnXpos();
+			tmpx = mapLight[light].returnXpos(); 
 			tmpy = mapLight[light].returnYpos();
 			tmpz = mapLight[light].returnZpos();
 
@@ -1132,7 +1132,7 @@ void S02Main::update(float fDeltaTime)
 			for (int k = 0; k < whatBox; ++k) {
 				if (mapLight[light].returnXpos() >= objectBox[k].returnBoxCenterX() - 15 && mapLight[light].returnXpos() <= objectBox[k].returnBoxCenterX() + 15
 					&& mapLight[light].returnYpos() >= objectBox[k].returnBoxCenterY() - 15 && mapLight[light].returnYpos() <= objectBox[k].returnBoxCenterY() + 15
-					&& mapLight[light].returnZpos() >= objectBox[k].returnBoxCenterZ() - 15 && mapLight[light].returnZpos() <= objectBox[k].returnBoxCenterY() + 15) {
+					&& mapLight[light].returnZpos() >= objectBox[k].returnBoxCenterZ() - 15 && mapLight[light].returnZpos() <= objectBox[k].returnBoxCenterZ() + 15) {
 					mapLight[light].throwLightUpdate(false);
 					mapLight[light].pickUp(false);
 					t = 0;
