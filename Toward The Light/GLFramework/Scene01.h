@@ -98,6 +98,11 @@ private:
 	Light			mapLight[100];
 	Shape			banana;
 	tmp				tmpRect;
+	Vector3			Destination;
+
+	float			t;
+	float			ControlPoint[3];
+	float			startPos[3];
 
 };
 

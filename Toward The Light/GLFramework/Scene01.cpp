@@ -184,7 +184,8 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 	int count = 0;
 	int i = 0;
 	BOOL check = FALSE;
-
+	bool beforePick = false;
+	static int pickCount = 0;
 
 
 	if (pressed)
@@ -258,6 +259,32 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 			}
 			break;
 
+		case 'f':
+		case 'F':
+
+			for (int i = 0; i < LightCount; ++i) {
+				if (mapLight[i].returnPickCheck() == true)
+					beforePick = true;
+			}
+
+			if (pickLightNumber != -1 && beforePick == false) {
+				mapLight[pickLightNumber].pickUp(true);
+				pickLight = true;
+			}
+
+			if (pickLight == true) {
+				if (pickCount % 2 == 1) {
+					mapLight[pickLightNumber].pickUp(false);
+					pickCount = 0;
+					pickLight = false;
+					beforePick = false;
+					pickLightNumber = -1;
+				}
+				else
+					pickCount++;
+			}
+			beforePick = false;
+			break;
 
 		}
 
@@ -349,7 +376,23 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 
 void S01Main::mouse(int button, bool pressed, int x, int y)
 {
+	if (pressed) {
+		if (button == GLUT_LEFT_BUTTON && pickLight == true) {
+			pickLight = false;
+			mapLight[pickLightNumber].throwLightUpdate(true);
+			Destination[0] = At[0];
+			Destination[1] = At[1];
+			Destination[2] = At[2];
 
+			startPos[0] = mapLight[pickLightNumber].returnXpos();
+			startPos[1] = mapLight[pickLightNumber].returnYpos();
+			startPos[2] = mapLight[pickLightNumber].returnZpos();
+
+			ControlPoint[0] = (At[0] - tmpRect.x) / 2;
+			ControlPoint[1] = startPos[1] + 40;
+			ControlPoint[2] = (At[2] - tmpRect.z) / 2;
+		}
+	}
 }
 
 void S01Main::motion(bool pressed, int x, int y)
@@ -763,13 +806,12 @@ void S01Main::update(float fDeltaTime)
 	}
 
 
-	// 조명의 낙하(상자위에 있을때)
 	bool lightLanding = false;
 	for (int light = 0; light < LightCount; ++light) {
-
+		lightLanding = false;
 		i = 0;
 		check = FALSE;
-		if (mapLight[light].returnYpos() - 3 > 0) {
+		if (mapLight[light].returnYpos() - 3 > 0 && mapLight[light].returnPickCheck() == false) {
 
 			while (check == FALSE) {
 				if ((objectBox[i].returnBoxCenterX() - 10 < mapLight[light].returnXpos() + 3 && objectBox[i].returnBoxCenterX() + 10 > mapLight[light].returnXpos() - 3 && objectBox[i].returnBoxCenterZ() + 10 > mapLight[light].returnZpos() - 3 && objectBox[i].returnBoxCenterZ() - 10 < mapLight[light].returnZpos() + 3)) {
@@ -791,6 +833,74 @@ void S01Main::update(float fDeltaTime)
 				mapLight[light].moveY(-1);
 		}
 	}
+
+	//조명을 집기 위한 공간
+
+	for (int light = 0; light < LightCount; ++light) {
+		if (pickLight == false && mapLight[light].returnThrowCheck() == false) {
+			if (mapLight[light].returnXpos() - 10 < tmpRect.x && mapLight[light].returnXpos() + 10 > tmpRect.x
+				&& mapLight[light].returnZpos() - 10 < tmpRect.z && mapLight[light].returnZpos() + 10 > tmpRect.z) {
+				print("press 'E' you can pick up this light", 0, 100, 0);
+				pickLightNumber = light;
+				break;
+			}
+			else
+				pickLightNumber = -1;
+
+		}
+	}
+
+	for (int light = 0; light < LightCount; ++light) {
+		if (mapLight[light].returnPickCheck() == true) {
+			mapLight[light].pickSetPos(tmpRect.x, tmpRect.y + 15, tmpRect.z);
+		}
+	}
+
+	//조명 던지는 공간
+
+	for (int light = 0; light < LightCount; ++light) {
+		if (mapLight[light].returnThrowCheck() == true) {
+			float tmpx;
+			float tmpy;
+			float tmpz;
+
+			tmpx = mapLight[light].returnXpos();
+			tmpy = mapLight[light].returnYpos();
+			tmpz = mapLight[light].returnZpos();
+
+			opening_camera_Eye(&startPos[0], &startPos[1], &startPos[2], &Destination[0], &Destination[1], &Destination[2], &t, startPos[1] + 60, &tmpx, &tmpy, &tmpz);
+			mapLight[light].settingPos(tmpx, tmpy, tmpz);
+			t += 0.01f;
+			if (t >= 1.f) {
+				mapLight[light].throwLightUpdate(false);
+				mapLight[light].pickUp(false);
+				t = 0;
+			}
+
+			for (int k = 0; k < whatBox; ++k) {
+				if (mapLight[light].returnXpos() >= objectBox[k].returnBoxCenterX() - 15 && mapLight[light].returnXpos() <= objectBox[k].returnBoxCenterX() + 15
+					&& mapLight[light].returnYpos() >= objectBox[k].returnBoxCenterY() - 15 && mapLight[light].returnYpos() <= objectBox[k].returnBoxCenterY() + 15
+					&& mapLight[light].returnZpos() >= objectBox[k].returnBoxCenterZ() - 15 && mapLight[light].returnZpos() <= objectBox[k].returnBoxCenterZ() + 15) {
+					mapLight[light].throwLightUpdate(false);
+					mapLight[light].pickUp(false);
+					t = 0;
+				}
+
+				if (mapLight[light].returnXpos() - 3 < -60
+					|| mapLight[light].returnXpos() + 3 > 60
+					|| mapLight[light].returnZpos() - 3 < -70
+					|| mapLight[light].returnZpos() + 3 > 70) {
+					mapLight[light].throwLightUpdate(false);
+					mapLight[light].pickUp(false);
+					t = 0;
+				}
+
+			}
+		}
+	}
+
+
+
 }
 
 
