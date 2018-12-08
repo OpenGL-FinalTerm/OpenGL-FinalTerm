@@ -74,6 +74,15 @@ void S01Main::init()
 void S01Main::exit()
 {
 	m_SoundPlayer.exit();
+	m_walkingSound.exit();
+	glDisable(GL_LIGHT0);
+	glDisable(GL_LIGHT1);
+	glDisable(GL_LIGHT2);
+	glDisable(GL_LIGHT3);
+//	glDisable(GL_LIGHT4);
+//	glDisable(GL_LIGHT5);
+//	glDisable(GL_LIGHT6);
+	glDisable(GL_LIGHT7);
 }
 
 void S01Main::reset()
