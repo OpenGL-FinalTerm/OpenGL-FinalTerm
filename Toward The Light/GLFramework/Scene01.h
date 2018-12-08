@@ -97,11 +97,11 @@ private:
 	NormalObject    m_Sphere;
 	SoundPlayer		m_SoundPlayer;
 	SoundPlayer		m_walkingSound;
-	Box				objectBox[65];
 	Box				mainCharacter;
 	Light			mapLight[100];
 	Shape			banana;
 	tmp				tmpRect;
+	Box				objectBox[65];
 	Vector3			Destination;
 
 	GLuint			texCord;

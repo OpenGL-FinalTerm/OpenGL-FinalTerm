@@ -30,6 +30,12 @@ void S00Logo::init()
 	Setting_bt_color[0] = 0.f;
 	Setting_bt_color[1] = 0.f;
 	Setting_bt_color[2] = 0.5f;
+
+	//사각형 읽어오기
+	LoadMap(objectBox, tmpRect, 1);
+	LoadMap(objectBox2, tmpRect, 2);
+
+
 }
 
 void S00Logo::exit()
@@ -44,12 +50,35 @@ void S00Logo::render()
 {
 	m_Camera.ready();
 	//이미지 드로우
+	//선택된건 확대해서 돌고있다.
+
+		for (int i = 0; i < 65; ++i)
+		{
+				glPushMatrix();
+				{
+					glScalef(0.2, 0.2, 0.2);
+					glTranslated(-300 + (600 * choose), -50, 0);
+					glRotated(degree, 0.1, 1, 0);
+				if (choose == 0) {
+						objectBox[i].drawBox(20);
+				}
+				else if (choose == 1) {
+					objectBox2[i].drawBox(20);
+				}
+
+
+					glTranslated(0, 50, 0);
+					glBegin(GL_QUADS);
+					glVertex3f(-choose_map_box[choose].z, -choose_map_box[choose].z / 2, -choose_map_box[choose].z);
+					glVertex3f(choose_map_box[choose].z, choose_map_box[choose].z / 2, -choose_map_box[choose].z);
+					glVertex3f(choose_map_box[choose].z, choose_map_box[choose].z / 2, choose_map_box[choose].z);
+					glVertex3f(-choose_map_box[choose].z, -choose_map_box[choose].z / 2, choose_map_box[choose].z);
+					glEnd();
+
+				}
+				glPopMatrix();
 	
-	//사각형 출력
-	glPushMatrix();
-
-	glPopMatrix();
-
+		}
 	//일단 출력할 사각형 출력
 	glPushMatrix();
 
@@ -93,23 +122,7 @@ void S00Logo::HUD()
 		print("Setting", DEF_WIN_WIDTH / 2, DEF_WIN_HEIGHT - 600, 0);
 	}
 
-	//선택된건 확대해서 돌고있다.
-	if (choose != 10) {
-		glPushMatrix();
-		glTranslated(choose_map_box[choose].x - 300 + (600 * choose), choose_map_box[choose].y, 0);
-		glRotated(degree, 0, 1, 1);
-		//glTranslated(-(choose_map_box[choose].x - 300 + (600 * choose)), -choose_map_box[choose].y, 0);
-		glColor3f(0.f + choose, 1.f, 1.f);
-
-		glBegin(GL_QUADS);
-		glVertex3f(-choose_map_box[choose].z, -choose_map_box[choose].z, -choose_map_box[choose].z / 2);
-		glVertex3f(choose_map_box[choose].z, -choose_map_box[choose].z, choose_map_box[choose].z / 2);
-		glVertex3f(choose_map_box[choose].z, choose_map_box[choose].z, choose_map_box[choose].z / 2);
-		glVertex3f(-choose_map_box[choose].z, choose_map_box[choose].z,-choose_map_box[choose].z / 2);
-		glEnd();
-
-		glPopMatrix();
-	}
+	
 
 	//셋팅창 선택 버튼
 	glPushMatrix();

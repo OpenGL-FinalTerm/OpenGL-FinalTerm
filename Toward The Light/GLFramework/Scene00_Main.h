@@ -2,10 +2,22 @@
 #include "GLScene.h"
 
 /* UTILITIES */
-#include "Model.h"
+//#include "Model.h"
+//#include "Object.h"
+//#include "Camera.h"
+//#include "BoxObject.h"
+
 #include "Object.h"
+#include "Model.h"
+
+#include "NormalObject.h"
 #include "Camera.h"
+//#include "SoundPlayer.h"
+
 #include "BoxObject.h"
+#include "Character.h"
+#include "LoadMap.h"
+
 /* ------------ */
 
 class S00Logo :
@@ -33,6 +45,11 @@ private:
 	Model	m_Model;
 	Object	m_Title;
 
+	//박스 로딩 함수
+	Box	objectBox[65];
+	Box	objectBox2[65];
+	tmp	tmpRect;
+	int		whatBox;
 
 	Vector2 select_map;
 	int choose = 10;
