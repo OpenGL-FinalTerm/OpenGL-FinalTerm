@@ -10,7 +10,7 @@ void HUD::Begin()
 		glMatrixMode(GL_PROJECTION);
 		glPushMatrix();
 		glLoadIdentity();
-		glOrtho(0, vPort[2], 0, vPort[3], -1, 1);
+		glOrtho(0, vPort[2], 0, vPort[3], -10, 10);
 		glMatrixMode(GL_MODELVIEW);
 		glPushMatrix();
 		glLoadIdentity();
