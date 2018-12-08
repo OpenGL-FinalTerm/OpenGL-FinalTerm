@@ -41,6 +41,14 @@ void S01Main::init()
 	//DefaultBoxPosSetting();
 	whatBox = LoadMap(objectBox, tmpRect, 1);
 	LightCount = LoadLight(mapLight, 1, RedColumn);
+	dep = false;
+	glEnable(GL_LIGHTING);
+	keyW = false;
+	keyS = false;
+	wPress = false;
+	aPress = false;
+	sPress = false;
+	dPress = false;
 
 	m_Camera.setEye(Eye);
 	result_degree[0] = 180;
@@ -75,14 +83,15 @@ void S01Main::exit()
 {
 	m_SoundPlayer.exit();
 	m_walkingSound.exit();
-	glDisable(GL_LIGHT0);
-	glDisable(GL_LIGHT1);
-	glDisable(GL_LIGHT2);
-	glDisable(GL_LIGHT3);
-//	glDisable(GL_LIGHT4);
-//	glDisable(GL_LIGHT5);
-//	glDisable(GL_LIGHT6);
-	glDisable(GL_LIGHT7);
+//	glDisable(GL_LIGHT0);
+//	glDisable(GL_LIGHT1);
+//	glDisable(GL_LIGHT2);
+//	glDisable(GL_LIGHT3);
+////	glDisable(GL_LIGHT4);
+////	glDisable(GL_LIGHT5);
+////	glDisable(GL_LIGHT6);
+//	glDisable(GL_LIGHT7);
+	glDisable(GL_LIGHTING);
 }
 
 void S01Main::reset()

@@ -38,6 +38,17 @@ void S06Start::init()
 	//LightCount = LoadLight(mapLight, 2);
 
 
+	glGenTextures(6, IDtmp);
+	glBindTexture(GL_TEXTURE_2D, IDtmp[0]);
+	pBytes = LoadDIBitmap("toward_that_light_V_logo2.bmp", &info);
+	glTexImage2D(GL_TEXTURE_2D, 0, 3, 1140, 682, 0, GL_BGR_EXT, GL_UNSIGNED_BYTE, pBytes);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+
+
 }
 
 void S06Start::exit()
@@ -193,8 +204,20 @@ void S06Start::HUD()
 {
 	glColor3f(1.f, 1.f, 1.f);
 	glPushMatrix();
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, IDtmp[0]);
+	glBegin(GL_QUADS);
+	glTexCoord2f(0, 1);
+	glVertex2f(0, 0);
+	glTexCoord2f(0, 0);
+	glVertex2f(0, 900);
+	glTexCoord2f(1, 0);
+	glVertex2f(1500, 900);
+	glTexCoord2f(1, 1);
+	glVertex2f(1500, 0);
+	glEnd();
 
-
+	glColor3f(1.f, 1.f, 1.f);
 	print("press 'Space' Game Start", 630, 900 / 2, 0);
 
 	glPopMatrix();
