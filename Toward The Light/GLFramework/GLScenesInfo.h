@@ -8,6 +8,8 @@
 #include "Scene02.h"
 #include "Scene03.h"
 #include "Scene04_Ending.h"
+#include "Scene_Setting.h";
+#include "Scene_Start.h"
 
 struct GLSceneInfo
 {
@@ -23,10 +25,13 @@ const GLSceneInfo SCENES[] =
 	{"1", new S01Main, false},
 	{"2", new S02Main, false},
 	{"3", new S03Main, false},
-	{"Ending", new S04End, false}
+	{"Ending", new S04End, false},
+	{"Setting", new S05Setting, false},
+	{"Start", new S06Start, false}
+
 };
 
 /*~~~STARTING SCENE~~~*/
-const std::string STARTING_SCENE { "Main" };
+const std::string STARTING_SCENE { "Start" };
 
 /*-------------------------------------------------------*/

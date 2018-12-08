@@ -2,18 +2,22 @@
 #include "GLScene.h"
 
 /* UTILITIES */
-#include "Model.h"
+//#include "Model.h"
+//#include "Object.h"
+//#include "Camera.h"
+//#include "BoxObject.h"
+
 #include "Object.h"
-#include "Camera.h"
 #include "Model.h"
+
 #include "NormalObject.h"
 #include "Camera.h"
-#include "SoundPlayer.h"
+//#include "SoundPlayer.h"
+
 #include "BoxObject.h"
-#include "Light.h"
-#include "BananaSetting.h"
 #include "Character.h"
-#include "camera_working.h"
+#include "LoadMap.h"
+
 /* ------------ */
 
 class S00Logo :
@@ -37,26 +41,22 @@ public:
 
 private:
 
-	Camera			m_Camera;
-	Model			m_Model;
-	Object			m_Title;
+	Camera	m_Camera;
+	Model	m_Model;
+	Object	m_Title;
 
-	Box				Map1objectBox[100];
-	Box				Map2objectBox[100];
+	//박스 로딩 함수
+	Box	objectBox[65];
+	Box	objectBox2[65];
+	tmp	tmpRect;
+	int		whatBox;
 
-	tmp				Map1Banana;
-	tmp				Map2Banana;
-
-	Light			Map1RedColumn;
-	Light			Map2RedColumn;
-
-	Light			Map1Light[10];
-	Light			Map2Light[10];
-
-	int				Map1BoxCount;
-	int				Map2BoxCount;
-
-	int				Map1LightCount;
-	int				Map2LightCount;
+	Vector2 select_map;
+	int choose = 10;
+	Vector3 choose_map_box[2];
+	//이거 함수로 따로 있나...으악
+	Vector3 Setting_button;
+	float Setting_bt_color[3];
+	int degree;
 };
 

@@ -6,23 +6,8 @@
 #include "Character.h"
 #include "BananaSetting.h"
 
-// 11/30 오후 7시반 오지않는 바나나 클래스를 
-static int whatBox;
-static int LightCount;
-
-static int angle = 0;
-
-//이동을 위함 임시 변수
-bool go_front;
-bool go_left;
-bool go_right;
-bool go_back;
-
-
 
 //코딩 3일차 오프닝 엔딩 카메라까지 전부 구현했다 델몬트 바나나가 먹고싶다
-
-#define d_Sensitivity  3 //감도 how many rotate camera
 
 S01Main::S01Main()
 {
@@ -51,7 +36,7 @@ void S01Main::init()
 	tmpRect.z = 60;
 	tmpRect.y = 10;
 
-	
+	////-----------------------------------------------------------
 	//LightSetting();
 	//DefaultBoxPosSetting();
 	whatBox = LoadMap(objectBox, tmpRect, 1);
