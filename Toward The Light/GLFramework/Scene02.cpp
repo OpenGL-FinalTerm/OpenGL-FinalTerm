@@ -370,25 +370,29 @@ void S02Main::keyboard(int key, bool pressed, int x, int y, bool special)
 					}
 				}
 				else if ((result_degree[0] >= 315 && result_degree[0] < 360) || (result_degree[0] >= 0 && result_degree[0] < 45)) {  // 뒤에있는거 sPress
-					if (objectBox[i].returnBoxCenterX() - 10 < tmpRect.x + 5 && objectBox[i].returnBoxCenterX() + 10 > tmpRect.x - 5
-						&& objectBox[i].returnBoxCenterZ() + 10 > tmpRect.z - 5 + 20 && objectBox[i].returnBoxCenterZ() - 10 < tmpRect.z + 5 + 20
-						&& objectBox[i].returnBoxCenterY() - 10 < tmpRect.y + 5 && objectBox[i].returnBoxCenterY() + 10 > tmpRect.y - 5) {
-						catchBox = true;
-						boxIndex = i;
-						objectBox[i].updateCatch(true);
-						objectBox[i].catchBoxPos(tmpRect.x, tmpRect.y + 20, tmpRect.z);
-						break;
+					for (int i = 0; i < whatBox; ++i) {
+						if (objectBox[i].returnBoxCenterX() - 10 < tmpRect.x + 5 && objectBox[i].returnBoxCenterX() + 10 > tmpRect.x - 5
+							&& objectBox[i].returnBoxCenterZ() + 10 > tmpRect.z - 5 + 20 && objectBox[i].returnBoxCenterZ() - 10 < tmpRect.z + 5 + 20
+							&& objectBox[i].returnBoxCenterY() - 10 < tmpRect.y + 5 && objectBox[i].returnBoxCenterY() + 10 > tmpRect.y - 5) {
+							catchBox = true;
+							boxIndex = i;
+							objectBox[i].updateCatch(true);
+							objectBox[i].catchBoxPos(tmpRect.x, tmpRect.y + 20, tmpRect.z);
+							break;
+						}
 					}
 				}
 				else if (result_degree[0] >= 45 && result_degree[0] < 135) {  // 오른쪽에 있는거 dPress
-					if (objectBox[i].returnBoxCenterX() - 10 < tmpRect.x + 5 + 20 && objectBox[i].returnBoxCenterX() + 10 > tmpRect.x - 5 + 20
-						&& objectBox[i].returnBoxCenterZ() + 10 > tmpRect.z - 5 && objectBox[i].returnBoxCenterZ() - 10 < tmpRect.z + 5
-						&& objectBox[i].returnBoxCenterY() - 10 < tmpRect.y + 5 && objectBox[i].returnBoxCenterY() + 10 > tmpRect.y - 5) {
-						catchBox = true;
-						boxIndex = i;
-						objectBox[i].updateCatch(true);
-						objectBox[i].catchBoxPos(tmpRect.x, tmpRect.y + 20, tmpRect.z);
-						break;
+					for (int i = 0; i < whatBox; ++i) {
+						if (objectBox[i].returnBoxCenterX() - 10 < tmpRect.x + 5 + 20 && objectBox[i].returnBoxCenterX() + 10 > tmpRect.x - 5 + 20
+							&& objectBox[i].returnBoxCenterZ() + 10 > tmpRect.z - 5 && objectBox[i].returnBoxCenterZ() - 10 < tmpRect.z + 5
+							&& objectBox[i].returnBoxCenterY() - 10 < tmpRect.y + 5 && objectBox[i].returnBoxCenterY() + 10 > tmpRect.y - 5) {
+							catchBox = true;
+							boxIndex = i;
+							objectBox[i].updateCatch(true);
+							objectBox[i].catchBoxPos(tmpRect.x, tmpRect.y + 20, tmpRect.z);
+							break;
+						}
 					}
 				}
 			}
@@ -504,13 +508,13 @@ void S02Main::mouse(int button, bool pressed, int x, int y)
 			catchBox = false;
 			objectBox[boxIndex].updateCatch(false);
 			if (result_degree[0] >= 135 && result_degree[0] < 225)
-				objectBox[boxIndex].catchBoxPos(tmpRect.x, tmpRect.y + 50, tmpRect.z - 22);
+				objectBox[boxIndex].catchBoxPos(tmpRect.x, tmpRect.y + 50, tmpRect.z - 20);
 			else if (result_degree[0] >= 225 && result_degree[0] < 315)
-				objectBox[boxIndex].catchBoxPos(tmpRect.x - 22, tmpRect.y + 50, tmpRect.z);
+				objectBox[boxIndex].catchBoxPos(tmpRect.x - 20, tmpRect.y + 50, tmpRect.z);
 			else if (result_degree[0] >= 315 || result_degree[0] < 45)
-				objectBox[boxIndex].catchBoxPos(tmpRect.x, tmpRect.y + 50, tmpRect.z + 22);
+				objectBox[boxIndex].catchBoxPos(tmpRect.x, tmpRect.y + 50, tmpRect.z + 20);
 			else if (result_degree[0] >= 45 && result_degree[0] < 135)
-				objectBox[boxIndex].catchBoxPos(tmpRect.x + 22, tmpRect.y + 50, tmpRect.z);
+				objectBox[boxIndex].catchBoxPos(tmpRect.x + 20, tmpRect.y + 50, tmpRect.z);
 		}
 	}
 }
@@ -598,7 +602,7 @@ void S02Main::update(float fDeltaTime)
 		bool tmpcheck = false;
 		for (int i = 0; i < whatBox; ++i) {
 			if (objectBox[i].returnCatch() == false) {
-				if (objectBox[i].returnBoxCenterX() - 10 < returnMainX() + 5 && objectBox[i].returnBoxCenterX() + 10 > returnMainX() - 5 && objectBox[i].returnBoxCenterZ() + 10 > returnMainZ() - 5 && objectBox[i].returnBoxCenterZ() - 10 < returnMainZ() + 5 && returnMainY() > objectBox[i].returnBoxCenterY() - 20 && returnMainY() < objectBox[i].returnBoxCenterY() + 20) {
+				if (objectBox[i].returnBoxCenterX() - 10 < returnMainX() + 5 && objectBox[i].returnBoxCenterX() + 10 > returnMainX() - 5 && objectBox[i].returnBoxCenterZ() + 10 > returnMainZ() - 5 && objectBox[i].returnBoxCenterZ() - 10 < returnMainZ() + 5 && returnMainY() > objectBox[i].returnBoxCenterY() - 21 && returnMainY() < objectBox[i].returnBoxCenterY() + 21) {
 					down = TRUE;
 					jump = FALSE;
 					tmpRect.jumpCount = 0;
