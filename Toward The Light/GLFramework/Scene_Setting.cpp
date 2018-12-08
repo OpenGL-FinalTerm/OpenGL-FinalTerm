@@ -38,9 +38,12 @@ void S05Setting::init()
 	Exit_button.y = DEF_WIN_HEIGHT - 200;
 	Exit_button_size.x = 200;
 	Exit_button_size.y = 50;
-	for (int i = 0; i < 3; ++i) {
-		scroll_bar[i].x = 700;
-		scroll_bar[i].y = DEF_WIN_HEIGHT  - 400 - 200 * i;
+	for (int i = 0; i < scroll_num; ++i) {
+		if( i >= 2)
+			scroll_bar[i].x = 700 + 400;
+		else
+			scroll_bar[i].x = 700;
+		scroll_bar[i].y = DEF_WIN_HEIGHT  - (i%2)*100 - 200;
 		scroll_bar_size[i].x = 200;
 		scroll_bar_size[i].y = 10;
 
@@ -139,7 +142,7 @@ void S05Setting::mouse(int button, bool pressed, int x, int y)
 		if (button == GLUT_LEFT_BUTTON && Exit_button_b == TRUE) {
 			m_Framework->toScene("Main");
 		}
-		for (int i = 0; i < 3; ++i) {
+		for (int i = 0; i < scroll_num; ++i) {
 			if (button == GLUT_LEFT_BUTTON) {
 				if (
 					(((scroll_bt[i].x + scroll_bar[i].x - (scroll_bt_size[i].x)) < select_map.x) && (select_map.x < ((scroll_bt[i].x + scroll_bar[i].x + (scroll_bt_size[i].x)))) &&
@@ -173,7 +176,7 @@ void S05Setting::motion(bool pressed, int x, int y)
 		Exit_button_b = false;
 	}
 	//胶农费官
-	for (int i = 0; i < 3; ++i) {
+	for (int i = 0; i < scroll_num; ++i) {
 		if (scroll_bt_b[i] && pressed == true) {
 			if ((-scroll_bar_size[i].x / 2 <= scroll_bt[i].x) && (scroll_bt[i].x <= scroll_bar_size[i].x / 2))
 			{
@@ -264,7 +267,7 @@ void S05Setting::HUD()
 
 	//胶农费 官
 	//胶农费官 巩备
-	for (int i = 0; i < 3; ++i) {
+	for (int i = 0; i < scroll_num; ++i) {
 		glColor3f(1, 0, 0);
 		print("Scroll", scroll_bar[i].x - scroll_bar_size[i].x, scroll_bar[i].y, 0);
 		glPushMatrix();

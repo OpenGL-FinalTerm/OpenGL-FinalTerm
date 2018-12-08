@@ -113,20 +113,21 @@ private:
 
 	Vector2 select_map;
 
+	#define scroll_num 4
 	//Exit button
 	Vector3			Exit_button;
 	Vector3			Exit_button_size;
 	bool Exit_button_b;
 	//胶农费 包访等 窃荐
-	Vector3 scroll_bar[3];
-	Vector3 scroll_bar_size[3];
+	Vector3 scroll_bar[scroll_num];
+	Vector3 scroll_bar_size[scroll_num];
 
-	Vector3 scroll_bt[3];
-	Vector3 scroll_bt_size[3];
-	bool scroll_bt_b[3];
-	bool scroll_motion_b[3];
+	Vector3 scroll_bt[scroll_num];
+	Vector3 scroll_bt_size[scroll_num];
+	bool scroll_bt_b[scroll_num];
+	bool scroll_motion_b[scroll_num];
 	Vector3 old_mouse_pos;
-	float scroll_result[3];
+	float scroll_result[scroll_num];
 
 
 	float			t;
