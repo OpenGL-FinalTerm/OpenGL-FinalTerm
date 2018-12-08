@@ -1130,18 +1130,18 @@ void S02Main::update(float fDeltaTime)
 			}
 
 			for (int k = 0; k < whatBox; ++k) {
-				if (mapLight[light].returnXpos() - 3 >= objectBox[k].returnBoxCenterX() - 10 && mapLight[light].returnXpos() + 3 <= objectBox[k].returnBoxCenterX() + 10
-					&& mapLight[light].returnYpos() - 3 >= objectBox[k].returnBoxCenterY() - 10 && mapLight[light].returnYpos() + 3 <= objectBox[k].returnBoxCenterY() + 10
-					&& mapLight[light].returnZpos() - 3 >= objectBox[k].returnBoxCenterZ() - 10 && mapLight[light].returnZpos() + 3 <= objectBox[k].returnBoxCenterY() + 10) {
+				if (mapLight[light].returnXpos() >= objectBox[k].returnBoxCenterX() - 15 && mapLight[light].returnXpos() <= objectBox[k].returnBoxCenterX() + 15
+					&& mapLight[light].returnYpos() >= objectBox[k].returnBoxCenterY() - 15 && mapLight[light].returnYpos() <= objectBox[k].returnBoxCenterY() + 15
+					&& mapLight[light].returnZpos() >= objectBox[k].returnBoxCenterZ() - 15 && mapLight[light].returnZpos() <= objectBox[k].returnBoxCenterY() + 15) {
 					mapLight[light].throwLightUpdate(false);
 					mapLight[light].pickUp(false);
 					t = 0;
 				}
 
-				if (mapLight[light].returnXpos() - 3 <= -60
-					|| mapLight[light].returnXpos() + 3 >= 60
-					|| mapLight[light].returnZpos() - 3 <= -70
-					|| mapLight[light].returnZpos() + 3 >= 70) {
+				if (mapLight[light].returnXpos() - 3 < -60
+					|| mapLight[light].returnXpos() + 3 > 60
+					|| mapLight[light].returnZpos() - 3 < -70
+					|| mapLight[light].returnZpos() + 3 > 70) {
 					mapLight[light].throwLightUpdate(false);
 					mapLight[light].pickUp(false);
 					t = 0;
