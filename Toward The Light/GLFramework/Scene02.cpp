@@ -24,6 +24,7 @@ void S02Main::init()
 	//인게임 bgm 재생초기화
 	m_SoundPlayer.init();
 	m_SoundPlayer.selectFolder("Resources\\BGM");
+	//m_SoundPlayer.play();
 
 	//걷기 효과음 재생 초기화
 	m_walkingSound.init();
@@ -128,6 +129,7 @@ float S02Main::returnMainZ()
 
 void S02Main::render()
 {
+	m_SoundPlayer.play();
 	glPushMatrix();
 	m_Camera.ready();
 	glColor3f(1.0f, 1.0f, 1.0f);
