@@ -159,6 +159,8 @@ void S01Main::render()
 	m_Camera.setEye(Eye);
 	m_Camera.setTarget(At);
 
+	drawHUD();
+
 	glPopMatrix();
 }
 
@@ -193,26 +195,54 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 		switch (key)
 		{
 		case 'w':
-			//위로 이동
-			go_front = true;
+			keyW = true;
+			/*	if (result_degree[0] > 90 && result_degree[0] < 180) {
+					aPress = false;
+					sPress = false;
+					wPress = true;
+					dPress = true;
+				}
 
+				else if (result_degree[0] > 180 && result_degree[0] < 270) {
+					sPress = false;
+					dPress = false;
+					wPress = true;
+					aPress = true;
+				}
+				else if (result_degree[0] > 270 && result_degree[0] < 360) {
+					wPress = false;
+					dPress = false;
+					sPress = true;
+					aPress = true;
+				}
+				else if (result_degree[0] > 0 && result_degree[0] < 90) {
+					wPress = false;
+					aPress = false;
+					sPress = true;
+					dPress = true;
+				}
+	*/
+			keyDown = true;
 			break;
 
 		case 'a':
-			//왼쪽 이동
-			go_left = true;
-
+			keyA = true;
+			//aPress = true;
+			////camera_deree[0] = Eye.x * cos(radian * 3.14) + Eye.z * -sin(radian * 3.14);
+			////camera_deree[2] = Eye.x * sin(radian * 3.14) + Eye.z * cos(radian * 3.14);
+			//keyDown = true;
 			break;
 
 		case 's':
-			//뒤로 이동
-			go_back = true;
+			keyS = true;
+			//sPress = true;
+			//keyDown = true;
 			break;
 
 		case 'd':
-			//우측 이동
-			go_right = true;
-			
+			keyD = true;
+			//dPress = true;
+			//keyDown = true;
 			break;
 
 		case ' ':
@@ -290,85 +320,49 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 
 	}
 	else {
-		if (key == 'w') {
-			if (wPress == true)
-				wPress = false;
-			if (aPress == true)
-				aPress = false;
-			if (sPress == true)
-				sPress = false;
-			if (dPress == true)
-				dPress = false;
-			
-			//위치
-			if (go_front)
-				go_front = false;
-			if (go_left)
-				go_left = false;
-			if (go_right)
-				go_right = false;
-			if (go_back)
-				go_back = false;
-		}
-		else if (key == 'a') {
-			if (wPress == true)
-				wPress = false;
-			if (aPress == true)
-				aPress = false;
-			if (sPress == true)
-				sPress = false;
-			if (dPress == true)
-				dPress = false;
-
-			//위치
-			if (go_front)
-				go_front = false;
-			if (go_left)
-				go_left = false;
-			if (go_right)
-				go_right = false;
-			if (go_back)
-				go_back = false;
-		}
-		else if (key == 's') {
-			if (wPress == true)
-				wPress = false;
-			if (aPress == true)
-				aPress = false;
-			if (sPress == true)
-				sPress = false;
-			if (dPress == true)
-				dPress = false;
-
-			//위치
-			if (go_front)
-				go_front = false;
-			if (go_left)
-				go_left = false;
-			if (go_right)
-				go_right = false;
-			if (go_back)
-				go_back = false;
-		}
-		else if (key == 'd') {
-			if (wPress == true)
-				wPress = false;
-			if (aPress == true)
-				aPress = false;
-			if (sPress == true)
-				sPress = false;
-			if (dPress == true)
-				dPress = false;
-
-			//위치
-			if (go_front)
-				go_front = false;
-			if (go_left)
-				go_left = false;
-			if (go_right)
-				go_right = false;
-			if (go_back)
-				go_back = false;
+	if (key == 'w') {
+		keyW = false;
+		if (wPress == true)
+			wPress = false;
+		else if (aPress == true)
+			aPress = false;
+		else if (sPress == true)
+			sPress = false;
+		else if (dPress == true)
+			dPress = false;
+	}
+	else if (key == 'a') {
+		keyA = false;
+		if (wPress == true)
+			wPress = false;
+		else if (aPress == true)
+			aPress = false;
+		else if (sPress == true)
+			sPress = false;
+		else if (dPress == true)
+			dPress = false;
+	}
+	else if (key == 's') {
+		keyS = false;
+		if (wPress == true)
+			wPress = false;
+		else if (aPress == true)
+			aPress = false;
+		else if (sPress == true)
+			sPress = false;
+		else if (dPress == true)
+			dPress = false;
+	}
+	else if (key == 'd') {
+		keyD = false;
+		if (wPress == true)
+			wPress = false;
+		else if (aPress == true)
+			aPress = false;
+		else if (sPress == true)
+			sPress = false;
+		else if (dPress == true)
+			dPress = false;
 		}
 	}
 
@@ -447,32 +441,11 @@ void S01Main::motion(bool pressed, int x, int y)
 
 void S01Main::update(float fDeltaTime)
 {
-	__t += 1;
 	//camera at --> player going foward pos update
-	// banana pos add
-	
-	//캐릭터 이동
-	if (go_back) {
-
-		tmpRect.x -= (sin((result_degree[0]) * 3.141592 / 180));
-		tmpRect.z -= (cos((result_degree[0]) * 3.141592 / 180));
-
-	}
-	if (go_front) {
-		tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
-		tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
-	}
-	if (go_left) {
-
-		tmpRect.x += (sin((result_degree[0] + 90) * 3.141592 / 180));
-		tmpRect.z += (cos((result_degree[0] + 90) * 3.141592 / 180));
-	}
-	if (go_right) {
-
-		tmpRect.x += (sin((result_degree[0] - 90) * 3.141592 / 180));
-		tmpRect.z += (cos((result_degree[0] - 90) * 3.141592 / 180));
-	}
-
+// banana pos add
+	__t += 1;
+	foward_move.x = (sin(result_degree[0] * 3.141592 / 180));
+	foward_move.z = (cos(result_degree[0] * 3.141592 / 180));
 
 	int saveBoxIndex[100];
 	Time_count++;
@@ -485,6 +458,18 @@ void S01Main::update(float fDeltaTime)
 	if (jump == TRUE && down == FALSE) {
 		tmpRect.y += 1;
 		tmpRect.jumpCount += 1;
+		bool tmpcheck = false;
+		for (int i = 0; i < whatBox; ++i) {
+			if (objectBox[i].returnBoxCenterX() - 10 < returnMainX() + 5 && objectBox[i].returnBoxCenterX() + 10 > returnMainX() - 5 && objectBox[i].returnBoxCenterZ() + 10 > returnMainZ() - 5 && objectBox[i].returnBoxCenterZ() - 10 < returnMainZ() + 5 && returnMainY() > objectBox[i].returnBoxCenterY() - 20 && returnMainY() < objectBox[i].returnBoxCenterY() + 20) {
+				down = TRUE;
+				jump = FALSE;
+				tmpRect.jumpCount = 0;
+				tmpRect.y -= 1;
+			}
+		}
+
+		tmpcheck = false;
+
 		if (tmpRect.jumpCount > 30) {
 			jump = FALSE;
 			tmpRect.jumpCount = 0;
@@ -498,21 +483,205 @@ void S01Main::update(float fDeltaTime)
 			if (objectBox[i].returnBoxCenterX() - 10 < returnMainX() + 5 && objectBox[i].returnBoxCenterX() + 10 > returnMainX() - 5 && objectBox[i].returnBoxCenterZ() + 10 > returnMainZ() - 5 && objectBox[i].returnBoxCenterZ() - 10 < returnMainZ() + 5 && tmpRect.y < objectBox[i].returnBoxCenterY() + 20) {
 				down = FALSE;
 				tmpcheck = true;
+
+				if (depthCheck >= 60) {
+					if (dep == false) {
+						dep = true;
+						depthCheck = 0;
+					}
+					else {
+						wPress = false;
+						aPress = false;
+						sPress = false;
+						dPress = false;
+						dep = false;
+						depthCheck = 0;
+						m_Framework->toScene("Ending");
+					}
+				}
+				depthCheck = 0;
 			}
 		}
 
 		if (tmpRect.y > 10 && tmpcheck == false) {
 			tmpRect.y -= 1;
+			depthCheck++;
 		}
 
-		if (tmpRect.y <= 10 && tmpcheck == false)
+		if (tmpRect.y <= 10 && tmpcheck == false) {
 			down = FALSE;
+			if (depthCheck >= 60) {
+				if (dep == false) {
+					dep = true;
+					depthCheck = 0;
+				}
+				else {
+					wPress = false;
+					aPress = false;
+					sPress = false;
+					dPress = false;
+					dep = false;
+					depthCheck = 0;
+					m_Framework->toScene("Ending");
+				}
+			}
+			depthCheck = 0;
+		}
 
 		tmpcheck = false;
 	}
+	//printf("%f \n", result_degree[0]);
+	if (keyW == true) {
+		if (result_degree[0] >= 90 && result_degree[0] < 180) {
+			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
+			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
+			aPress = false;
+			sPress = false;
+			wPress = true;
+			dPress = true;
+		}
+
+		else if (result_degree[0] >= 180 && result_degree[0] < 270) {
+			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
+			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
+			sPress = false;
+			dPress = false;
+			wPress = true;
+			aPress = true;
+		}
+		else if (result_degree[0] >= 270 && result_degree[0] < 360) {
+			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
+			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
+			wPress = false;
+			dPress = false;
+			sPress = true;
+			aPress = true;
+		}
+		else if (result_degree[0] >= 0 && result_degree[0] < 90) {
+			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
+			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
+			wPress = false;
+			aPress = false;
+			sPress = true;
+			dPress = true;
+		}
+	}
+
+	if (keyA == true) {
+		if (result_degree[0] >= 90 && result_degree[0] < 180) {
+			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
+			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
+			dPress = false;
+			sPress = false;
+			wPress = true;
+			aPress = true;
+		}
+
+		else if (result_degree[0] >= 180 && result_degree[0] < 270) {
+			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
+			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
+			wPress = false;
+			dPress = false;
+			sPress = true;
+			aPress = true;
+		}
+		else if (result_degree[0] >= 270 && result_degree[0] < 360) {
+			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
+			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
+			wPress = false;
+			aPress = false;
+			sPress = true;
+			dPress = true;
+		}
+		else if (result_degree[0] >= 0 && result_degree[0] < 90) {
+			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
+			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
+			wPress = false;
+			aPress = false;
+			wPress = true;
+			dPress = true;
+		}
+	}
 
 
+	if (keyS == true) {
+		if (result_degree[0] >= 90 && result_degree[0] < 180) {
+			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
+			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
+			aPress = false;
+			sPress = false;
+			wPress = true;
+			dPress = true;
+		}
 
+		else if (result_degree[0] >= 180 && result_degree[0] < 270) {
+			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
+			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
+			sPress = false;
+			dPress = false;
+			wPress = true;
+			aPress = true;
+		}
+		else if (result_degree[0] >= 270 && result_degree[0] < 360) {
+			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
+			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
+			wPress = false;
+			dPress = false;
+			sPress = true;
+			aPress = true;
+		}
+		else if (result_degree[0] >= 0 && result_degree[0] < 90) {
+			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
+			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
+			wPress = false;
+			aPress = false;
+			sPress = true;
+			dPress = true;
+		}
+	}
+
+	if (keyD == true) {
+		if (result_degree[0] >= 90 && result_degree[0] < 180) {
+			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
+			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
+			aPress = false;
+			sPress = false;
+			wPress = true;
+			dPress = true;
+		}
+
+		else if (result_degree[0] >= 180 && result_degree[0] < 270) {
+			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
+			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
+			sPress = false;
+			dPress = false;
+			wPress = true;
+			aPress = true;
+		}
+		else if (result_degree[0] >= 270 && result_degree[0] < 360) {
+			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
+			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
+			wPress = false;
+			dPress = false;
+			sPress = true;
+			aPress = true;
+		}
+		else if (result_degree[0] >= 0 && result_degree[0] < 90) {
+			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
+			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
+			wPress = false;
+			aPress = false;
+			sPress = true;
+			dPress = true;
+		}
+	}
+
+	if (keyW == false && keyA == false && keyS == false && keyD == false) {
+		wPress = false;
+		aPress = false;
+		sPress = false;
+		dPress = false;
+	}
 	// 캐릭도 연속 이동
 	bool check = false;
 	int cycle = 0;
@@ -545,23 +714,34 @@ void S01Main::update(float fDeltaTime)
 
 			}
 
-			if (boxLanding != true)
+			if (boxLanding != true) {
 				objectBox[k].movingY(-1);
+				if (objectBox[k].returnBoxCenterX() - 10 < returnMainX() + 5 && objectBox[k].returnBoxCenterX() + 10 > returnMainX() - 5 && objectBox[k].returnBoxCenterZ() + 10 > returnMainZ() - 5 && objectBox[k].returnBoxCenterZ() - 10 < returnMainZ() + 5 && returnMainY() > objectBox[k].returnBoxCenterY() - 20 && returnMainY() < objectBox[k].returnBoxCenterY() + 20) {
+					m_Camera.init();
+					wPress = false;
+					aPress = false;
+					sPress = false;
+					dPress = false;
+					m_Framework->toScene("Ending");
+				}
+			}
 		}
 
 	}
 
 	check = FALSE;
 	if (wPress == true) {
-
-
+		cycle = 0;
+		count = 0;
+		boxCheckCount = 0;
+		i = 0;
 		angle = 180;
-		mainCharacter.movingZ(-1);
-
+		mainCharacter.movingZ(foward_move.z);
+		tmpRect.z += foward_move.z;
 		boxCheckCount = 0;
 		while (check == FALSE) {
 
-			if (returnMainZ() - 5 <= objectBox[i].returnBoxCenterZ() + 10 && !(returnMainZ() + 5 <= objectBox[i].returnBoxCenterZ() - 10)) {
+			if (returnMainZ() - 6 <= objectBox[i].returnBoxCenterZ() + 10 && !(returnMainZ() + 6 <= objectBox[i].returnBoxCenterZ() - 10)) {
 				if (objectBox[i].returnBoxCenterX() - 10 < returnMainX() + 5 && objectBox[i].returnBoxCenterX() + 10 > returnMainX() - 5 && objectBox[i].returnBoxCenterY() + 10 > returnMainY() - 5 && objectBox[i].returnBoxCenterY() - 10 < returnMainY() + 5) {
 					if (objectBox[i].returnCheck() == 0) {
 						tmpRect.zRate -= 20;
@@ -594,15 +774,19 @@ void S01Main::update(float fDeltaTime)
 
 		}
 
-		if (boxCheckCount < 3) {
-			for (int o = 0; o < boxCheckCount; ++o)
-				objectBox[saveBoxIndex[o]].movingZ((cos(result_degree[0] * 3.141592 / 180)));
+		if (returnMainZ() > -60) {
+			if (m_walkingSound.playing() == false)
+				m_walkingSound.play();
+			if (boxCheckCount < 3) {
+				for (int o = 0; o < boxCheckCount; ++o)
+					objectBox[saveBoxIndex[o]].movingZ(foward_move.z);
+			}
+			else
+				tmpRect.z -= foward_move.z;
 		}
 		else
-		{
-			tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
+			tmpRect.z -= foward_move.z;
 
-		}
 
 		for (int k = 0; k < whatBox; ++k)
 			objectBox[k].checkUpdate(0);
@@ -617,14 +801,17 @@ void S01Main::update(float fDeltaTime)
 	}
 
 	if (aPress == true) {
-
-	
+		cycle = 0;
+		count = 0;
+		boxCheckCount = 0;
+		i = 0;
 		angle = 270;
-		mainCharacter.movingX(-(sin((result_degree[0] + 90) * 3.141592 / 180)));
+		tmpRect.x += foward_move.x;
+		mainCharacter.movingX(foward_move.x);
 		boxCheckCount = 0;
 		while (check == FALSE) {
 
-			if (returnMainX() - 5 <= objectBox[i].returnBoxCenterX() + 10 && !(returnMainX() + 5 <= objectBox[i].returnBoxCenterX() - 10)) {
+			if (returnMainX() - 6 <= objectBox[i].returnBoxCenterX() + 10 && !(returnMainX() + 6 <= objectBox[i].returnBoxCenterX() - 10)) {
 				if (objectBox[i].returnBoxCenterZ() - 10 < returnMainZ() + 5 && objectBox[i].returnBoxCenterZ() + 10 > returnMainZ() - 5 && objectBox[i].returnBoxCenterY() + 10 > returnMainY() - 5 && objectBox[i].returnBoxCenterY() - 10 < returnMainY() + 5) {
 					if (objectBox[i].returnCheck() == 0) {
 						tmpRect.xRate -= 20;
@@ -662,14 +849,19 @@ void S01Main::update(float fDeltaTime)
 		for (int k = 0; k < whatBox; ++k)
 			objectBox[k].checkUpdate(0);
 
-		if (boxCheckCount < 3) {
-			for (int o = 0; o < boxCheckCount; ++o)
-				objectBox[saveBoxIndex[o]].movingX(-(sin((result_degree[0] + 90) * 3.141592 / 180)));
+		if (returnMainX() > -55) {
+			if (m_walkingSound.playing() == false)
+				m_walkingSound.play();
+			if (boxCheckCount < 3) {
+				for (int o = 0; o < boxCheckCount; ++o)
+					objectBox[saveBoxIndex[o]].movingX(foward_move.x);
+			}
+
+			else
+				tmpRect.x -= foward_move.x;
 		}
 		else
-		{
-			tmpRect.x += (sin((result_degree[0] + 90) * 3.141592 / 180));
-		}
+			tmpRect.x -= foward_move.x;
 
 		boxCheckCount = 0;
 		check = FALSE;
@@ -680,13 +872,17 @@ void S01Main::update(float fDeltaTime)
 	}
 
 	if (sPress == true) {
-
+		cycle = 0;
+		count = 0;
+		boxCheckCount = 0;
+		i = 0;
 		angle = 180;
-		mainCharacter.movingZ((cos((result_degree[0]) * 3.141592 / 180)));
+		tmpRect.z += foward_move.z;
+		mainCharacter.movingZ(foward_move.z);
 		boxCheckCount = 0;
 		while (check == FALSE) {
 
-			if (returnMainZ() - 5 <= objectBox[i].returnBoxCenterZ() + 10 && !(returnMainZ() + 5 <= objectBox[i].returnBoxCenterZ() - 10)) {
+			if (returnMainZ() - 6 <= objectBox[i].returnBoxCenterZ() + 10 && !(returnMainZ() + 6 <= objectBox[i].returnBoxCenterZ() - 10)) {
 				if (objectBox[i].returnBoxCenterX() - 10 < returnMainX() + 5 && objectBox[i].returnBoxCenterX() + 10 > returnMainX() - 5 && objectBox[i].returnBoxCenterY() + 10 > returnMainY() - 5 && objectBox[i].returnBoxCenterY() - 10 < returnMainY() + 5) {
 					if (objectBox[i].returnCheck() == 0) {
 						tmpRect.zRate += 20;
@@ -719,17 +915,19 @@ void S01Main::update(float fDeltaTime)
 
 		}
 
-
-		if (boxCheckCount < 3) {
-			for (int o = 0; o < boxCheckCount; ++o)
-				objectBox[saveBoxIndex[o]].movingZ((cos((result_degree[0]) * 3.141592 / 180)));
+		if (returnMainZ() < 60) {
+			if (m_walkingSound.playing() == false)
+				m_walkingSound.play();
+			if (boxCheckCount < 3) {
+				for (int o = 0; o < boxCheckCount; ++o)
+					objectBox[saveBoxIndex[o]].movingZ(foward_move.z);
+			}
+			else
+				tmpRect.z -= foward_move.z;
 		}
 		else
-		{
+			tmpRect.z -= foward_move.z;
 
-			tmpRect.z -= (cos((result_degree[0]) * 3.141592 / 180));
-
-		}
 		for (int k = 0; k < whatBox; ++k)
 			objectBox[k].checkUpdate(0);
 
@@ -743,14 +941,17 @@ void S01Main::update(float fDeltaTime)
 	}
 
 	if (dPress == true) {
-
-	
+		cycle = 0;
+		count = 0;
+		boxCheckCount = 0;
+		i = 0;
 		angle = 90;
-		mainCharacter.movingX((sin((result_degree[0] - 90) * 3.141592 / 180)));
+		tmpRect.x += foward_move.x;
+		mainCharacter.movingX(foward_move.x);
 		boxCheckCount = 0;
 		while (check == FALSE) {
 
-			if (returnMainX() - 5 <= objectBox[i].returnBoxCenterX() + 10 && !(returnMainX() + 5 <= objectBox[i].returnBoxCenterX() - 10)) {
+			if (returnMainX() - 6 <= objectBox[i].returnBoxCenterX() + 10 && !(returnMainX() + 6 <= objectBox[i].returnBoxCenterX() - 10)) {
 				if (objectBox[i].returnBoxCenterZ() - 10 < returnMainZ() + 5 && objectBox[i].returnBoxCenterZ() + 10 > returnMainZ() - 5 && objectBox[i].returnBoxCenterY() + 10 > returnMainY() - 5 && objectBox[i].returnBoxCenterY() - 10 < returnMainY() + 5) {
 					if (objectBox[i].returnCheck() == 0) {
 						tmpRect.xRate += 20;
@@ -787,16 +988,20 @@ void S01Main::update(float fDeltaTime)
 			objectBox[k].checkUpdate(0);
 
 
-		if (boxCheckCount < 3) {
-			for (int o = 0; o < boxCheckCount; ++o)
-				objectBox[saveBoxIndex[o]].movingX((sin((result_degree[0] - 90) * 3.141592 / 180)));
+		if (returnMainX() < 55) {
+
+			if (m_walkingSound.playing() == false)
+				m_walkingSound.play();
+			if (boxCheckCount < 3) {
+				for (int o = 0; o < boxCheckCount; ++o)
+					objectBox[saveBoxIndex[o]].movingX(foward_move.x);
+			}
+			else
+				tmpRect.x -= foward_move.x;
 		}
 		else
-		{
+			tmpRect.x -= foward_move.x;
 
-			tmpRect.x -= (sin((result_degree[0] - 90) * 3.141592 / 180));
-
-		}
 		boxCheckCount = 0;
 		check = FALSE;
 		cycle = 0;
@@ -805,7 +1010,7 @@ void S01Main::update(float fDeltaTime)
 		tmpRect.zRate = 0;
 	}
 
-
+	//조명 낙하
 	bool lightLanding = false;
 	for (int light = 0; light < LightCount; ++light) {
 		lightLanding = false;
@@ -900,8 +1105,10 @@ void S01Main::update(float fDeltaTime)
 	}
 
 
+	//조명 그림자 shadowMapping
 
 }
+
 
 
 void S01Main::LightSetting()
@@ -943,4 +1150,92 @@ void S01Main::LightSetting()
 void S01Main::camera_install(int x, int y) {
 	printf("ok \n");
 
+}
+
+void S01Main::HUD()
+{
+
+
+	//GLuint tex;
+
+
+	//IDtmp[0] = LoadTexture("Test.bmp", 150, 150);
+	glColor3f(1.f, 1.f, 1.f);
+	glPushMatrix();
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, IDtmp[0]);
+	glBegin(GL_QUADS);
+	glTexCoord2f(0.f, 1.f);		glVertex2f(0, 100);
+	glTexCoord2f(0.f, 0.f);		glVertex2f(0, 0);
+	glTexCoord2f(1.f, 0.f);		glVertex2f(100, 0);
+	glTexCoord2f(1.f, 1.f);		glVertex2f(100, 100);
+	glEnd();
+	glPopMatrix();
+
+}
+
+void S01Main::drawHUD()
+{
+	glMatrixMode(GL_PROJECTION);
+	//glPushMatrix();
+	glLoadIdentity();
+	gluOrtho2D(0.0, 1500.0, 900.0, 0.0);
+
+	glMatrixMode(GL_MODELVIEW);
+	//glPushMatrix();
+	glLoadIdentity();
+
+	HUD();
+	glDisable(GL_TEXTURE_2D);
+	//glMatrixMode(GL_PROJECTION);
+	//glPopMatrix();
+	//glMatrixMode(GL_MODELVIEW);
+	//glPopMatrix();
+}
+
+GLuint S01Main::LoadTexture(const char * filename, int width_1, int height_1)
+{
+	GLuint texture;
+	int width, height;
+	unsigned char * data;
+	FILE * file;
+
+	// 파일 열기
+	fopen_s(&file, filename, "rb");
+
+	if (file == NULL) return 0;
+	width = width_1;
+	height = height_1;
+	data = (unsigned char *)malloc(width * height * 3);
+	fread(data, width * height * 3, 1, file);
+	fclose(file);
+
+	// 색상결정
+	for (int i = 0; i < width * height; ++i)
+	{
+		int index = i * 3;
+		unsigned char B, R;
+		B = data[index];
+		R = data[index + 2];
+
+		data[index] = R;
+		data[index + 2] = B;
+	}
+
+	// 이후 PDF동일
+	glGenTextures(1, &texture);
+	glBindTexture(GL_TEXTURE_2D, texture);
+
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+	// Modulate로 함
+	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_COLOR, GL_MODULATE);
+
+	// 나는 밉맵으로 만듬
+	glTexImage2D(GL_TEXTURE_2D, 0, 3, width, height, 0, GL_BGR_EXT, GL_UNSIGNED_BYTE, data);
+	//gluBuild2DMipmaps(GL_TEXTURE_2D, 3, width, height, GL_BGR_EXT, GL_UNSIGNED_BYTE, data);
+	free(data);
+
+	return texture;
 }

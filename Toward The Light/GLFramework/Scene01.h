@@ -29,6 +29,8 @@ public:
 	virtual void mouse(int button, bool pressed, int x, int y);
 	virtual void motion(bool pressed, int x, int y);
 	virtual void update(float fDeltaTime);
+	virtual void drawHUD();
+	virtual void HUD();
 	//Ä«¸Þ¶ó
 	virtual void camera_install(int x, int y);
 	virtual void LightSetting();
@@ -36,6 +38,7 @@ public:
 	virtual float returnMainY();
 	virtual float returnMainZ();
 
+	virtual GLuint LoadTexture(const char * filename, int width_1, int height_1);
 
 
 private:
@@ -99,6 +102,11 @@ private:
 	Shape			banana;
 	tmp				tmpRect;
 	Vector3			Destination;
+
+	GLuint			texCord;
+	GLubyte			*pBytes;
+	BITMAPINFO		*info;
+	GLuint			IDtmp[6];
 
 	float			t;
 	float			ControlPoint[3];

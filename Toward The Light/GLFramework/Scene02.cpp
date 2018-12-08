@@ -1154,35 +1154,6 @@ void S02Main::update(float fDeltaTime)
 
 	//조명 그림자 shadowMapping
 
-	// 캐릭터 회전
-
-	if (wPress == true)
-		radian = 90;
-
-	if (aPress == true)
-		radian = 180;
-
-	if (sPress == true)
-		radian = 270;
-
-	if (dPress == true)
-		radian = 0;
-
-	if (wPress == true && dPress == true)
-		radian = 45;
-
-	if (wPress == true && aPress == true)
-		radian = 135;
-
-
-	if (sPress == true && aPress == true)
-		radian = 225;
-
-	if (sPress == true && dPress == true)
-		radian = 315;
-
-
-
 }
 
 void S02Main::DefaultBoxPosSetting()

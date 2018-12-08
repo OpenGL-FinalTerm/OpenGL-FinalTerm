@@ -241,6 +241,91 @@ void Light::drawLight(bool LightSwitch, int i)
 			glMateriali(GL_FRONT, GL_SHININESS, 64);
 			glEnable(GL_LIGHT3);
 		}
+		else if (i == 3) {
+			glEnable(GL_LIGHTING);
+			glLightfv(GL_LIGHT3, GL_POSITION, pos);
+			glLightfv(GL_LIGHT3, GL_AMBIENT, ambientLight);
+			glLightfv(GL_LIGHT3, GL_DIFFUSE, diffuseLight);
+			glLightfv(GL_LIGHT3, GL_SPECULAR, specu);
+			glLightfv(GL_LIGHT3, GL_POSITION, pos);
+
+			glEnable(GL_COLOR_MATERIAL);
+
+			glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
+			// 이후에 나오는 모든 재질은 밝게 빛나는 완전 전반사 반사율을 갖는다.
+			//glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, gray);
+			glMaterialfv(GL_FRONT, GL_SPECULAR, specu);
+			glMateriali(GL_FRONT, GL_SHININESS, 64);
+			glEnable(GL_LIGHT3);
+		}
+		else if (i == 4) {
+			glEnable(GL_LIGHTING);
+			glLightfv(GL_LIGHT4, GL_POSITION, pos);
+			glLightfv(GL_LIGHT4, GL_AMBIENT, ambientLight);
+			glLightfv(GL_LIGHT4, GL_DIFFUSE, diffuseLight);
+			glLightfv(GL_LIGHT4, GL_SPECULAR, specu);
+			glLightfv(GL_LIGHT4, GL_POSITION, pos);
+
+			glEnable(GL_COLOR_MATERIAL);
+
+			glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
+			// 이후에 나오는 모든 재질은 밝게 빛나는 완전 전반사 반사율을 갖는다.
+			//glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, gray);
+			glMaterialfv(GL_FRONT, GL_SPECULAR, specu);
+			glMateriali(GL_FRONT, GL_SHININESS, 64);
+			glEnable(GL_LIGHT4);
+		}
+		else if (i == 5) {
+		glEnable(GL_LIGHTING);
+		glLightfv(GL_LIGHT5, GL_POSITION, pos);
+		glLightfv(GL_LIGHT5, GL_AMBIENT, ambientLight);
+		glLightfv(GL_LIGHT5, GL_DIFFUSE, diffuseLight);
+		glLightfv(GL_LIGHT5, GL_SPECULAR, specu);
+		glLightfv(GL_LIGHT5, GL_POSITION, pos);
+
+		glEnable(GL_COLOR_MATERIAL);
+
+		glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
+		// 이후에 나오는 모든 재질은 밝게 빛나는 완전 전반사 반사율을 갖는다.
+		//glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, gray);
+		glMaterialfv(GL_FRONT, GL_SPECULAR, specu);
+		glMateriali(GL_FRONT, GL_SHININESS, 64);
+		glEnable(GL_LIGHT5);
+		}
+		else if (i == 6) {
+		glEnable(GL_LIGHTING);
+		glLightfv(GL_LIGHT6, GL_POSITION, pos);
+		glLightfv(GL_LIGHT6, GL_AMBIENT, ambientLight);
+		glLightfv(GL_LIGHT6, GL_DIFFUSE, diffuseLight);
+		glLightfv(GL_LIGHT6, GL_SPECULAR, specu);
+		glLightfv(GL_LIGHT6, GL_POSITION, pos);
+
+		glEnable(GL_COLOR_MATERIAL);
+
+		glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
+		// 이후에 나오는 모든 재질은 밝게 빛나는 완전 전반사 반사율을 갖는다.
+		//glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, gray);
+		glMaterialfv(GL_FRONT, GL_SPECULAR, specu);
+		glMateriali(GL_FRONT, GL_SHININESS, 64);
+		glEnable(GL_LIGHT6);
+		}
+		else if (i == 7) {
+		glEnable(GL_LIGHTING);
+		glLightfv(GL_LIGHT7, GL_POSITION, pos);
+		glLightfv(GL_LIGHT7, GL_AMBIENT, ambientLight);
+		glLightfv(GL_LIGHT7, GL_DIFFUSE, diffuseLight);
+		glLightfv(GL_LIGHT7, GL_SPECULAR, specu);
+		glLightfv(GL_LIGHT7, GL_POSITION, pos);
+
+		glEnable(GL_COLOR_MATERIAL);
+
+		glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
+		// 이후에 나오는 모든 재질은 밝게 빛나는 완전 전반사 반사율을 갖는다.
+		//glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, gray);
+		glMaterialfv(GL_FRONT, GL_SPECULAR, specu);
+		glMateriali(GL_FRONT, GL_SHININESS, 64);
+		glEnable(GL_LIGHT7);
+		}
 	}
 
 	else {
