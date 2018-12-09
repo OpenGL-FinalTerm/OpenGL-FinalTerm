@@ -10,6 +10,7 @@
 #include "Scene04_Ending.h"
 #include "Scene_Setting.h";
 #include "Scene_Start.h"
+#include "Scene05_clear.h"
 
 struct GLSceneInfo
 {
@@ -27,8 +28,8 @@ const GLSceneInfo SCENES[] =
 	{"3", new S03Main, false},
 	{"Ending", new S04End, false},
 	{"Setting", new S05Setting, false},
-	{"Start", new S06Start, false}
-
+	{"Start", new S06Start, false},
+	{"Clear", new S05End, false}
 };
 
 /*~~~STARTING SCENE~~~*/

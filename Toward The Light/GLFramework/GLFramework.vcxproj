@@ -161,6 +161,7 @@
     <ClCompile Include="Scene04_Ending.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Scene05_clear.cpp" />
     <ClCompile Include="Scene_Setting.cpp" />
     <ClCompile Include="Scene_start.cpp" />
     <ClCompile Include="Sound.cpp" />
@@ -208,6 +209,7 @@
     <ClInclude Include="Scene04_Ending.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="Scene05_clear.h" />
     <ClInclude Include="Scene_Setting.h" />
     <ClInclude Include="Scene_Start.h" />
     <ClInclude Include="Sound.h" />
