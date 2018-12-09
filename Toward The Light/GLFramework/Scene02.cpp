@@ -20,24 +20,19 @@ S02Main::~S02Main()
 void S02Main::init()
 {
 	radian = 90;
-
+	glEnable(GL_LIGHTING);
 	//인게임 bgm 재생초기화
-	m_SoundPlayer.exit();
 	m_SoundPlayer.init();
-	m_SoundPlayer.selectFolder("Resources\\BGM");
-	//m_SoundPlayer.play();
+	m_SoundPlayer.selectFolder("Resources\\BGM\\until morning game.ver.mp3");
 	//m_SoundPlayer.play();
 
 	//걷기 효과음 재생 초기화
-	m_walkingSound.exit();
 	m_walkingSound.init();
 	m_walkingSound.selectFolder("Resources\\Sound");
-	//m_SoundPlayer.play();
 
 	m_Camera.setDistance(300.f);
 	m_Camera.setPerspective(45.f, 0.125f, 7'000.f);
 	m_Camera.setSensitivity(10.f);
-	glEnable(GL_LIGHTING);
 
 	//for (int i = 0; i < 20; ++i) {
 	//   objectBox[i].CreateBox(rand() % 120 - 60, 10, rand() % 140 - 70);
@@ -95,7 +90,16 @@ void S02Main::init()
 	for (int i = 0; i < whatBox; ++i)
 		objectBox[i].updateCatch(false);
 
-	
+
+	view_rotate[0] = 60;
+	view_rotate[1] = 50;
+
+	view_at_size[0] = 100;
+	view_at_size[1] = 10;
+
+	banana_cl[0] = 50;
+	banana_cl[1] = 20;
+	banana_cl[2] = 50;
 }
 
 void S02Main::exit()
@@ -116,7 +120,6 @@ void S02Main::exit()
 void S02Main::reset()
 {
 	m_SoundPlayer.play();
-	m_walkingSound.play();
 }
 
 float S02Main::returnMainX()
@@ -136,7 +139,7 @@ float S02Main::returnMainZ()
 
 void S02Main::render()
 {
-	//m_SoundPlayer.play();
+	m_SoundPlayer.play();
 	glPushMatrix();
 	m_Camera.ready();
 	glColor3f(1.0f, 1.0f, 1.0f);
@@ -231,24 +234,9 @@ void S02Main::render()
 		At.z = tmpRect.z + ((cos(result_degree[0] * 3.141592 / 180) * 100));
 	}
 
-	// 바나나 스포트라이트
-	spotPos[0] = tmpRect.x;
-	spotPos[1] = tmpRect.y + 40;
-	spotPos[2] = tmpRect.z;
 
-	glLightfv(GL_LIGHT6, GL_DIFFUSE, spotDiffuse);
-	glLightfv(GL_LIGHT6, GL_SPECULAR, spotSpecu);
-	glLightfv(GL_LIGHT6, GL_POSITION, spotPos);
-
-	GLfloat direction[] = { 0, -1, 0 };
-	GLfloat temp = 20;
-	glLightfv(GL_LIGHT6, GL_SPOT_DIRECTION, direction);
-	glLightf(GL_LIGHT6, GL_SPOT_CUTOFF, 25.f);
-
-	glEnable(GL_LIGHT6);
-	//
 	glPushMatrix();
-	banana_draw(tmpRect.x, tmpRect.y + 5, tmpRect.z, 0.5, IDLE, banana.rot.degree, result_degree[0]);
+	banana_draw(tmpRect.x, tmpRect.y + 5, tmpRect.z, 0.5, IDLE, banana.rot.degree, result_degree[0], banana_cl[0], banana_cl[1], banana_cl[2]);
 	glPopMatrix();
 	if (person_view_mouse) {
 		m_Camera.setEye(Eye);
@@ -894,7 +882,6 @@ void S02Main::update(float fDeltaTime)
 		if (returnMainZ() > -60) {
 			if (m_walkingSound.playing() == false)
 				m_walkingSound.play();
-
 			if (boxCheckCount < 3) {
 				for (int o = 0; o < boxCheckCount; ++o)
 					objectBox[saveBoxIndex[o]].movingZ(foward_move.z);

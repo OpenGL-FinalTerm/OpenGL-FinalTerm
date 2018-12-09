@@ -87,6 +87,9 @@ private:
 	float		assist_rotation = 1;
 	int		view_rotate[2] = {};
 	int view_at_size[2];
+
+	float banana_cl[3];//banana color
+
 	//∫”¿∫ ¡∂∏Ì±‚µ’
 	Vector3 red_right_cylinder;
 	//ø¿«¡¥◊ Ω√¿€

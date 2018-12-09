@@ -31,7 +31,9 @@ void S04End::init()
 	tmpRect.z = 0;
 	ending_animation_bool = false;
 
-
+	banana_cl[0] = 50;
+	banana_cl[1] = 20;
+	banana_cl[2] = 50;
 }
 
 void S04End::exit()
@@ -53,7 +55,7 @@ void S04End::render()
 	ending_camera_At(&old_At_pos.x ,&old_At_pos.y , &old_At_pos.z, &tmpRect.x, &tmpRect.y, &tmpRect.z, &ttt, &At.x, &At.y, &At.z);
 
 	glPushMatrix();
-	banana_draw(tmpRect.x, tmpRect.y + 5, tmpRect.z, 0.5, IDLE, banana.rot.degree, 0);
+	banana_draw(tmpRect.x, tmpRect.y + 5, tmpRect.z, 0.5, IDLE, banana.rot.degree, result_degree[0], banana_cl[0], banana_cl[1], banana_cl[2]);
 	glPopMatrix();
 
 	//카메라 렌더링
