@@ -20,7 +20,8 @@ GLubyte * LoadDIBitmap(const char *filename, BITMAPINFO **info)
 	if (header.bfType != 'MB') {
 		fclose(fp);
 		return NULL;
-	}	infosize = header.bfOffBits - sizeof(BITMAPFILEHEADER);
+	}
+	infosize = header.bfOffBits - sizeof(BITMAPFILEHEADER);
 	// 비트맵 이미지 데이터를 넣을 메모리 할당을 한다.
 	if ((*info = (BITMAPINFO *)malloc(infosize)) == NULL) {
 		fclose(fp);
@@ -32,7 +33,8 @@ GLubyte * LoadDIBitmap(const char *filename, BITMAPINFO **info)
 		free(*info);
 		fclose(fp);
 		return NULL;
-	}	// 비트맵의 크기 설정
+	}
+	// 비트맵의 크기 설정
 	if ((bitsize = (*info)->bmiHeader.biSizeImage) == 0)
 		bitsize = ((*info)->bmiHeader.biWidth*(*info)->bmiHeader.biBitCount +7) / 8.0 * abs((*info) -> bmiHeader.biHeight);
 	// 비트맵의 크기만큼 메모리를 할당한다.

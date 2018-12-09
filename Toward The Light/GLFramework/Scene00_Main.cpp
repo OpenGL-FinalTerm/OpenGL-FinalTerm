@@ -135,6 +135,11 @@ void S00Logo::render()
 void S00Logo::HUD()
 {
 	glColor3f(1.f, 1.f, 1.f);
+	print("made by SH-BROAR", DEF_WIN_WIDTH / 2 + 500, DEF_WIN_HEIGHT - 100, 0);
+	print("2017180006 Kim Woo Bin ", DEF_WIN_WIDTH / 2 + 500, DEF_WIN_HEIGHT - 150, 0);
+	print("2017180006 Kim Ji Yeong", DEF_WIN_WIDTH / 2 + 500, DEF_WIN_HEIGHT - 200, 0);
+
+	glColor3f(1.f, 1.f, 1.f);
 	glPushMatrix();
 
 	glDisable(GL_CULL_FACE);

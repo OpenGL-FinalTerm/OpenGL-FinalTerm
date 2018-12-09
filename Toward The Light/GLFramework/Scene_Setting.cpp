@@ -150,7 +150,7 @@ void S05Setting::mouse(int button, bool pressed, int x, int y)
 					((scroll_bt[i].y + scroll_bar[i].y - (scroll_bt_size[i].y)) < select_map.y) && (select_map.y < ((scroll_bt[i].y + scroll_bar[i].y + (scroll_bt_size[i].y)))))
 					) {
 					scroll_bt_b[i] = true;
-					printf("true1 :: %d \n" , i);
+					
 				}
 				else {
 					scroll_bt_b[i] = false;
@@ -171,7 +171,7 @@ void S05Setting::motion(bool pressed, int x, int y)
 	if (((Exit_button.x -(Exit_button_size.x / 2)) < select_map.x) && (select_map.x < ((Exit_button.x + (Exit_button_size.x / 2)))) &&
 		((Exit_button.y - (Exit_button_size.y / 2)) < select_map.y) &&( select_map.y < ((Exit_button.y + (Exit_button_size.y / 2))))) {
 		Exit_button_b = true;
-		printf("true \n");
+	
 	}
 	else {
 		Exit_button_b = false;
@@ -196,7 +196,7 @@ void S05Setting::motion(bool pressed, int x, int y)
 			((scroll_bt[i].y + scroll_bar[i].y - (scroll_bt_size[i].y)) < select_map.y) && (select_map.y < ((scroll_bt[i].y + scroll_bar[i].y + (scroll_bt_size[i].y)))))
 			) {
 			scroll_motion_b[i] = true;
-			printf("true1 \n");
+			
 		}
 		else {
 			scroll_motion_b[i] = false;
@@ -204,7 +204,7 @@ void S05Setting::motion(bool pressed, int x, int y)
 
 		//정규화 시킨 다음에 값을 얻어낸다.
 		scroll_result[i] = 1 + scroll_bt[i].x / (sqrt(pow(scroll_bar_size[i].x, 2) + pow(1, 2)));
-		printf("%f \n", scroll_result[i]);
+	
 	}
 	
 	//old 좌표에 다시 저장한다
@@ -230,7 +230,7 @@ void S05Setting::LightSetting()
 }
 
 void S05Setting::camera_install(int x, int y) {
-	printf("ok \n");
+
 
 }
 

@@ -200,7 +200,6 @@ void S06Start::LightSetting()
 }
 
 void S06Start::camera_install(int x, int y) {
-	printf("ok \n");
 
 }
 

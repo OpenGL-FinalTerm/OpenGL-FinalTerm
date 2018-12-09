@@ -84,10 +84,10 @@ private:
 	float		difference_normal_pos[2] = {};
 	float		result_degree[2] = {};
 	float		assist_rotation = 1;
-	int		view_rotate[2] = {};
-	int view_at_size[2];
-
-	float banana_cl[3];//banana color
+	int			view_rotate[2] = {};
+	int			view_at_size[2];
+	int			banana_state;
+	float		banana_cl[3];//banana color
 	int			stepSound = 0;
 	//붉은 조명기둥
 	Vector3 red_right_cylinder;
@@ -120,16 +120,22 @@ private:
 	float			t;
 	float			ControlPoint[3];
 	float			startPos[3];
+	int				checkCount = 0;
 
 
 	GLfloat spotPos[4] = { 0,0,0, 1.0f };
-	GLfloat spotDiffuse[4] = { 0.2 ,0.2, 0.2, 0.2f };
-	GLfloat spotSpecu[4] = { 1.f, 1.f, 1.f, 0.2 };
+	GLfloat spotDiffuse[4] = { 0.7f ,0.7f, 0.f, 0.7f };
+	GLfloat spotSpecu[4] = { 1.f, 1.f, 1.f, 0.1f };
 
 	// 프레임워크 BGM 결함으로 다른걸로 대체함
 	MCI_OPEN_PARMS      mciOpenParms;
 	MCI_PLAY_PARMS       mciPlayParms;
 	MCI_STATUS_PARMS   mciStatus;
 	UINT wDeviceID = 0;
+
+	GLfloat fog_color[4] = { 0.f, 0.f, 0.f, 1.f };
+	GLfloat density = 0.3;
+	GLfloat start = 100.f;
+	GLfloat end = 120.f;
 };
 
