@@ -1,1 +1,40 @@
-﻿  GLFramework.vcxproj -> D:\GitHub\OpenGL-FinalTerm\Toward The Light\x64\Debug\GLFramework.exe
+﻿  Scene_start.cpp
+d:\git\opengl-finalterm\toward the light\glframework\banana_draw.h(16): warning C4091: 'typedef ': 변수를 선언하지 않으면 'Color' 왼쪽은 무시됩니다.
+d:\git\opengl-finalterm\toward the light\glframework\banana_draw.h(22): warning C4091: 'typedef ': 변수를 선언하지 않으면 'Translate_pos' 왼쪽은 무시됩니다.
+d:\git\opengl-finalterm\toward the light\glframework\banana_draw.h(30): warning C4091: 'typedef ': 변수를 선언하지 않으면 'BoOL' 왼쪽은 무시됩니다.
+d:\git\opengl-finalterm\toward the light\glframework\banana_draw.h(48): warning C4091: 'typedef ': 변수를 선언하지 않으면 'QUAD' 왼쪽은 무시됩니다.
+d:\git\opengl-finalterm\toward the light\glframework\bananasetting.h(22): warning C4091: 'typedef ': 변수를 선언하지 않으면 'Shape' 왼쪽은 무시됩니다.
+d:\git\opengl-finalterm\toward the light\glframework\scene_start.cpp(280): warning C4715: 'S06Start::LoadTexture': 모든 제어 경로에서 값을 반환하지는 않습니다.
+x64\Debug\HUD.obj : warning LNK4042: 개체가 두 번 이상 지정되었습니다. 나머지는 무시됩니다.
+Scene04_Ending.obj : warning LNK4099: 'vc141.pdb' PDB를 'Scene04_Ending.obj' 또는 'D:\git\OpenGL-FinalTerm\Toward The Light\x64\Debug\vc141.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+Scene03.obj : warning LNK4099: 'vc141.pdb' PDB를 'Scene03.obj' 또는 'D:\git\OpenGL-FinalTerm\Toward The Light\x64\Debug\vc141.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+Wall.obj : warning LNK4099: 'vc141.pdb' PDB를 'Wall.obj' 또는 'D:\git\OpenGL-FinalTerm\Toward The Light\x64\Debug\vc141.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+Transformations.obj : warning LNK4099: 'vc141.pdb' PDB를 'Transformations.obj' 또는 'D:\git\OpenGL-FinalTerm\Toward The Light\x64\Debug\vc141.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+Timer.obj : warning LNK4099: 'vc141.pdb' PDB를 'Timer.obj' 또는 'D:\git\OpenGL-FinalTerm\Toward The Light\x64\Debug\vc141.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+Texture.obj : warning LNK4099: 'vc141.pdb' PDB를 'Texture.obj' 또는 'D:\git\OpenGL-FinalTerm\Toward The Light\x64\Debug\vc141.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+stdafx.obj : warning LNK4099: 'vc141.pdb' PDB를 'stdafx.obj' 또는 'D:\git\OpenGL-FinalTerm\Toward The Light\x64\Debug\vc141.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+Source.obj : warning LNK4099: 'vc141.pdb' PDB를 'Source.obj' 또는 'D:\git\OpenGL-FinalTerm\Toward The Light\x64\Debug\vc141.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+SoundPlayer.obj : warning LNK4099: 'vc141.pdb' PDB를 'SoundPlayer.obj' 또는 'D:\git\OpenGL-FinalTerm\Toward The Light\x64\Debug\vc141.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+Sound.obj : warning LNK4099: 'vc141.pdb' PDB를 'Sound.obj' 또는 'D:\git\OpenGL-FinalTerm\Toward The Light\x64\Debug\vc141.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+Scene_Setting.obj : warning LNK4099: 'vc141.pdb' PDB를 'Scene_Setting.obj' 또는 'D:\git\OpenGL-FinalTerm\Toward The Light\x64\Debug\vc141.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+Scene00_Main.obj : warning LNK4099: 'vc141.pdb' PDB를 'Scene00_Main.obj' 또는 'D:\git\OpenGL-FinalTerm\Toward The Light\x64\Debug\vc141.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+Robot.obj : warning LNK4099: 'vc141.pdb' PDB를 'Robot.obj' 또는 'D:\git\OpenGL-FinalTerm\Toward The Light\x64\Debug\vc141.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+Picking.obj : warning LNK4099: 'vc141.pdb' PDB를 'Picking.obj' 또는 'D:\git\OpenGL-FinalTerm\Toward The Light\x64\Debug\vc141.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+camera_working.obj : warning LNK4099: 'vc141.pdb' PDB를 'camera_working.obj' 또는 'D:\git\OpenGL-FinalTerm\Toward The Light\x64\Debug\vc141.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+Object.obj : warning LNK4099: 'vc141.pdb' PDB를 'Object.obj' 또는 'D:\git\OpenGL-FinalTerm\Toward The Light\x64\Debug\vc141.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+NormalObject.obj : warning LNK4099: 'vc141.pdb' PDB를 'NormalObject.obj' 또는 'D:\git\OpenGL-FinalTerm\Toward The Light\x64\Debug\vc141.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+Model.obj : warning LNK4099: 'vc141.pdb' PDB를 'Model.obj' 또는 'D:\git\OpenGL-FinalTerm\Toward The Light\x64\Debug\vc141.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+LoadMap.obj : warning LNK4099: 'vc141.pdb' PDB를 'LoadMap.obj' 또는 'D:\git\OpenGL-FinalTerm\Toward The Light\x64\Debug\vc141.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+LoadBitmap.obj : warning LNK4099: 'vc141.pdb' PDB를 'LoadBitmap.obj' 또는 'D:\git\OpenGL-FinalTerm\Toward The Light\x64\Debug\vc141.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+LinearMath.obj : warning LNK4099: 'vc141.pdb' PDB를 'LinearMath.obj' 또는 'D:\git\OpenGL-FinalTerm\Toward The Light\x64\Debug\vc141.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+Light.obj : warning LNK4099: 'vc141.pdb' PDB를 'Light.obj' 또는 'D:\git\OpenGL-FinalTerm\Toward The Light\x64\Debug\vc141.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+HUD.obj : warning LNK4099: 'vc141.pdb' PDB를 'HUD.obj' 또는 'D:\git\OpenGL-FinalTerm\Toward The Light\x64\Debug\vc141.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+GLScene.obj : warning LNK4099: 'vc141.pdb' PDB를 'GLScene.obj' 또는 'D:\git\OpenGL-FinalTerm\Toward The Light\x64\Debug\vc141.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+FolderReader.obj : warning LNK4099: 'vc141.pdb' PDB를 'FolderReader.obj' 또는 'D:\git\OpenGL-FinalTerm\Toward The Light\x64\Debug\vc141.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+Character.obj : warning LNK4099: 'vc141.pdb' PDB를 'Character.obj' 또는 'D:\git\OpenGL-FinalTerm\Toward The Light\x64\Debug\vc141.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+Camera.obj : warning LNK4099: 'vc141.pdb' PDB를 'Camera.obj' 또는 'D:\git\OpenGL-FinalTerm\Toward The Light\x64\Debug\vc141.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+BoxObject.obj : warning LNK4099: 'vc141.pdb' PDB를 'BoxObject.obj' 또는 'D:\git\OpenGL-FinalTerm\Toward The Light\x64\Debug\vc141.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+banana_draw.obj : warning LNK4099: 'vc141.pdb' PDB를 'banana_draw.obj' 또는 'D:\git\OpenGL-FinalTerm\Toward The Light\x64\Debug\vc141.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+BananaSetting.obj : warning LNK4099: 'vc141.pdb' PDB를 'BananaSetting.obj' 또는 'D:\git\OpenGL-FinalTerm\Toward The Light\x64\Debug\vc141.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+AirPlane.obj : warning LNK4099: 'vc141.pdb' PDB를 'AirPlane.obj' 또는 'D:\git\OpenGL-FinalTerm\Toward The Light\x64\Debug\vc141.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+  GLFramework.vcxproj -> D:\git\OpenGL-FinalTerm\Toward The Light\x64\Debug\GLFramework.exe
