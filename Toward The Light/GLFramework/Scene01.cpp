@@ -212,7 +212,7 @@ void S01Main::render()
 
 
 		if(banana_cl[0] <=3)
-			m_Framework->toScene("Ending");
+			m_Framework->toScene("Clear");
 	}
 
 		//banana_cl[0] = 3;

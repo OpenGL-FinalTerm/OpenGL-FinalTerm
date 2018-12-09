@@ -1,20 +1,20 @@
 #include "stdafx.h"
-#include "Scene04_Ending.h"
+#include "Scene05_clear.h"
 #include "GLFramework.h"
 #include "banana_draw.h"
 #include "Character.h"
 #include "camera_working.h"
 
 
-S04End::S04End()
+S05End::S05End()
 {
 }
 
-S04End::~S04End()
+S05End::~S05End()
 {
 }
 
-void S04End::init()
+void S05End::init()
 {
 	m_Camera_end.init();
 	m_Camera_end.setDistance(200.f);
@@ -29,28 +29,29 @@ void S04End::init()
 	tmpRect.z = 0;
 	ending_animation_bool = false;
 
-	banana_cl[0] = 50;
-	banana_cl[1] = 20;
-	banana_cl[2] = 50;
+	banana_cl[0] = 3;
+	banana_cl[1] = 40;
+	banana_cl[2] = 255;
+
 }
 
-void S04End::exit()
+void S05End::exit()
 {
 }
 
-void S04End::reset()
+void S05End::reset()
 {
 }
 
 
-void S04End::render()
+void S05End::render()
 {
 	m_Camera_end.ready();
-	
+
 
 	//카메라 연산
 	ending_camera_Eye(&tmpRect.x, &tmpRect.y, &tmpRect.z, &camera_degree[0], &camera_size[0], &camera_size[1], &Eye.x, &Eye.y, &Eye.z);
-	ending_camera_At(&old_At_pos.x ,&old_At_pos.y , &old_At_pos.z, &tmpRect.x, &tmpRect.y, &tmpRect.z, &ttt, &At.x, &At.y, &At.z);
+	ending_camera_At(&old_At_pos.x, &old_At_pos.y, &old_At_pos.z, &tmpRect.x, &tmpRect.y, &tmpRect.z, &ttt, &At.x, &At.y, &At.z);
 
 	glPushMatrix();
 	banana_draw(tmpRect.x, tmpRect.y + 5, tmpRect.z, 0.5, IDLE, banana.rot.degree, result_degree[0], banana_cl[0], banana_cl[1], banana_cl[2]);
@@ -60,17 +61,18 @@ void S04End::render()
 	m_Camera_end.setEye(Eye);
 	m_Camera_end.setTarget(At);
 	drawHUD();
+
 	glColor3f(1.f, 1.f, 1.f);
-	print("Banana is Dead", 0, 40, 0);
+	print("Clear!", 0, 40, 0);
 
 }
 
-void S04End::reshape(int w, int h)
+void S05End::reshape(int w, int h)
 {
 
 }
 
-void S04End::keyboard(int key, bool pressed, int x, int y, bool special)
+void S05End::keyboard(int key, bool pressed, int x, int y, bool special)
 {
 	if (pressed)
 		switch (key)
@@ -81,20 +83,20 @@ void S04End::keyboard(int key, bool pressed, int x, int y, bool special)
 
 }
 
-void S04End::mouse(int button, bool pressed, int x, int y)
+void S05End::mouse(int button, bool pressed, int x, int y)
 {
 }
 
-void S04End::motion(bool pressed, int x, int y)
+void S05End::motion(bool pressed, int x, int y)
 {
 }
 
-void S04End::update(float fDeltaTime)
+void S05End::update(float fDeltaTime)
 {
 	//엔딩이 나올때는 줌인 한 후에 회전하면서 바나나 가르기키 
 	camera_degree[0] += 1;
 	if (ending_animation_bool) {
-		
+
 		if (camera_size[0] >= 100) {
 			camera_size[0] -= 1;
 		}
@@ -120,13 +122,13 @@ void S04End::update(float fDeltaTime)
 	banana.rot.degree += 0.1f * switch_sign;
 }
 
-void S04End::HUD()
+void S05End::HUD()
 {
 
-	
+
 }
 
-void S04End::drawHUD()
+void S05End::drawHUD()
 {
 	glMatrixMode(GL_PROJECTION);
 	//glPushMatrix();

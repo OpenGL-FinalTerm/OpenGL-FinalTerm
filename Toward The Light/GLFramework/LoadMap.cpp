@@ -93,7 +93,8 @@ int LoadLight(Light mapLight[], int i, Light RedColunm)
 			int lx;
 			int ly;
 			int lz;
-
+			// colorType 1 -> 빨강색 조명공
+			// colorType 0 -> 파랑색 조명공
 			lx = -50 + (tmpX * 20);
 			ly = 120;
 			lz = -60 + (tmpZ * 20);

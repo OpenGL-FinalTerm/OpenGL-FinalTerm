@@ -1,4 +1,5 @@
 #pragma once
+#pragma once
 #include "GLScene.h"
 
 /* UTILITIES */
@@ -7,12 +8,12 @@
 #include "BananaSetting.h"
 /* ------------ */
 
-class S04End :
+class S05End :
 	public GLScene
 {
 public:
-	S04End();
-	virtual ~S04End();
+	S05End();
+	virtual ~S05End();
 
 	virtual void init();
 	virtual void exit();
