@@ -139,11 +139,11 @@ void S05Setting::keyboard(int key, bool pressed, int x, int y, bool special)
 void S05Setting::mouse(int button, bool pressed, int x, int y)
 {
 	if (pressed) {
-		if (button == GLUT_LEFT_BUTTON && Exit_button_b == TRUE) {
+		if (button == GLUT_LEFT_BUTTON && Exit_button_b == TRUE && pressed == true) {
 			m_Framework->toScene("Main");
 		}
 		for (int i = 0; i < scroll_num; ++i) {
-			if (button == GLUT_LEFT_BUTTON) {
+			if (button == GLUT_LEFT_BUTTON && pressed == TRUE) {
 				if (
 					(((scroll_bt[i].x + scroll_bar[i].x - (scroll_bt_size[i].x)) < select_map.x) && (select_map.x < ((scroll_bt[i].x + scroll_bar[i].x + (scroll_bt_size[i].x)))) &&
 					((scroll_bt[i].y + scroll_bar[i].y - (scroll_bt_size[i].y)) < select_map.y) && (select_map.y < ((scroll_bt[i].y + scroll_bar[i].y + (scroll_bt_size[i].y)))))

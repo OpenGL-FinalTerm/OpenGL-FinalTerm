@@ -42,6 +42,8 @@ void S00Logo::init()
 		}
 	}
 	choose = 10;
+	select_map.x = 1000;
+	select_map.y =0;
 
 }
 
@@ -241,13 +243,13 @@ void S00Logo::keyboard(int key, bool pressed, int x, int y, bool special)
 void S00Logo::mouse(int button, bool pressed, int x, int y)
 {
 	//선택하면 바로 넘어간다.
-	if (button == GLUT_LEFT_BUTTON && choose == 0) {
+	if (button == GLUT_LEFT_BUTTON && choose == 0 && pressed == true) {
 		m_Framework->toScene("1");
 	}
-	else if (button == GLUT_LEFT_BUTTON && choose == 1){
+	else if (button == GLUT_LEFT_BUTTON && choose == 1 && pressed == true){
 			m_Framework->toScene("2");
 	}
-	else if (button == GLUT_LEFT_BUTTON && choose == 3) {
+	else if (button == GLUT_LEFT_BUTTON && choose == 3 && pressed == true) {
 		m_Framework->toScene("Setting");
 	}
 
