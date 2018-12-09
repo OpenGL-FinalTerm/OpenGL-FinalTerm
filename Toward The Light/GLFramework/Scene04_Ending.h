@@ -52,6 +52,13 @@ private:
 	tmp		tmpRect;
 	Shape	banana;
 
+	//Exit button
+	Vector2 select_map;
+
+	Vector3			return_button;
+	Vector3			return_button_size;
+	bool return_button_b;
+
 	int rotate;
 	float ttt;
 	Vector3 old_At_pos;

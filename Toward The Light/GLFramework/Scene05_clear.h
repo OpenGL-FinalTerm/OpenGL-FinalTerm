@@ -56,5 +56,17 @@ private:
 	int rotate;
 	float ttt;
 	Vector3 old_At_pos;
+
+	//Exit button
+	Vector2 select_map;
+
+	Vector3			return_button;
+	Vector3			return_button_size;
+	bool return_button_b;
+
+	Vector3			main_button;
+	Vector3			main_button_size;
+	bool main_button_b;
+	
 };
 

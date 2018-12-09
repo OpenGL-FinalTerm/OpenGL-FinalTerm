@@ -32,6 +32,14 @@ void S04End::init()
 	banana_cl[0] = 50;
 	banana_cl[1] = 20;
 	banana_cl[2] = 50;
+
+
+	//버튼
+	return_button.x = 600;
+	return_button.y = DEF_WIN_HEIGHT - 200;
+	return_button_size.x = 50;
+	return_button_size.y = 50;
+
 }
 
 void S04End::exit()
@@ -83,10 +91,25 @@ void S04End::keyboard(int key, bool pressed, int x, int y, bool special)
 
 void S04End::mouse(int button, bool pressed, int x, int y)
 {
+	if (button == GLUT_LEFT_BUTTON && return_button_b == TRUE && pressed == true) {
+		m_Framework->toScene("Main");
+	}
 }
 
 void S04End::motion(bool pressed, int x, int y)
 {
+	select_map.x = x;
+	select_map.y = y;
+
+	if (((return_button.x - (return_button_size.x / 2)) < select_map.x) && (select_map.x < ((return_button.x + (return_button_size.x / 2)))) &&
+		((return_button.y - (return_button_size.y / 2)) < select_map.y) && (select_map.y < ((return_button.y + (return_button_size.y / 2))))) {
+		return_button_b = true;
+		printf("true \n");
+	}
+	else {
+		return_button_b = false;
+	}
+
 }
 
 void S04End::update(float fDeltaTime)
@@ -122,6 +145,45 @@ void S04End::update(float fDeltaTime)
 
 void S04End::HUD()
 {
+	glColor3f(1.f, 1.f, 1.f);
+	glPushMatrix();
+
+	glPushMatrix();
+	glTranslatef(return_button.x, return_button.y, -0.5);
+	glBegin(GL_QUADS);
+	glVertex3f(-return_button_size.x / 2, -return_button_size.y / 2, 0);
+	glVertex3f(return_button_size.x / 2, -return_button_size.y / 2, 0);
+	glVertex3f(return_button_size.x / 2, return_button_size.y / 2, 0);
+	glVertex3f(-return_button_size.x / 2, return_button_size.y / 2, 0);
+	glEnd();
+
+	glBegin(GL_TRIANGLES);
+	glVertex3f(-return_button_size.x, 0, 0);
+	glVertex3f(return_button_size.x, 0, 0);
+	glVertex3f(0, -return_button_size.y, 0);
+	glEnd();
+
+	glPopMatrix();
+
+
+	
+
+	//HUD를 그린다.
+	glPushMatrix();
+	glTranslatef(select_map.x, select_map.y, 1);
+	glColor3f(1, 1, 1);
+	glBegin(GL_QUADS);
+	glVertex3f(-10, -10, 0);
+	glVertex3f(10, -10, 0);
+	glVertex3f(10, 10, 0);
+	glVertex3f(-10, 10, 0);
+	glEnd();
+	glPopMatrix();
+
+
+
+	glPopMatrix();
+
 
 	
 }
