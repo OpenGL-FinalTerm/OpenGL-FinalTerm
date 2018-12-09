@@ -54,7 +54,16 @@ void S01Main::init()
 	aPress = false;
 	sPress = false;
 	dPress = false;
+	for (int i = 0; i < LightCount - 1; ++i) {
+		mapLight[i].pickUp(false);
+	}
+	pickLight = false;
+	pickLightNumber = -1;
 
+	catchBox = false;
+	boxIndex = -1;
+	for (int i = 0; i < whatBox; ++i)
+		objectBox[i].updateCatch(false);
 	m_Camera.setEye(Eye);
 	result_degree[0] = 180;
 
