@@ -23,7 +23,7 @@ void S02Main::init()
 	glEnable(GL_LIGHTING);
 	//인게임 bgm 재생초기화
 	m_SoundPlayer.init();
-	m_SoundPlayer.selectFolder("Resources\\BGM");
+	m_SoundPlayer.selectFolder("Resources\\BGM\\until morning game.ver.mp3");
 	//m_SoundPlayer.play();
 
 	//걷기 효과음 재생 초기화
@@ -90,6 +90,12 @@ void S02Main::init()
 	for (int i = 0; i < whatBox; ++i)
 		objectBox[i].updateCatch(false);
 
+
+	view_rotate[0] = 60;
+	view_rotate[1] = 50;
+
+	view_at_size[0] = 100;
+	view_at_size[1] = 10;
 }
 
 void S02Main::exit()

@@ -492,10 +492,15 @@ void S01Main::motion(bool pressed, int x, int y)
 			//if(result_degree[1] < 180)
 			result_degree[1] -= difference_normal_pos[1];
 
-			if ((result_degree[0] > 360) || (result_degree[0] < 0)) {
-				result_degree[0] = 0;
+			if ((result_degree[0] < 360) && (result_degree[0] >= 0)) {
+				result_degree[0] += int(difference_normal_pos[0] * 3);
 			}
-			if ((result_degree[1] > 180) || (result_degree[1] < 0)) {
+			else if (result_degree[0] >= 360)
+				result_degree[0] = 0;
+			else
+				result_degree[0] = 359;
+
+			if ((result_degree[1] > 360) || (result_degree[1] < -360)) {
 				result_degree[1] = 0;
 			}
 
