@@ -81,7 +81,7 @@ private:
 	bool		aPress = false;
 	bool		sPress = false;
 	bool		dPress = false;
-
+	bool		fogOn = true;
 	bool catchBox = false;
 	int boxIndex;
 

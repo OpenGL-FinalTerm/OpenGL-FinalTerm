@@ -121,7 +121,7 @@ private:
 	float			ControlPoint[3];
 	float			startPos[3];
 	int				checkCount = 0;
-
+	bool			fogOn = true;
 
 	GLfloat spotPos[4] = { 0,0,0, 1.0f };
 	GLfloat spotDiffuse[4] = { 0.7f ,0.7f, 0.f, 0.7f };

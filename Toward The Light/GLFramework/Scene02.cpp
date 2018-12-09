@@ -192,7 +192,11 @@ void S02Main::render()
 	//glHint(GL_FOG_HINT, GL_NICEST);     // 멋있게 해달라구 요구
 	glFogf(GL_FOG_START, 100.f);         // LINEAR에서만 적용 안개가 보이는 Z값
 	glFogf(GL_FOG_END, 120.f);           // 안개가 들이워져서 물체가 보이지 않는 Z값
-	glEnable(GL_FOG);
+
+	if (fogOn == true)
+		glEnable(GL_FOG);
+	else
+		glDisable(GL_FOG);
 
 	
 
@@ -485,9 +489,18 @@ void S02Main::keyboard(int key, bool pressed, int x, int y, bool special)
 			}
 			beforePick = false;
 			break;
-
+		case '.':
+			if (fogOn == true) {
+				fogOn = false;
+			}
+			else {
+				fogOn = true;
+			}
+			break;
 
 		}
+
+		
 
 	}
 	else {
