@@ -92,7 +92,9 @@ void S02Main::init()
 
 	for (int i = 0; i < whatBox; ++i)
 		objectBox[i].updateCatch(false);
-
+	//오프닝 카메라를 위한----------------
+	m_Camera.setEye(Eye);
+	result_degree[0] = 180;
 
 	view_rotate[0] = 60;
 	view_rotate[1] = 50;
@@ -103,6 +105,32 @@ void S02Main::init()
 	banana_cl[0] = 50;
 	banana_cl[1] = 20;
 	banana_cl[2] = 50;
+
+	red_right_cylinder.x = mapLight[LightCount - 1].returnXpos();
+	red_right_cylinder.y = mapLight[LightCount - 1].returnYpos();
+	red_right_cylinder.z = mapLight[LightCount - 1].returnZpos();
+
+	//초기 카메라 위치를 설정합니다.
+	Eye.x = red_right_cylinder.x;
+	Eye.y = red_right_cylinder.y;
+	Eye.z = red_right_cylinder.z;
+
+
+	opening_camera_working = true;
+	opening_bezier_t = 0;
+	//
+	end_At.x = tmpRect.x + sin(180 * 3.141592 / 180) * 100;
+	end_At.z = tmpRect.z + cos(180 * 3.141592 / 180) * 100;
+	start_At.x = 1;
+	start_At.y = 1;
+
+
+	view_rotate[0] = 60;
+	view_rotate[1] = 50;
+
+	view_at_size[0] = 100;
+	view_at_size[1] = 10;
+	//------------------변수 이름 넘나 긴것!
 }
 
 void S02Main::exit()
@@ -172,7 +200,7 @@ void S02Main::render()
 		}
 		opening_bezier_t += 0.01f;
 
-		opening_camera_Eye(&red_right_cylinder.x, &red_right_cylinder.y, &red_right_cylinder.z, &tmpRect.x, &tmpRect.y, &tmpRect.z, &opening_bezier_t, 300, &Eye.x, &Eye.y, &Eye.z);
+		opening_camera_Eye(&red_right_cylinder.x, &red_right_cylinder.y, &red_right_cylinder.z, &tmpRect.x, &tmpRect.y - 20, &tmpRect.z, &opening_bezier_t, 200, &Eye.x, &Eye.y, &Eye.z);
 		opening_camera_At(&start_At.x, &start_At.y, &start_At.z, &end_At.x, &end_At.y, &end_At.z, &opening_bezier_t, &At.x, &At.y, &At.z);
 
 		printf("opeing %f \n", Eye.y);
