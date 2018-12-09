@@ -60,6 +60,7 @@ private:
 	int			drag_new_postion[2] = {};
 	int			__t = 0;
 	int			pickLightNumber = -1;
+	int			logoTime = 0;
 
 	bool		dep = false; // 시작할때 낙하하는것도 체크하여서 만들어둠
 	bool		person_view_1 = false;

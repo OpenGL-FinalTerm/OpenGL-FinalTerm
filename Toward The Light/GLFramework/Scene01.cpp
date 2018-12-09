@@ -87,6 +87,7 @@ void S01Main::init()
 	banana_cl[0] = 50;
 	banana_cl[1] = 20;
 	banana_cl[2] = 50;
+
 }
 
 void S01Main::exit()

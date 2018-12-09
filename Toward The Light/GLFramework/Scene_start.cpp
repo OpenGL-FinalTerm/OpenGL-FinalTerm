@@ -25,7 +25,7 @@ void S06Start::init()
 	radian = 90;
 	m_SoundPlayer.init();
 	m_SoundPlayer.selectFolder("Resources\\BGM");
-
+	logoTime = 0;
 	m_Camera.setDistance(300.f);
 	m_Camera.setPerspective(45.f, 0.125f, 7'000.f);
 	m_Camera.setSensitivity(10.f);
@@ -185,8 +185,11 @@ void S06Start::update(float fDeltaTime)
 {
 	//camera at --> player going foward pos update
 // banana pos add
-
-
+	logoTime++;
+	if (logoTime >= 200) {
+		m_Framework->toScene("Main");
+		logoTime = 0;
+	}
 }
 
 
@@ -219,7 +222,7 @@ void S06Start::HUD()
 	glEnd();
 
 	glColor3f(1.f, 1.f, 1.f);
-	print("press 'Space' Game Start", 630, 900 / 2, 0);
+	print("press 'Space' Game Start", 630, 200, 0);
 
 	glPopMatrix();
 }
