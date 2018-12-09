@@ -43,6 +43,9 @@ private:
 	float camera_pos[3];
 	bool ending_animation_bool = true;
 
+	float banana_cl[3];//banana color
+
+
 	Vector3	Eye;
 	Vector3	At;
 	Camera	m_Camera_end;

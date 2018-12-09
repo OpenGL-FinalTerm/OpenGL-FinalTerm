@@ -77,6 +77,11 @@ void S01Main::init()
 
 	view_at_size[0] = 100;
 	view_at_size[1] = 10;
+
+
+	banana_cl[0] = 50;
+	banana_cl[1] = 20;
+	banana_cl[2] = 50;
 }
 
 void S01Main::exit()
@@ -157,13 +162,34 @@ void S01Main::render()
 	}
 
 	glPushMatrix();
-	banana_draw(tmpRect.x, tmpRect.y + 5, tmpRect.z, 0.5, IDLE, banana.rot.degree, result_degree[0]);
+	banana_draw(tmpRect.x, tmpRect.y + 5, tmpRect.z, 0.5, IDLE, banana.rot.degree, result_degree[0], banana_cl[0], banana_cl[1], banana_cl[2]);
 	glPopMatrix();
 
 	m_Camera.setEye(Eye);
 	m_Camera.setTarget(At);
 
 	drawHUD();
+
+	//바나나 색 변화
+	//if(banana_cl[0] > 10)
+	//	banana_cl[0] -= 1;
+	//if (banana_cl[1] < 50)
+	//	banana_cl[1] += 1;
+	//바나나 색변화
+
+	if (banana_cl[0] > 3)
+		banana_cl[0] -= 0.1;
+	if (banana_cl[1] < 40)
+		banana_cl[1] += 0.1;
+	if (banana_cl[2] < 255)
+		banana_cl[2] += 0.5;
+
+		//banana_cl[0] = 3;
+	//banana_cl[1] = 40;
+	//banana_cl[2] = 255;
+
+
+	printf("%f \n", banana_cl[1]);
 
 	glPopMatrix();
 }
@@ -504,9 +530,6 @@ void S01Main::motion(bool pressed, int x, int y)
 				result_degree[1] = 0;
 			}
 
-			printf("normal: %f %f   size : %f \n", difference_new_old[0], difference_new_old[1], difference_size);
-			printf("normal: %f %f   ", difference_normal_pos[0], difference_normal_pos[1]);
-			printf("degree: %f %f \n \n", result_degree[0], result_degree[1]);
 		}
 		//연산이 끝난 후에 저장한다.
 		drag_old_postion[0] = drag_new_postion[0];

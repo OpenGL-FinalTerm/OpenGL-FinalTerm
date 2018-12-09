@@ -96,6 +96,10 @@ void S02Main::init()
 
 	view_at_size[0] = 100;
 	view_at_size[1] = 10;
+
+	banana_cl[0] = 50;
+	banana_cl[1] = 20;
+	banana_cl[2] = 50;
 }
 
 void S02Main::exit()
@@ -232,7 +236,7 @@ void S02Main::render()
 
 
 	glPushMatrix();
-	banana_draw(tmpRect.x, tmpRect.y + 5, tmpRect.z, 0.5, IDLE, banana.rot.degree, result_degree[0]);
+	banana_draw(tmpRect.x, tmpRect.y + 5, tmpRect.z, 0.5, IDLE, banana.rot.degree, result_degree[0], banana_cl[0], banana_cl[1], banana_cl[2]);
 	glPopMatrix();
 	if (person_view_mouse) {
 		m_Camera.setEye(Eye);

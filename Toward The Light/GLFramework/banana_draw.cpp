@@ -10,6 +10,7 @@ void Swap(float a, float b) {
 	a = b;
 	b = temp;
 }
+float banana_color_[7][3];
 
 
 void banana_save_index() {
@@ -195,15 +196,12 @@ void banana_save_index() {
 	index.pos[1 + 8 * 5].y = -12.017;
 	index.pos[1 + 8 * 5].z = -14.961;
 
-
+	
 	for (int i = 0; i < (1 + 8 * 5) + 1; i++) {
-
-		index.cl[i].R = (i + 10) % 255;
-		index.cl[i].G = (i + 10) % 255;
-
 
 		Swap(index.pos[i].y, -index.pos[i].z);
 	}
+
 	// x z -y
 	for (int i = 0; i <= (1 + 8 * 5 + 1); i++) {
 		index.pos[i].x = index.pos[i].x;
@@ -231,7 +229,6 @@ void banana_index_change(float size) {
 
 float __tmp;
 void banana_head(int pivot_x, int pivot_y, int pivot_z, float size, float degree, int state, float rotate) {
-
 	QUAD temp;
 	for (int i = 0; i <= (1 + 8 * 5 + 1); i++) {
 		temp.pos[i].x = index.pos[i].x;
@@ -338,13 +335,17 @@ void banana_head(int pivot_x, int pivot_y, int pivot_z, float size, float degree
 int sign = 1;
 float t = 0.f;
 
-void banana_body(int pivot_x, int pivot_y, int pivot_z, float size, float rot_degree, int state, float rotate) {
+void banana_body(int pivot_x, int pivot_y, int pivot_z, float size, float rot_degree, int state, float rotate, float R, float G, float B) {
 
 	QUAD temp;
 	for (int i = 0; i <= (1 + 8 * 5 + 1); i++) {
 		temp.pos[i].x = index.pos[i].x;
 		temp.pos[i].y = index.pos[i].y;
 		temp.pos[i].z = index.pos[i].z;
+
+		temp.cl[i].R = index.cl[i].R;
+		temp.cl[i].G = index.cl[i].G;
+		temp.cl[i].B = index.cl[i].B;
 
 	}
 	int mult_default = 1;
@@ -378,23 +379,21 @@ void banana_body(int pivot_x, int pivot_y, int pivot_z, float size, float rot_de
 		}
 
 
-
 		glPushMatrix(); {
 
 			glTranslated(pivot_x, pivot_y, pivot_z);
 			glRotatef(rotate, 0, 1, 0);
 			//glRotated(rot_degree, 1, 0, 0);
 			for (int j = 1; j < 7; j++) {
-
-				glColor3f(j + 0.5 * 0.5, j * 0.2, 0);
-
+				//glColor3f((float)(230 - j * 50) / 255, (float)(230 - j * 20) / 255, (float)(230 - j * 50) / 255);
+				//banana_color_
+				glColor3f((float)(255 - j * R) / 255, (float)(230 - j * G) / 255, (float)(30 - j * B) / 255);
 				for (int i = 4; i > 0; i--) {
-
-
+				
 					glBegin(GL_POLYGON); {//¾Æ·¡
 
 						glVertex3f(temp.pos[i + (j * 5)].x, temp.pos[i + (j * 5)].y, temp.pos[i + (j * 5)].z);//Áß½É
-
+						 
 						glVertex3f(temp.pos[(i + 1) + (j * 5)].x, temp.pos[(i + 1) + (j * 5)].y, temp.pos[(i + 1) + (j * 5)].z);//±×¿Ü
 
 						glVertex3f(temp.pos[(i + 1) + ((j + 1) * 5)].x, temp.pos[(i + 1) + ((j + 1) * 5)].y, temp.pos[(i + 1) + ((j + 1) * 5)].z);//±×¿Ü
@@ -582,13 +581,21 @@ void banana_body(int pivot_x, int pivot_y, int pivot_z, float size, float rot_de
 	}
 
 }
+void banana_set_cl(float* R, float* G, float* B)
+{
+	
+	for (int j = 1; j < 7; j++) {
+		;
+	}
+}
 
-void banana_draw(int pivot_x, int pivot_y, int pivot_z, float size, int state, float sub_degree, float rotate) {
+
+void banana_draw(int pivot_x, int pivot_y, int pivot_z, float size, int state, float sub_degree, float rotate, float R, float G,float B) {
 	if (state == IDLE) {
 
 		banana_index_change(size);
 		banana_head(pivot_x, pivot_y, pivot_z, size, sub_degree / 2, IDLE, rotate);//¸Ó¸®
-		banana_body(pivot_x, pivot_y, pivot_z, size, sub_degree * 2, IDLE, rotate);//¸ö
+		banana_body(pivot_x, pivot_y, pivot_z, size, sub_degree * 2, IDLE, rotate  , R, G, B);//¸ö
 	}
 }
 //¿À´ÃÀº glPush Pop Â¦À» ¸ø¸ÂÃß´Â ¿À·ù¸¦ ³Â´Ù.

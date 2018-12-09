@@ -50,7 +50,8 @@ private:
 	float		oX = 0, oY = 0;
 	float		rY = 0;
 	float		radian;
-	
+	float banana_cl[3];//banana color
+
 	
 	int			whatBox;
 	int			LightCount = 4;
