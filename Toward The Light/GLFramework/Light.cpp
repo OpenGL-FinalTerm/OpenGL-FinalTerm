@@ -196,6 +196,7 @@ void Light::drawLight(bool LightSwitch, int i)
 {
 	if (LightSwitch == true) {
 		if (i == 0) {
+			GLfloat tmpSpe[4] = { 0.25f, 0.25f, 0.25f, 1.f };
 			glEnable(GL_LIGHTING);
 			glLightfv(GL_LIGHT0, GL_POSITION, pos);
 			glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuseLight);
@@ -208,7 +209,7 @@ void Light::drawLight(bool LightSwitch, int i)
 			glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
 			// 이후에 나오는 모든 재질은 밝게 빛나는 완전 전반사 반사율을 갖는다.
 			//glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, gray);
-			glMaterialfv(GL_FRONT, GL_SPECULAR, specu);
+			glMaterialfv(GL_FRONT, GL_SPECULAR, tmpSpe);
 			glMateriali(GL_FRONT, GL_SHININESS, 64);
 
 			glEnable(GL_LIGHT0);
@@ -216,6 +217,7 @@ void Light::drawLight(bool LightSwitch, int i)
 		}
 
 		else if (i == 1) {
+			GLfloat tmpSpe[4] = { 0.25f, 0.25f, 0.25f, 1.f };
 			glEnable(GL_LIGHTING);
 			glLightfv(GL_LIGHT1, GL_POSITION, pos);
 			glLightfv(GL_LIGHT1, GL_DIFFUSE, diffuseLight);
@@ -228,12 +230,13 @@ void Light::drawLight(bool LightSwitch, int i)
 			glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
 			// 이후에 나오는 모든 재질은 밝게 빛나는 완전 전반사 반사율을 갖는다.
 			//glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, gray);
-			glMaterialfv(GL_FRONT, GL_SPECULAR, specu);
+			glMaterialfv(GL_FRONT, GL_SPECULAR, tmpSpe);
 			glMateriali(GL_FRONT, GL_SHININESS, 64);
 			glEnable(GL_LIGHT1);
 		}
 
 		else if (i == 2) {
+			GLfloat tmpSpe[4] = { 0.25f, 0.25f, 0.25f, 1.f };
 			glEnable(GL_LIGHTING);
 			glLightfv(GL_LIGHT2, GL_POSITION, pos);
 			glLightfv(GL_LIGHT2, GL_AMBIENT, ambientLight);
@@ -246,12 +249,13 @@ void Light::drawLight(bool LightSwitch, int i)
 			glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
 			// 이후에 나오는 모든 재질은 밝게 빛나는 완전 전반사 반사율을 갖는다.
 			//glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, gray);
-			glMaterialfv(GL_FRONT, GL_SPECULAR, specu);
+			glMaterialfv(GL_FRONT, GL_SPECULAR, tmpSpe);
 			glMateriali(GL_FRONT, GL_SHININESS, 64);
 			glEnable(GL_LIGHT2);
 		}
 
 		else if (i == 3) {
+			GLfloat tmpSpe[4] = { 0.25f, 0.25f, 0.25f, 1.f };
 			glEnable(GL_LIGHTING);
 			glLightfv(GL_LIGHT3, GL_POSITION, pos);
 			glLightfv(GL_LIGHT3, GL_AMBIENT, ambientLight);
@@ -264,24 +268,7 @@ void Light::drawLight(bool LightSwitch, int i)
 			glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
 			// 이후에 나오는 모든 재질은 밝게 빛나는 완전 전반사 반사율을 갖는다.
 			//glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, gray);
-			glMaterialfv(GL_FRONT, GL_SPECULAR, specu);
-			glMateriali(GL_FRONT, GL_SHININESS, 64);
-			glEnable(GL_LIGHT3);
-		}
-		else if (i == 3) {
-			glEnable(GL_LIGHTING);
-			glLightfv(GL_LIGHT3, GL_POSITION, pos);
-			glLightfv(GL_LIGHT3, GL_AMBIENT, ambientLight);
-			glLightfv(GL_LIGHT3, GL_DIFFUSE, diffuseLight);
-			glLightfv(GL_LIGHT3, GL_SPECULAR, specu);
-			glLightfv(GL_LIGHT3, GL_POSITION, pos);
-
-			glEnable(GL_COLOR_MATERIAL);
-
-			glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
-			// 이후에 나오는 모든 재질은 밝게 빛나는 완전 전반사 반사율을 갖는다.
-			//glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, gray);
-			glMaterialfv(GL_FRONT, GL_SPECULAR, specu);
+			glMaterialfv(GL_FRONT, GL_SPECULAR, tmpSpe);
 			glMateriali(GL_FRONT, GL_SHININESS, 64);
 			glEnable(GL_LIGHT3);
 		}

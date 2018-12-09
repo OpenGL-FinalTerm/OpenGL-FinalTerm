@@ -88,6 +88,12 @@ void S01Main::init()
 	banana_cl[1] = 20;
 	banana_cl[2] = 50;
 
+	glDisable(GL_LIGHT0);
+	glDisable(GL_LIGHT1);
+	glDisable(GL_LIGHT2);
+	glDisable(GL_LIGHT3);
+	glDisable(GL_LIGHT6);
+	glDisable(GL_LIGHT7);
 }
 
 void S01Main::exit()
@@ -181,7 +187,7 @@ void S01Main::render()
 	GLfloat direction[] = { 0, -1, 0 };
 	GLfloat temp = 20;
 	glLightfv(GL_LIGHT6, GL_SPOT_DIRECTION, direction);
-	glLightf(GL_LIGHT6, GL_SPOT_CUTOFF, 25.f);
+	glLightf(GL_LIGHT6, GL_SPOT_CUTOFF, 15.f);
 
 	glEnable(GL_LIGHT6);
 

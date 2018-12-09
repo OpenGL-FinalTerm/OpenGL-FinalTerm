@@ -71,6 +71,7 @@ int LoadLight(Light mapLight[], int i, Light RedColunm)
 
 	float diffuse[4];
 	float specu[4];
+	float ambient[4];
 
 	if (i == 1)
 		fileName = "StageData\\LightPos\\stage_1-light.txt";
@@ -86,6 +87,7 @@ int LoadLight(Light mapLight[], int i, Light RedColunm)
 		in >> tmpZ;
 		in >> colorType;
 
+		in >> ambient[0] >> ambient[1] >> ambient[2] >> ambient[3];
 		in >> diffuse[0] >> diffuse[1] >> diffuse[2] >> diffuse[3];
 		in >> specu[0] >> specu[1] >> specu[2] >> specu[3];
 
@@ -100,6 +102,7 @@ int LoadLight(Light mapLight[], int i, Light RedColunm)
 			lz = -60 + (tmpZ * 20);
 
 			mapLight[k].DefaultLightPosSetting(lx, ly, lz, colorType);
+			mapLight[k].settingAmbient(ambient[0], ambient[1], ambient[2], ambient[3]);
 			mapLight[k].settingDiffuse((float)diffuse[0], (float)diffuse[1], (float)diffuse[2], (float)diffuse[3]);
 			mapLight[k].settingSpecu((float)specu[0], (float)specu[1], (float)specu[2], (float)specu[3]);
 			mapLight[k].drawLight(TRUE, k);
@@ -110,6 +113,7 @@ int LoadLight(Light mapLight[], int i, Light RedColunm)
 			tmpZ = -60 + (tmpZ * 20);
 
 			mapLight[k].DefaultLightPosSetting(tmpX, 40, tmpZ, colorType);
+			mapLight[k].settingAmbient((float)ambient[0], (float)ambient[1], (float)ambient[2], (float)ambient[3]);
 			mapLight[k].settingDiffuse((float)diffuse[0], (float)diffuse[1], (float)diffuse[2], (float)diffuse[3]);
 			mapLight[k].settingSpecu((float)specu[0], (float)specu[1], (float)specu[2], (float)specu[3]);
 			mapLight[k].drawRedColunm();
