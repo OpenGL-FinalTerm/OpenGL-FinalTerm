@@ -21,8 +21,13 @@ void S01Main::init()
 {
 	ShowCursor(false);
 	radian = 90;
+	m_SoundPlayer.exit();
 	m_SoundPlayer.init();
 	m_SoundPlayer.selectFolder("Resources\\BGM");
+
+	m_walkingSound.init();
+	m_walkingSound.selectFolder("Resources\\walkSound");
+	
 
 	m_Camera.setDistance(300.f);
 	m_Camera.setPerspective(45.f, 0.125f, 7'000.f);
@@ -97,6 +102,7 @@ void S01Main::exit()
 void S01Main::reset()
 {
 	m_SoundPlayer.play();
+	m_walkingSound.play();
 }
 
 float S01Main::returnMainX()
@@ -155,6 +161,21 @@ void S01Main::render()
 		camera_moving_Eye(&tmpRect.x, &tmpRect.y, &tmpRect.z, &result_degree[0], &view_rotate[0], &view_rotate[1], &Eye.x, &Eye.y, &Eye.z);
 		camera_moving_At(&tmpRect.x, &tmpRect.y, &tmpRect.z, &result_degree[0], &view_at_size[0], &view_at_size[1], &At.x, &At.y, &At.z);
 	}
+
+	spotPos[0] = tmpRect.x;
+	spotPos[1] = tmpRect.y + 40;
+	spotPos[2] = tmpRect.z;
+
+	glLightfv(GL_LIGHT6, GL_DIFFUSE, spotDiffuse);
+	glLightfv(GL_LIGHT6, GL_SPECULAR, spotSpecu);
+	glLightfv(GL_LIGHT6, GL_POSITION, spotPos);
+
+	GLfloat direction[] = { 0, -1, 0 };
+	GLfloat temp = 20;
+	glLightfv(GL_LIGHT6, GL_SPOT_DIRECTION, direction);
+	glLightf(GL_LIGHT6, GL_SPOT_CUTOFF, 25.f);
+
+	glEnable(GL_LIGHT6);
 
 	glPushMatrix();
 	banana_draw(tmpRect.x, tmpRect.y + 5, tmpRect.z, 0.5, IDLE, banana.rot.degree, result_degree[0]);

@@ -136,4 +136,9 @@ private:
 	tmp				tmpRect;
 	//GLubyte *map = (GLubyte*)image->pixels;
 
+
+	//스포트 라이트 색상부
+	GLfloat spotPos[4] = { 0,0,0, 1.0f };
+	GLfloat spotDiffuse[4] = { 1.f ,1.f, 1.f, 1.f };
+	GLfloat spotSpecu[4] = { 1.f, 1.f, 1.f, 1.f };
 };
