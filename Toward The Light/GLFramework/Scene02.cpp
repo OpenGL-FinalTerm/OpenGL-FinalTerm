@@ -161,8 +161,7 @@ void S02Main::render()
 		mapLight[i].drawLight(TRUE, i);
 
 	mapLight[LightCount - 1].drawRedColunm();
-
-
+	//카메라 정리 ---
 	if (opening_camera_working) {//오프닝 영상이 시작되면
 
 		if (opening_bezier_t >= 1) {
@@ -181,60 +180,6 @@ void S02Main::render()
 		//eye 도 각도에 따라 바뀐다.
 		camera_moving_Eye(&tmpRect.x, &tmpRect.y, &tmpRect.z, &result_degree[0], &view_rotate[0], &view_rotate[1], &Eye.x, &Eye.y, &Eye.z);
 		camera_moving_At(&tmpRect.x, &tmpRect.y, &tmpRect.z, &result_degree[0], &view_at_size[0], &view_at_size[1], &At.x, &At.y, &At.z);
-	}
-	//glPushMatrix();
-	//glColor3f(1.f, 0.4f, 0.2f);
-	//glutSolidCube(10);
-	//glPopMatrix();
-
-
-	//카메라 정리 ---
-
-	if (person_view_1) {//1인칭
-		move_Eye[0] = tmpRect.x;
-		//move_Eye[1] = tmpRect.y;
-		move_Eye[2] = tmpRect.z;
-
-		Eye.x = move_Eye[0];
-		Eye.y = tmpRect.y + 20;
-		Eye.z = move_Eye[2] - 20;
-
-		//각도에 맞춰서 카메라를 돌려준다.
-		At.x = move_Eye[0] + sin(radian  * 3.141592 / 180) * 50;
-		At.z = move_Eye[2] + cos(radian  * 3.141592 / 180) * 50;
-		At.y = tmpRect.y + 10;
-	}
-	else if (person_view_3) {//3인칭
-		move_Eye[0] = tmpRect.x;
-		//move_Eye[1] = tmpRect.y;
-		move_Eye[2] = tmpRect.z;
-
-		Eye.x = move_Eye[0];
-		Eye.y = tmpRect.y + 50;
-		Eye.z = move_Eye[2] + 20;
-
-		//각도에 맞춰서 카메라를 돌려준다.
-		At.x = move_Eye[0] + sin(radian  * 3.141592 / 180) * 50;
-		At.z = move_Eye[2] + cos(radian  * 3.141592 / 180) * 50;
-		At.y = tmpRect.y + 20;
-	}
-	else if (person_view_mouse) {
-		//eye 도 각도에 따라 바뀐다.
-		Eye.x = -sin(result_degree[0] * 3.141592 / 180) * (20 + view_rotate[0]) + tmpRect.x;
-		Eye.y = tmpRect.y + view_rotate[1];
-		Eye.z = -cos(result_degree[0] * 3.141592 / 180) * (20 + view_rotate[0]) + tmpRect.z;
-
-		//각도에 맞춰서 카메라를 돌려준다.
-		//이때 카메라의 At 벡터 기준점은 eye가 아닌 바나나의 현재 위치입니다.
-		At.x = tmpRect.x + sin(result_degree[0] * 3.141592 / 180) * 100;
-		//At.y = tmpRect.y + ((cos(result_degree[1] * 3.141592 / 180) * 50));
-		//At.z = tmpRect.z + ((cos(result_degree[0] * 3.141592 / 180) * 50) + (sin(result_degree[1] * 3.141592 / 180) * 50));
-		//At.z = tmpRect.z + ((cos(result_degree[0] * 3.141592 / 180) * 100));
-		At.y = 20;
-
-
-		//1인칭 뷰
-		At.z = tmpRect.z + ((cos(result_degree[0] * 3.141592 / 180) * 100));
 	}
 
 	spotPos[0] = tmpRect.x;
@@ -255,19 +200,11 @@ void S02Main::render()
 	glPushMatrix();
 	banana_draw(tmpRect.x, tmpRect.y + 5, tmpRect.z, 0.5, IDLE, banana.rot.degree, result_degree[0], banana_cl[0], banana_cl[1], banana_cl[2]);
 	glPopMatrix();
-	if (person_view_mouse) {
-		m_Camera.setEye(Eye);
-		m_Camera.setTarget(At);
 
-	}
-	else {
-		//		m_Camera.setDistance(100);
-		m_Camera.setTarget(At);
-	}
-
+	m_Camera.setEye(Eye);
+	m_Camera.setTarget(At);
 
 	drawHUD();
-
 
 	//바나나 색 변화
 	//if(banana_cl[0] > 10)
@@ -286,6 +223,9 @@ void S02Main::render()
 	//banana_cl[0] = 3;
 //banana_cl[1] = 40;
 //banana_cl[2] = 255;
+
+
+	printf("%f \n", banana_cl[1]);
 
 	glPopMatrix();
 }

@@ -108,8 +108,6 @@ void S01Main::exit()
 
 void S01Main::reset()
 {
-	m_SoundPlayer.play();
-	m_walkingSound.play();
 }
 
 float S01Main::returnMainX()
