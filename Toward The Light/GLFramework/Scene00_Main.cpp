@@ -167,6 +167,9 @@ void S00Logo::HUD()
 	else if (choose == 3) {
 		print("Setting", DEF_WIN_WIDTH / 2, DEF_WIN_HEIGHT - 600, 0);
 	}
+	else {
+		print("Select Map", DEF_WIN_WIDTH / 2, DEF_WIN_HEIGHT - 600, 0);
+	}
 
 	
 
