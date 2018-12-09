@@ -144,24 +144,24 @@ void S06Start::reshape(int w, int h)
 void S06Start::keyboard(int key, bool pressed, int x, int y, bool special)
 {
 
-	if (pressed)
-	{
-		switch (key)
-		{
-		case ' ':
-			m_Framework->toScene("Main");
-			break;
-			//환경설정 나오기
+	//if (pressed)
+	//{
+	//	switch (key)
+	//	{
+	//	case ' ':
+	//		m_Framework->toScene("Main");
+	//		break;
+	//		//환경설정 나오기
 
 
-		//바로가기 
-		case '1': m_Framework->toScene("1"); break;
-		case '2': m_Framework->toScene("2"); break;
-		case '3': m_Framework->toScene("3"); break;
-		case '4': m_Framework->toScene("Ending"); break;
-		case '5': m_Framework->toScene("Setting"); break;
-		}
-	}
+	//	//바로가기 
+	//	case '1': m_Framework->toScene("1"); break;
+	//	case '2': m_Framework->toScene("2"); break;
+	//	case '3': m_Framework->toScene("3"); break;
+	//	case '4': m_Framework->toScene("Ending"); break;
+	//	case '5': m_Framework->toScene("Setting"); break;
+	//	}
+	//}
 
 }
 

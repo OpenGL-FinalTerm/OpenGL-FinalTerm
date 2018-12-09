@@ -6,8 +6,6 @@
 #include "GLScene.h"
 
 /* UTILITIES */
-#include "Model.h"
-#include "NormalObject.h"
 #include "Camera.h"
 #include "SoundPlayer.h"
 #include "BoxObject.h"
@@ -15,10 +13,11 @@
 #include "BananaSetting.h"
 #include "Character.h"
 #include "Wall.h"
-#include "Texture.h"
 #include "LoadBitmap.h"
 #include <Windows.h>
 #include "camera_working.h"
+#include <mmsystem.h>
+#pragma comment(lib, "winmm")
 
 class S02Main : public GLScene
 {
@@ -44,13 +43,15 @@ public:
 	virtual float returnMainZ();
 
 	virtual GLuint LoadTexture(const char * filename, int width_1, int height_1);
+	DWORD LoadWAV(HWND hWnd, LPCTSTR lpszWave);
+	void LoadSound(int i, bool check);
 
 private:
 	float		tX = 0, tY = 0;
 	float		oX = 0, oY = 0;
 	float		rY = 0;
 	float		radian;
-	float banana_cl[3];//banana color
+	float		banana_cl[3];//banana color
 
 	
 	int			whatBox;
@@ -95,6 +96,7 @@ private:
 	bool		sPress = false;
 	bool		dPress = false;
 	
+	int			stepSound = 0;
 	GLuint			texCord;
 	GLubyte			*pBytes;
 	BITMAPINFO		*info;
@@ -122,11 +124,8 @@ private:
 	Camera			m_Camera;
 	BITMAPINFO		*texture;
 	//Texture			textures;
-	NormalObject	m_Plane;
-	NormalObject    m_Box[3];
-	NormalObject    m_wBox[3];
-	SoundPlayer		m_SoundPlayer;
-	SoundPlayer		m_walkingSound;
+	SoundPlayer		m_map2BGM;
+	SoundPlayer		m_map2Walk;
 	Box				objectBox[100];
 	Box				mainCharacter;
 
@@ -142,4 +141,11 @@ private:
 	GLfloat spotPos[4] = { 0,0,0, 1.0f };
 	GLfloat spotDiffuse[4] = { 1.f ,1.f, 1.f, 1.f };
 	GLfloat spotSpecu[4] = { 1.f, 1.f, 1.f, 1.f };
+
+
+	// 프레임워크 BGM 결함으로 다른걸로 대체함
+	MCI_OPEN_PARMS      mciOpenParms;
+	MCI_PLAY_PARMS       mciPlayParms;
+	MCI_STATUS_PARMS   mciStatus;
+	UINT wDeviceID = 0;
 };

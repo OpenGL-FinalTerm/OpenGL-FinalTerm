@@ -8,7 +8,6 @@
 //#include "BoxObject.h"
 
 #include "Object.h"
-#include "Model.h"
 
 #include "NormalObject.h"
 #include "Camera.h"
@@ -42,7 +41,6 @@ public:
 private:
 
 	Camera	m_Camera;
-	Model	m_Model;
 	Object	m_Title;
 
 	//박스 로딩 함수

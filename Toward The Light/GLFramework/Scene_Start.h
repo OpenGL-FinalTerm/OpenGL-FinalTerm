@@ -3,8 +3,6 @@
 #include "GLScene.h"
 
 /* UTILITIES */
-#include "Model.h"
-#include "NormalObject.h"
 #include "Camera.h"
 #include "SoundPlayer.h"
 #include "BoxObject.h"
@@ -95,8 +93,6 @@ private:
 	Vector3			foward_move; //나아가야하는 방향
 	Vector2			foward;//player move
 	Camera			m_Camera;
-	NormalObject	m_Plane;
-	NormalObject    m_Sphere;
 	SoundPlayer		m_SoundPlayer;
 	SoundPlayer		m_walkingSound;
 	Box				objectBox[65];

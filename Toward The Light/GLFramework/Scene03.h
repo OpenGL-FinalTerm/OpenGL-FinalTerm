@@ -2,7 +2,6 @@
 #include "GLScene.h"
 
 /* UTILITIES */
-#include "Model.h"
 #include "NormalObject.h"
 #include "Camera.h"
 #include "AirPlane.h"
