@@ -123,8 +123,8 @@ private:
 
 
 	GLfloat spotPos[4] = { 0,0,0, 1.0f };
-	GLfloat spotDiffuse[4] = { 0.2 ,0.2, 0.2, 0.2f };
-	GLfloat spotSpecu[4] = { 1.f, 1.f, 1.f, 0.2 };
+	GLfloat spotDiffuse[4] = { 1.f ,1.f, 1.f, 1.f };
+	GLfloat spotSpecu[4] = { 1.f, 1.f, 1.f, 1.f };
 
 	// 프레임워크 BGM 결함으로 다른걸로 대체함
 	MCI_OPEN_PARMS      mciOpenParms;
