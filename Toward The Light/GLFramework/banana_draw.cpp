@@ -363,6 +363,8 @@ void banana_body(int pivot_x, int pivot_y, int pivot_z, float size, float rot_de
 
 	}
 
+
+
 	for (int i = 0; i < 2; i++) {
 		float t__t;
 		if (i == 1) {
@@ -481,6 +483,11 @@ void banana_body(int pivot_x, int pivot_y, int pivot_z, float size, float rot_de
 					limb_down[2] += size * 2 * cos(rot_degree / 4 * 3.141592 * 1) * mult_default;
 
 				}
+				else if (state == RUN) {
+					limb_down[1] += size * 2 * sin(-rot_degree / 4 * 3.141592 * 1) * mult_default;
+					limb_down[2] += size * 2 * cos(rot_degree / 4 * 3.141592 * 1) * mult_default;
+
+				}
 				//Áß°£ °üÀý º¸°£
 				for (int i = 0; i < 3; i++) {
 					limb_mid[i] = (limb_up[i] + limb_down[i]) / 2;
@@ -526,9 +533,9 @@ void banana_body(int pivot_x, int pivot_y, int pivot_z, float size, float rot_de
 					leg_down[2] = temp.pos[4 + 5 * 5].z;
 				}
 				else if (state == RUN) {
-					leg_down[0] = temp.pos[4 + 5 * 5].x;
-					leg_down[1] = temp.pos[4 + 5 * 5].y - (size * 10);
-					leg_down[2] = temp.pos[4 + 5 * 5].z + rot_degree / 2 * mult_default;
+					leg_down[0] = temp.pos[4 + 5 * 5].x ;
+					leg_down[1] = temp.pos[4 + 5 * 5].y - (size * 10) + sin(rot_degree * 2) * mult_default;
+					leg_down[2] = temp.pos[4 + 5 * 5].z + cos(rot_degree * 2)* mult_default;
 				}
 
 				for (int i = 0; i < 3; i++) {
@@ -596,6 +603,12 @@ void banana_draw(int pivot_x, int pivot_y, int pivot_z, float size, int state, f
 		banana_index_change(size);
 		banana_head(pivot_x, pivot_y, pivot_z, size, sub_degree / 2, IDLE, rotate);//¸Ó¸®
 		banana_body(pivot_x, pivot_y, pivot_z, size, sub_degree * 2, IDLE, rotate  , R, G, B);//¸ö
+	}
+	else if (state == RUN) {
+
+		banana_index_change(size);
+		banana_head(pivot_x, pivot_y, pivot_z, size, sub_degree / 2, RUN, rotate);//¸Ó¸®
+		banana_body(pivot_x, pivot_y, pivot_z, size, sub_degree * 2, RUN, rotate, R, G, B);//¸ö
 	}
 }
 //¿À´ÃÀº glPush Pop Â¦À» ¸ø¸ÂÃß´Â ¿À·ù¸¦ ³Â´Ù.

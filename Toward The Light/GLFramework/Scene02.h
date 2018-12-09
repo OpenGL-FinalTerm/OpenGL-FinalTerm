@@ -81,7 +81,7 @@ private:
 	bool		aPress = false;
 	bool		sPress = false;
 	bool		dPress = false;
-
+	bool		fogOn = true;
 	bool catchBox = false;
 	int boxIndex;
 
@@ -127,14 +127,20 @@ private:
 	float			ControlPoint[3];
 	float			startPos[3];
 
-
+	int				banana_state;
+	int				checkCount = 0;
 	GLfloat spotPos[4] = { 0,0,0, 1.0f };
-	GLfloat spotDiffuse[4] = { 1.f ,1.f, 1.f, 1.f };
-	GLfloat spotSpecu[4] = { 1.f, 1.f, 1.f, 1.f };
+	GLfloat spotDiffuse[4] = { 0.7f ,0.7f, 0.f, 0.7f };
+	GLfloat spotSpecu[4] = { 1.f, 1.f, 1.f, 0.1f };
 
 	// 프레임워크 BGM 결함으로 다른걸로 대체함
 	MCI_OPEN_PARMS      mciOpenParms;
 	MCI_PLAY_PARMS       mciPlayParms;
 	MCI_STATUS_PARMS   mciStatus;
 	UINT wDeviceID = 0;
+
+	GLfloat fog_color[4] = { 0.f, 0.f, 0.f, 1.f };
+	GLfloat density = 0.3;
+	GLfloat start = 5.5f;
+	GLfloat end = 7.0f;
 };

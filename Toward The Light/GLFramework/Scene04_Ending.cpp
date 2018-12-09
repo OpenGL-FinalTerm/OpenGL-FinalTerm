@@ -122,8 +122,11 @@ void S04End::update(float fDeltaTime)
 
 void S04End::HUD()
 {
+	glColor3f(1.f, 1.f, 1.f);
+	print("GAME_OVER", DEF_WIN_WIDTH / 2 + 500, DEF_WIN_HEIGHT / 2 - 50, 0);
 
-	
+	print("Press 'R' key", DEF_WIN_WIDTH / 2 + 500, DEF_WIN_HEIGHT / 2, 0);
+
 }
 
 void S04End::drawHUD()

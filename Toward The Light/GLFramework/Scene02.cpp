@@ -51,7 +51,7 @@ void S02Main::init()
 	LightCount = LoadLight(mapLight, 2, RedColumn);
 	for (int i = 0; i < LightCount - 1; ++i)
 		mapLight[i].LightOn(true, i);
-
+	checkCount = 0;
 	keyW = false;
 	keyS = false;
 	wPress = false;
@@ -156,6 +156,7 @@ void S02Main::exit()
 	banana_cl[1] = 20;
 	banana_cl[2] = 50;
 	glDisable(GL_LIGHTING);
+	glDisable(GL_FOG);
 }
 
 void S02Main::reset()
@@ -180,6 +181,25 @@ float S02Main::returnMainZ()
 
 void S02Main::render()
 {
+	glEnable(GL_DEPTH_TEST);
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glMatrixMode(GL_MODELVIEW);
+
+	glFogi(GL_FOG_MODE, GL_LINEAR);     //
+	glFogfv(GL_FOG_COLOR, fog_color);    // LINEAR모드의 안개 색 지정
+	//glFogf(GL_FOG_DENSITY, 0.3f);       // 안개의 밀도 지정.GL_EXP,GL_EXP2만 사용 
+	//glHint(GL_FOG_HINT, GL_NICEST);     // 멋있게 해달라구 요구
+	glFogf(GL_FOG_START, 100.f);         // LINEAR에서만 적용 안개가 보이는 Z값
+	glFogf(GL_FOG_END, 120.f);           // 안개가 들이워져서 물체가 보이지 않는 Z값
+
+	if (fogOn == true)
+		glEnable(GL_FOG);
+	else
+		glDisable(GL_FOG);
+
+	
+
 	glPushMatrix();
 	m_Camera.ready();
 	glColor3f(1.0f, 1.0f, 1.0f);
@@ -209,7 +229,6 @@ void S02Main::render()
 		opening_camera_Eye(&red_right_cylinder.x, &red_right_cylinder.y, &red_right_cylinder.z, &tmpRect.x, &tmpRect.y - 20, &tmpRect.z, &opening_bezier_t, 200, &Eye.x, &Eye.y, &Eye.z);
 		opening_camera_At(&start_At.x, &start_At.y, &start_At.z, &end_At.x, &end_At.y, &end_At.z, &opening_bezier_t, &At.x, &At.y, &At.z);
 
-		printf("opeing %f \n", Eye.y);
 	}
 
 
@@ -235,7 +254,7 @@ void S02Main::render()
 	glEnable(GL_LIGHT6);
 
 	glPushMatrix();
-	banana_draw(tmpRect.x, tmpRect.y + 5, tmpRect.z, 0.5, IDLE, banana.rot.degree, result_degree[0], banana_cl[0], banana_cl[1], banana_cl[2]);
+	banana_draw(tmpRect.x, tmpRect.y + 5, tmpRect.z, 0.5, banana_state, banana.rot.degree, result_degree[0], banana_cl[0], banana_cl[1], banana_cl[2]);
 	glPopMatrix();
 
 	m_Camera.setEye(Eye);
@@ -267,8 +286,6 @@ void S02Main::render()
 //banana_cl[1] = 40;
 //banana_cl[2] = 255;
 
-
-	printf("%f \n", banana_cl[1]);
 
 	glPopMatrix();
 }
@@ -472,9 +489,18 @@ void S02Main::keyboard(int key, bool pressed, int x, int y, bool special)
 			}
 			beforePick = false;
 			break;
-
+		case '.':
+			if (fogOn == true) {
+				fogOn = false;
+			}
+			else {
+				fogOn = true;
+			}
+			break;
 
 		}
+
+		
 
 	}
 	else {
@@ -619,6 +645,16 @@ void S02Main::motion(bool pressed, int x, int y)
 
 void S02Main::update(float fDeltaTime)
 {
+	checkCount++;
+	if (checkCount > 240000) {
+		glDisable(GL_FOG);
+		m_Framework->toScene("Ending");
+	}
+
+	if (checkCount % 10 == 0) {
+		start += 0.05f;
+		end += 0.05f;
+	}
 	//camera at --> player going foward pos update
 // banana pos add
 
@@ -722,6 +758,7 @@ void S02Main::update(float fDeltaTime)
 	}
 	//printf("%f \n", result_degree[0]);
 	if (keyW == true) {
+		banana_state = 1;
 		if (result_degree[0] >= 90 && result_degree[0] < 180) {
 			//tmpRect.x += (sin(result_degree[0] * 3.141592 / 180));
 			//tmpRect.z += (cos(result_degree[0] * 3.141592 / 180));
@@ -758,6 +795,7 @@ void S02Main::update(float fDeltaTime)
 	}
 
 	if (keyS == true) {
+		banana_state = 1;
 		foward_move.x *= -1;
 		foward_move.z *= -1;
 		if (result_degree[0] >= 90 && result_degree[0] < 180) {
@@ -800,6 +838,7 @@ void S02Main::update(float fDeltaTime)
 		aPress = false;
 		sPress = false;
 		dPress = false;
+		banana_state = 0;
 	}
 	// 캐릭도 연속 이동
 	bool check = false;
