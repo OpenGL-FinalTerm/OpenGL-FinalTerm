@@ -103,6 +103,9 @@ void S01Main::exit()
 	////	glDisable(GL_LIGHT6);
 	//	glDisable(GL_LIGHT7);
 	LoadSound(0, false);
+	banana_cl[0] = 50;
+	banana_cl[1] = 20;
+	banana_cl[2] = 50;
 	glDisable(GL_LIGHTING);
 }
 
@@ -198,12 +201,19 @@ void S01Main::render()
 	//	banana_cl[1] += 1;
 	//바나나 색변화
 
-	if (banana_cl[0] > 3)
-		banana_cl[0] -= 0.1;
-	if (banana_cl[1] < 40)
-		banana_cl[1] += 0.1;
-	if (banana_cl[2] < 255)
-		banana_cl[2] += 0.5;
+	if (mapLight[LightCount - 1].returnXpos() - 10 < returnMainX() + 5 && mapLight[LightCount - 1].returnXpos() + 10 > returnMainX() - 5
+		&&mapLight[LightCount - 1].returnZpos() + 10 > returnMainZ() - 5 && mapLight[LightCount - 1].returnZpos() - 10 < returnMainZ() + 5) {
+		if (banana_cl[0] > 3)
+			banana_cl[0] -= 0.1;
+		if (banana_cl[1] < 40)
+			banana_cl[1] += 0.1;
+		if (banana_cl[2] < 255)
+			banana_cl[2] += 0.5;
+
+
+		if(banana_cl[0] <=3)
+			m_Framework->toScene("Ending");
+	}
 
 		//banana_cl[0] = 3;
 	//banana_cl[1] = 40;
