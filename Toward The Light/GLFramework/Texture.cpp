@@ -17,7 +17,7 @@ Texture::~Texture()
 void Texture::load(std::string path)
 {
 	CImage cimg;
-	cimg.Load(path.c_str());
+	cimg.Load((LPCTSTR)path.c_str());
 
 	glBindTexture(GL_TEXTURE_2D, m_uGlobalTexID);
 

@@ -70,7 +70,8 @@ void S05Setting::exit()
 
 void S05Setting::reset()
 {
-	m_SoundPlayer.play();}
+	m_SoundPlayer.play();
+}
 
 float S05Setting::returnMainX()
 {

@@ -25,7 +25,7 @@ void S06Start::init()
 	radian = 90;
 	m_SoundPlayer.init();
 	m_SoundPlayer.selectFolder("Resources\\BGM");
-
+	logoTime = 0;
 	m_Camera.setDistance(300.f);
 	m_Camera.setPerspective(45.f, 0.125f, 7'000.f);
 	m_Camera.setSensitivity(10.f);
@@ -144,24 +144,24 @@ void S06Start::reshape(int w, int h)
 void S06Start::keyboard(int key, bool pressed, int x, int y, bool special)
 {
 
-	if (pressed)
-	{
-		switch (key)
-		{
-		case ' ':
-			m_Framework->toScene("Main");
-			break;
-			//환경설정 나오기
+	//if (pressed)
+	//{
+	//	switch (key)
+	//	{
+	//	case ' ':
+	//		m_Framework->toScene("Main");
+	//		break;
+	//		//환경설정 나오기
 
 
-		//바로가기 
-		case '1': m_Framework->toScene("1"); break;
-		case '2': m_Framework->toScene("2"); break;
-		case '3': m_Framework->toScene("3"); break;
-		case '4': m_Framework->toScene("Ending"); break;
-		case '5': m_Framework->toScene("Setting"); break;
-		}
-	}
+	//	//바로가기 
+	//	case '1': m_Framework->toScene("1"); break;
+	//	case '2': m_Framework->toScene("2"); break;
+	//	case '3': m_Framework->toScene("3"); break;
+	//	case '4': m_Framework->toScene("Ending"); break;
+	//	case '5': m_Framework->toScene("Setting"); break;
+	//	}
+	//}
 
 }
 
@@ -185,8 +185,11 @@ void S06Start::update(float fDeltaTime)
 {
 	//camera at --> player going foward pos update
 // banana pos add
-
-
+	logoTime++;
+	if (logoTime >= 200) {
+		m_Framework->toScene("Main");
+		logoTime = 0;
+	}
 }
 
 
@@ -219,7 +222,7 @@ void S06Start::HUD()
 	glEnd();
 
 	glColor3f(1.f, 1.f, 1.f);
-	print("press 'Space' Game Start", 630, 900 / 2, 0);
+	print("press 'Space' Game Start", 630, 200, 0);
 
 	glPopMatrix();
 }

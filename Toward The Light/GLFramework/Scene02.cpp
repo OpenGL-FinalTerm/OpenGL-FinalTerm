@@ -19,16 +19,19 @@ S02Main::~S02Main()
 
 void S02Main::init()
 {
-	radian = 90;
-	glEnable(GL_LIGHTING);
-	//인게임 bgm 재생초기화
-	m_SoundPlayer.init();
-	m_SoundPlayer.selectFolder("Resources\\BGM\\until morning game.ver.mp3");
+	//m_map2BGM.init();
+	//m_map2BGM.selectFolder("Resources\\BGM");
 	//m_SoundPlayer.play();
 
 	//걷기 효과음 재생 초기화
-	m_walkingSound.init();
-	m_walkingSound.selectFolder("Resources\\Sound");
+	//m_map2Walk.init();
+	//m_map2Walk.selectFolder("Resources\\walkSound");
+	//BGM호출
+	LoadSound(0, true);
+	radian = 90;
+	glEnable(GL_LIGHTING);
+	//인게임 bgm 재생초기화
+
 
 	m_Camera.setDistance(300.f);
 	m_Camera.setPerspective(45.f, 0.125f, 7'000.f);
@@ -104,8 +107,9 @@ void S02Main::init()
 
 void S02Main::exit()
 {
-	m_SoundPlayer.exit();
-	m_walkingSound.exit();
+	//m_map2BGM.exit();
+	//m_map2Walk.exit();
+	LoadSound(0, false);
 	//	glDisable(GL_LIGHT0);
 	//	glDisable(GL_LIGHT1);
 	//	glDisable(GL_LIGHT2);
@@ -119,7 +123,7 @@ void S02Main::exit()
 
 void S02Main::reset()
 {
-	m_SoundPlayer.play();
+	//m_map2BGM.play();
 }
 
 float S02Main::returnMainX()
@@ -139,7 +143,6 @@ float S02Main::returnMainZ()
 
 void S02Main::render()
 {
-	m_SoundPlayer.play();
 	glPushMatrix();
 	m_Camera.ready();
 	glColor3f(1.0f, 1.0f, 1.0f);
@@ -158,8 +161,7 @@ void S02Main::render()
 		mapLight[i].drawLight(TRUE, i);
 
 	mapLight[LightCount - 1].drawRedColunm();
-
-
+	//카메라 정리 ---
 	if (opening_camera_working) {//오프닝 영상이 시작되면
 
 		if (opening_bezier_t >= 1) {
@@ -179,77 +181,51 @@ void S02Main::render()
 		camera_moving_Eye(&tmpRect.x, &tmpRect.y, &tmpRect.z, &result_degree[0], &view_rotate[0], &view_rotate[1], &Eye.x, &Eye.y, &Eye.z);
 		camera_moving_At(&tmpRect.x, &tmpRect.y, &tmpRect.z, &result_degree[0], &view_at_size[0], &view_at_size[1], &At.x, &At.y, &At.z);
 	}
-	//glPushMatrix();
-	//glColor3f(1.f, 0.4f, 0.2f);
-	//glutSolidCube(10);
-	//glPopMatrix();
 
+	spotPos[0] = tmpRect.x;
+	spotPos[1] = tmpRect.y + 40;
+	spotPos[2] = tmpRect.z;
 
-	//카메라 정리 ---
+	glLightfv(GL_LIGHT6, GL_DIFFUSE, spotDiffuse);
+	glLightfv(GL_LIGHT6, GL_SPECULAR, spotSpecu);
+	glLightfv(GL_LIGHT6, GL_POSITION, spotPos);
 
-	if (person_view_1) {//1인칭
-		move_Eye[0] = tmpRect.x;
-		//move_Eye[1] = tmpRect.y;
-		move_Eye[2] = tmpRect.z;
+	GLfloat direction[] = { 0, -1, 0 };
+	GLfloat temp = 20;
+	glLightfv(GL_LIGHT6, GL_SPOT_DIRECTION, direction);
+	glLightf(GL_LIGHT6, GL_SPOT_CUTOFF, 25.f);
 
-		Eye.x = move_Eye[0];
-		Eye.y = tmpRect.y + 20;
-		Eye.z = move_Eye[2] - 20;
-
-		//각도에 맞춰서 카메라를 돌려준다.
-		At.x = move_Eye[0] + sin(radian  * 3.141592 / 180) * 50;
-		At.z = move_Eye[2] + cos(radian  * 3.141592 / 180) * 50;
-		At.y = tmpRect.y + 10;
-	}
-	else if (person_view_3) {//3인칭
-		move_Eye[0] = tmpRect.x;
-		//move_Eye[1] = tmpRect.y;
-		move_Eye[2] = tmpRect.z;
-
-		Eye.x = move_Eye[0];
-		Eye.y = tmpRect.y + 50;
-		Eye.z = move_Eye[2] + 20;
-
-		//각도에 맞춰서 카메라를 돌려준다.
-		At.x = move_Eye[0] + sin(radian  * 3.141592 / 180) * 50;
-		At.z = move_Eye[2] + cos(radian  * 3.141592 / 180) * 50;
-		At.y = tmpRect.y + 20;
-	}
-	else if (person_view_mouse) {
-		//eye 도 각도에 따라 바뀐다.
-		Eye.x = -sin(result_degree[0] * 3.141592 / 180) * (20 + view_rotate[0]) + tmpRect.x;
-		Eye.y = tmpRect.y + view_rotate[1];
-		Eye.z = -cos(result_degree[0] * 3.141592 / 180) * (20 + view_rotate[0]) + tmpRect.z;
-
-		//각도에 맞춰서 카메라를 돌려준다.
-		//이때 카메라의 At 벡터 기준점은 eye가 아닌 바나나의 현재 위치입니다.
-		At.x = tmpRect.x + sin(result_degree[0] * 3.141592 / 180) * 100;
-		//At.y = tmpRect.y + ((cos(result_degree[1] * 3.141592 / 180) * 50));
-		//At.z = tmpRect.z + ((cos(result_degree[0] * 3.141592 / 180) * 50) + (sin(result_degree[1] * 3.141592 / 180) * 50));
-		//At.z = tmpRect.z + ((cos(result_degree[0] * 3.141592 / 180) * 100));
-		At.y = 20;
-
-
-		//1인칭 뷰
-		At.z = tmpRect.z + ((cos(result_degree[0] * 3.141592 / 180) * 100));
-	}
-
+	glEnable(GL_LIGHT6);
 
 	glPushMatrix();
 	banana_draw(tmpRect.x, tmpRect.y + 5, tmpRect.z, 0.5, IDLE, banana.rot.degree, result_degree[0], banana_cl[0], banana_cl[1], banana_cl[2]);
 	glPopMatrix();
-	if (person_view_mouse) {
-		m_Camera.setEye(Eye);
-		m_Camera.setTarget(At);
 
-	}
-	else {
-		//		m_Camera.setDistance(100);
-		m_Camera.setTarget(At);
-	}
-
+	m_Camera.setEye(Eye);
+	m_Camera.setTarget(At);
 
 	drawHUD();
+
+	//바나나 색 변화
+	//if(banana_cl[0] > 10)
+	//	banana_cl[0] -= 1;
+	//if (banana_cl[1] < 50)
+	//	banana_cl[1] += 1;
+	//바나나 색변화
+
+	if (banana_cl[0] > 3)
+		banana_cl[0] -= 0.1;
+	if (banana_cl[1] < 40)
+		banana_cl[1] += 0.1;
+	if (banana_cl[2] < 255)
+		banana_cl[2] += 0.5;
+
+	//banana_cl[0] = 3;
+//banana_cl[1] = 40;
+//banana_cl[2] = 255;
+
+
+	printf("%f \n", banana_cl[1]);
 
 	glPopMatrix();
 }
@@ -880,8 +856,12 @@ void S02Main::update(float fDeltaTime)
 		}
 
 		if (returnMainZ() > -60) {
-			if (m_walkingSound.playing() == false)
-				m_walkingSound.play();
+			stepSound++;
+			if (stepSound % 100 == 0) {
+				LoadSound(1, true);
+				stepSound = 0;
+			}
+
 			if (boxCheckCount < 3) {
 				for (int o = 0; o < boxCheckCount; ++o)
 					objectBox[saveBoxIndex[o]].movingZ(foward_move.z);
@@ -955,8 +935,12 @@ void S02Main::update(float fDeltaTime)
 			objectBox[k].checkUpdate(0);
 
 		if (returnMainX() > -55) {
-			if (m_walkingSound.playing() == false)
-				m_walkingSound.play();
+			stepSound++;
+			if (stepSound % 100 == 0) {
+				LoadSound(1, true);
+				stepSound = 0;
+			}
+
 			if (boxCheckCount < 3) {
 				for (int o = 0; o < boxCheckCount; ++o)
 					objectBox[saveBoxIndex[o]].movingX(foward_move.x);
@@ -1021,8 +1005,11 @@ void S02Main::update(float fDeltaTime)
 		}
 
 		if (returnMainZ() < 60) {
-			if (m_walkingSound.playing() == false)
-				m_walkingSound.play();
+			stepSound++;
+			if (stepSound % 100 == 0) {
+				LoadSound(1, true);
+				stepSound = 0;
+			}
 			if (boxCheckCount < 3) {
 				for (int o = 0; o < boxCheckCount; ++o)
 					objectBox[saveBoxIndex[o]].movingZ(foward_move.z);
@@ -1094,9 +1081,12 @@ void S02Main::update(float fDeltaTime)
 
 
 		if (returnMainX() < 55) {
+			stepSound++;
+			if (stepSound % 100 == 0) {
+				LoadSound(1, true);
+				stepSound = 0;
+			}
 
-			if (m_walkingSound.playing() == false)
-				m_walkingSound.play();
 			if (boxCheckCount < 3) {
 				for (int o = 0; o < boxCheckCount; ++o)
 					objectBox[saveBoxIndex[o]].movingX(foward_move.x);
@@ -1434,4 +1424,41 @@ GLuint S02Main::LoadTexture(const char * filename, int width_1, int height_1)
 	free(data);
 
 	return texture;
+}
+
+void S02Main::LoadSound(int i, bool check)
+{
+	HWND hWnd = NULL;
+	DWORD SelectBGM;
+	if (i == 0) {
+		if (check == true) {
+			SelectBGM = LoadWAV(hWnd, L"until morning game.mp3");
+			SelectBGM = mciSendCommand(1, MCI_PLAY, MCI_NOTIFY, (DWORD)(LPVOID)&mciPlayParms);
+		}
+		else {
+			SelectBGM = LoadWAV(hWnd, L"until morning game.mp3");
+			SelectBGM = mciSendCommand(1, MCI_SEEK, MCI_SEEK_TO_START, (DWORD)(LPVOID)NULL);
+		}
+	}
+	else {
+		SelectBGM = LoadWAV(hWnd, L"walking.wav");
+		SelectBGM = mciSendCommand(2, MCI_SEEK, MCI_SEEK_TO_START, (DWORD)(LPVOID)NULL);
+		SelectBGM = mciSendCommand(2, MCI_PLAY, MCI_NOTIFY, (DWORD)(LPVOID)&mciPlayParms);
+	}
+}
+
+
+DWORD S02Main::LoadWAV(HWND hWnd, LPCTSTR lpszWave)
+{
+	DWORD Result;
+	mciOpenParms.lpstrDeviceType = L"mpegvideo";
+	mciOpenParms.lpstrElementName = lpszWave;
+	Result = mciSendCommand(wDeviceID, MCI_OPEN, MCI_OPEN_TYPE | MCI_OPEN_ELEMENT, (DWORD)(LPVOID)&mciOpenParms);
+	if (Result)
+		return Result;
+	wDeviceID = mciOpenParms.wDeviceID;
+	mciPlayParms.dwCallback = (DWORD)hWnd;
+	if (Result)
+		return Result;
+	return 0;
 }

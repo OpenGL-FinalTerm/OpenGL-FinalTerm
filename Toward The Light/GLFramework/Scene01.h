@@ -2,8 +2,6 @@
 #include "GLScene.h"
 
 /* UTILITIES */
-#include "Model.h"
-#include "NormalObject.h"
 #include "Camera.h"
 #include "SoundPlayer.h"
 #include "BoxObject.h"
@@ -39,7 +37,8 @@ public:
 	virtual float returnMainZ();
 
 	virtual GLuint LoadTexture(const char * filename, int width_1, int height_1);
-
+	DWORD LoadWAV(HWND hWnd, LPCTSTR lpszWave);
+	void LoadSound(int i, bool check);
 
 private:
 	float		rX, rY, rZ;
@@ -89,7 +88,7 @@ private:
 	int view_at_size[2];
 
 	float banana_cl[3];//banana color
-
+	int			stepSound = 0;
 	//붉은 조명기둥
 	Vector3 red_right_cylinder;
 	//오프닝 시작
@@ -103,8 +102,6 @@ private:
 	Vector3			foward_move; //나아가야하는 방향
 	Vector2			foward;//player move
 	Camera			m_Camera;
-	NormalObject	m_Plane;
-	NormalObject    m_Sphere;
 	SoundPlayer		m_SoundPlayer;
 	SoundPlayer		m_walkingSound;
 	Box				objectBox[100];
@@ -124,5 +121,15 @@ private:
 	float			ControlPoint[3];
 	float			startPos[3];
 
+
+	GLfloat spotPos[4] = { 0,0,0, 1.0f };
+	GLfloat spotDiffuse[4] = { 1.f ,1.f, 1.f, 1.f };
+	GLfloat spotSpecu[4] = { 1.f, 1.f, 1.f, 1.f };
+
+	// 프레임워크 BGM 결함으로 다른걸로 대체함
+	MCI_OPEN_PARMS      mciOpenParms;
+	MCI_PLAY_PARMS       mciPlayParms;
+	MCI_STATUS_PARMS   mciStatus;
+	UINT wDeviceID = 0;
 };
 

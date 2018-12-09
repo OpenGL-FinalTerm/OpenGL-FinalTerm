@@ -19,10 +19,15 @@ S01Main::~S01Main()
 
 void S01Main::init()
 {
+	LoadSound(0, true);
+	/*m_SoundPlayer.init();
+	m_SoundPlayer.selectFolder("Resources\\BGM");*/
+
+	/*m_walkingSound.init();
+	m_walkingSound.selectFolder("Resources\\walkSound");*/
+
 	ShowCursor(false);
 	radian = 90;
-	m_SoundPlayer.init();
-	m_SoundPlayer.selectFolder("Resources\\BGM");
 
 	m_Camera.setDistance(300.f);
 	m_Camera.setPerspective(45.f, 0.125f, 7'000.f);
@@ -82,12 +87,13 @@ void S01Main::init()
 	banana_cl[0] = 50;
 	banana_cl[1] = 20;
 	banana_cl[2] = 50;
+
 }
 
 void S01Main::exit()
 {
-	m_SoundPlayer.exit();
-	m_walkingSound.exit();
+	//m_SoundPlayer.exit();
+	//m_walkingSound.exit();
 	//	glDisable(GL_LIGHT0);
 	//	glDisable(GL_LIGHT1);
 	//	glDisable(GL_LIGHT2);
@@ -96,12 +102,12 @@ void S01Main::exit()
 	////	glDisable(GL_LIGHT5);
 	////	glDisable(GL_LIGHT6);
 	//	glDisable(GL_LIGHT7);
+	LoadSound(0, false);
 	glDisable(GL_LIGHTING);
 }
 
 void S01Main::reset()
 {
-	m_SoundPlayer.play();
 }
 
 float S01Main::returnMainX()
@@ -160,6 +166,21 @@ void S01Main::render()
 		camera_moving_Eye(&tmpRect.x, &tmpRect.y, &tmpRect.z, &result_degree[0], &view_rotate[0], &view_rotate[1], &Eye.x, &Eye.y, &Eye.z);
 		camera_moving_At(&tmpRect.x, &tmpRect.y, &tmpRect.z, &result_degree[0], &view_at_size[0], &view_at_size[1], &At.x, &At.y, &At.z);
 	}
+
+	spotPos[0] = tmpRect.x;
+	spotPos[1] = tmpRect.y + 40;
+	spotPos[2] = tmpRect.z;
+
+	glLightfv(GL_LIGHT6, GL_DIFFUSE, spotDiffuse);
+	glLightfv(GL_LIGHT6, GL_SPECULAR, spotSpecu);
+	glLightfv(GL_LIGHT6, GL_POSITION, spotPos);
+
+	GLfloat direction[] = { 0, -1, 0 };
+	GLfloat temp = 20;
+	glLightfv(GL_LIGHT6, GL_SPOT_DIRECTION, direction);
+	glLightf(GL_LIGHT6, GL_SPOT_CUTOFF, 25.f);
+
+	glEnable(GL_LIGHT6);
 
 	glPushMatrix();
 	banana_draw(tmpRect.x, tmpRect.y + 5, tmpRect.z, 0.5, IDLE, banana.rot.degree, result_degree[0], banana_cl[0], banana_cl[1], banana_cl[2]);
@@ -822,8 +843,11 @@ void S01Main::update(float fDeltaTime)
 		}
 
 		if (returnMainZ() > -60) {
-			if (m_walkingSound.playing() == false)
-				m_walkingSound.play();
+			stepSound++;
+			if (stepSound % 100 == 0) {
+				LoadSound(1, true);
+				stepSound = 0;
+			}
 			if (boxCheckCount < 3) {
 				for (int o = 0; o < boxCheckCount; ++o)
 					objectBox[saveBoxIndex[o]].movingZ(foward_move.z);
@@ -897,8 +921,11 @@ void S01Main::update(float fDeltaTime)
 			objectBox[k].checkUpdate(0);
 
 		if (returnMainX() > -55) {
-			if (m_walkingSound.playing() == false)
-				m_walkingSound.play();
+			stepSound++;
+			if (stepSound % 100 == 0) {
+				LoadSound(1, true);
+				stepSound = 0;
+			}
 			if (boxCheckCount < 3) {
 				for (int o = 0; o < boxCheckCount; ++o)
 					objectBox[saveBoxIndex[o]].movingX(foward_move.x);
@@ -963,8 +990,11 @@ void S01Main::update(float fDeltaTime)
 		}
 
 		if (returnMainZ() < 60) {
-			if (m_walkingSound.playing() == false)
-				m_walkingSound.play();
+			stepSound++;
+			if (stepSound % 100 == 0) {
+				LoadSound(1, true);
+				stepSound = 0;
+			}
 			if (boxCheckCount < 3) {
 				for (int o = 0; o < boxCheckCount; ++o)
 					objectBox[saveBoxIndex[o]].movingZ(foward_move.z);
@@ -1037,8 +1067,11 @@ void S01Main::update(float fDeltaTime)
 
 		if (returnMainX() < 55) {
 
-			if (m_walkingSound.playing() == false)
-				m_walkingSound.play();
+			stepSound++;
+			if (stepSound % 100 == 0) {
+				LoadSound(1, true);
+				stepSound = 0;
+			}
 			if (boxCheckCount < 3) {
 				for (int o = 0; o < boxCheckCount; ++o)
 					objectBox[saveBoxIndex[o]].movingX(foward_move.x);
@@ -1364,4 +1397,41 @@ GLuint S01Main::LoadTexture(const char * filename, int width_1, int height_1)
 	free(data);
 
 	return texture;
+}
+
+void S01Main::LoadSound(int i, bool check)
+{
+	HWND hWnd = NULL;
+	DWORD SelectBGM;
+	if (i == 0) {
+		if (check == true) {
+			SelectBGM = LoadWAV(hWnd, L"until morning game.mp3");
+			SelectBGM = mciSendCommand(1, MCI_PLAY, MCI_NOTIFY, (DWORD)(LPVOID)&mciPlayParms);
+		}
+		else {
+			SelectBGM = LoadWAV(hWnd, L"until morning game.mp3");
+			SelectBGM = mciSendCommand(1, MCI_SEEK, MCI_SEEK_TO_START, (DWORD)(LPVOID)NULL);
+		}
+	}
+	else {
+		SelectBGM = LoadWAV(hWnd, L"walking.wav");
+		SelectBGM = mciSendCommand(2, MCI_SEEK, MCI_SEEK_TO_START, (DWORD)(LPVOID)NULL);
+		SelectBGM = mciSendCommand(2, MCI_PLAY, MCI_NOTIFY, (DWORD)(LPVOID)&mciPlayParms);
+	}
+}
+
+
+DWORD S01Main::LoadWAV(HWND hWnd, LPCTSTR lpszWave)
+{
+	DWORD Result;
+	mciOpenParms.lpstrDeviceType = L"mpegvideo";
+	mciOpenParms.lpstrElementName = lpszWave;
+	Result = mciSendCommand(wDeviceID, MCI_OPEN, MCI_OPEN_TYPE | MCI_OPEN_ELEMENT, (DWORD)(LPVOID)&mciOpenParms);
+	if (Result)
+		return Result;
+	wDeviceID = mciOpenParms.wDeviceID;
+	mciPlayParms.dwCallback = (DWORD)hWnd;
+	if (Result)
+		return Result;
+	return 0;
 }

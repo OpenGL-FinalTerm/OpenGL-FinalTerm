@@ -2,8 +2,6 @@
 #include "GLScene.h"
 
 /* UTILITIES */
-#include "Model.h"
-#include "Object.h"
 #include "Camera.h"
 #include "Character.h"
 #include "BananaSetting.h"
@@ -49,8 +47,6 @@ private:
 	Vector3	Eye;
 	Vector3	At;
 	Camera	m_Camera_end;
-	Model	m_Model;
-	Object	m_Title;
 	tmp		tmpRect;
 	Shape	banana;
 };

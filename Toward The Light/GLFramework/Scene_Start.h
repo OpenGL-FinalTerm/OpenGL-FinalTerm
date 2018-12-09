@@ -3,8 +3,6 @@
 #include "GLScene.h"
 
 /* UTILITIES */
-#include "Model.h"
-#include "NormalObject.h"
 #include "Camera.h"
 #include "SoundPlayer.h"
 #include "BoxObject.h"
@@ -60,6 +58,7 @@ private:
 	int			drag_new_postion[2] = {};
 	int			__t = 0;
 	int			pickLightNumber = -1;
+	int			logoTime = 0;
 
 	bool		dep = false; // 시작할때 낙하하는것도 체크하여서 만들어둠
 	bool		person_view_1 = false;
@@ -94,8 +93,6 @@ private:
 	Vector3			foward_move; //나아가야하는 방향
 	Vector2			foward;//player move
 	Camera			m_Camera;
-	NormalObject	m_Plane;
-	NormalObject    m_Sphere;
 	SoundPlayer		m_SoundPlayer;
 	SoundPlayer		m_walkingSound;
 	Box				objectBox[65];
