@@ -83,14 +83,14 @@ void S01Main::exit()
 {
 	m_SoundPlayer.exit();
 	m_walkingSound.exit();
-//	glDisable(GL_LIGHT0);
-//	glDisable(GL_LIGHT1);
-//	glDisable(GL_LIGHT2);
-//	glDisable(GL_LIGHT3);
-////	glDisable(GL_LIGHT4);
-////	glDisable(GL_LIGHT5);
-////	glDisable(GL_LIGHT6);
-//	glDisable(GL_LIGHT7);
+	//	glDisable(GL_LIGHT0);
+	//	glDisable(GL_LIGHT1);
+	//	glDisable(GL_LIGHT2);
+	//	glDisable(GL_LIGHT3);
+	////	glDisable(GL_LIGHT4);
+	////	glDisable(GL_LIGHT5);
+	////	glDisable(GL_LIGHT6);
+	//	glDisable(GL_LIGHT7);
 	glDisable(GL_LIGHTING);
 }
 
@@ -137,19 +137,19 @@ void S01Main::render()
 	mapLight[LightCount - 1].drawRedColunm();
 	//카메라 정리 ---
 	if (opening_camera_working) {//오프닝 영상이 시작되면
-		
+
 		if (opening_bezier_t >= 1) {
 			opening_camera_working = false;
 		}
 		opening_bezier_t += 0.01f;
-	
+
 		opening_camera_Eye(&red_right_cylinder.x, &red_right_cylinder.y, &red_right_cylinder.z, &tmpRect.x, &tmpRect.y, &tmpRect.z, &opening_bezier_t, 300, &Eye.x, &Eye.y, &Eye.z);
 		opening_camera_At(&start_At.x, &start_At.y, &start_At.z, &end_At.x, &end_At.y, &end_At.z, &opening_bezier_t, &At.x, &At.y, &At.z);
-	
+
 		printf("opeing %f \n", Eye.y);
 	}
-	
-	
+
+
 	if (!opening_camera_working) { //오프닝 카메라 워킹이 false
 		//eye 도 각도에 따라 바뀐다.
 		camera_moving_Eye(&tmpRect.x, &tmpRect.y, &tmpRect.z, &result_degree[0], &view_rotate[0], &view_rotate[1], &Eye.x, &Eye.y, &Eye.z);
@@ -379,49 +379,49 @@ void S01Main::keyboard(int key, bool pressed, int x, int y, bool special)
 
 	}
 	else {
-	if (key == 'w') {
-		keyW = false;
-		if (wPress == true)
-			wPress = false;
-		else if (aPress == true)
-			aPress = false;
-		else if (sPress == true)
-			sPress = false;
-		else if (dPress == true)
-			dPress = false;
-	}
-	else if (key == 'a') {
-		keyA = false;
-		if (wPress == true)
-			wPress = false;
-		else if (aPress == true)
-			aPress = false;
-		else if (sPress == true)
-			sPress = false;
-		else if (dPress == true)
-			dPress = false;
-	}
-	else if (key == 's') {
-		keyS = false;
-		if (wPress == true)
-			wPress = false;
-		else if (aPress == true)
-			aPress = false;
-		else if (sPress == true)
-			sPress = false;
-		else if (dPress == true)
-			dPress = false;
-	}
-	else if (key == 'd') {
-		keyD = false;
-		if (wPress == true)
-			wPress = false;
-		else if (aPress == true)
-			aPress = false;
-		else if (sPress == true)
-			sPress = false;
-		else if (dPress == true)
-			dPress = false;
+		if (key == 'w') {
+			keyW = false;
+			if (wPress == true)
+				wPress = false;
+			else if (aPress == true)
+				aPress = false;
+			else if (sPress == true)
+				sPress = false;
+			else if (dPress == true)
+				dPress = false;
+		}
+		else if (key == 'a') {
+			keyA = false;
+			if (wPress == true)
+				wPress = false;
+			else if (aPress == true)
+				aPress = false;
+			else if (sPress == true)
+				sPress = false;
+			else if (dPress == true)
+				dPress = false;
+		}
+		else if (key == 's') {
+			keyS = false;
+			if (wPress == true)
+				wPress = false;
+			else if (aPress == true)
+				aPress = false;
+			else if (sPress == true)
+				sPress = false;
+			else if (dPress == true)
+				dPress = false;
+		}
+		else if (key == 'd') {
+			keyD = false;
+			if (wPress == true)
+				wPress = false;
+			else if (aPress == true)
+				aPress = false;
+			else if (sPress == true)
+				sPress = false;
+			else if (dPress == true)
+				dPress = false;
 		}
 	}
 
@@ -538,7 +538,9 @@ void S01Main::update(float fDeltaTime)
 		bool tmpcheck = false;
 		for (int i = 0; i < whatBox; ++i) {
 			if (objectBox[i].returnCatch() == false) {
-				if (objectBox[i].returnBoxCenterX() - 10 < returnMainX() + 5 && objectBox[i].returnBoxCenterX() + 10 > returnMainX() - 5 && objectBox[i].returnBoxCenterZ() + 10 > returnMainZ() - 5 && objectBox[i].returnBoxCenterZ() - 10 < returnMainZ() + 5 && returnMainY() > objectBox[i].returnBoxCenterY() - 21 && returnMainY() < objectBox[i].returnBoxCenterY() + 16) {
+				if (objectBox[i].returnBoxCenterX() - 10 < returnMainX() + 5 && objectBox[i].returnBoxCenterX() + 10 > returnMainX() - 5
+					&& objectBox[i].returnBoxCenterZ() + 10 > returnMainZ() - 5 && objectBox[i].returnBoxCenterZ() - 10 < returnMainZ() + 5
+					&& returnMainY() + 5 > objectBox[i].returnBoxCenterY() - 10 && returnMainY() - 5 < objectBox[i].returnBoxCenterY() + 10) {
 					down = TRUE;
 					jump = FALSE;
 					tmpRect.jumpCount = 0;
@@ -560,7 +562,9 @@ void S01Main::update(float fDeltaTime)
 		bool tmpcheck = false;
 		for (int i = 0; i < whatBox; ++i) {
 			if (objectBox[i].returnCatch() == false) {
-				if (objectBox[i].returnBoxCenterX() - 10 < returnMainX() + 5 && objectBox[i].returnBoxCenterX() + 10 > returnMainX() - 5 && objectBox[i].returnBoxCenterZ() + 10 > returnMainZ() - 5 && objectBox[i].returnBoxCenterZ() - 10 < returnMainZ() + 5 && tmpRect.y < objectBox[i].returnBoxCenterY() + 20) {
+				if (objectBox[i].returnBoxCenterX() - 10 < returnMainX() + 5 && objectBox[i].returnBoxCenterX() + 10 > returnMainX() - 5
+					&& objectBox[i].returnBoxCenterZ() + 10 > returnMainZ() - 5 && objectBox[i].returnBoxCenterZ() - 10 < returnMainZ() + 5
+					&& tmpRect.y - 5 < objectBox[i].returnBoxCenterY() + 20 && !(tmpRect.y + 5 < objectBox[i].returnBoxCenterY())) {
 					down = FALSE;
 					tmpcheck = true;
 

@@ -154,7 +154,6 @@ void S00Logo::HUD()
 
 	//}
 	//º±≈√
-	print("Select Stage!", DEF_WIN_WIDTH / 2 - 35, DEF_WIN_HEIGHT - 100, 0);
 	if (choose == 0) {
 		print("Map 1", DEF_WIN_WIDTH / 2, DEF_WIN_HEIGHT - 600, 0);
 

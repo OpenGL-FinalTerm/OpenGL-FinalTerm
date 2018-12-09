@@ -11,12 +11,10 @@
 
 S02Main::S02Main()
 {
-
 }
 
 S02Main::~S02Main()
 {
-
 }
 
 void S02Main::init()
@@ -26,6 +24,7 @@ void S02Main::init()
 	//인게임 bgm 재생초기화
 	m_SoundPlayer.init();
 	m_SoundPlayer.selectFolder("Resources\\BGM");
+	//m_SoundPlayer.play();
 
 	//걷기 효과음 재생 초기화
 	m_walkingSound.init();
@@ -81,7 +80,7 @@ void S02Main::init()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
-	
+
 	glutSetCursor(GLUT_CURSOR_NONE);
 	ShowCursor(FALSE);
 
@@ -97,14 +96,14 @@ void S02Main::exit()
 {
 	m_SoundPlayer.exit();
 	m_walkingSound.exit();
-//	glDisable(GL_LIGHT0);
-//	glDisable(GL_LIGHT1);
-//	glDisable(GL_LIGHT2);
-//	glDisable(GL_LIGHT3);
-////	glDisable(GL_LIGHT4);
-////	glDisable(GL_LIGHT5);
-////	glDisable(GL_LIGHT6);
-//	glDisable(GL_LIGHT7);
+	//	glDisable(GL_LIGHT0);
+	//	glDisable(GL_LIGHT1);
+	//	glDisable(GL_LIGHT2);
+	//	glDisable(GL_LIGHT3);
+	////	glDisable(GL_LIGHT4);
+	////	glDisable(GL_LIGHT5);
+	////	glDisable(GL_LIGHT6);
+	//	glDisable(GL_LIGHT7);
 	glDisable(GL_LIGHTING);
 }
 
@@ -130,6 +129,7 @@ float S02Main::returnMainZ()
 
 void S02Main::render()
 {
+	m_SoundPlayer.play();
 	glPushMatrix();
 	m_Camera.ready();
 	glColor3f(1.0f, 1.0f, 1.0f);
@@ -240,7 +240,7 @@ void S02Main::render()
 
 
 	drawHUD();
-	
+
 	glPopMatrix();
 }
 
@@ -273,32 +273,32 @@ void S02Main::keyboard(int key, bool pressed, int x, int y, bool special)
 		{
 		case 'w':
 			keyW = true;
-		/*	if (result_degree[0] > 90 && result_degree[0] < 180) {
-				aPress = false;
-				sPress = false;
-				wPress = true;
-				dPress = true;
-			}
+			/*	if (result_degree[0] > 90 && result_degree[0] < 180) {
+					aPress = false;
+					sPress = false;
+					wPress = true;
+					dPress = true;
+				}
 
-			else if (result_degree[0] > 180 && result_degree[0] < 270) {
-				sPress = false;
-				dPress = false;
-				wPress = true;
-				aPress = true;
-			}
-			else if (result_degree[0] > 270 && result_degree[0] < 360) {
-				wPress = false;
-				dPress = false;
-				sPress = true;
-				aPress = true;
-			}
-			else if (result_degree[0] > 0 && result_degree[0] < 90) {
-				wPress = false;
-				aPress = false;
-				sPress = true;
-				dPress = true;
-			}
-*/
+				else if (result_degree[0] > 180 && result_degree[0] < 270) {
+					sPress = false;
+					dPress = false;
+					wPress = true;
+					aPress = true;
+				}
+				else if (result_degree[0] > 270 && result_degree[0] < 360) {
+					wPress = false;
+					dPress = false;
+					sPress = true;
+					aPress = true;
+				}
+				else if (result_degree[0] > 0 && result_degree[0] < 90) {
+					wPress = false;
+					aPress = false;
+					sPress = true;
+					dPress = true;
+				}
+	*/
 			keyDown = true;
 			break;
 
@@ -614,7 +614,9 @@ void S02Main::update(float fDeltaTime)
 		bool tmpcheck = false;
 		for (int i = 0; i < whatBox; ++i) {
 			if (objectBox[i].returnCatch() == false) {
-				if (objectBox[i].returnBoxCenterX() - 10 < returnMainX() + 5 && objectBox[i].returnBoxCenterX() + 10 > returnMainX() - 5 && objectBox[i].returnBoxCenterZ() + 10 > returnMainZ() - 5 && objectBox[i].returnBoxCenterZ() - 10 < returnMainZ() + 5 && returnMainY() > objectBox[i].returnBoxCenterY() - 21 && returnMainY() < objectBox[i].returnBoxCenterY() + 16) {
+				if (objectBox[i].returnBoxCenterX() - 10 < returnMainX() + 5 && objectBox[i].returnBoxCenterX() + 10 > returnMainX() - 5
+					&& objectBox[i].returnBoxCenterZ() + 10 > returnMainZ() - 5 && objectBox[i].returnBoxCenterZ() - 10 < returnMainZ() + 5
+					&& returnMainY() + 5 > objectBox[i].returnBoxCenterY() - 10 && returnMainY() - 5 < objectBox[i].returnBoxCenterY() + 10) {
 					down = TRUE;
 					jump = FALSE;
 					tmpRect.jumpCount = 0;
@@ -636,7 +638,9 @@ void S02Main::update(float fDeltaTime)
 		bool tmpcheck = false;
 		for (int i = 0; i < whatBox; ++i) {
 			if (objectBox[i].returnCatch() == false) {
-				if (objectBox[i].returnBoxCenterX() - 10 < returnMainX() + 5 && objectBox[i].returnBoxCenterX() + 10 > returnMainX() - 5 && objectBox[i].returnBoxCenterZ() + 10 > returnMainZ() - 5 && objectBox[i].returnBoxCenterZ() - 10 < returnMainZ() + 5 && tmpRect.y < objectBox[i].returnBoxCenterY() + 20) {
+				if (objectBox[i].returnBoxCenterX() - 10 < returnMainX() + 5 && objectBox[i].returnBoxCenterX() + 10 > returnMainX() - 5
+					&& objectBox[i].returnBoxCenterZ() + 10 > returnMainZ() - 5 && objectBox[i].returnBoxCenterZ() - 10 < returnMainZ() + 5
+					&& tmpRect.y - 5 < objectBox[i].returnBoxCenterY() + 20 && !(tmpRect.y + 5 < objectBox[i].returnBoxCenterY())) {
 					down = FALSE;
 					tmpcheck = true;
 
@@ -815,7 +819,7 @@ void S02Main::update(float fDeltaTime)
 			}
 		}
 	}
-	
+
 	if (catchBox == true) {
 		objectBox[boxIndex].catchBoxPos(tmpRect.x, tmpRect.y + 30, tmpRect.z);
 	}
@@ -1129,9 +1133,9 @@ void S02Main::update(float fDeltaTime)
 				mapLight[light].moveY(-1);
 		}
 	}
-	
+
 	//조명을 집기 위한 공간
-	
+
 	for (int light = 0; light < LightCount - 1; ++light) {
 		if (pickLight == false && mapLight[light].returnThrowCheck() == false) {
 			if (mapLight[light].returnXpos() - 10 < tmpRect.x && mapLight[light].returnXpos() + 10 > tmpRect.x
@@ -1150,8 +1154,8 @@ void S02Main::update(float fDeltaTime)
 
 	for (int light = 0; light < LightCount - 1; ++light) {
 		if (mapLight[light].returnPickCheck() == true) {
-				messageOn = false;
-				mapLight[light].pickSetPos(tmpRect.x, tmpRect.y + 15, tmpRect.z);
+			messageOn = false;
+			mapLight[light].pickSetPos(tmpRect.x, tmpRect.y + 15, tmpRect.z);
 		}
 	}
 
@@ -1163,7 +1167,7 @@ void S02Main::update(float fDeltaTime)
 			float tmpy;
 			float tmpz;
 
-			tmpx = mapLight[light].returnXpos(); 
+			tmpx = mapLight[light].returnXpos();
 			tmpy = mapLight[light].returnYpos();
 			tmpz = mapLight[light].returnZpos();
 
@@ -1279,7 +1283,7 @@ void S02Main::HUD()
 
 		//정규화를 시켜준다.
 		//sqrt(pow(difference_new_old[0], 2) + pow(difference_new_old[1], 2));
-		
+
 		glPushMatrix();
 		glTranslated(100 + mapLight[i].returnXpos(), 100 + mapLight[i].returnZpos(), mapLight[i].returnYpos() / 100);
 		glBegin(GL_QUADS);
