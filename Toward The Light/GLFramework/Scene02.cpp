@@ -130,6 +130,12 @@ void S02Main::init()
 
 	view_at_size[0] = 100;
 	view_at_size[1] = 10;
+	glDisable(GL_LIGHT0);
+	glDisable(GL_LIGHT1);
+	glDisable(GL_LIGHT2);
+	glDisable(GL_LIGHT3);
+	glDisable(GL_LIGHT6);
+	glDisable(GL_LIGHT7);
 	//------------------변수 이름 넘나 긴것!
 }
 
@@ -224,7 +230,7 @@ void S02Main::render()
 	GLfloat direction[] = { 0, -1, 0 };
 	GLfloat temp = 20;
 	glLightfv(GL_LIGHT6, GL_SPOT_DIRECTION, direction);
-	glLightf(GL_LIGHT6, GL_SPOT_CUTOFF, 25.f);
+	glLightf(GL_LIGHT6, GL_SPOT_CUTOFF, 15.f);
 
 	glEnable(GL_LIGHT6);
 
