@@ -104,7 +104,7 @@ private:
 	Camera			m_Camera;
 	SoundPlayer		m_SoundPlayer;
 	SoundPlayer		m_walkingSound;
-	Box				objectBox[100];
+	Box				objectBox[500];
 	Box				mainCharacter;
 	Light			mapLight[100];
 	Shape			banana;
