@@ -32,6 +32,18 @@ void S04End::init()
 	banana_cl[0] = 50;
 	banana_cl[1] = 20;
 	banana_cl[2] = 50;
+
+	camera_degree[0] = 0;
+	camera_size[1] = 0;
+	Eye.x = 0;
+	Eye.y = 0;
+	Eye.z = 0;
+
+	At.x = 0;
+	At.y = 0;
+	At.z = 0;
+
+	//ttt = 0;
 }
 
 void S04End::exit()
@@ -91,7 +103,7 @@ void S04End::motion(bool pressed, int x, int y)
 
 void S04End::update(float fDeltaTime)
 {
-	//엔딩이 나올때는 줌인 한 후에 회전하면서 바나나 가르기키 
+	//엔딩이 나올때는 줌인 한 후에 회전하면서 바나나 가르기키 https://www.youtube.com/
 	camera_degree[0] += 1;
 	if (ending_animation_bool) {
 		

@@ -174,7 +174,7 @@ void S01Main::render()
 	glVertex3f(60, 0, -70);
 	glEnd();
 
-	for (int i = 0; i < 65; ++i)
+	for (int i = 0; i < whatBox; ++i)
 		objectBox[i].drawBox(20);
 
 	for (int i = 0; i < LightCount - 1; ++i)

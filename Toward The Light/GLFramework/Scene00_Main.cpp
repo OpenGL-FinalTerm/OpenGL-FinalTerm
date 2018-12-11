@@ -61,7 +61,7 @@ void S00Logo::render()
 	//이미지 드로우
 	//선택된건 확대해서 돌고있다.
 
-		for (int i = 0; i < 65; ++i)
+		for (int i = 0; i < 500; ++i)
 		{
 				glPushMatrix();
 				{

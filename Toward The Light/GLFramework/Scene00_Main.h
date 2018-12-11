@@ -44,8 +44,8 @@ private:
 	Object	m_Title;
 
 	//박스 로딩 함수
-	Box	objectBox[65];
-	Box	objectBox2[65];
+	Box	objectBox[500];
+	Box	objectBox2[500];
 	tmp	tmpRect;
 	int		whatBox;
 
