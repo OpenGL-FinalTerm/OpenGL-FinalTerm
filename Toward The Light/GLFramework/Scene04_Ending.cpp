@@ -73,7 +73,10 @@ void S04End::render()
 	m_Camera_end.setTarget(At);
 	drawHUD();
 	glColor3f(1.f, 1.f, 1.f);
-	print("Banana is Dead", 0, 40, 0);
+	
+	
+	
+	("Banana is Dead", 0, 40, 0);
 
 }
 
